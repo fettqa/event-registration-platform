@@ -1,6 +1,8 @@
 package com.fettqa.events.event;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import java.time.OffsetDateTime;
 
 @Entity
@@ -43,5 +45,13 @@ public class Event {
 
   public OffsetDateTime getCreatedAt() {
     return createdAt;
+  }
+
+  public void setMaxSeats(Integer integer) {
+    this.maxSeats = integer;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 }
