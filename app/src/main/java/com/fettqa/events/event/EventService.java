@@ -38,7 +38,7 @@ public class EventService {
 
   public EventResponse getById(Long id) {
     Event event = eventRepository.findById(id)
-        .orElseThrow(() -> new EventNotFoundException("even with id: " + id + " not found"));
+        .orElseThrow(() -> new EventNotFoundException("event with id: " + id + " not found"));
     return EventResponse.from(event);
   }
 
@@ -48,7 +48,7 @@ public class EventService {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Nothing to update");
     }
     Event event = eventRepository.findById(id)
-        .orElseThrow(() -> new EventNotFoundException("even with id: " + id + " not found"));
+        .orElseThrow(() -> new EventNotFoundException("event with id: " + id + " not found"));
     if (request.maxSeats() != null) {
       event.setMaxSeats(request.maxSeats());
     }
@@ -71,7 +71,7 @@ public class EventService {
 
   public void delete(Long id) {
     Event event = eventRepository.findById(id)
-        .orElseThrow(() -> new EventNotFoundException("even with id: " + id + " not found"));
+        .orElseThrow(() -> new EventNotFoundException("event with id: " + id + " not found"));
     eventRepository.delete(event);
   }
 }

@@ -12,3 +12,6 @@ Pet project: API, automated tests, k6 performance.
 ```bash
 cd app
 ./gradlew bootRun
+
+Swagger: http://localhost:8080/swagger-ui.html  
+Health: http://localhost:8080/actuator/health
