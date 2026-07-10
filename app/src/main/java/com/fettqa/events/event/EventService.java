@@ -3,12 +3,10 @@ package com.fettqa.events.event;
 import com.fettqa.events.event.dto.CreateEventRequest;
 import com.fettqa.events.event.dto.EventResponse;
 import com.fettqa.events.event.dto.UpdateEventRequest;
-import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
@@ -21,7 +19,7 @@ public class EventService {
   }
 
   @Transactional
-  public List<EventResponse> create(List<CreateEventRequest> request){
+  public List<EventResponse> create(List<CreateEventRequest> request) {
     List<Event> events = request.stream()
         .map(r -> new Event(r.name(), r.maxSeats()))
         .toList();

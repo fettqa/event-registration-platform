@@ -12,6 +12,11 @@ Pet project: API, automated tests, k6 performance.
 ```bash
 cd app
 ./gradlew bootRun
-
+```
 Swagger: http://localhost:8080/swagger-ui.html  
 Health: http://localhost:8080/actuator/health
+
+## API
+- `POST /api/events/{id}` — register an event
+- `POST /api/events/{id}/registrations` — register for an event
+- Returns 409 when seats are full or email already registered
