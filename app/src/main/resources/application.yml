@@ -16,15 +16,23 @@ spring:
   flyway:
     enabled: true
 
-  logging:
-    level:
-      org.hibernate.SQL: debug
-
 server:
   port: 8080
+
+logging:
+  level:
+    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+    org.hibernate.SQL: debug
+    org.springframework.boot: debug
 
 springdoc:
    swagger-ui:
      path: /swagger-ui.html
    api-docs:
      path: /v3/api-docs
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: env,health,configprops

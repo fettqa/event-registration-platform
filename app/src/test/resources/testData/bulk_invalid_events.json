@@ -1,0 +1,16 @@
+[
+  {
+    "name": "QA conf",
+    "maxSeats": -1
+  },
+  {
+    "maxSeats": 3
+  },
+  {
+    "name": "Automation"
+  },
+  {
+    "name": "DEV conf",
+    "maxSeats": 321
+  }
+]

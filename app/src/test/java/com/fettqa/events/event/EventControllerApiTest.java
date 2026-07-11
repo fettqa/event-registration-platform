@@ -18,14 +18,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.test.context.ActiveProfiles;
 
+@ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class EventControllerApiTest {
 
   @LocalServerPort
   int port;
 
-  private final String testDataPath = "testData/bulk_events.json";
   @Autowired
   private EventRepository eventRepository;
 
@@ -91,6 +92,29 @@ public class EventControllerApiTest {
     }
 
     @Test
+    void patchEvent_returns400() {
+      Integer id = createEvent("QA Conf", 50)
+          .body()
+          .path("id");
+
+      given()
+          .contentType(ContentType.JSON)
+          .body("{}")
+          .when()
+          .patch("{id}", id)
+          .then()
+          .statusCode(400);
+
+      given()
+          .contentType(ContentType.JSON)
+          .body("{\"maxSeats\":-1}")
+          .when()
+          .patch("{id}", id)
+          .then()
+          .statusCode(400);
+    }
+
+    @Test
     void getEventByName_returns200() {
       String eventName = "QA Conf";
       int maxSeats = 50;
@@ -125,6 +149,24 @@ public class EventControllerApiTest {
     }
 
     @Test
+    void getEvent_returnsEmpty() {
+      given()
+          .when()
+          .get()
+          .then()
+          .statusCode(200)
+          .body("size()", equalTo(0));
+
+      given()
+          .when()
+          .queryParam("name", "Unknown")
+          .get()
+          .then()
+          .statusCode(200)
+          .body("size()", equalTo(0));
+    }
+
+    @Test
     void deleteEvent_returns204() {
       Integer id = createEvent("QA Conf", 999)
           .body()
@@ -153,47 +195,64 @@ public class EventControllerApiTest {
     }
   }
 
+  @Nested
+  class BulkEventCreation {
 
-  @Test
-  void createEventsBulk_returnsList() {
-    Event[] events = Utils.jsonToObject(testDataPath, Event[].class);
-    List<EventResponse> created = given()
-        .contentType(ContentType.JSON)
-        .body(getClass().getClassLoader().getResourceAsStream(testDataPath))
-        .when()
-        .post("bulk")
-        .then()
-        .statusCode(201)
-        .body("size()", equalTo(events.length))
-        .body("name", hasItem(events[0].getName()))
-        .body("name", hasItem(events[1].getName()))
-        .body("name", hasItem(events[2].getName()))
-        .body("name", hasItem(events[3].getName()))
-        .body("maxSeats", hasItem(events[0].getMaxSeats()))
-        .body("maxSeats", hasItem(events[1].getMaxSeats()))
-        .body("maxSeats", hasItem(events[2].getMaxSeats()))
-        .body("maxSeats", hasItem(events[3].getMaxSeats()))
-        .extract().jsonPath().getList("", EventResponse.class);
+    @Test
+    void createEventsBulk_returnsList() {
+      String testDataPath = "testData/bulk_events.json";
+      Event[] events = Utils.jsonToObject(testDataPath, Event[].class);
+      List<EventResponse> created = given()
+          .contentType(ContentType.JSON)
+          .body(Utils.jsonAsString(testDataPath))
+          .when()
+          .post("bulk")
+          .then()
+          .statusCode(201)
+          .body("size()", equalTo(events.length))
+          .body("name", hasItem(events[0].getName()))
+          .body("name", hasItem(events[1].getName()))
+          .body("name", hasItem(events[2].getName()))
+          .body("name", hasItem(events[3].getName()))
+          .body("maxSeats", hasItem(events[0].getMaxSeats()))
+          .body("maxSeats", hasItem(events[1].getMaxSeats()))
+          .body("maxSeats", hasItem(events[2].getMaxSeats()))
+          .body("maxSeats", hasItem(events[3].getMaxSeats()))
+          .extract().jsonPath().getList("", EventResponse.class);
 
-    given()
-        .when()
-        .delete("{id}", created.get(3).id())
-        .then()
-        .statusCode(204);
+      given()
+          .when()
+          .delete("{id}", created.get(3).id())
+          .then()
+          .statusCode(204);
 
-    given()
-        .when()
-        .get()
-        .then()
-        .statusCode(200)
-        .body("size()", equalTo(events.length - 1))
-        .body("name", hasItem(events[0].getName()))
-        .body("name", hasItem(events[1].getName()))
-        .body("name", hasItem(events[2].getName()))
-        .body("maxSeats", hasItem(events[0].getMaxSeats()))
-        .body("maxSeats", hasItem(events[1].getMaxSeats()))
-        .body("maxSeats", hasItem(events[2].getMaxSeats()))
-        .body(not(hasItem(events[3].getName())))
-        .body(not(hasItem(events[3].getMaxSeats())));
+      given()
+          .when()
+          .get()
+          .then()
+          .statusCode(200)
+          .body("size()", equalTo(events.length - 1))
+          .body("name", hasItem(events[0].getName()))
+          .body("name", hasItem(events[1].getName()))
+          .body("name", hasItem(events[2].getName()))
+          .body("maxSeats", hasItem(events[0].getMaxSeats()))
+          .body("maxSeats", hasItem(events[1].getMaxSeats()))
+          .body("maxSeats", hasItem(events[2].getMaxSeats()))
+          .body(not(hasItem(events[3].getName())))
+          .body(not(hasItem(events[3].getMaxSeats())));
+    }
+
+    @Test
+    void createEventsBulk_returns400() {
+      String testDataPath = "testData/bulk_invalid_events.json";
+      String events = Utils.jsonAsString(testDataPath);
+      given()
+          .contentType(ContentType.JSON)
+          .body(events)
+          .when()
+          .post("bulk")
+          .then()
+          .statusCode(400);
+    }
   }
 }
