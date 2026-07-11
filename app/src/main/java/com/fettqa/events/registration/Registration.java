@@ -37,6 +37,10 @@ public class Registration {
     this.createdAt = OffsetDateTime.now();
   }
 
+  public Registration() {
+
+  }
+
   public Long getId() {
     return id;
   }

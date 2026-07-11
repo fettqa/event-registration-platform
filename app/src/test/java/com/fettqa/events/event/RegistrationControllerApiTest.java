@@ -40,14 +40,16 @@ public class RegistrationControllerApiTest {
         .statusCode(201)
         .extract().path("id");
   }
+
   @Test
   void register_returns201() {
     Integer eventId = createEvent(10);
     given()
         .contentType(ContentType.JSON)
         .body("""
-                {"email":"ivan@example.com","fullName":"Ivan"}
-                """)
+            
+            {"email":"ivan@example.com","fullName":"Ivan"}
+            """)
         .when()
         .post("/api/events/{eventId}/registrations", eventId)
         .then()
@@ -56,4 +58,51 @@ public class RegistrationControllerApiTest {
         .body("email", equalTo("ivan@example.com"));
   }
 
+  @Test
+  void register_returns409_whenEventIsFull() {
+    Integer eventId = createEvent(1);
+    given()
+        .contentType(ContentType.JSON)
+        .body("""
+            {"email":"ivan@example.com","fullName":"Ivan"}
+            """)
+        .when()
+        .post("/api/events/{eventId}/registrations", eventId)
+        .then()
+        .statusCode(201);
+
+    given()
+        .contentType(ContentType.JSON)
+        .body("""
+            {"email":"john@example.com","fullName":"John"}
+            """)
+        .when()
+        .post("/api/events/{eventId}/registrations", eventId)
+        .then()
+        .statusCode(409);
+  }
+
+  @Test
+  void register_returns409_whenEmailAlreadyRegistered() {
+    Integer eventId = createEvent(10);
+    given()
+        .contentType(ContentType.JSON)
+        .body("""
+            {"email":"ivan@example.com","fullName":"Ivan"}
+            """)
+        .when()
+        .post("/api/events/{eventId}/registrations", eventId)
+        .then()
+        .statusCode(201);
+
+    given()
+        .contentType(ContentType.JSON)
+        .body("""
+            {"email":"ivan@example.com","fullName":"Ivan"}
+            """)
+        .when()
+        .post("/api/events/{eventId}/registrations", eventId)
+        .then()
+        .statusCode(409);
+  }
 }
