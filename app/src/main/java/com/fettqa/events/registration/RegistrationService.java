@@ -25,10 +25,6 @@ public class RegistrationService {
     Event event = eventRepository.findById(eventId)
         .orElseThrow(() -> new EventNotFoundException("event with id: " + eventId + " not found"));
 
-    if (!request.email().matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$")) {
-      throw new RegistrationConflictException("email " + request.email() + " is invalid");
-    }
-
     if (registrationRepository.existsByEventIdAndEmailIgnoreCase(eventId, request.email())) {
       throw new RegistrationConflictException(
           "email " + request.email() + " is already registered for event " + event.getName());

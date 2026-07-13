@@ -1,4 +1,4 @@
-package com.fettqa.events.event;
+package com.fettqa.events.event.rest;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
@@ -6,7 +6,9 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 
-import com.fettqa.events.Utils;
+import com.fettqa.events.utils.Utils;
+import com.fettqa.events.event.Event;
+import com.fettqa.events.event.EventRepository;
 import com.fettqa.events.event.dto.EventResponse;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;

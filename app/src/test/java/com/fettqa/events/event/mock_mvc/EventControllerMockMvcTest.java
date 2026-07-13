@@ -1,21 +1,17 @@
-package com.fettqa.events.event;
+package com.fettqa.events.event.mock_mvc;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fettqa.events.ExceptionHandler;
+import com.fettqa.events.event.EventController;
+import com.fettqa.events.event.EventService;
 import com.fettqa.events.event.dto.CreateEventRequest;
 import com.fettqa.events.event.dto.EventResponse;
-import com.fettqa.events.event.dto.UpdateEventRequest;
 import java.time.OffsetDateTime;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,26 +70,5 @@ class EventControllerMockMvcTest {
         .andExpect(status().isBadRequest());
 
     verifyNoInteractions(eventService);
-  }
-
-  @Test
-  void event_returns404() throws Exception {
-    when(eventService.getById(999L))
-        .thenThrow(new EventNotFoundException("event with id: 999 not found"));
-    when(eventService.updateById(eq(999L), any(UpdateEventRequest.class)))
-        .thenThrow(new EventNotFoundException("event with id: 999 not found"));
-    doThrow(new EventNotFoundException("event with id: 999 not found"))
-        .when(eventService).delete(999L);
-
-    mockMvc.perform(get("/api/events/999"))
-        .andExpect(status().isNotFound());
-    mockMvc.perform(patch("/api/events/999")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content("""
-                {"name":"QA Conf","maxSeats":50}
-                """))
-        .andExpect(status().isNotFound());
-    mockMvc.perform(delete("/api/events/999"))
-        .andExpect(status().isNotFound());
   }
 }

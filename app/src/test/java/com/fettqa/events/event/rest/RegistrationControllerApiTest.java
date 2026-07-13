@@ -1,8 +1,9 @@
-package com.fettqa.events.event;
+package com.fettqa.events.event.rest;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
+import com.fettqa.events.event.EventRepository;
 import com.fettqa.events.registration.RegistrationRepository;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -27,6 +28,7 @@ public class RegistrationControllerApiTest {
   @BeforeEach
   void setUp() {
     registrationRepository.deleteAll();
+    registrationRepository.resetIdentity();
     eventRepository.deleteAll();
     eventRepository.resetIdentity();
     RestAssured.port = port;

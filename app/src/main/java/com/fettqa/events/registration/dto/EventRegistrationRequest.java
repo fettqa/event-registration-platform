@@ -1,3 +1,5 @@
 package com.fettqa.events.registration.dto;
 
-public record EventRegistrationRequest(String fullName, String email) {}
+import jakarta.validation.constraints.Email;
+
+public record EventRegistrationRequest(String fullName, @Email String email) {}

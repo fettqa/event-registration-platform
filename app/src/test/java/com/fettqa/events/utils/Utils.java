@@ -1,4 +1,4 @@
-package com.fettqa.events;
+package com.fettqa.events.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
