@@ -1,3 +1,5 @@
+![App CI](https://github.com/fettqa/event-registration-platform/actions/workflows/app-ci.yml/badge.svg)
+
 # Event Registration
 
 Pet project: API, automated tests, k6 performance.
@@ -20,6 +22,9 @@ Health: http://localhost:8080/actuator/health
 - `POST /api/events/{id}` — create an event
 - `POST /api/events/{id}/registrations` — register for an event
 - Returns 409 when seats are full or email already registered
+
+## CI
+Tests run automatically on push/PR via GitHub Actions.
 
 ## Run with PostgreSQL (Docker)
 
