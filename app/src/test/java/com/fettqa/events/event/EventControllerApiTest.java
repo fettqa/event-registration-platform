@@ -243,8 +243,21 @@ public class EventControllerApiTest {
     }
 
     @Test
-    void createEventsBulk_returns400() {
+    void createInvalidEventsBulk_returns400() {
       String testDataPath = "testData/bulk_invalid_events.json";
+      String events = Utils.jsonAsString(testDataPath);
+      given()
+          .contentType(ContentType.JSON)
+          .body(events)
+          .when()
+          .post("bulk")
+          .then()
+          .statusCode(400);
+    }
+
+    @Test
+    void createDuplicatedEventsBulk_returns400() {
+      String testDataPath = "testData/bulk_duplicated_events.json";
       String events = Utils.jsonAsString(testDataPath);
       given()
           .contentType(ContentType.JSON)

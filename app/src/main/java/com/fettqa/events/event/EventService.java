@@ -4,6 +4,8 @@ import com.fettqa.events.event.dto.CreateEventRequest;
 import com.fettqa.events.event.dto.EventResponse;
 import com.fettqa.events.event.dto.UpdateEventRequest;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +25,16 @@ public class EventService {
     List<Event> events = request.stream()
         .map(r -> new Event(r.name(), r.maxSeats()))
         .toList();
+    Set<String> uniqNames = events.stream().map(Event::getName).collect(Collectors.toSet());
+    if (uniqNames.size() != events.size()) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Duplicate event names in request");
+    }
+    eventRepository.findAll().stream().map(Event::getName).forEach(name -> {
+      if (events.stream().anyMatch(e -> e.getName().equals(name))) {
+        throw new ResponseStatusException(HttpStatus.CONFLICT,
+            "event with name: " + name + " already exists");
+      }
+    });
     eventRepository.saveAll(events);
     return events.stream().map(EventResponse::from).toList();
   }
@@ -30,6 +42,10 @@ public class EventService {
   @Transactional
   public EventResponse create(CreateEventRequest request) {
     Event event = new Event(request.name(), request.maxSeats());
+    if (!eventRepository.findByName(request.name()).isEmpty()) {
+      throw new ResponseStatusException(HttpStatus.CONFLICT,
+          "event with name: " + request.name() + " already exists");
+    }
     Event saved = eventRepository.save(event);
     return EventResponse.from(saved);
   }

@@ -23,7 +23,7 @@ logging:
   level:
     org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
     org.hibernate.SQL: debug
-    org.springframework.boot: debug
+    org.springframework.boot: info
 
 springdoc:
    swagger-ui:
