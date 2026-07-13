@@ -22,7 +22,7 @@ jobs:
           cache: gradle
 
       - name: Max Gradle Executable
-        run: chmod +x ./gradlew
+        run: chmod +x gradlew
 
       - name: Run tests
         run: ./gradlew test
