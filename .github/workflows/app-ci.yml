@@ -10,6 +10,10 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -21,7 +25,7 @@ jobs:
           java-version: '21'
           cache: gradle
 
-      - name: Max Gradle Executable
+      - name: Make gradlew executable
         run: chmod +x gradlew
 
       - name: Run tests
