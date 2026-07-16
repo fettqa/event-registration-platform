@@ -47,3 +47,32 @@ docker compose down
 cd app
 ./gradlew test
 ```
+
+## Performance (k6)
+
+### Prerequisites
+1. Start the app (`cd app && ./gradlew bootRun`)
+2. Install [k6](https://grafana.com/docs/k6/latest/set-up/install-k6/)
+
+### Smoke
+```bash
+k6 run perf/k6/smoke.js
+```
+
+### Load (registrations)
+```bash
+k6 run perf/k6/load-register.js
+```
+
+### Spike
+```bash
+k6 run perf/k6/spike.js
+```
+
+### Results (local)
+
+| Test  | VUs / stages | Duration | p95 | Failed | Checks |
+|-------|-------------|-------|-----|--------|--------|
+| Smoke | 2 VU        | 30s   | 12.76 ms | 0 %    | 100 %  |
+| Load  | 0→50→0      | ~3m   | 52.2ms | 0 %    | 100 %  |
+| Spike | 10→100→0    | ~1m   | 105.13 ms | 0 %    | 100 %  |

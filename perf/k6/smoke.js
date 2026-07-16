@@ -1,7 +1,6 @@
 import http from 'k6/http';
-import { check, sleep } from 'k6';
-
-const BASE_URL = __ENV.BASE_URL || 'http://localhost:8080';
+import {check, sleep} from 'k6';
+import {BASE_URL, createEvent, register} from './helpers.js';
 
 export const options = {
   vus: 2,
@@ -9,6 +8,7 @@ export const options = {
   thresholds: {
     http_req_failed: ['rate<0.01'],      // < 1% exceptions
     http_req_duration: ['p(95)<500'],  // 95% requests < 500ms
+    checks: ['rate>0.95'] // 95% checks ok
   },
 };
 
@@ -20,30 +20,12 @@ export default function () {
   });
 
   // 2) Create event
-  const eventRes = http.post(
-      `${BASE_URL}/api/events`,
-      JSON.stringify({
-        name: `Smoke Event ${__VU}-${__ITER}`,
-        maxSeats: 100,
-      }),
-      { headers: { 'Content-Type': 'application/json' } }
-  );
-
-  check(eventRes, {
-    'create event is 201': (r) => r.status === 201,
-  });
-
-  const eventId = eventRes.json('id');
+  const eventRes = createEvent(`Smoke Event ${__VU}-${__ITER}`, 10000);
 
   // 3) Register for event
-  const regRes = http.post(
-      `${BASE_URL}/api/events/${eventId}/registrations`,
-      JSON.stringify({
-        email: `user_${__VU}_${__ITER}@example.com`,
-        fullName: `User ${__VU}`,
-      }),
-      { headers: { 'Content-Type': 'application/json' } }
-  );
+  const regRes = register(eventRes.eventId,
+      `user_${__VU}_${__ITER}@example.com`,
+      `User ${__VU}`);
 
   check(regRes, {
     'register is 201': (r) => r.status === 201,
