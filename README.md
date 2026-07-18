@@ -19,7 +19,7 @@ Swagger: http://localhost:8080/swagger-ui.html
 Health: http://localhost:8080/actuator/health
 
 ## API
-- `POST /api/events/{id}` — create an event
+- `POST /api/events` — create an event
 - `POST /api/events/{id}/registrations` — register for an event
 - Returns 409 when seats are full or email already registered
 
@@ -76,3 +76,18 @@ k6 run perf/k6/spike.js
 | Smoke | 2 VU        | 30s   | 12.76 ms | 0 %    | 100 %  |
 | Load  | 0→50→0      | ~3m   | 52.2ms | 0 %    | 100 %  |
 | Spike | 10→100→0    | ~1m   | 105.13 ms | 0 %    | 100 %  |
+
+## Python API tests
+
+```bash
+# 1. Start the app
+cd app && ./gradlew bootRun
+
+# 2. In another terminal
+cd tests-api
+python -m venv .venv
+# Windows:
+.venv\Scripts\activate
+pip install -r requirements.txt
+pytest
+```

@@ -25,3 +25,9 @@ replay_pid*
 
 #IntellijIDEA
 .idea
+**/*.iml
+
+# Python
+**/.venv/
+**/__pycache__/
+**/.pytest_cache/
