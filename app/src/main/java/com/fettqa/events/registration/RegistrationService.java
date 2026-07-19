@@ -5,6 +5,7 @@ import com.fettqa.events.event.EventNotFoundException;
 import com.fettqa.events.event.EventRepository;
 import com.fettqa.events.registration.dto.EventRegistrationRequest;
 import com.fettqa.events.registration.dto.EventRegistrationResponse;
+import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,4 +42,12 @@ public class RegistrationService {
         registrationRepository.save(new Registration(event, request.fullName(), request.email())));
   }
 
+  public List<EventRegistrationResponse> getRegistrations(Long eventId) {
+    if (!eventRepository.existsById(eventId)) {
+      throw new EventNotFoundException("event with id: " + eventId + " not found");
+    }
+    return registrationRepository.findByEventId(eventId).stream()
+        .map(EventRegistrationResponse::from)
+        .toList();
+  }
 }

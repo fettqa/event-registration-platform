@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 
+import com.fettqa.events.utils.TestDataCleaner;
 import com.fettqa.events.utils.Utils;
 import com.fettqa.events.event.Event;
 import com.fettqa.events.event.EventRepository;
@@ -20,22 +21,23 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 
 @ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Import(TestDataCleaner.class)
 public class EventControllerApiTest {
 
   @LocalServerPort
   int port;
 
   @Autowired
-  private EventRepository eventRepository;
+  private TestDataCleaner testDataCleaner;
 
   @BeforeEach
   void setUp() {
-    eventRepository.deleteAll();
-    eventRepository.resetIdentity();
+    testDataCleaner.cleanAndResetIds();
     RestAssured.port = port;
     RestAssured.basePath = "/api/events";
   }

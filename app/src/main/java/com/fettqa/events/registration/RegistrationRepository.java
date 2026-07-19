@@ -1,9 +1,7 @@
 package com.fettqa.events.registration;
 
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.transaction.annotation.Transactional;
 
 public interface RegistrationRepository extends JpaRepository<Registration, Long> {
 
@@ -11,9 +9,5 @@ public interface RegistrationRepository extends JpaRepository<Registration, Long
 
   boolean existsByEventIdAndEmailIgnoreCase(Long eventId, String email);
 
-  @Modifying
-  @Transactional
-  @Query(value = "ALTER TABLE registrations ALTER COLUMN id RESTART WITH 1", nativeQuery = true)
-  void resetIdentity();
-
+  List<Registration> findByEventId(Long eventId);
 }
