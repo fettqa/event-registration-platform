@@ -13,7 +13,7 @@ public interface RegistrationRepository extends JpaRepository<Registration, Long
 
   @Modifying
   @Transactional
-  @Query(value = "ALTER TABLE events ALTER COLUMN id RESTART WITH 1", nativeQuery = true)
+  @Query(value = "ALTER TABLE registrations ALTER COLUMN id RESTART WITH 1", nativeQuery = true)
   void resetIdentity();
 
 }

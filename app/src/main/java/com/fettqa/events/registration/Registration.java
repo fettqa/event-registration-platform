@@ -8,10 +8,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import java.time.OffsetDateTime;
 
 @Entity
-@Table(name = "registrations")
+@Table(name = "registrations",
+    uniqueConstraints = @UniqueConstraint(
+        name = "uq_registrations_event_email",
+        columnNames = {"event_id", "email"}
+    )
+)
 public class Registration {
 
   @Id

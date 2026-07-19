@@ -22,7 +22,9 @@ public class RegistrationService {
 
   @Transactional
   public EventRegistrationResponse register(Long eventId, EventRegistrationRequest request) {
-    Event event = eventRepository.findById(eventId)
+    // Lock event row for the whole transaction so concurrent requests cannot
+    // both pass the seat-limit check (check-then-act race).
+    Event event = eventRepository.findByIdForUpdate(eventId)
         .orElseThrow(() -> new EventNotFoundException("event with id: " + eventId + " not found"));
 
     if (registrationRepository.existsByEventIdAndEmailIgnoreCase(eventId, request.email())) {
@@ -37,7 +39,6 @@ public class RegistrationService {
 
     return EventRegistrationResponse.from(
         registrationRepository.save(new Registration(event, request.fullName(), request.email())));
-
   }
 
 }
