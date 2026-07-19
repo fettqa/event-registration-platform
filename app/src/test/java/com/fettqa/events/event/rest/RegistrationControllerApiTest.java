@@ -38,7 +38,7 @@ public class RegistrationControllerApiTest {
   private Integer createEvent(int maxSeats) {
     return given()
         .contentType(ContentType.JSON)
-        .body("{\"name\":\"QA Conf\",\"maxSeats\":" + maxSeats + "}")
+        .body("{\"name\":\"QA Conf\",\"maxSeats\":\"" + maxSeats + "\"}")
         .when()
         .post("/api/events")
         .then()

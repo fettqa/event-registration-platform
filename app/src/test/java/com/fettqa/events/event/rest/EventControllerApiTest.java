@@ -6,11 +6,10 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 
+import com.fettqa.events.event.Event;
+import com.fettqa.events.event.dto.EventResponse;
 import com.fettqa.events.utils.TestDataCleaner;
 import com.fettqa.events.utils.Utils;
-import com.fettqa.events.event.Event;
-import com.fettqa.events.event.EventRepository;
-import com.fettqa.events.event.dto.EventResponse;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -86,7 +85,7 @@ public class EventControllerApiTest {
 
       given()
           .contentType(ContentType.JSON)
-          .body("{\"maxSeats\":" + newMaxSeats + "}")
+          .body("{\"maxSeats\":\"" + newMaxSeats + "\"}")
           .when()
           .patch("{id}", id)
           .then()
