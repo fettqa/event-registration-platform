@@ -8,8 +8,8 @@ export const options = {
     {duration: '30s', target: 0}, // Ramp-down to 0 users
   ],
   thresholds: {
-    http_req_failed: ['rate<0.05'],      // < 10% exceptions
-    http_req_duration: ['p(95)<800'],  // 95% requests < 500ms
+    http_req_failed: ['rate<0.05'],      // < 5% exceptions
+    http_req_duration: ['p(95)<800'],  // 95% requests < 800ms
     checks: ['rate>0.95'] // 95% checks ok
   },
 };

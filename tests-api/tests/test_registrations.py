@@ -1,6 +1,6 @@
 def test_register_returns_201(client, created_event, unique_suffix):
   event_id = created_event['id']
-  response = client.post(f"api/events/{event_id}/registrations",
+  response = client.post(f"/api/events/{event_id}/registrations",
                          json={
                            "fullName": "Python Tester",
                            "email": f"user_{unique_suffix}@example.com"
@@ -17,11 +17,11 @@ def test_register_duplicate_email_returns_409(client, created_event,
     "fullName": "First",
     "email": f"user_{unique_suffix}@example.com"
   }
-  first = client.post(f"api/events/{created_event['id']}/registrations",
+  first = client.post(f"/api/events/{created_event['id']}/registrations",
                       json=payload)
   assert first.status_code == 201, first.text
 
-  second = client.post(f"api/events/{created_event['id']}/registrations",
+  second = client.post(f"/api/events/{created_event['id']}/registrations",
                        json={**payload, "fullName": "Second"})
   assert second.status_code == 409, second.text
 
@@ -46,7 +46,7 @@ def test_register_when_full_returns_409(client, unique_suffix):
 
 
 def test_register_missing_event_returns_404(client, unique_suffix):
-  response = client.post("api/events/999999/registrations",
+  response = client.post("/api/events/999999/registrations",
                          json={
                            "fullName": "Python Tester",
                            "email": f"user_{unique_suffix}@example.com"

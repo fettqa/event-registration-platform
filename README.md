@@ -6,9 +6,9 @@ Pet project: API, automated tests, k6 performance.
 
 ## Structure
 - `app/` — Spring Boot API (Java 21)
-- `tests-api/` — Python REST tests (planned)
+- `tests-api/` — Python REST tests (Python 3.14.6)
 - `tests-e2e/` — Playwright E2E (planned)
-- `perf/k6/` — k6 load tests (planned)
+- `perf/k6/` — k6 load tests (k6.exe v2.1.0)
 
 ## Run app
 ```bash
@@ -71,11 +71,11 @@ k6 run perf/k6/spike.js
 
 ### Results (local)
 
-| Test  | VUs / stages | Duration | p95 | Failed | Checks |
-|-------|-------------|-------|-----|--------|--------|
-| Smoke | 2 VU        | 30s   | 12.76 ms | 0 %    | 100 %  |
-| Load  | 0→50→0      | ~3m   | 52.2ms | 0 %    | 100 %  |
-| Spike | 10→100→0    | ~1m   | 105.13 ms | 0 %    | 100 %  |
+| Test  | VUs / stages | Duration | p95     | Failed | Checks |
+|-------|-------------|-------|---------|--------|--------|
+| Smoke | 2 VU        | 30s   | 17.33ms | 0 %    | 100 %  |
+| Load  | 0→50→0      | ~3m   | 160.64ms | 0 %    | 100 %  |
+| Spike | 10→100→0    | ~1m   | 626.22ms | 0 %    | 100 %  |
 
 ## Python API tests
 

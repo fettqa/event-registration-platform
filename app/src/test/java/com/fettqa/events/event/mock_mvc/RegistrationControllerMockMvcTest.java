@@ -7,7 +7,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fettqa.events.ExceptionHandler;
+import com.fettqa.events.GlobalExceptionHandler;
 import com.fettqa.events.registration.RegistrationController;
 import com.fettqa.events.registration.RegistrationService;
 import com.fettqa.events.registration.dto.EventRegistrationRequest;
@@ -22,7 +22,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(controllers = RegistrationController.class)
-@Import(ExceptionHandler.class)
+@Import(GlobalExceptionHandler.class)
 public class RegistrationControllerMockMvcTest {
 
   @Autowired

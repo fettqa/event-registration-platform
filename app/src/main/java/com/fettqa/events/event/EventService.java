@@ -3,6 +3,7 @@ package com.fettqa.events.event;
 import com.fettqa.events.event.dto.CreateEventRequest;
 import com.fettqa.events.event.dto.EventResponse;
 import com.fettqa.events.event.dto.UpdateEventRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -29,12 +30,16 @@ public class EventService {
     if (uniqNames.size() != events.size()) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Duplicate event names in request");
     }
-    eventRepository.findAll().stream().map(Event::getName).forEach(name -> {
-      if (events.stream().anyMatch(e -> e.getName().equals(name))) {
-        throw new ResponseStatusException(HttpStatus.CONFLICT,
-            "event with name: " + name + " already exists");
+    List<String> existingEvents = new ArrayList<>();
+    events.forEach(event -> {
+      if (!eventRepository.findByName(event.getName()).isEmpty()) {
+        existingEvents.add(event.getName());
       }
     });
+    if (!existingEvents.isEmpty()) {
+      throw new ResponseStatusException(HttpStatus.CONFLICT,
+          "events with names: " + String.join(", ", existingEvents) + " already exist");
+    }
     eventRepository.saveAll(events);
     return events.stream().map(EventResponse::from).toList();
   }
@@ -42,6 +47,9 @@ public class EventService {
   @Transactional
   public EventResponse create(CreateEventRequest request) {
     Event event = new Event(request.name(), request.maxSeats());
+    if (request.name().isBlank()) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "name must not be blank");
+    }
     if (!eventRepository.findByName(request.name()).isEmpty()) {
       throw new ResponseStatusException(HttpStatus.CONFLICT,
           "event with name: " + request.name() + " already exists");
@@ -58,6 +66,9 @@ public class EventService {
 
   @Transactional
   public EventResponse updateById(Long id, UpdateEventRequest request) {
+    if (request.name() != null && request.name().isBlank()) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "name must not be blank");
+    }
     if (request.name() == null && request.maxSeats() == null) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Nothing to update");
     }
@@ -83,6 +94,7 @@ public class EventService {
         .toList();
   }
 
+  @Transactional
   public void delete(Long id) {
     Event event = eventRepository.findById(id)
         .orElseThrow(() -> new EventNotFoundException("event with id: " + id + " not found"));

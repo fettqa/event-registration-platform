@@ -24,7 +24,7 @@ def unique_suffix() -> str:
 
 @pytest.fixture
 def created_event(client: httpx.Client, unique_suffix: str) -> dict:
-  response = client.post("api/events",
+  response = client.post("/api/events",
                          json={
                            "name": f"PyTest Event {unique_suffix}",
                            "maxSeats": 10,

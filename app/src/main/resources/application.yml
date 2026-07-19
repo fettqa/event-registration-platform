@@ -10,9 +10,6 @@ spring:
     hibernate:
       ddl-auto: validate
     open-in-view: false
-  h2:
-    console:
-      enabled: true
   flyway:
     enabled: true
 
@@ -22,7 +19,6 @@ server:
 logging:
   level:
     org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
-    org.hibernate.SQL: debug
     org.springframework.boot: info
 
 springdoc:
@@ -30,9 +26,3 @@ springdoc:
      path: /swagger-ui.html
    api-docs:
      path: /v3/api-docs
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: env,health,configprops

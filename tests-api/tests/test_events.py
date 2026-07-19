@@ -22,11 +22,11 @@ def test_create_event_invalid_returns_400(client):
 
 def test_get_event_by_id(client, created_event):
   event_id = created_event['id']
-  response = client.get(f"api/events/{event_id}")
+  response = client.get(f"/api/events/{event_id}")
   assert response.status_code == 200, response.text
   assert response.json()['id'] == event_id
 
 
 def test_get_missing_event_returns_404(client):
-  response = client.get("api/events/999999")
+  response = client.get("/api/events/999999")
   assert response.status_code == 404, response.text

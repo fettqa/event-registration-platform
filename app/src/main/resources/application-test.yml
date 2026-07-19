@@ -6,3 +6,16 @@ spring:
     driver-class-name: org.h2.Driver
   flyway:
     enabled: true
+  h2:
+    console:
+      enabled: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: env,health,configprops
