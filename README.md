@@ -1,14 +1,42 @@
 ![App CI](https://github.com/fettqa/event-registration-platform/actions/workflows/app-ci.yml/badge.svg)
+![Python API Tests](https://github.com/fettqa/event-registration-platform/actions/workflows/python-api-tests.yml/badge.svg)
+## About
+Event Registration API — pet project for SDET portfolio.
+Covers:
+- REST API (Spring Boot, Java 21, Flyway)
+- Automated API tests in **Java (REST Assured)** and **Python (pytest + httpx)**
+- CI on **GitHub Actions** (Java unit/API tests + Python black-box tests)
+- Performance tests with **k6** (smoke / load / spike)
+- Dockerized **PostgreSQL** for local prod-like runs
 
-# Event Registration
+## Tech stack
+| Area | Tools |
+|------|--------|
+| Backend | Java 21, Spring Boot, JPA, Flyway, H2 / PostgreSQL |
+| API docs | springdoc OpenAPI (Swagger UI) |
+| Java tests | JUnit 5, REST Assured, MockMvc |
+| Python tests | pytest, httpx |
+| Performance | k6 |
+| CI/CD | GitHub Actions |
+| Infra | Docker Compose |
 
-Pet project: API, automated tests, k6 performance.
+## Quick start
+```bash
+# App (H2)
+cd app && ./gradlew bootRun
+# Java tests
+cd app && ./gradlew test
+# Python API tests (app must be running)
+cd tests-api && pytest
+# k6 smoke
+k6 run perf/k6/smoke.js
+```
 
 ## Structure
 - `app/` — Spring Boot API (Java 21)
-- `tests-api/` — Python REST tests (Python 3.14.6)
+- `tests-api/` — Python REST tests (pytest + httpx)
 - `tests-e2e/` — Playwright E2E (planned)
-- `perf/k6/` — k6 load tests (k6.exe v2.1.0)
+- `perf/k6/` — k6 load tests (smoke / load / spike)
 
 ## Run app
 ```bash

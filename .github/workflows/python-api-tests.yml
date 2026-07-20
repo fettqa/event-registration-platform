@@ -1,0 +1,85 @@
+name: Python API Tests
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'app/**'
+      - 'tests-api/**'
+      - '.github/workflows/python-api-tests.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'app/**'
+      - 'tests-api/**'
+      - '.github/workflows/python-api-tests.yml'
+
+jobs:
+  api-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tests-api
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set Up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: gradle
+
+      - name: Set up Python 3.14.6
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.14.6'
+          cache: pip
+          cache-dependency-path: test-requirements.txt
+
+      - name: Make gradlew executable
+        run: chmod +x app/gradlew
+
+      - name: Build app (skip tests - Java tests run in a separate workflow)
+        working-directory: app
+        run: ./gradlew buildJar -x test
+
+      - name: Start Spring Boot application
+        working-directory: app
+        run: |
+          nohup java -jar build/libs/*.jar > app.log 2>&1 &
+          echo $! > app.pid
+
+      - name: Wait for application to start
+        run: |
+          echo "Waiting for the application to start..."
+          for i in {1..30}; do
+            if curl -s http://localhost:8080/actuator/health | grep -q UP; then
+              echo "Application is up and running."
+              exit 0
+            fi
+            echo "Waiting for application to start... ($i)"
+            sleep 2
+          done
+          echo "Application failed to start within the expected time."
+          cat app.log || true
+          exit 1
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run pytest
+        working-directory: tests-api
+        env:
+            BASE_URL: http://localhost:8080
+        run: pytest
+
+      - name: Upload app log on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-log
+          path: app/app.log
