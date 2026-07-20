@@ -24,34 +24,38 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set Up JDK 21
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
+          distribution: temurin
           java-version: '21'
           cache: gradle
 
-      - name: Set up Python 3.14.6
-        uses: actions/setup-python@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.14.6'
+          python-version: '3.14'
           cache: pip
-          cache-dependency-path: test-requirements.txt
+          cache-dependency-path: tests-api/requirements.txt
 
       - name: Make gradlew executable
-        run: chmod +x app/gradlew
-
-      - name: Build app (skip tests - Java tests run in a separate workflow)
         working-directory: app
-        run: ./gradlew buildJar -x test
+        run: chmod +x gradlew
+
+      - name: Build app ...
+        working-directory: app
+        run: ./gradlew bootJar -x test
 
       - name: Start Spring Boot application
         working-directory: app
         run: |
-          nohup java -jar build/libs/*.jar > app.log 2>&1 &
+          JAR=$(ls build/libs/*SNAPSHOT.jar | head -n 1)
+          echo "Starting $JAR"
+          nohup java -jar "$JAR" > app.log 2>&1 &
           echo $! > app.pid
 
       - name: Wait for application to start
+        working-directory: app
         run: |
           echo "Waiting for the application to start..."
           for i in {1..30}; do
@@ -67,6 +71,7 @@ jobs:
           exit 1
 
       - name: Install Python dependencies
+        working-directory: tests-api
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
@@ -74,7 +79,7 @@ jobs:
       - name: Run pytest
         working-directory: tests-api
         env:
-            BASE_URL: http://localhost:8080
+          BASE_URL: http://localhost:8080
         run: pytest
 
       - name: Upload app log on failure
