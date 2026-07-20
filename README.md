@@ -1,5 +1,8 @@
 ![App CI](https://github.com/fettqa/event-registration-platform/actions/workflows/app-ci.yml/badge.svg)
 ![Python API Tests](https://github.com/fettqa/event-registration-platform/actions/workflows/python-api-tests.yml/badge.svg)
+
+## Event Registration Platform
+
 ## About
 Event Registration API — pet project.
 Covers:
@@ -54,10 +57,18 @@ Health: http://localhost:8080/actuator/health
 ## CI
 Tests run automatically on push/PR via GitHub Actions.
 
+| Workflow | What it runs |
+|----------|----------------|
+| App CI | `./gradlew test` (Java / REST Assured) |
+| Python API Tests | build jar → start app → `pytest` |
+
+Badges at the top show current status.
+
 ## Run with PostgreSQL (Docker)
 
 ```bash
 # 1. Start database
+cd app
 docker compose up -d
 
 # 2. Run app with docker profile
