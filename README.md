@@ -1,7 +1,7 @@
 ![App CI](https://github.com/fettqa/event-registration-platform/actions/workflows/app-ci.yml/badge.svg)
 ![Python API Tests](https://github.com/fettqa/event-registration-platform/actions/workflows/python-api-tests.yml/badge.svg)
 ## About
-Event Registration API — pet project for SDET portfolio.
+Event Registration API — pet project.
 Covers:
 - REST API (Spring Boot, Java 21, Flyway)
 - Automated API tests in **Java (REST Assured)** and **Python (pytest + httpx)**
