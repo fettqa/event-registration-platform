@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>New event</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" th:href="@{/css/app.css}"/>
+</head>
+<body>
+<header class="app-header">
+  <div class="app-header-inner">
+    <a class="app-brand" href="/" data-testid="app-header">Event Registration Platform</a>
+  </div>
+</header>
+
+<div class="page">
+  <div class="topbar">
+    <h1>Create event</h1>
+    <a class="btn btn-secondary" href="/">Back</a>
+  </div>
+
+  <div class="card">
+    <div th:if="${error}" class="alert alert-error" data-testid="error-message" th:text="${error}"></div>
+
+    <form th:action="@{/events}" th:object="${eventForm}" method="post"
+          class="form-stack" data-testid="create-event-form">
+
+      <div th:if="${#fields.hasErrors('*')}" class="form-errors" data-testid="form-errors">
+        <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+      </div>
+
+      <div class="field">
+        <label for="name">Name</label>
+        <input id="name" th:field="*{name}" data-testid="event-name-input"/>
+        <p class="field-error" th:if="${#fields.hasErrors('name')}"
+           th:errors="*{name}" data-testid="name-error"></p>
+      </div>
+
+      <div class="field">
+        <label for="maxSeats">Max seats</label>
+        <input id="maxSeats" type="number" th:field="*{maxSeats}" data-testid="event-seats-input"/>
+        <p class="field-error" th:if="${#fields.hasErrors('maxSeats')}"
+           th:errors="*{maxSeats}" data-testid="seats-error"></p>
+      </div>
+
+      <div class="actions">
+        <button type="submit" data-testid="submit-event">Create</button>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>

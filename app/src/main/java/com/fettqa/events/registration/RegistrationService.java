@@ -6,6 +6,8 @@ import com.fettqa.events.event.EventRepository;
 import com.fettqa.events.registration.dto.EventRegistrationRequest;
 import com.fettqa.events.registration.dto.EventRegistrationResponse;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,5 +51,24 @@ public class RegistrationService {
     return registrationRepository.findByEventId(eventId).stream()
         .map(EventRegistrationResponse::from)
         .toList();
+  }
+
+  public Page<EventRegistrationResponse> searchRegistrations(
+      Long eventId, String query, Pageable pageable) {
+    if (!eventRepository.existsById(eventId)) {
+      throw new EventNotFoundException("event with id: " + eventId + " not found");
+    }
+    Page<Registration> page;
+    if (query == null || query.isBlank()) {
+      page = registrationRepository.findByEventId(eventId, pageable);
+    } else {
+      page = registrationRepository.findByEventIdAndFullNameContainingIgnoreCase(
+          eventId, query.trim(), pageable);
+    }
+    return page.map(EventRegistrationResponse::from);
+  }
+
+  public long countByEventId(Long eventId) {
+    return registrationRepository.countByEventId(eventId);
   }
 }
