@@ -12,6 +12,26 @@ Covers:
 - Performance tests with **k6** (smoke / load / spike)
 - Dockerized **PostgreSQL** for local prod-like runs
 
+## Web UI (Thymeleaf)
+
+Open after `bootRun`: http://localhost:8080/
+
+| Page | URL | Features |
+|------|-----|----------|
+| Events list | `/` | search by name, pagination (100/page) |
+| Create event | `/events/new` | validation errors, redirect to created event |
+| Event details | `/events/{id}` | seats left, register form, registrations list with search + pagination |
+
+UI uses the same services as REST API (SSR forms, not JSON).
+
+## Domain rules
+
+- Unique event name
+- Unique email per event
+- Cannot register when seats are full (409)
+- Concurrent registration protected (row lock / race handling)
+- Remaining seats shown on event details page
+
 ## Tech stack
 | Area | Tools |
 |------|--------|
@@ -23,36 +43,39 @@ Covers:
 | CI/CD | GitHub Actions |
 | Infra | Docker Compose |
 
+## Structure
+- `app/` — Spring Boot API (Java 21) + Thymeleaf UI
+- `tests-api/` — Python REST tests (pytest + httpx)
+- `tests-e2e/` — Playwright E2E (planned)
+- `perf/k6/` — k6 load tests (smoke / load / spike)
+
 ## Quick start
 ```bash
 # App (H2)
 cd app && ./gradlew bootRun
+# Web UI
+open http://localhost:8080/
 # Java tests
 cd app && ./gradlew test
 # Python API tests (app must be running)
 cd tests-api && pytest
 # k6 smoke
 k6 run perf/k6/smoke.js
-```
 
-## Structure
-- `app/` — Spring Boot API (Java 21)
-- `tests-api/` — Python REST tests (pytest + httpx)
-- `tests-e2e/` — Playwright E2E (planned)
-- `perf/k6/` — k6 load tests (smoke / load / spike)
-
-## Run app
-```bash
-cd app
-./gradlew bootRun
-```
 Swagger: http://localhost:8080/swagger-ui.html  
 Health: http://localhost:8080/actuator/health
+```
 
-## API
-- `POST /api/events` — create an event
-- `POST /api/events/{id}/registrations` — register for an event
-- Returns 409 when seats are full or email already registered
+## API (REST)
+| Method | Path | Notes |
+|--------|------|-------|
+| POST | `/api/events` | create |
+| GET | `/api/events` | list / filter |
+| GET | `/api/events/{id}` | by id |
+| PATCH | `/api/events/{id}` | update |
+| DELETE | `/api/events/{id}` | delete |
+| POST | `/api/events/{id}/registrations` | register (201 / 409) |
+Swagger: http://localhost:8080/swagger-ui.html
 
 ## CI
 Tests run automatically on push/PR via GitHub Actions.
@@ -130,3 +153,7 @@ python -m venv .venv
 pip install -r requirements.txt
 pytest
 ```
+
+![Events](Events.png)
+![New event](New_event.png)
+![Event details](Event_details.png)
