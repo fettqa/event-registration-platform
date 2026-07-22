@@ -1,5 +1,6 @@
 ![App CI](https://github.com/fettqa/event-registration-platform/actions/workflows/app-ci.yml/badge.svg)
 ![Python API Tests](https://github.com/fettqa/event-registration-platform/actions/workflows/python-api-tests.yml/badge.svg)
+![E2E Java](https://github.com/fettqa/event-registration-platform/actions/workflows/e2e-java.yml/badge.svg)
 
 ## Event Registration Platform
 
@@ -46,7 +47,7 @@ UI uses the same services as REST API (SSR forms, not JSON).
 ## Structure
 - `app/` — Spring Boot API (Java 21) + Thymeleaf UI
 - `tests-api/` — Python REST tests (pytest + httpx)
-- `tests-e2e/` — Playwright E2E (planned)
+- `tests-e2e/` — Playwright E2E (java + Playwright)
 - `perf/k6/` — k6 load tests (smoke / load / spike)
 
 ## Quick start
@@ -61,6 +62,8 @@ cd app && ./gradlew test
 cd tests-api && pytest
 # k6 smoke
 k6 run perf/k6/smoke.js
+# Playwright E2E (app must be running)
+cd tests-e2e/java && ./gradlew installPlaywright && ./gradlew test
 
 Swagger: http://localhost:8080/swagger-ui.html  
 Health: http://localhost:8080/actuator/health
@@ -152,6 +155,24 @@ python -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
 pytest
+```
+
+## Playwright E2E (Java)
+
+App must be running on `:8080`.
+
+```bash
+# 1. Start the app
+cd app && ./gradlew bootRun
+
+# 2. Install browser (once)
+cd tests-e2e/java
+./gradlew installPlaywright
+
+# 3. Run E2E
+./gradlew test
+# optional:
+./gradlew test -DbaseUrl=http://localhost:8080
 ```
 
 ![Events](Events.png)
