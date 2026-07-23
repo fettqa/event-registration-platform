@@ -1,6 +1,7 @@
 ![App CI](https://github.com/fettqa/event-registration-platform/actions/workflows/app-ci.yml/badge.svg)
 ![Python API Tests](https://github.com/fettqa/event-registration-platform/actions/workflows/python-api-tests.yml/badge.svg)
 ![E2E Java](https://github.com/fettqa/event-registration-platform/actions/workflows/e2e-java.yml/badge.svg)
+![E2E Python](https://github.com/fettqa/event-registration-platform/actions/workflows/e2e-python.yml/badge.svg)
 
 ## Event Registration Platform
 
@@ -9,7 +10,8 @@ Event Registration API — pet project.
 Covers:
 - REST API (Spring Boot, Java 21, Flyway)
 - Automated API tests in **Java (REST Assured)** and **Python (pytest + httpx)**
-- CI on **GitHub Actions** (Java unit/API tests + Python black-box tests)
+- E2E UI tests with **Playwright (Java + Python)**
+- CI on **GitHub Actions** (Java tests, Python API tests, Playwright E2E)
 - Performance tests with **k6** (smoke / load / spike)
 - Dockerized **PostgreSQL** for local prod-like runs
 
@@ -39,7 +41,8 @@ UI uses the same services as REST API (SSR forms, not JSON).
 | Backend | Java 21, Spring Boot, JPA, Flyway, H2 / PostgreSQL |
 | API docs | springdoc OpenAPI (Swagger UI) |
 | Java tests | JUnit 5, REST Assured, MockMvc |
-| Python tests | pytest, httpx |
+| Python API tests | pytest, httpx |
+| E2E | Playwright (Java + Python) |
 | Performance | k6 |
 | CI/CD | GitHub Actions |
 | Infra | Docker Compose |
@@ -47,7 +50,8 @@ UI uses the same services as REST API (SSR forms, not JSON).
 ## Structure
 - `app/` — Spring Boot API (Java 21) + Thymeleaf UI
 - `tests-api/` — Python REST tests (pytest + httpx)
-- `tests-e2e/` — Playwright E2E (java + Playwright)
+- `tests-e2e/java/` — Playwright E2E (Java)
+- `tests-e2e/python/` — Playwright E2E (Python)
 - `perf/k6/` — k6 load tests (smoke / load / spike)
 
 ## Quick start
@@ -173,6 +177,28 @@ cd tests-e2e/java
 ./gradlew test
 # optional:
 ./gradlew test -DbaseUrl=http://localhost:8080
+```
+
+## Playwright E2E (Python)
+
+Use **Python 3.12** (3.14 may fail installing `greenlet` wheels on Windows).
+
+```bash
+# 1. Start app
+cd app && ./gradlew bootRun
+
+# 2. Setup (first time)
+cd tests-e2e/python
+py -3.12 -m venv .venv
+# Windows:
+.venv\Scripts\activate
+pip install -r requirements.txt
+playwright install chromium
+
+# 3. Run
+pytest
+# headed:
+pytest --headed
 ```
 
 ![Events](Events.png)
