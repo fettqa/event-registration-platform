@@ -68,6 +68,10 @@ cd tests-api && pytest
 k6 run perf/k6/smoke.js
 # Playwright E2E (app must be running)
 cd tests-e2e/java && ./gradlew installPlaywright && ./gradlew test
+# Playwright E2E Python (app must be running)
+cd tests-e2e/python
+# activate venv, then:
+pytest
 
 Swagger: http://localhost:8080/swagger-ui.html  
 Health: http://localhost:8080/actuator/health
@@ -86,11 +90,14 @@ Swagger: http://localhost:8080/swagger-ui.html
 
 ## CI
 Tests run automatically on push/PR via GitHub Actions.
+## CI workflows
 
-| Workflow | What it runs |
-|----------|----------------|
-| App CI | `./gradlew test` (Java / REST Assured) |
-| Python API Tests | build jar → start app → `pytest` |
+| Workflow | Runs |
+|----------|------|
+| App CI | `./gradlew test` |
+| Python API Tests | bootJar → start app → pytest |
+| E2E Java | Playwright Java |
+| E2E Python | Playwright Python |
 
 Badges at the top show current status.
 

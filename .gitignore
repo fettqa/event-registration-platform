@@ -33,3 +33,11 @@ replay_pid*
 **/__pycache__/
 **/.pytest_cache/
 out/
+**/build/
+**/.gradle/
+tests-e2e/java/build/
+tests-e2e/java/.gradle/
+tests-e2e/python/.venv/
+tests-e2e/python/.pytest_cache/
+tests-e2e/python/test-results/
+tests-e2e/python/playwright-report/
