@@ -22,10 +22,11 @@ Open after `bootRun`: http://localhost:8080/
 | Page | URL | Features |
 |------|-----|----------|
 | Events list | `/` | search by name, pagination (100/page) |
-| Create event | `/events/new` | validation errors, redirect to created event |
+| Login | `/login` | JWT via `/api/auth/login`, token in `localStorage` |
+| Create event | `/events/new` | requires ADMIN Bearer token; calls `POST /api/events` |
 | Event details | `/events/{id}` | seats left, register form, registrations list with search + pagination |
 
-UI uses the same services as REST API (SSR forms, not JSON).
+Create event uses the secured REST API from the browser (`Authorization: Bearer ...`). Guest registration on event details stays as an SSR form (public).
 
 ## Auth
 Default admin (seeded on startup):

@@ -45,4 +45,10 @@ public class GlobalExceptionHandler {
     String message = ex.getReason() != null ? ex.getReason() : ex.getMessage();
     return ResponseEntity.status(ex.getStatusCode()).body(Map.of("error", message));
   }
+
+  @ExceptionHandler(org.springframework.security.core.AuthenticationException.class)
+  @ResponseStatus(HttpStatus.UNAUTHORIZED)
+  public Map<String, String> handleAuth(org.springframework.security.core.AuthenticationException ex) {
+    return Map.of("error", "bad credentials");
+  }
 }

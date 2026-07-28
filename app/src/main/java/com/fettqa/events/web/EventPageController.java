@@ -1,7 +1,6 @@
 package com.fettqa.events.web;
 
 import com.fettqa.events.event.EventService;
-import com.fettqa.events.event.dto.CreateEventRequest;
 import com.fettqa.events.event.dto.EventResponse;
 import com.fettqa.events.registration.RegistrationService;
 import com.fettqa.events.registration.dto.EventRegistrationRequest;
@@ -48,28 +47,8 @@ public class EventPageController {
   }
 
   @GetMapping("/events/new")
-  public String newEvent(Model model) {
-    model.addAttribute("eventForm", new CreateEventRequest("", 10));
+  public String newEvent() {
     return "events/new";
-  }
-
-  @PostMapping("/events")
-  public String createEvent(@Valid @ModelAttribute("eventForm") CreateEventRequest form,
-      BindingResult bindingResult,
-      Model model) {
-    if (bindingResult.hasErrors()) {
-      return "events/new";
-    }
-    try {
-      EventResponse created = eventService.create(form);
-      return "redirect:/events/" + created.id();
-    } catch (ResponseStatusException ex) {
-      model.addAttribute("error", ex.getReason() != null ? ex.getReason() : ex.getMessage());
-      return "events/new";
-    } catch (Exception ex) {
-      model.addAttribute("error", ex.getMessage());
-      return "events/new";
-    }
   }
 
   @GetMapping("/events/{id}")

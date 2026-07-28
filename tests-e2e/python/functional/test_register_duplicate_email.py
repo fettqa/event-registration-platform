@@ -1,9 +1,13 @@
 from playwright.sync_api import Page, expect
 
+from support.ui_auth import login_as_admin
+
 
 def test_register_same_email_twice_shows_error(page: Page, base_url: str, unique_suffix: str):
   event_name = f"E2E Dup Event {unique_suffix}"
   email = f"dup_python_{unique_suffix}@example.com"
+
+  login_as_admin(page, base_url)
 
   page.goto(f"{base_url}/events/new")
   page.get_by_test_id("event-name-input").fill(event_name)

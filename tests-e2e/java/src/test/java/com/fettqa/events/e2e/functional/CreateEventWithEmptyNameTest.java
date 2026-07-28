@@ -4,12 +4,15 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 
 import com.fettqa.events.e2e.base.PlaywrightBaseTest;
 import com.fettqa.events.e2e.preconditions.Precondition;
+import com.fettqa.events.e2e.support.UiAuth;
 import org.junit.jupiter.api.Test;
 
 public class CreateEventWithEmptyNameTest extends PlaywrightBaseTest<Precondition> {
 
   @Test
   void createEventWithEmptyName_showsValidation() {
+    UiAuth.loginAsAdmin(page, baseUrl);
+
     page.navigate(baseUrl + "/events/new");
     page.getByTestId("event-name-input").fill("");
     page.getByTestId("event-seats-input").fill("0");
@@ -19,6 +22,6 @@ public class CreateEventWithEmptyNameTest extends PlaywrightBaseTest<Preconditio
     assertThat(page.getByTestId("form-errors")).isVisible();
     assertThat(page.getByTestId("name-error")).isVisible();
     assertThat(page.getByTestId("seats-error")).isVisible();
-    assertThat(page).hasURL(java.util.regex.Pattern.compile(".*/events$|.*/events/new.*"));
+    assertThat(page).hasURL(java.util.regex.Pattern.compile(".*/events/new.*"));
   }
 }

@@ -1,6 +1,3 @@
-import uuid
-
-
 def test_login_admin_returns_token(client):
   response = client.post(
       "/api/auth/login",

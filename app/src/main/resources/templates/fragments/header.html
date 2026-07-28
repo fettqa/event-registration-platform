@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<header class="app-header" th:fragment="header">
+  <div class="app-header-inner">
+    <a class="app-brand" href="/" data-testid="app-header">Event Registration Platform</a>
+    <nav class="app-nav" data-testid="app-nav">
+      <div class="auth-guest" data-auth-guest>
+        <a class="nav-link" href="/login" data-testid="login-link">Login</a>
+      </div>
+      <div class="auth-user" data-auth-user hidden>
+        <span class="nav-user" data-testid="auth-email"></span>
+        <span class="nav-role" data-testid="auth-role"></span>
+        <button type="button" class="btn btn-nav" data-testid="logout-button">Logout</button>
+      </div>
+    </nav>
+  </div>
+</header>
+</body>
+</html>

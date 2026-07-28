@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.fettqa.events.e2e.base.PlaywrightBaseTest;
 import com.fettqa.events.e2e.preconditions.Precondition;
+import com.fettqa.events.e2e.support.UiAuth;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +16,8 @@ public class CreateEventAndRegisterE2ETest extends PlaywrightBaseTest<Preconditi
     String suffix = UUID.randomUUID().toString().substring(0, 8);
     String eventName = "E2E Java Event " + suffix;
     String email = "e2e_java_" + suffix + "@example.com";
+
+    UiAuth.loginAsAdmin(page, baseUrl);
 
     page.navigate(baseUrl + "/");
     assertThat(page.getByTestId("create-event-link")).isVisible();

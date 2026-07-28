@@ -10,11 +10,7 @@
   <link rel="stylesheet" th:href="@{/css/app.css}"/>
 </head>
 <body>
-<header class="app-header">
-  <div class="app-header-inner">
-    <a class="app-brand" href="/" data-testid="app-header">Event Registration Platform</a>
-  </div>
-</header>
+<header th:replace="~{fragments/header :: header}"></header>
 
 <div class="page">
   <div class="topbar">
@@ -125,5 +121,7 @@
     </div>
   </div>
 </div>
+
+<script th:src="@{/js/auth.js}"></script>
 </body>
 </html>

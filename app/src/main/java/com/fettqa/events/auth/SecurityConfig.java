@@ -8,6 +8,7 @@ import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,7 +39,7 @@ public class SecurityConfig {
       throws Exception {
 
     http
-        .csrf(csrf -> csrf.disable())
+        .csrf(AbstractHttpConfigurer::disable)
         .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/error").permitAll()
@@ -48,7 +49,7 @@ public class SecurityConfig {
                 "/swagger-ui/**",
                 "/swagger-ui.html",
                 "/v3/api-docs/**").permitAll()
-            .requestMatchers("/", "/events/**", "/css/**").permitAll()
+            .requestMatchers("/", "/events/**", "/login", "/css/**", "/js/**").permitAll()
             .requestMatchers(HttpMethod.GET, "/api/events", "/api/events/**").permitAll()
             .requestMatchers(HttpMethod.POST, "/api/events/*/registrations").permitAll()
             .requestMatchers(HttpMethod.POST, "/api/events", "/api/events/bulk").hasRole("ADMIN")
@@ -56,8 +57,8 @@ public class SecurityConfig {
             .requestMatchers(HttpMethod.DELETE, "/api/events/**").hasRole("ADMIN")
             .anyRequest().authenticated()
         )
-        .httpBasic(basic -> basic.disable())
-        .formLogin(form -> form.disable())
+        .httpBasic(AbstractHttpConfigurer::disable)
+        .formLogin(AbstractHttpConfigurer::disable)
         .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
     return http.build();

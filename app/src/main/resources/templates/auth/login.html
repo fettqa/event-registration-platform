@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>New event</title>
+  <title>Login</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
@@ -14,30 +14,33 @@
 
 <div class="page">
   <div class="topbar">
-    <h1>Create event</h1>
+    <h1>Login</h1>
     <a class="btn btn-secondary" href="/">Back</a>
   </div>
 
   <div class="card">
-    <div class="alert alert-error" data-testid="error-message" hidden></div>
+    <p class="muted login-hint">
+      Seeded admin: <code>admin@example.com</code> / <code>admin123</code>
+      (USER can register via <code>POST /api/auth/register</code>, but cannot create events).
+    </p>
 
-    <form class="form-stack" data-testid="create-event-form">
-      <div class="form-errors" data-testid="form-errors" hidden></div>
+    <div class="alert alert-error" data-testid="login-error" hidden></div>
 
+    <form class="form-stack" data-testid="login-form">
       <div class="field">
-        <label for="name">Name</label>
-        <input id="name" name="name" data-testid="event-name-input"/>
-        <p class="field-error" data-testid="name-error" hidden></p>
+        <label for="email">Email</label>
+        <input id="email" type="email" autocomplete="username" required
+               data-testid="login-email-input"/>
       </div>
 
       <div class="field">
-        <label for="maxSeats">Max seats</label>
-        <input id="maxSeats" name="maxSeats" type="number" value="10" data-testid="event-seats-input"/>
-        <p class="field-error" data-testid="seats-error" hidden></p>
+        <label for="password">Password</label>
+        <input id="password" type="password" autocomplete="current-password" required
+               data-testid="login-password-input"/>
       </div>
 
       <div class="actions">
-        <button type="submit" data-testid="submit-event">Create</button>
+        <button type="submit" data-testid="login-submit">Sign in</button>
       </div>
     </form>
   </div>

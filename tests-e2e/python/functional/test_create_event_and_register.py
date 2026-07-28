@@ -1,9 +1,13 @@
 from playwright.sync_api import Page, expect
 
+from support.ui_auth import login_as_admin
+
 
 def test_create_event_and_register_shows_success(page: Page, base_url: str, unique_suffix: str):
   event_name = f"E2E Python Event {unique_suffix}"
   email = f"e2e_python_{unique_suffix}@example.com"
+
+  login_as_admin(page, base_url)
 
   page.goto(f"{base_url}/")
   expect(page.get_by_test_id("create-event-link")).to_be_visible()
