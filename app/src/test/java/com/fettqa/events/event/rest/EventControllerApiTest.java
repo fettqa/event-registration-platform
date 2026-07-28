@@ -8,6 +8,7 @@ import static org.hamcrest.Matchers.notNullValue;
 
 import com.fettqa.events.event.Event;
 import com.fettqa.events.event.dto.EventResponse;
+import com.fettqa.events.utils.AuthTestSupport;
 import com.fettqa.events.utils.TestDataCleaner;
 import com.fettqa.events.utils.Utils;
 import io.restassured.RestAssured;
@@ -34,16 +35,19 @@ public class EventControllerApiTest {
   @Autowired
   private TestDataCleaner testDataCleaner;
 
+  private String adminToken;
+
   @BeforeEach
   void setUp() {
     testDataCleaner.cleanAndResetIds();
     RestAssured.port = port;
     RestAssured.basePath = "/api/events";
+    adminToken = AuthTestSupport.adminToken(port);
   }
-
 
   private Response createEvent(String name, Integer maxSeats) {
     return given()
+        .header("Authorization", "Bearer " + adminToken)
         .contentType(ContentType.JSON)
         .body("""
             {"name":"%s","maxSeats":%d}
@@ -74,6 +78,7 @@ public class EventControllerApiTest {
           .path("id");
 
       given()
+          .header("Authorization", "Bearer " + adminToken)
           .contentType(ContentType.JSON)
           .body("{\"name\":\"" + newName + "\"}")
           .when()
@@ -84,6 +89,7 @@ public class EventControllerApiTest {
           .body("maxSeats", equalTo(maxSeats));
 
       given()
+          .header("Authorization", "Bearer " + adminToken)
           .contentType(ContentType.JSON)
           .body("{\"maxSeats\":\"" + newMaxSeats + "\"}")
           .when()
@@ -97,10 +103,13 @@ public class EventControllerApiTest {
     @Test
     void patchEvent_returns400() {
       Integer id = createEvent("QA Conf", 50)
-          .body()
+          .then()
+          .statusCode(201)
+          .extract()
           .path("id");
 
       given()
+          .header("Authorization", "Bearer " + adminToken)
           .contentType(ContentType.JSON)
           .body("{}")
           .when()
@@ -109,6 +118,7 @@ public class EventControllerApiTest {
           .statusCode(400);
 
       given()
+          .header("Authorization", "Bearer " + adminToken)
           .contentType(ContentType.JSON)
           .body("{\"maxSeats\":-1}")
           .when()
@@ -176,6 +186,7 @@ public class EventControllerApiTest {
           .path("id");
 
       given()
+          .header("Authorization", "Bearer " + adminToken)
           .when()
           .delete("{id}", id)
           .then()
@@ -206,6 +217,7 @@ public class EventControllerApiTest {
       String testDataPath = "testData/bulk_events.json";
       Event[] events = Utils.jsonToObject(testDataPath, Event[].class);
       List<EventResponse> created = given()
+          .header("Authorization", "Bearer " + adminToken)
           .contentType(ContentType.JSON)
           .body(Utils.jsonAsString(testDataPath))
           .when()
@@ -224,6 +236,7 @@ public class EventControllerApiTest {
           .extract().jsonPath().getList("", EventResponse.class);
 
       given()
+          .header("Authorization", "Bearer " + adminToken)
           .when()
           .delete("{id}", created.get(3).id())
           .then()
@@ -250,6 +263,7 @@ public class EventControllerApiTest {
       String testDataPath = "testData/bulk_invalid_events.json";
       String events = Utils.jsonAsString(testDataPath);
       given()
+          .header("Authorization", "Bearer " + adminToken)
           .contentType(ContentType.JSON)
           .body(events)
           .when()
@@ -263,6 +277,7 @@ public class EventControllerApiTest {
       String testDataPath = "testData/bulk_duplicated_events.json";
       String events = Utils.jsonAsString(testDataPath);
       given()
+          .header("Authorization", "Bearer " + adminToken)
           .contentType(ContentType.JSON)
           .body(events)
           .when()

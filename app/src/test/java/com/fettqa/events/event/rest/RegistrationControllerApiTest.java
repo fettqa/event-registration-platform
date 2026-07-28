@@ -4,6 +4,7 @@ import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
+import com.fettqa.events.utils.AuthTestSupport;
 import com.fettqa.events.utils.TestDataCleaner;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -28,15 +29,19 @@ public class RegistrationControllerApiTest {
   @Autowired
   TestDataCleaner testDataCleaner;
 
+  private String adminToken;
+
   @BeforeEach
   void setUp() {
     testDataCleaner.cleanAndResetIds();
     RestAssured.port = port;
     RestAssured.basePath = "";
+    adminToken = AuthTestSupport.adminToken(port);
   }
 
   private Integer createEvent(int maxSeats) {
     return given()
+        .header("Authorization", "Bearer " + adminToken)
         .contentType(ContentType.JSON)
         .body("{\"name\":\"QA Conf\",\"maxSeats\":\"" + maxSeats + "\"}")
         .when()

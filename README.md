@@ -27,6 +27,18 @@ Open after `bootRun`: http://localhost:8080/
 
 UI uses the same services as REST API (SSR forms, not JSON).
 
+## Auth
+Default admin (seeded on startup):
+email:    admin@example.com
+password: admin123
+
+POST /api/auth/register  → USER + accessToken
+POST /api/auth/login     → accessToken
+
+Header: Authorization: Bearer <accessToken>
+
+Swagger: Authorize → bearerAuth → insert token
+
 ## Domain rules
 
 - Unique event name
@@ -36,16 +48,16 @@ UI uses the same services as REST API (SSR forms, not JSON).
 - Remaining seats shown on event details page
 
 ## Tech stack
-| Area | Tools |
-|------|--------|
-| Backend | Java 21, Spring Boot, JPA, Flyway, H2 / PostgreSQL |
-| API docs | springdoc OpenAPI (Swagger UI) |
-| Java tests | JUnit 5, REST Assured, MockMvc |
-| Python API tests | pytest, httpx |
-| E2E | Playwright (Java + Python) |
-| Performance | k6 |
-| CI/CD | GitHub Actions |
-| Infra | Docker Compose |
+| Area | Tools                                                   |
+|------|---------------------------------------------------------|
+| Backend | Java 21, Spring Boot, JPA, Flyway, H2 / PostgreSQL, JWT |
+| API docs | springdoc OpenAPI (Swagger UI)                          |
+| Java tests | JUnit 5, REST Assured, MockMvc                          |
+| Python API tests | pytest, httpx                                           |
+| E2E | Playwright (Java + Python)                              |
+| Performance | k6                                                      |
+| CI/CD | GitHub Actions                                          |
+| Infra | Docker Compose                                          |
 
 ## Structure
 - `app/` — Spring Boot API (Java 21) + Thymeleaf UI
@@ -70,7 +82,7 @@ k6 run perf/k6/smoke.js
 cd tests-e2e/java && ./gradlew installPlaywright && ./gradlew test
 # Playwright E2E Python (app must be running)
 cd tests-e2e/python
-# activate venv, then:
+# activate venv (py .\.venv\Scripts\activate), then:
 pytest
 
 Swagger: http://localhost:8080/swagger-ui.html  
@@ -78,14 +90,14 @@ Health: http://localhost:8080/actuator/health
 ```
 
 ## API (REST)
-| Method | Path | Notes |
-|--------|------|-------|
-| POST | `/api/events` | create |
-| GET | `/api/events` | list / filter |
-| GET | `/api/events/{id}` | by id |
-| PATCH | `/api/events/{id}` | update |
-| DELETE | `/api/events/{id}` | delete |
-| POST | `/api/events/{id}/registrations` | register (201 / 409) |
+| Method | Path | Notes | Access |
+|--------|------|-------|--------|
+| POST | `/api/events` | create | Admin |
+| GET | `/api/events` | list / filter | Public |
+| GET | `/api/events/{id}` | by id | Public |
+| PATCH | `/api/events/{id}` | update | Admin |
+| DELETE | `/api/events/{id}` | delete | Admin |
+| POST | `/api/events/{id}/registrations` | register (201 / 409) | Public |
 Swagger: http://localhost:8080/swagger-ui.html
 
 ## CI
@@ -118,6 +130,12 @@ Stop database:
 docker compose down
 ```
 
+Clean database (drop + recreate):
+```bash
+docker compose down -v
+docker compose up -d
+```
+
 ## Run tests (H2, no Docker required)
 ```bash
 cd app
@@ -147,11 +165,11 @@ k6 run perf/k6/spike.js
 
 ### Results (local)
 
-| Test  | VUs / stages | Duration | p95     | Failed | Checks |
-|-------|-------------|-------|---------|--------|--------|
-| Smoke | 2 VU        | 30s   | 17.33ms | 0 %    | 100 %  |
-| Load  | 0→50→0      | ~3m   | 160.64ms | 0 %    | 100 %  |
-| Spike | 10→100→0    | ~1m   | 626.22ms | 0 %    | 100 %  |
+| Test  | VUs / stages | Duration | p95      | Failed | Checks |
+|-------|-------------|-------|----------|--------|--------|
+| Smoke | 2 VU        | 30s   | 43.59ms  | 0 %    | 100 %  |
+| Load  | 0→50→0      | ~3m   | 222.16ms | 0 %    | 100 %  |
+| Spike | 10→100→0    | ~1m   | 664.22ms | 0 %    | 100 %  |
 
 ## Python API tests
 

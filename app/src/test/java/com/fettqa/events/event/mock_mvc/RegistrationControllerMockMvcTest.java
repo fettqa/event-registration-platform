@@ -8,6 +8,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fettqa.events.GlobalExceptionHandler;
+import com.fettqa.events.auth.AppUserDetailsService;
+import com.fettqa.events.auth.JwtService;
 import com.fettqa.events.registration.RegistrationController;
 import com.fettqa.events.registration.RegistrationService;
 import com.fettqa.events.registration.dto.EventRegistrationRequest;
@@ -15,6 +17,7 @@ import com.fettqa.events.registration.dto.EventRegistrationResponse;
 import java.time.OffsetDateTime;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
@@ -22,6 +25,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(controllers = RegistrationController.class)
+@AutoConfigureMockMvc(addFilters = false)
 @Import(GlobalExceptionHandler.class)
 public class RegistrationControllerMockMvcTest {
 
@@ -30,6 +34,12 @@ public class RegistrationControllerMockMvcTest {
 
   @MockitoBean
   private RegistrationService registrationService;
+
+  @MockitoBean
+  private JwtService jwtService;
+
+  @MockitoBean
+  private AppUserDetailsService appUserDetailsService;
 
 
   @Test

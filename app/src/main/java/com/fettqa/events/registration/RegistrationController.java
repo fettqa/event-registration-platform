@@ -2,6 +2,7 @@ package com.fettqa.events.registration;
 
 import com.fettqa.events.registration.dto.EventRegistrationRequest;
 import com.fettqa.events.registration.dto.EventRegistrationResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -25,12 +26,14 @@ public class RegistrationController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
+  @SecurityRequirement(name = "bearerAuth")
   public EventRegistrationResponse register(@PathVariable Long eventId,
       @Valid @RequestBody EventRegistrationRequest request) {
     return registrationService.register(eventId, request);
   }
 
   @GetMapping
+  @SecurityRequirement(name = "bearerAuth")
   public List<EventRegistrationResponse> getRegistrations(@PathVariable Long eventId) {
     return registrationService.getRegistrations(eventId);
   }

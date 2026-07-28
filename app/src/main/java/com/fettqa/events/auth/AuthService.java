@@ -38,7 +38,7 @@ public class AuthService {
 
     User user = new User(
         request.email().trim().toLowerCase(),
-        passwordEncoder.encode(request.password()), // обязательно encode!
+        passwordEncoder.encode(request.password()),
         Role.USER);
 
     userRepository.save(user);

@@ -5,26 +5,29 @@ import com.fettqa.events.registration.RegistrationConflictException;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-  @org.springframework.web.bind.annotation.ExceptionHandler(EventNotFoundException.class)
+  @ExceptionHandler(EventNotFoundException.class)
   @ResponseStatus(HttpStatus.NOT_FOUND)
   public Map<String, String> handleNotFound(EventNotFoundException ex) {
     return Map.of("error", ex.getMessage());
   }
 
-  @org.springframework.web.bind.annotation.ExceptionHandler(RegistrationConflictException.class)
+  @ExceptionHandler(RegistrationConflictException.class)
   @ResponseStatus(HttpStatus.CONFLICT)
   public Map<String, String> handleConflict(RegistrationConflictException ex) {
     return Map.of("error", ex.getMessage());
   }
 
-  @org.springframework.web.bind.annotation.ExceptionHandler(MethodArgumentNotValidException.class)
+  @ExceptionHandler(MethodArgumentNotValidException.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   public Map<String, Object> handleValidation(MethodArgumentNotValidException ex) {
     Map<String, String> fieldErrors = new HashMap<>();
@@ -35,5 +38,11 @@ public class GlobalExceptionHandler {
         "error", "Validation failed",
         "fields", fieldErrors
     );
+  }
+
+  @ExceptionHandler(ResponseStatusException.class)
+  public ResponseEntity<Map<String, String>> handleResponseStatus(ResponseStatusException ex) {
+    String message = ex.getReason() != null ? ex.getReason() : ex.getMessage();
+    return ResponseEntity.status(ex.getStatusCode()).body(Map.of("error", message));
   }
 }
