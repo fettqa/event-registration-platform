@@ -421,6 +421,102 @@
     });
   }
 
+  function canDeleteEvent(auth, createdByEmail) {
+    if (!auth) {
+      return false;
+    }
+    if (auth.role === "ADMIN") {
+      return true;
+    }
+    return auth.role === "SUPER_USER"
+        && createdByEmail
+        && auth.email
+        && createdByEmail.toLowerCase() === auth.email.toLowerCase();
+  }
+
+  function canDeleteRegistration(auth, registrationEmail, createdByEmail) {
+    if (!auth) {
+      return false;
+    }
+    if (auth.role === "ADMIN") {
+      return true;
+    }
+    if (auth.role === "SUPER_USER"
+        && createdByEmail
+        && auth.email
+        && createdByEmail.toLowerCase() === auth.email.toLowerCase()) {
+      return true;
+    }
+    return !!(registrationEmail
+        && auth.email
+        && registrationEmail.toLowerCase() === auth.email.toLowerCase());
+  }
+
+  function bindDeleteActions() {
+    const auth = getAuth();
+    const deleteEventBtn = document.querySelector("[data-testid='delete-event-button']");
+    if (deleteEventBtn) {
+      const createdByEmail = deleteEventBtn.getAttribute("data-created-by-email");
+      if (canDeleteEvent(auth, createdByEmail)) {
+        deleteEventBtn.hidden = false;
+        deleteEventBtn.addEventListener("click", async function () {
+          if (!window.confirm("Delete this event and all its registrations?")) {
+            return;
+          }
+          const eventId = deleteEventBtn.getAttribute("data-event-id");
+          const response = await fetch("/api/events/" + eventId, {
+            method: "DELETE",
+            headers: { "Authorization": "Bearer " + getToken() }
+          });
+          if (response.status === 401) {
+            clearAuth();
+            redirectToLogin(window.location.pathname);
+            return;
+          }
+          if (!response.ok) {
+            const body = await response.json().catch(function () { return {}; });
+            showAlert("error-message", body.error || "Failed to delete event");
+            return;
+          }
+          window.location.href = "/";
+        });
+      }
+    }
+
+    document.querySelectorAll("[data-testid='delete-registration-button']").forEach(function (btn) {
+      const registrationEmail = btn.getAttribute("data-registration-email");
+      const createdByEmail = btn.getAttribute("data-created-by-email");
+      if (!canDeleteRegistration(auth, registrationEmail, createdByEmail)) {
+        return;
+      }
+      btn.hidden = false;
+      btn.addEventListener("click", async function () {
+        if (!window.confirm("Delete this registration?")) {
+          return;
+        }
+        const eventId = btn.getAttribute("data-event-id");
+        const registrationId = btn.getAttribute("data-registration-id");
+        const response = await fetch(
+            "/api/events/" + eventId + "/registrations/" + registrationId,
+            {
+              method: "DELETE",
+              headers: { "Authorization": "Bearer " + getToken() }
+            });
+        if (response.status === 401) {
+          clearAuth();
+          redirectToLogin(window.location.pathname);
+          return;
+        }
+        if (!response.ok) {
+          const body = await response.json().catch(function () { return {}; });
+          showAlert("error-message", body.error || "Failed to delete registration");
+          return;
+        }
+        window.location.reload();
+      });
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     renderHeaderAuth();
     renderCreateEventLink();
@@ -430,5 +526,6 @@
     guardCreatePage();
     bindCreateEventForm();
     bindEventRegistration();
+    bindDeleteActions();
   });
 })();

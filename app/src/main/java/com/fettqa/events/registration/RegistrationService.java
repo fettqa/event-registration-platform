@@ -1,5 +1,6 @@
 package com.fettqa.events.registration;
 
+import com.fettqa.events.auth.Role;
 import com.fettqa.events.auth.SecurityUtils;
 import com.fettqa.events.auth.User;
 import com.fettqa.events.event.Event;
@@ -9,8 +10,10 @@ import com.fettqa.events.registration.dto.EventRegistrationResponse;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class RegistrationService {
@@ -75,5 +78,38 @@ public class RegistrationService {
 
   public long countByEventId(Long eventId) {
     return registrationRepository.countByEventId(eventId);
+  }
+
+  @Transactional
+  public void deleteRegistration(Long eventId, Long registrationId) {
+    User current = SecurityUtils.requireCurrentUser();
+    Registration registration = registrationRepository.findById(registrationId)
+        .orElseThrow(() -> new ResponseStatusException(
+            HttpStatus.NOT_FOUND, "registration with id: " + registrationId + " not found"));
+
+    Event event = registration.getEvent();
+    if (event == null || !event.getId().equals(eventId)) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+          "registration with id: " + registrationId + " not found for event " + eventId);
+    }
+
+    if (!canDeleteRegistration(current, event, registration)) {
+      throw new ResponseStatusException(HttpStatus.FORBIDDEN,
+          "not allowed to delete this registration");
+    }
+    registrationRepository.delete(registration);
+  }
+
+  private boolean canDeleteRegistration(User user, Event event, Registration registration) {
+    if (user.getRole() == Role.ADMIN) {
+      return true;
+    }
+    if (user.getRole() == Role.SUPER_USER
+        && event.getCreatedBy() != null
+        && event.getCreatedBy().getId().equals(user.getId())) {
+      return true;
+    }
+    return registration.getEmail() != null
+        && registration.getEmail().equalsIgnoreCase(user.getEmail());
   }
 }

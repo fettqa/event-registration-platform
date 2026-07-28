@@ -296,6 +296,22 @@ button.btn-nav:hover {
   background: rgba(255, 255, 255, 0.12);
 }
 
+.btn-danger,
+button.btn-danger {
+  background: var(--danger);
+}
+
+.btn-danger:hover,
+button.btn-danger:hover {
+  background: #912018;
+}
+
+.btn-small,
+button.btn-small {
+  padding: 6px 10px;
+  font-size: 0.85rem;
+}
+
 .login-hint {
   margin-top: 0;
   margin-bottom: 16px;

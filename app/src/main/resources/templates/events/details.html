@@ -25,7 +25,14 @@
         </span>
       </div>
     </div>
-    <a class="btn btn-secondary" href="/" data-testid="back-to-list">Back to list</a>
+    <div class="actions">
+      <button type="button"
+              class="btn btn-danger"
+              data-testid="delete-event-button"
+              th:attr="data-event-id=${event.id()},data-created-by-email=${event.createdByEmail()}"
+              hidden>Delete event</button>
+      <a class="btn btn-secondary" href="/" data-testid="back-to-list">Back to list</a>
+    </div>
   </div>
 
   <div th:if="${justRegistered}" class="alert alert-success" data-testid="success-message">
@@ -82,17 +89,25 @@
           <th>ID</th>
           <th>Name</th>
           <th>Email</th>
+          <th></th>
         </tr>
         </thead>
         <tbody>
         <tr th:if="${registrations.totalElements == 0}">
-          <td colspan="3" class="empty">No registrations found.</td>
+          <td colspan="4" class="empty">No registrations found.</td>
         </tr>
         <tr th:each="r : ${registrations.content}"
             th:attr="data-testid=|registration-row-${r.id()}|">
           <td th:text="${r.id()}"></td>
           <td th:text="${r.fullName()}"></td>
           <td th:text="${r.email()}"></td>
+          <td>
+            <button type="button"
+                    class="btn btn-secondary btn-small"
+                    data-testid="delete-registration-button"
+                    th:attr="data-event-id=${event.id()},data-registration-id=${r.id()},data-registration-email=${r.email()},data-created-by-email=${event.createdByEmail()}"
+                    hidden>Delete</button>
+          </td>
         </tr>
         </tbody>
       </table>
