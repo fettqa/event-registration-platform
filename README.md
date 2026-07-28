@@ -24,6 +24,7 @@ Open after `bootRun`: http://localhost:8080/
 | Events list | `/` | search by name, pagination (100/page) |
 | Login | `/login` | JWT via `/api/auth/login`, token in `localStorage` |
 | Register | `/register` | full name + email + password → USER + JWT |
+| Admin Panel | `/adminPanel` | ADMIN only; Users tab to set USER / SUPER_USER |
 | Create event | `/events/new` | ADMIN / SUPER_USER only; calls `POST /api/events` |
 | Event details | `/events/{id}` | guests browse; logged-in users register from profile (no name/email form) |
 

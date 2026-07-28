@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Admin Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" th:href="@{/css/app.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<div class="page">
+  <div class="topbar">
+    <h1>Admin Panel</h1>
+    <a class="btn btn-secondary" href="/">Back</a>
+  </div>
+
+  <div class="card">
+    <div class="admin-tabs" data-testid="admin-tabs">
+      <button type="button" class="tab-btn active" data-testid="admin-tab-users">Users</button>
+    </div>
+
+    <div class="alert alert-error" data-testid="admin-error" hidden></div>
+    <div class="alert alert-success" data-testid="admin-success" hidden></div>
+
+    <div class="table-wrap" data-testid="admin-users-section">
+      <table data-testid="admin-users-table">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Full name</th>
+          <th>Email</th>
+          <th>Role</th>
+        </tr>
+        </thead>
+        <tbody data-testid="admin-users-tbody">
+        <tr>
+          <td colspan="4" class="empty">Loading…</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script th:src="@{/js/auth.js}"></script>
+<script th:src="@{/js/admin.js}"></script>
+</body>
+</html>
