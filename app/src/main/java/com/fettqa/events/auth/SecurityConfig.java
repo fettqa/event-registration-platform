@@ -49,11 +49,12 @@ public class SecurityConfig {
                 "/swagger-ui/**",
                 "/swagger-ui.html",
                 "/v3/api-docs/**").permitAll()
-            .requestMatchers("/", "/events/**", "/login", "/css/**", "/js/**").permitAll()
+            .requestMatchers("/", "/events/**", "/login", "/register", "/css/**", "/js/**").permitAll()
             .requestMatchers(HttpMethod.GET, "/api/events", "/api/events/**").permitAll()
-            .requestMatchers(HttpMethod.POST, "/api/events/*/registrations").permitAll()
-            .requestMatchers(HttpMethod.POST, "/api/events", "/api/events/bulk").hasRole("ADMIN")
-            .requestMatchers(HttpMethod.PATCH, "/api/events/**").hasRole("ADMIN")
+            .requestMatchers(HttpMethod.POST, "/api/events/*/registrations").authenticated()
+            .requestMatchers(HttpMethod.POST, "/api/events", "/api/events/bulk")
+                .hasAnyRole("ADMIN", "SUPER_USER")
+            .requestMatchers(HttpMethod.PATCH, "/api/events/**").hasAnyRole("ADMIN", "SUPER_USER")
             .requestMatchers(HttpMethod.DELETE, "/api/events/**").hasRole("ADMIN")
             .anyRequest().authenticated()
         )

@@ -23,17 +23,23 @@ Open after `bootRun`: http://localhost:8080/
 |------|-----|----------|
 | Events list | `/` | search by name, pagination (100/page) |
 | Login | `/login` | JWT via `/api/auth/login`, token in `localStorage` |
-| Create event | `/events/new` | requires ADMIN Bearer token; calls `POST /api/events` |
-| Event details | `/events/{id}` | seats left, register form, registrations list with search + pagination |
+| Register | `/register` | full name + email + password → USER + JWT |
+| Create event | `/events/new` | ADMIN / SUPER_USER only; calls `POST /api/events` |
+| Event details | `/events/{id}` | guests browse; logged-in users register from profile (no name/email form) |
 
-Create event uses the secured REST API from the browser (`Authorization: Bearer ...`). Guest registration on event details stays as an SSR form (public).
+Create event uses the secured REST API from the browser (`Authorization: Bearer ...`). Event registration requires login; name/email come from the user account.
 
 ## Auth
 Default admin (seeded on startup):
 email:    admin@example.com
 password: admin123
 
-POST /api/auth/register  → USER + accessToken
+Roles:
+- `ADMIN` — seeded account (and any admins added via `AdminUserInitializer` / DB)
+- `SUPER_USER` — can create events and register for events
+- `USER` — can register for events only
+
+POST /api/auth/register  → USER + accessToken (requires fullName)
 POST /api/auth/login     → accessToken
 
 Header: Authorization: Bearer <accessToken>

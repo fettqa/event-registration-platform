@@ -1,9 +1,10 @@
 package com.fettqa.events.registration;
 
+import com.fettqa.events.auth.SecurityUtils;
+import com.fettqa.events.auth.User;
 import com.fettqa.events.event.Event;
 import com.fettqa.events.event.EventNotFoundException;
 import com.fettqa.events.event.EventRepository;
-import com.fettqa.events.registration.dto.EventRegistrationRequest;
 import com.fettqa.events.registration.dto.EventRegistrationResponse;
 import java.util.List;
 import org.springframework.data.domain.Page;
@@ -24,15 +25,19 @@ public class RegistrationService {
   }
 
   @Transactional
-  public EventRegistrationResponse register(Long eventId, EventRegistrationRequest request) {
-    // Lock event row for the whole transaction so concurrent requests cannot
-    // both pass the seat-limit check (check-then-act race).
+  public EventRegistrationResponse registerCurrentUser(Long eventId) {
+    User user = SecurityUtils.requireCurrentUser();
+    return register(eventId, user.getFullName(), user.getEmail());
+  }
+
+  @Transactional
+  public EventRegistrationResponse register(Long eventId, String fullName, String email) {
     Event event = eventRepository.findByIdForUpdate(eventId)
         .orElseThrow(() -> new EventNotFoundException("event with id: " + eventId + " not found"));
 
-    if (registrationRepository.existsByEventIdAndEmailIgnoreCase(eventId, request.email())) {
+    if (registrationRepository.existsByEventIdAndEmailIgnoreCase(eventId, email)) {
       throw new RegistrationConflictException(
-          "email " + request.email() + " is already registered for event " + event.getName());
+          "email " + email + " is already registered for event " + event.getName());
     }
 
     if (registrationRepository.countByEventId(eventId) >= event.getMaxSeats()) {
@@ -41,7 +46,7 @@ public class RegistrationService {
     }
 
     return EventRegistrationResponse.from(
-        registrationRepository.save(new Registration(event, request.fullName(), request.email())));
+        registrationRepository.save(new Registration(event, fullName, email)));
   }
 
   public List<EventRegistrationResponse> getRegistrations(Long eventId) {

@@ -37,6 +37,7 @@ public class AuthService {
     }
 
     User user = new User(
+        request.fullName().trim(),
         request.email().trim().toLowerCase(),
         passwordEncoder.encode(request.password()),
         Role.USER);

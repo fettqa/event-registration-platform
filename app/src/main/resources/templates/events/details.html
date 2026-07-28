@@ -28,41 +28,31 @@
     <a class="btn btn-secondary" href="/" data-testid="back-to-list">Back to list</a>
   </div>
 
-  <div th:if="${success}" class="alert alert-success" data-testid="success-message"
-       th:text="${success}"></div>
-  <div th:if="${error}" class="alert alert-error" data-testid="error-message"
-       th:text="${error}"></div>
+  <div th:if="${justRegistered}" class="alert alert-success" data-testid="success-message">
+    Registration successful
+  </div>
+  <div class="alert alert-error" data-testid="error-message" hidden></div>
 
   <div class="card register-card" data-testid="register-section">
     <h2>Register</h2>
-    <form th:action="@{/events/{id}/registrations(id=${event.id()}, page=${registrations.number}, q=${q})}"
-          th:object="${registrationForm}"
-          method="post"
-          class="form-stack"
-          data-testid="register-form">
 
-      <div th:if="${#fields.hasErrors('*')}" class="form-errors" data-testid="form-errors">
-        <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
-      </div>
+    <div data-testid="register-guest" hidden>
+      <p class="muted">Guests can browse events. Sign in to register.</p>
+      <a class="btn" th:href="@{/login(redirect=${'/events/' + event.id()})}"
+         data-testid="register-login-link">Login to register</a>
+    </div>
 
-      <div class="field">
-        <label for="fullName">Full name</label>
-        <input id="fullName" th:field="*{fullName}" data-testid="full-name-input"/>
-        <p class="field-error" th:if="${#fields.hasErrors('fullName')}"
-           th:errors="*{fullName}" data-testid="full-name-error"></p>
-      </div>
-
-      <div class="field">
-        <label for="email">Email</label>
-        <input id="email" th:field="*{email}" data-testid="email-input"/>
-        <p class="field-error" th:if="${#fields.hasErrors('email')}"
-           th:errors="*{email}" data-testid="email-error"></p>
-      </div>
-
+    <div data-testid="register-user" hidden>
+      <p class="muted">
+        You will register as
+        <strong data-testid="register-as-name"></strong>
+        (<span data-testid="register-as-email"></span>).
+      </p>
       <div class="actions">
-        <button type="submit" data-testid="submit-registration">Register</button>
+        <button type="button" class="btn" data-testid="submit-registration"
+                th:attr="data-event-id=${event.id()}">Register</button>
       </div>
-    </form>
+    </div>
   </div>
 
   <div class="card registrations-card" data-testid="registrations-section">

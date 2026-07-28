@@ -44,7 +44,7 @@ class EventControllerMockMvcTest {
   @Test
   void createEvent_returns201() throws Exception {
     when(eventService.create(any(CreateEventRequest.class)))
-        .thenReturn(new EventResponse(42L, "QA Conf", 50, OffsetDateTime.now()));
+        .thenReturn(new EventResponse(42L, "QA Conf", 50, 1L, "admin@example.com", OffsetDateTime.now()));
 
     mockMvc.perform(post("/api/events")
             .contentType(MediaType.APPLICATION_JSON)

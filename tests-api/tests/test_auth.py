@@ -8,6 +8,7 @@ def test_login_admin_returns_token(client):
   assert body["accessToken"]
   assert body["tokenType"] == "Bearer"
   assert body["role"] == "ADMIN"
+  assert body["fullName"]
 
 
 def test_create_event_without_token_returns_403(client, unique_suffix):
@@ -22,7 +23,7 @@ def test_create_event_with_user_token_returns_403(client, unique_suffix):
   email = f"user_{unique_suffix}@example.com"
   register = client.post(
       "/api/auth/register",
-      json={"email": email, "password": "secret12"},
+      json={"fullName": "Python User", "email": email, "password": "secret12"},
   )
   assert register.status_code == 201, register.text
   token = register.json()["accessToken"]

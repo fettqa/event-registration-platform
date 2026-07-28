@@ -1,5 +1,7 @@
 package com.fettqa.events.event;
 
+import com.fettqa.events.auth.SecurityUtils;
+import com.fettqa.events.auth.User;
 import com.fettqa.events.event.dto.CreateEventRequest;
 import com.fettqa.events.event.dto.EventResponse;
 import com.fettqa.events.event.dto.UpdateEventRequest;
@@ -25,8 +27,9 @@ public class EventService {
 
   @Transactional
   public List<EventResponse> create(List<CreateEventRequest> request) {
+    User creator = SecurityUtils.requireCurrentUser();
     List<Event> events = request.stream()
-        .map(r -> new Event(r.name(), r.maxSeats()))
+        .map(r -> new Event(r.name(), r.maxSeats(), creator))
         .toList();
     Set<String> uniqNames = events.stream().map(Event::getName).collect(Collectors.toSet());
     if (uniqNames.size() != events.size()) {
@@ -48,7 +51,8 @@ public class EventService {
 
   @Transactional
   public EventResponse create(CreateEventRequest request) {
-    Event event = new Event(request.name(), request.maxSeats());
+    User creator = SecurityUtils.requireCurrentUser();
+    Event event = new Event(request.name(), request.maxSeats(), creator);
     if (request.name().isBlank()) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "name must not be blank");
     }
@@ -60,6 +64,7 @@ public class EventService {
     return EventResponse.from(saved);
   }
 
+  @Transactional(readOnly = true)
   public EventResponse getById(Long id) {
     Event event = eventRepository.findById(id)
         .orElseThrow(() -> new EventNotFoundException("event with id: " + id + " not found"));
@@ -85,17 +90,20 @@ public class EventService {
     return EventResponse.from(event);
   }
 
+  @Transactional(readOnly = true)
   public List<EventResponse> getByName(String name) {
     List<Event> events = eventRepository.findByName(name);
     return events.stream().map(EventResponse::from).toList();
   }
 
+  @Transactional(readOnly = true)
   public List<EventResponse> getAll() {
     return eventRepository.findAll().stream()
         .map(EventResponse::from)
         .toList();
   }
 
+  @Transactional(readOnly = true)
   public Page<EventResponse> search(String query, Pageable pageable) {
     Page<Event> page;
     if (query == null || query.isBlank()) {

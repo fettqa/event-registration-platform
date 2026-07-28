@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Register</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" th:href="@{/css/app.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<div class="page">
+  <div class="topbar">
+    <h1>Register</h1>
+    <a class="btn btn-secondary" href="/">Back</a>
+  </div>
+
+  <div class="card">
+    <p class="muted login-hint">
+      Creates a <strong>USER</strong> account (cannot create events).
+      Already have an account? <a href="/login" data-testid="go-to-login">Sign in</a>.
+    </p>
+
+    <div class="alert alert-error" data-testid="register-error" hidden></div>
+
+    <form class="form-stack" data-testid="register-form">
+      <div class="field">
+        <label for="fullName">Full name</label>
+        <input id="fullName" type="text" autocomplete="name" required
+               data-testid="register-fullname-input"/>
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" type="email" autocomplete="username" required
+               data-testid="register-email-input"/>
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input id="password" type="password" autocomplete="new-password" required
+               minlength="6" data-testid="register-password-input"/>
+      </div>
+
+      <div class="field">
+        <label for="passwordConfirm">Confirm password</label>
+        <input id="passwordConfirm" type="password" autocomplete="new-password" required
+               minlength="6" data-testid="register-password-confirm-input"/>
+      </div>
+
+      <div class="actions">
+        <button type="submit" data-testid="register-submit">Create account</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script th:src="@{/js/auth.js}"></script>
+</body>
+</html>

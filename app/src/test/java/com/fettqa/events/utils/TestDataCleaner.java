@@ -18,6 +18,8 @@ public class TestDataCleaner {
     entityManager.createNativeQuery("DELETE FROM registrations").executeUpdate();
     entityManager.createNativeQuery("DELETE FROM events").executeUpdate();
     entityManager.createNativeQuery(
+        "DELETE FROM users WHERE LOWER(email) <> 'admin@example.com'").executeUpdate();
+    entityManager.createNativeQuery(
         "ALTER TABLE registrations ALTER COLUMN id RESTART WITH 1").executeUpdate();
     entityManager.createNativeQuery(
         "ALTER TABLE events ALTER COLUMN id RESTART WITH 1").executeUpdate();

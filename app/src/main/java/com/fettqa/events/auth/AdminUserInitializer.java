@@ -21,6 +21,7 @@ public class AdminUserInitializer implements ApplicationRunner {
     String adminEmail = "admin@example.com";
     if (!userRepository.existsByEmailIgnoreCase(adminEmail)) {
       userRepository.save(new User(
+          "System Admin",
           adminEmail,
           passwordEncoder.encode("admin123"),
           Role.ADMIN));

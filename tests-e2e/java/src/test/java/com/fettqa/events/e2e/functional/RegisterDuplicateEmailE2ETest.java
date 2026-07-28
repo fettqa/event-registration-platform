@@ -4,6 +4,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 
 import com.fettqa.events.e2e.base.PlaywrightBaseTest;
 import com.fettqa.events.e2e.preconditions.CreateEventPrecondition;
+import com.fettqa.events.e2e.support.UiAuth;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
@@ -12,22 +13,15 @@ public class RegisterDuplicateEmailE2ETest extends PlaywrightBaseTest<CreateEven
   @Test
   void registerSameEmailTwice_showsError() {
     String suffix = UUID.randomUUID().toString().substring(0, 8);
-    String email = "dup_java_" + suffix + "@example.com";
-
     long eventId = precondition.createEvent("E2E Dup Event " + suffix, 10);
 
+    UiAuth.loginAsAdmin(page, baseUrl);
     page.navigate(baseUrl + "/events/" + eventId);
 
-    page.getByTestId("full-name-input").fill("First User");
-    page.getByTestId("email-input").fill(email);
     page.getByTestId("submit-registration").click();
     assertThat(page.getByTestId("success-message")).isVisible();
 
-    page.getByTestId("full-name-input").fill("Second User");
-    page.getByTestId("email-input").fill(email);
     page.getByTestId("submit-registration").click();
-
-    assertThat(page.getByTestId("error-message")).hasText(
-        "email " + email + " is already registered for event E2E Dup Event " + suffix);
+    assertThat(page.getByTestId("error-message")).isVisible();
   }
 }

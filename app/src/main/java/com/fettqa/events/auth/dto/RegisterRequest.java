@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public record RegisterRequest(
+    @NotBlank(message = "full name must not be blank")
+    String fullName,
     @NotBlank @Email String email,
     @NotBlank @Size(min = 6, message = "password must be at least 6 characters")
     String password

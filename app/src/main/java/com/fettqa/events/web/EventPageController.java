@@ -3,22 +3,15 @@ package com.fettqa.events.web;
 import com.fettqa.events.event.EventService;
 import com.fettqa.events.event.dto.EventResponse;
 import com.fettqa.events.registration.RegistrationService;
-import com.fettqa.events.registration.dto.EventRegistrationRequest;
 import com.fettqa.events.registration.dto.EventRegistrationResponse;
-import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class EventPageController {
@@ -56,54 +49,21 @@ public class EventPageController {
       @PathVariable Long id,
       @RequestParam(defaultValue = "0") int page,
       @RequestParam(required = false) String q,
+      @RequestParam(required = false) Boolean registered,
       Model model) {
-    populateEventDetails(id, page, q, model);
-    if (!model.containsAttribute("registrationForm")) {
-      model.addAttribute("registrationForm", new EventRegistrationRequest("", ""));
-    }
-    return "events/details";
-  }
-
-  @PostMapping("/events/{id}/registrations")
-  public String register(@PathVariable Long id,
-      @Valid @ModelAttribute("registrationForm") EventRegistrationRequest form,
-      BindingResult bindingResult,
-      @RequestParam(defaultValue = "0") int page,
-      @RequestParam(required = false) String q,
-      Model model,
-      RedirectAttributes redirectAttributes) {
-    if (bindingResult.hasErrors()) {
-      populateEventDetails(id, page, q, model);
-      return "events/details";
-    }
-    try {
-      registrationService.register(id, form);
-      redirectAttributes.addFlashAttribute("success", "Registration successful");
-    } catch (ResponseStatusException ex) {
-      redirectAttributes.addFlashAttribute("error",
-          ex.getReason() != null ? ex.getReason() : ex.getMessage());
-    } catch (Exception ex) {
-      redirectAttributes.addFlashAttribute("error", ex.getMessage());
-    }
-    String redirect = "redirect:/events/" + id;
-    if (q != null && !q.isBlank()) {
-      redirect += "?q=" + q;
-    }
-    return redirect;
-  }
-
-  private void populateEventDetails(Long id, int page, String q, Model model) {
     EventResponse event = eventService.getById(id);
-    long registered = registrationService.countByEventId(id);
-    int seatsLeft = Math.max(0, event.maxSeats() - (int) registered);
+    long registeredCount = registrationService.countByEventId(id);
+    int seatsLeft = Math.max(0, event.maxSeats() - (int) registeredCount);
 
     Page<EventRegistrationResponse> registrations = registrationService.searchRegistrations(
         id, q, PageRequest.of(page, PAGE_SIZE, Sort.by(Sort.Direction.DESC, "id")));
 
     model.addAttribute("event", event);
     model.addAttribute("seatsLeft", seatsLeft);
-    model.addAttribute("registeredCount", registered);
+    model.addAttribute("registeredCount", registeredCount);
     model.addAttribute("registrations", registrations);
     model.addAttribute("q", q == null ? "" : q);
+    model.addAttribute("justRegistered", Boolean.TRUE.equals(registered));
+    return "events/details";
   }
 }

@@ -8,6 +8,7 @@ import com.fettqa.events.utils.AuthTestSupport;
 import com.fettqa.events.utils.TestDataCleaner;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CountDownLatch;
 import java.util.function.Consumer;
@@ -51,32 +52,42 @@ public class RegistrationControllerApiTest {
         .extract().path("id");
   }
 
+  private String registerToken(String fullName, String email) {
+    return AuthTestSupport.registerUser(port, fullName, email, "secret12");
+  }
+
   @Test
   void registration_returns201() {
     Integer eventId = createEvent(10);
+    String token = registerToken("Ivan", "ivan@example.com");
     given()
-        .contentType(ContentType.JSON)
-        .body("""
-            
-            {"email":"ivan@example.com","fullName":"Ivan"}
-            """)
+        .header("Authorization", "Bearer " + token)
         .when()
         .post("/api/events/{eventId}/registrations", eventId)
         .then()
         .statusCode(201)
         .body("eventId", equalTo(eventId))
-        .body("email", equalTo("ivan@example.com"));
+        .body("email", equalTo("ivan@example.com"))
+        .body("fullName", equalTo("Ivan"));
+  }
+
+  @Test
+  void registration_withoutToken_returns401or403() {
+    Integer eventId = createEvent(10);
+    int status = given()
+        .when()
+        .post("/api/events/{eventId}/registrations", eventId)
+        .then()
+        .extract().statusCode();
+    assertThat(status).isIn(401, 403);
   }
 
   @Test
   void get_registration_returns200() {
     Integer eventId = createEvent(10);
+    String token = registerToken("Ivan", "ivan@example.com");
     given()
-        .contentType(ContentType.JSON)
-        .body("""
-            {"email":"ivan@example.com",
-            "fullName":"Ivan"}
-            """)
+        .header("Authorization", "Bearer " + token)
         .when()
         .post("/api/events/{eventId}/registrations", eventId)
         .then()
@@ -114,21 +125,18 @@ public class RegistrationControllerApiTest {
   @Test
   void registration_returns409_whenEventIsFull() {
     Integer eventId = createEvent(1);
+    String first = registerToken("Ivan", "ivan@example.com");
+    String second = registerToken("John", "john@example.com");
+
     given()
-        .contentType(ContentType.JSON)
-        .body("""
-            {"email":"ivan@example.com","fullName":"Ivan"}
-            """)
+        .header("Authorization", "Bearer " + first)
         .when()
         .post("/api/events/{eventId}/registrations", eventId)
         .then()
         .statusCode(201);
 
     given()
-        .contentType(ContentType.JSON)
-        .body("""
-            {"email":"john@example.com","fullName":"John"}
-            """)
+        .header("Authorization", "Bearer " + second)
         .when()
         .post("/api/events/{eventId}/registrations", eventId)
         .then()
@@ -138,21 +146,17 @@ public class RegistrationControllerApiTest {
   @Test
   void registration_returns409_whenEmailAlreadyRegistered() {
     Integer eventId = createEvent(10);
+    String token = registerToken("Ivan", "ivan@example.com");
+
     given()
-        .contentType(ContentType.JSON)
-        .body("""
-            {"email":"ivan@example.com","fullName":"Ivan"}
-            """)
+        .header("Authorization", "Bearer " + token)
         .when()
         .post("/api/events/{eventId}/registrations", eventId)
         .then()
         .statusCode(201);
 
     given()
-        .contentType(ContentType.JSON)
-        .body("""
-            {"email":"ivan@example.com","fullName":"Ivan"}
-            """)
+        .header("Authorization", "Bearer " + token)
         .when()
         .post("/api/events/{eventId}/registrations", eventId)
         .then()
@@ -162,11 +166,14 @@ public class RegistrationControllerApiTest {
   @Test
   void registration_concurrent_respectsMaxSeats() throws Exception {
     Integer eventId = createEvent(1);
+    String token1 = registerToken("Ivan", "ivan_" + UUID.randomUUID().toString().substring(0, 6) + "@example.com");
+    String token2 = registerToken("John", "john_" + UUID.randomUUID().toString().substring(0, 6) + "@example.com");
+
     CountDownLatch ready = new CountDownLatch(2);
     CountDownLatch start = new CountDownLatch(1);
     ConcurrentLinkedQueue<Integer> statuses = new ConcurrentLinkedQueue<>();
 
-    Consumer<String> register = (email) -> {
+    Consumer<String> register = (token) -> {
       ready.countDown();
       try {
         start.await();
@@ -175,8 +182,7 @@ public class RegistrationControllerApiTest {
         throw new RuntimeException(e);
       }
       int status = given()
-          .contentType(ContentType.JSON)
-          .body("{\"email\":\"" + email + "\",\"fullName\":\"User\"}")
+          .header("Authorization", "Bearer " + token)
           .when()
           .post("/api/events/{eventId}/registrations", eventId)
           .then()
@@ -184,8 +190,8 @@ public class RegistrationControllerApiTest {
       statuses.add(status);
     };
 
-    Thread t1 = new Thread(() -> register.accept("ivan@example.com"));
-    Thread t2 = new Thread(() -> register.accept("john@example.com"));
+    Thread t1 = new Thread(() -> register.accept(token1));
+    Thread t2 = new Thread(() -> register.accept(token2));
     t1.start();
     t2.start();
 

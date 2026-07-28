@@ -1,10 +1,14 @@
 package com.fettqa.events.event;
 
+import com.fettqa.events.auth.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import java.time.OffsetDateTime;
@@ -28,15 +32,20 @@ public class Event {
   @Column(name = "max_seats", nullable = false)
   private Integer maxSeats;
 
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "created_by_id")
+  private User createdBy;
+
   @Column(name = "created_at", nullable = false)
   private OffsetDateTime createdAt;
 
   protected Event() {
   }
 
-  public Event(String name, Integer maxSeats) {
+  public Event(String name, Integer maxSeats, User createdBy) {
     this.name = name;
     this.maxSeats = maxSeats;
+    this.createdBy = createdBy;
     this.createdAt = OffsetDateTime.now();
   }
 
@@ -50,6 +59,10 @@ public class Event {
 
   public Integer getMaxSeats() {
     return maxSeats;
+  }
+
+  public User getCreatedBy() {
+    return createdBy;
   }
 
   public OffsetDateTime getCreatedAt() {

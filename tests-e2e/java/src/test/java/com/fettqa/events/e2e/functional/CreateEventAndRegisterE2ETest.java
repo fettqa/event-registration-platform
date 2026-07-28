@@ -15,7 +15,6 @@ public class CreateEventAndRegisterE2ETest extends PlaywrightBaseTest<Preconditi
   void createEventAndRegister_showsSuccess() {
     String suffix = UUID.randomUUID().toString().substring(0, 8);
     String eventName = "E2E Java Event " + suffix;
-    String email = "e2e_java_" + suffix + "@example.com";
 
     UiAuth.loginAsAdmin(page, baseUrl);
 
@@ -30,10 +29,9 @@ public class CreateEventAndRegisterE2ETest extends PlaywrightBaseTest<Preconditi
     page.getByTestId("submit-event").click();
 
     assertThat(page.getByTestId("event-title")).hasText(eventName);
-    assertThat(page.getByTestId("register-form")).isVisible();
+    assertThat(page.getByTestId("register-user")).isVisible();
+    assertThat(page.getByTestId("submit-registration")).isVisible();
 
-    page.getByTestId("full-name-input").fill("Java Playwright User");
-    page.getByTestId("email-input").fill(email);
     page.getByTestId("submit-registration").click();
 
     assertThat(page.getByTestId("success-message")).isVisible();
@@ -41,6 +39,6 @@ public class CreateEventAndRegisterE2ETest extends PlaywrightBaseTest<Preconditi
         .containsText("Registration successful");
 
     assertTrue(
-        page.getByTestId("registrations-table").textContent().contains(email));
+        page.getByTestId("registrations-table").textContent().contains("admin@example.com"));
   }
 }
