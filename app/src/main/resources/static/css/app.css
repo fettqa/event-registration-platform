@@ -248,6 +248,17 @@ th {
   gap: 10px;
 }
 
+.auth-guest[hidden],
+.auth-user[hidden],
+[data-testid="create-event-link"][hidden],
+[data-testid="admin-panel-link"][hidden],
+[data-testid="delete-event-button"][hidden],
+[data-testid="delete-registration-button"][hidden],
+[data-testid="register-guest"][hidden],
+[data-testid="register-user"][hidden] {
+  display: none !important;
+}
+
 .nav-link {
   color: #fff;
   text-decoration: none;
