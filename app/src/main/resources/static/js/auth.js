@@ -34,6 +34,7 @@
     const fullNameEl = document.querySelector("[data-testid='auth-full-name']");
     const emailEl = document.querySelector("[data-testid='auth-email']");
     const roleEl = document.querySelector("[data-testid='auth-role']");
+    const adminLink = document.querySelector("[data-testid='admin-panel-link']");
     if (!guest || !user) {
       return;
     }
@@ -51,9 +52,15 @@
       if (roleEl) {
         roleEl.textContent = auth.role || "";
       }
+      if (adminLink) {
+        adminLink.hidden = auth.role !== "ADMIN";
+      }
     } else {
       guest.hidden = false;
       user.hidden = true;
+      if (adminLink) {
+        adminLink.hidden = true;
+      }
     }
   }
 

@@ -248,6 +248,17 @@ th {
   gap: 10px;
 }
 
+.auth-guest[hidden],
+.auth-user[hidden],
+[data-testid="create-event-link"][hidden],
+[data-testid="admin-panel-link"][hidden],
+[data-testid="delete-event-button"][hidden],
+[data-testid="delete-registration-button"][hidden],
+[data-testid="register-guest"][hidden],
+[data-testid="register-user"][hidden] {
+  display: none !important;
+}
+
 .nav-link {
   color: #fff;
   text-decoration: none;
@@ -293,6 +304,35 @@ button.btn-nav:hover {
 .login-hint code {
   font-size: 0.9em;
 }
+
+.admin-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tab-btn {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--border);
+  padding: 8px 14px;
+}
+
+.tab-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.admin-users-table select,
+[data-testid^="admin-role-select-"] {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font: inherit;
+  background: #fff;
+}
+
 
 .event-heading {
   display: grid;
