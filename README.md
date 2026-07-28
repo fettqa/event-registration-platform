@@ -105,7 +105,9 @@ Health: http://localhost:8080/actuator/health
 | GET | `/api/events/{id}` | by id | Public |
 | PATCH | `/api/events/{id}` | update | Admin |
 | DELETE | `/api/events/{id}` | delete | Admin |
-| POST | `/api/events/{id}/registrations` | register (201 / 409) | Public |
+| POST | `/api/events/{id}/registrations` | register current user (201 / 409) | Authenticated |
+| DELETE | `/api/events/{id}/registrations/{registrationId}` | delete registration | Admin: any; Super User: on own events; User: own |
+| DELETE | `/api/events/{id}` | delete event | Admin: any; Super User: own events |
 Swagger: http://localhost:8080/swagger-ui.html
 
 ## CI

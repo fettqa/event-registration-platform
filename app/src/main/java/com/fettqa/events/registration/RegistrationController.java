@@ -4,6 +4,7 @@ import com.fettqa.events.registration.dto.EventRegistrationResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import java.util.List;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,5 +32,14 @@ public class RegistrationController {
   @GetMapping
   public List<EventRegistrationResponse> getRegistrations(@PathVariable Long eventId) {
     return registrationService.getRegistrations(eventId);
+  }
+
+  @DeleteMapping("/{registrationId}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  @SecurityRequirement(name = "bearerAuth")
+  public void delete(
+      @PathVariable Long eventId,
+      @PathVariable Long registrationId) {
+    registrationService.deleteRegistration(eventId, registrationId);
   }
 }

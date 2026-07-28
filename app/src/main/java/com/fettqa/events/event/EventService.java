@@ -1,5 +1,6 @@
 package com.fettqa.events.event;
 
+import com.fettqa.events.auth.Role;
 import com.fettqa.events.auth.SecurityUtils;
 import com.fettqa.events.auth.User;
 import com.fettqa.events.event.dto.CreateEventRequest;
@@ -116,8 +117,25 @@ public class EventService {
 
   @Transactional
   public void delete(Long id) {
+    User current = SecurityUtils.requireCurrentUser();
     Event event = eventRepository.findById(id)
         .orElseThrow(() -> new EventNotFoundException("event with id: " + id + " not found"));
+
+    if (!canDeleteEvent(current, event)) {
+      throw new ResponseStatusException(HttpStatus.FORBIDDEN, "not allowed to delete this event");
+    }
     eventRepository.delete(event);
+  }
+
+  private boolean canDeleteEvent(User user, Event event) {
+    if (user.getRole() == Role.ADMIN) {
+      return true;
+    }
+    if (user.getRole() == Role.SUPER_USER
+        && event.getCreatedBy() != null
+        && event.getCreatedBy().getId().equals(user.getId())) {
+      return true;
+    }
+    return false;
   }
 }
