@@ -1,0 +1,5 @@
+"Epic","Feature","Story","FAILED","BROKEN","PASSED","SKIPPED","UNKNOWN"
+"End-to-End Tests","Register User","Register New User","0","0","1","0","0"
+"End-to-End Tests","Create Event and Register","Create Event and Register","0","0","1","0","0"
+"End-to-End Tests","Register Duplicate Email Validation","Register Duplicate Email","0","0","1","0","0"
+"End-to-End Tests","Create Event Validation","Create Event Validation","0","0","1","0","0"
