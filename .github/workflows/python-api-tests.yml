@@ -82,6 +82,31 @@ jobs:
           BASE_URL: http://localhost:8080
         run: pytest
 
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results-python-api
+          path: tests-api/allure-results
+          if-no-files-found: ignore
+
+      - name: Generate Allure HTML report
+        if: always()
+        working-directory: tests-api
+        run: |
+          if [ -d allure-results ] && [ "$(ls -A allure-results 2>/dev/null)" ]; then
+            npm install -g allure-commandline@2.29.0
+            allure generate allure-results -o allure-report --clean
+          fi
+
+      - name: Upload Allure HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report-python-api
+          path: tests-api/allure-report
+          if-no-files-found: ignore
+
       - name: Upload app log on failure
         if: failure()
         uses: actions/upload-artifact@v4

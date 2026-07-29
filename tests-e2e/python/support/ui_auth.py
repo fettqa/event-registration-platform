@@ -1,9 +1,10 @@
 from playwright.sync_api import Page, expect
+import allure
 
 ADMIN_EMAIL = "admin@example.com"
 ADMIN_PASSWORD = "admin123"
 
-
+@allure.step("Login as admin")
 def login_as_admin(page: Page, base_url: str) -> None:
   page.goto(f"{base_url}/login")
   expect(page.get_by_test_id("login-form")).to_be_visible()

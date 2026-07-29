@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.options.RequestOptions;
+import io.qameta.allure.Step;
 import java.util.Map;
 
 public class CreateEventPrecondition extends Precondition {
@@ -15,6 +16,7 @@ public class CreateEventPrecondition extends Precondition {
   public CreateEventPrecondition() {
   }
 
+  @Step("Create event with name: {name} and maxSeats: {maxSeats}")
   public long createEvent(String name, int maxSeats) {
     String token = adminToken();
     String body;
@@ -50,6 +52,7 @@ public class CreateEventPrecondition extends Precondition {
     }
   }
 
+  @Step("Get admin token")
   private String adminToken() {
     String body;
     try {

@@ -41,3 +41,13 @@ tests-e2e/python/.venv/
 tests-e2e/python/.pytest_cache/
 tests-e2e/python/test-results/
 tests-e2e/python/playwright-report/
+
+# k6
+perf/k6/results/*
+!perf/k6/results/.gitkeep
+
+# Allure
+**/allure-results/
+**/allure-report/
+ajcore.*.txt
+**/ajcore.*.txt

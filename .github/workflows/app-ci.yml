@@ -37,6 +37,31 @@ jobs:
       - name: Run tests
         run: ./gradlew test
 
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results-app
+          path: app/build/allure-results
+          if-no-files-found: ignore
+
+      - name: Generate Allure HTML report
+        if: always()
+        working-directory: app
+        run: |
+          if [ -d build/allure-results ] && [ "$(ls -A build/allure-results 2>/dev/null)" ]; then
+            npm install -g allure-commandline@2.29.0
+            allure generate build/allure-results -o build/allure-report --clean
+          fi
+
+      - name: Upload Allure HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report-app
+          path: app/build/allure-report
+          if-no-files-found: ignore
+
       - name: Upload test report
         if: failure()
         uses: actions/upload-artifact@v4

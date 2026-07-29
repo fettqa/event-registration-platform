@@ -65,6 +65,31 @@ jobs:
         working-directory: tests-e2e/java
         run: ./gradlew test -DbaseUrl=http://localhost:8080
 
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results-e2e-java
+          path: tests-e2e/java/build/allure-results
+          if-no-files-found: ignore
+
+      - name: Generate Allure HTML report
+        if: always()
+        working-directory: tests-e2e/java
+        run: |
+          if [ -d build/allure-results ] && [ "$(ls -A build/allure-results 2>/dev/null)" ]; then
+            npm install -g allure-commandline@2.29.0
+            allure generate build/allure-results -o build/allure-report --clean
+          fi
+
+      - name: Upload Allure HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report-e2e-java
+          path: tests-e2e/java/build/allure-report
+          if-no-files-found: ignore
+
       - name: Upload reports on failure
         if: failure()
         uses: actions/upload-artifact@v4

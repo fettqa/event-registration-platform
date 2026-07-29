@@ -7,12 +7,15 @@ import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
+import io.qameta.allure.Allure;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import org.junit.jupiter.api.extension.TestWatcher;
 
 public abstract class PlaywrightBaseTest<T extends Precondition> {
 
@@ -55,10 +58,32 @@ public abstract class PlaywrightBaseTest<T extends Precondition> {
     precondition.setApi(api);
   }
 
-  @AfterEach
-  void closePage() {
+  @RegisterExtension
+  TestWatcher screenshotOnFailure = new TestWatcher() {
+    @Override
+    public void testFailed(ExtensionContext context, Throwable cause) {
+      if (page != null) {
+        Allure.getLifecycle().addAttachment(
+            "failure-screenshot", "image/png", "png", page.screenshot());
+      }
+      closePageQuietly();
+    }
+
+    @Override
+    public void testSuccessful(ExtensionContext context) {
+      closePageQuietly();
+    }
+
+    @Override
+    public void testAborted(ExtensionContext context, Throwable cause) {
+      closePageQuietly();
+    }
+  };
+
+  private void closePageQuietly() {
     if (page != null) {
       page.close();
+      page = null;
     }
   }
 
