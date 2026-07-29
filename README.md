@@ -4,6 +4,7 @@
 ![E2E Python](https://github.com/fettqa/event-registration-platform/actions/workflows/e2e-python.yml/badge.svg)
 
 ## Event Registration Platform
+Demo: https://event-registration-jesq.onrender.com/
 
 ## About
 Event Registration API — pet project.
