@@ -2,6 +2,7 @@ package com.fettqa.events.utils;
 
 import static io.restassured.RestAssured.given;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 
@@ -15,6 +16,7 @@ public final class AuthTestSupport {
 
   public static String login(int port, String email, String password) {
     return given()
+        .filter(new AllureRestAssured())
         .port(port)
         .basePath("")
         .contentType(ContentType.JSON)
@@ -39,6 +41,7 @@ public final class AuthTestSupport {
 
   public static String registerUser(int port, String fullName, String email, String password) {
     return given()
+        .filter(new AllureRestAssured())
         .port(port)
         .basePath("")
         .contentType(ContentType.JSON)
@@ -55,12 +58,14 @@ public final class AuthTestSupport {
 
   public static RequestSpecification givenAdmin(int port) {
     return given()
+        .filter(new AllureRestAssured())
         .port(port)
         .header("Authorization", "Bearer " + adminToken(port));
   }
 
   public static RequestSpecification givenBearer(int port, String token) {
     return given()
+        .filter(new AllureRestAssured())
         .port(port)
         .header("Authorization", "Bearer " + token);
   }

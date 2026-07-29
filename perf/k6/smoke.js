@@ -1,6 +1,15 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
-import { BASE_URL, createEvent, loginAdmin, register } from './helpers.js';
+import {
+  BASE_URL,
+  createEvent,
+  handleSummaryFor,
+  loginAdmin,
+  registerForEvent,
+  signup,
+} from './helpers.js';
+
+export const handleSummary = handleSummaryFor('smoke');
 
 export const options = {
   vus: 2,
@@ -26,11 +35,9 @@ export default function (data) {
 
   const eventRes = createEvent(`Smoke Event ${__VU}-${__ITER}`, 10000, data.token);
 
-  const regRes = register(
-      eventRes.eventId,
-      `user_${__VU}_${__ITER}@example.com`,
-      `User ${__VU}`
-  );
+  const email = `smoke_u${__VU}_i${__ITER}_${Date.now()}@example.com`;
+  const userToken = signup(email, `Smoke User ${__VU}`);
+  const regRes = registerForEvent(eventRes.eventId, userToken);
 
   check(regRes, {
     'register is 201': (r) => r.status === 201,

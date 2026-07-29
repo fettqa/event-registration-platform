@@ -6,6 +6,10 @@ import static org.hamcrest.Matchers.equalTo;
 
 import com.fettqa.events.utils.AuthTestSupport;
 import com.fettqa.events.utils.TestDataCleaner;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import java.util.UUID;
@@ -20,6 +24,8 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 
+@Epic("Event Registration")
+@Feature("Register / List Operations")
 @ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import(TestDataCleaner.class)
@@ -42,6 +48,7 @@ public class RegistrationControllerApiTest {
 
   private Integer createEvent(int maxSeats) {
     return given()
+        .filter(new AllureRestAssured())
         .header("Authorization", "Bearer " + adminToken)
         .contentType(ContentType.JSON)
         .body("{\"name\":\"QA Conf\",\"maxSeats\":\"" + maxSeats + "\"}")
@@ -57,10 +64,12 @@ public class RegistrationControllerApiTest {
   }
 
   @Test
+  @Story("Register for Event")
   void registration_returns201() {
     Integer eventId = createEvent(10);
     String token = registerToken("Ivan", "ivan@example.com");
     given()
+        .filter(new AllureRestAssured())
         .header("Authorization", "Bearer " + token)
         .when()
         .post("/api/events/{eventId}/registrations", eventId)
@@ -72,9 +81,11 @@ public class RegistrationControllerApiTest {
   }
 
   @Test
+  @Story("Register for Event without Token")
   void registration_withoutToken_returns401or403() {
     Integer eventId = createEvent(10);
     int status = given()
+        .filter(new AllureRestAssured())
         .when()
         .post("/api/events/{eventId}/registrations", eventId)
         .then()
@@ -83,10 +94,12 @@ public class RegistrationControllerApiTest {
   }
 
   @Test
+  @Story("Get Registrations for Event")
   void get_registration_returns200() {
     Integer eventId = createEvent(10);
     String token = registerToken("Ivan", "ivan@example.com");
     given()
+        .filter(new AllureRestAssured())
         .header("Authorization", "Bearer " + token)
         .when()
         .post("/api/events/{eventId}/registrations", eventId)
@@ -94,6 +107,7 @@ public class RegistrationControllerApiTest {
         .statusCode(201);
 
     given()
+        .filter(new AllureRestAssured())
         .when()
         .get("/api/events/{eventId}/registrations", eventId)
         .then()
@@ -103,8 +117,10 @@ public class RegistrationControllerApiTest {
   }
 
   @Test
+  @Story("Get Registrations for Non-Existent Event")
   void get_registration_returns404() {
     given()
+        .filter(new AllureRestAssured())
         .when()
         .get("/api/events/{eventId}/registrations", 9999)
         .then()
@@ -112,9 +128,11 @@ public class RegistrationControllerApiTest {
   }
 
   @Test
+  @Story("Get Registrations for Event with No Registrations")
   void get_registration_returns_empty_list() {
     Integer eventId = createEvent(10);
     given()
+        .filter(new AllureRestAssured())
         .when()
         .get("/api/events/{eventId}/registrations", eventId)
         .then()
@@ -123,12 +141,14 @@ public class RegistrationControllerApiTest {
   }
 
   @Test
+  @Story("Register for Event when Event is Full")
   void registration_returns409_whenEventIsFull() {
     Integer eventId = createEvent(1);
     String first = registerToken("Ivan", "ivan@example.com");
     String second = registerToken("John", "john@example.com");
 
     given()
+        .filter(new AllureRestAssured())
         .header("Authorization", "Bearer " + first)
         .when()
         .post("/api/events/{eventId}/registrations", eventId)
@@ -136,6 +156,7 @@ public class RegistrationControllerApiTest {
         .statusCode(201);
 
     given()
+        .filter(new AllureRestAssured())
         .header("Authorization", "Bearer " + second)
         .when()
         .post("/api/events/{eventId}/registrations", eventId)
@@ -144,11 +165,13 @@ public class RegistrationControllerApiTest {
   }
 
   @Test
+  @Story("Register for Event with Already Registered Email")
   void registration_returns409_whenEmailAlreadyRegistered() {
     Integer eventId = createEvent(10);
     String token = registerToken("Ivan", "ivan@example.com");
 
     given()
+        .filter(new AllureRestAssured())
         .header("Authorization", "Bearer " + token)
         .when()
         .post("/api/events/{eventId}/registrations", eventId)
@@ -156,6 +179,7 @@ public class RegistrationControllerApiTest {
         .statusCode(201);
 
     given()
+        .filter(new AllureRestAssured())
         .header("Authorization", "Bearer " + token)
         .when()
         .post("/api/events/{eventId}/registrations", eventId)
@@ -164,6 +188,7 @@ public class RegistrationControllerApiTest {
   }
 
   @Test
+  @Story("Concurrent Registration Respects Max Seats")
   void registration_concurrent_respectsMaxSeats() throws Exception {
     Integer eventId = createEvent(1);
     String token1 = registerToken("Ivan", "ivan_" + UUID.randomUUID().toString().substring(0, 6) + "@example.com");
@@ -182,6 +207,7 @@ public class RegistrationControllerApiTest {
         throw new RuntimeException(e);
       }
       int status = given()
+          .filter(new AllureRestAssured())
           .header("Authorization", "Bearer " + token)
           .when()
           .post("/api/events/{eventId}/registrations", eventId)
@@ -202,6 +228,7 @@ public class RegistrationControllerApiTest {
 
     assertThat(statuses).containsExactlyInAnyOrder(201, 409);
     given()
+        .filter(new AllureRestAssured())
         .when()
         .get("/api/events/{eventId}/registrations", eventId)
         .then()

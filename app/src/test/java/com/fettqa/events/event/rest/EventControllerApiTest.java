@@ -11,6 +11,10 @@ import com.fettqa.events.event.dto.EventResponse;
 import com.fettqa.events.utils.AuthTestSupport;
 import com.fettqa.events.utils.TestDataCleaner;
 import com.fettqa.events.utils.Utils;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -24,6 +28,8 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 
+@Epic("Event Management")
+@Feature("Lifecycle / Bulk Operations")
 @ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import(TestDataCleaner.class)
@@ -47,6 +53,7 @@ public class EventControllerApiTest {
 
   private Response createEvent(String name, Integer maxSeats) {
     return given()
+        .filter(new AllureRestAssured())
         .header("Authorization", "Bearer " + adminToken)
         .contentType(ContentType.JSON)
         .body("""
@@ -60,6 +67,7 @@ public class EventControllerApiTest {
   class EventLifecycle {
 
     @Test
+    @Story("Create Event")
     void createEvent_returns201() {
       createEvent("QA Conf", 50)
           .then()
@@ -69,6 +77,7 @@ public class EventControllerApiTest {
     }
 
     @Test
+    @Story("Patch Event")
     void patchEvent_returns200() {
       String newName = "Automation";
       Integer maxSeats = 50;
@@ -78,6 +87,7 @@ public class EventControllerApiTest {
           .path("id");
 
       given()
+          .filter(new AllureRestAssured())
           .header("Authorization", "Bearer " + adminToken)
           .contentType(ContentType.JSON)
           .body("{\"name\":\"" + newName + "\"}")
@@ -89,6 +99,7 @@ public class EventControllerApiTest {
           .body("maxSeats", equalTo(maxSeats));
 
       given()
+          .filter(new AllureRestAssured())
           .header("Authorization", "Bearer " + adminToken)
           .contentType(ContentType.JSON)
           .body("{\"maxSeats\":\"" + newMaxSeats + "\"}")
@@ -101,6 +112,7 @@ public class EventControllerApiTest {
     }
 
     @Test
+    @Story("Patch Event - Invalid Data")
     void patchEvent_returns400() {
       Integer id = createEvent("QA Conf", 50)
           .then()
@@ -109,6 +121,7 @@ public class EventControllerApiTest {
           .path("id");
 
       given()
+          .filter(new AllureRestAssured())
           .header("Authorization", "Bearer " + adminToken)
           .contentType(ContentType.JSON)
           .body("{}")
@@ -118,6 +131,7 @@ public class EventControllerApiTest {
           .statusCode(400);
 
       given()
+          .filter(new AllureRestAssured())
           .header("Authorization", "Bearer " + adminToken)
           .contentType(ContentType.JSON)
           .body("{\"maxSeats\":-1}")
@@ -128,12 +142,14 @@ public class EventControllerApiTest {
     }
 
     @Test
+    @Story("Get Event by Name")
     void getEventByName_returns200() {
       String eventName = "QA Conf";
       int maxSeats = 50;
       createEvent(eventName, maxSeats);
 
       given()
+          .filter(new AllureRestAssured())
           .when()
           .queryParam("name", eventName)
           .get()
@@ -146,6 +162,7 @@ public class EventControllerApiTest {
     }
 
     @Test
+    @Story("Get Event by ID")
     void getEventById_returns200() {
       int maxSeats = 50;
       Integer id = createEvent("QA Conf", maxSeats)
@@ -153,6 +170,7 @@ public class EventControllerApiTest {
           .path("id");
 
       given()
+          .filter(new AllureRestAssured())
           .when()
           .get("{id}", id)
           .then()
@@ -162,8 +180,10 @@ public class EventControllerApiTest {
     }
 
     @Test
+    @Story("Get Event - Empty Result")
     void getEvent_returnsEmpty() {
       given()
+          .filter(new AllureRestAssured())
           .when()
           .get()
           .then()
@@ -171,6 +191,7 @@ public class EventControllerApiTest {
           .body("size()", equalTo(0));
 
       given()
+          .filter(new AllureRestAssured())
           .when()
           .queryParam("name", "Unknown")
           .get()
@@ -180,12 +201,14 @@ public class EventControllerApiTest {
     }
 
     @Test
+    @Story("Delete Event")
     void deleteEvent_returns204() {
       Integer id = createEvent("QA Conf", 999)
           .body()
           .path("id");
 
       given()
+          .filter(new AllureRestAssured())
           .header("Authorization", "Bearer " + adminToken)
           .when()
           .delete("{id}", id)
@@ -193,6 +216,7 @@ public class EventControllerApiTest {
           .statusCode(204);
 
       given()
+          .filter(new AllureRestAssured())
           .when()
           .get("{id}", id)
           .then()
@@ -200,8 +224,10 @@ public class EventControllerApiTest {
     }
 
     @Test
+    @Story("Get Event by ID - Not Found")
     void getEventById_returns404WhenMissing() {
       given()
+          .filter(new AllureRestAssured())
           .when()
           .get("{id}", 999)
           .then()
@@ -213,10 +239,12 @@ public class EventControllerApiTest {
   class BulkEventCreation {
 
     @Test
+    @Story("Create Bulk Events")
     void createEventsBulk_returnsList() {
       String testDataPath = "testData/bulk_events.json";
       Event[] events = Utils.jsonToObject(testDataPath, Event[].class);
       List<EventResponse> created = given()
+          .filter(new AllureRestAssured())
           .header("Authorization", "Bearer " + adminToken)
           .contentType(ContentType.JSON)
           .body(Utils.jsonAsString(testDataPath))
@@ -236,6 +264,7 @@ public class EventControllerApiTest {
           .extract().jsonPath().getList("", EventResponse.class);
 
       given()
+          .filter(new AllureRestAssured())
           .header("Authorization", "Bearer " + adminToken)
           .when()
           .delete("{id}", created.get(3).id())
@@ -243,6 +272,7 @@ public class EventControllerApiTest {
           .statusCode(204);
 
       given()
+          .filter(new AllureRestAssured())
           .when()
           .get()
           .then()
@@ -259,10 +289,12 @@ public class EventControllerApiTest {
     }
 
     @Test
+    @Story("Create Invalid Bulk Events")
     void createInvalidEventsBulk_returns400() {
       String testDataPath = "testData/bulk_invalid_events.json";
       String events = Utils.jsonAsString(testDataPath);
       given()
+          .filter(new AllureRestAssured())
           .header("Authorization", "Bearer " + adminToken)
           .contentType(ContentType.JSON)
           .body(events)
@@ -273,10 +305,12 @@ public class EventControllerApiTest {
     }
 
     @Test
+    @Story("Create Duplicated Bulk Events")
     void createDuplicatedEventsBulk_returns400() {
       String testDataPath = "testData/bulk_duplicated_events.json";
       String events = Utils.jsonAsString(testDataPath);
       given()
+          .filter(new AllureRestAssured())
           .header("Authorization", "Bearer " + adminToken)
           .contentType(ContentType.JSON)
           .body(events)

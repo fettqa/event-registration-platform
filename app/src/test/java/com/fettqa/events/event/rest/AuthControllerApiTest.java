@@ -6,6 +6,10 @@ import static org.hamcrest.Matchers.notNullValue;
 
 import com.fettqa.events.utils.AuthTestSupport;
 import com.fettqa.events.utils.TestDataCleaner;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import java.util.UUID;
@@ -17,6 +21,8 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 
+@Epic("Authentication and Authorization")
+@Feature("Login / Create event permissions")
 @ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import(TestDataCleaner.class)
@@ -36,8 +42,10 @@ class AuthControllerApiTest {
   }
 
   @Test
+  @Story("Admin Login")
   void loginAdmin_returnsToken() {
     given()
+        .filter(new AllureRestAssured())
         .contentType(ContentType.JSON)
         .body("""
             {"email":"admin@example.com","password":"admin123"}
@@ -52,8 +60,10 @@ class AuthControllerApiTest {
   }
 
   @Test
+  @Story("Guest can't create event")
   void createEvent_withoutToken_returns403() {
     given()
+        .filter(new AllureRestAssured())
         .contentType(ContentType.JSON)
         .body("{\"name\":\"No Auth Event\",\"maxSeats\":10}")
         .when()
@@ -63,6 +73,7 @@ class AuthControllerApiTest {
   }
 
   @Test
+  @Story("User can't create event")
   void createEvent_withUserToken_returns403() {
     String suffix = UUID.randomUUID().toString().substring(0, 8);
     String userToken = AuthTestSupport.registerUser(
@@ -78,6 +89,7 @@ class AuthControllerApiTest {
   }
 
   @Test
+  @Story("Admin can create event")
   void createEvent_withAdminToken_returns201() {
     AuthTestSupport.givenAdmin(port)
         .contentType(ContentType.JSON)

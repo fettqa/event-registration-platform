@@ -1,17 +1,19 @@
 import {check, sleep} from 'k6';
-import {createEvent, register} from "./helpers.js";
+import {createEvent, handleSummaryFor, registerForEvent, signup} from './helpers.js';
+
+export const handleSummary = handleSummaryFor('spike');
 
 export const options = {
   stages: [
-    {duration: '10s', target: 10}, // Ramp-up to 10 users
-    {duration: '20s', target: 100}, // Ramp-up to 100 users within 20 seconds
-    {duration: '30s', target: 100}, // Stay at 100 users for 30 seconds
-    {duration: '10s', target: 0}, // Ramp-down to 0 users
+    {duration: '10s', target: 10},
+    {duration: '20s', target: 100},
+    {duration: '30s', target: 100},
+    {duration: '10s', target: 0},
   ],
   thresholds: {
-    http_req_failed: ['rate<0.10'],      // < 10% exceptions
-    http_req_duration: ['p(95)<1500'],  // 95% requests < 1500ms
-    checks: ['rate>0.95']
+    http_req_failed: ['rate<0.10'],
+    http_req_duration: ['p(95)<1500'],
+    checks: ['rate>0.95'],
   },
 };
 
@@ -21,8 +23,8 @@ export function setup() {
 
 export default function (data) {
   const email = `spike_u${__VU}_i${__ITER}_d${Date.now()}@example.com`;
-
-  const res = register(data.eventId, email, `Spike user ${__VU}`);
+  const token = signup(email, `Spike user ${__VU}`);
+  const res = registerForEvent(data.eventId, token);
 
   check(res, {
     'registration is 201': (r) => r.status === 201,

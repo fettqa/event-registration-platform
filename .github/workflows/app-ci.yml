@@ -37,9 +37,62 @@ jobs:
       - name: Run tests
         run: ./gradlew test
 
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results-app
+          path: app/build/allure-results
+          if-no-files-found: ignore
+
+      - name: Generate Allure HTML report
+        if: always()
+        working-directory: app
+        run: |
+          if [ -d build/allure-results ] && [ "$(ls -A build/allure-results 2>/dev/null)" ]; then
+            npm install -g allure-commandline@2.29.0
+            allure generate build/allure-results -o build/allure-report --clean
+          fi
+
+      - name: Upload Allure HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report-app
+          path: app/build/allure-report
+          if-no-files-found: ignore
+
       - name: Upload test report
         if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: test-report
           path: app/build/reports/tests/test
+
+  publish-allure-report:
+    name: Publish Allure Report
+    runs-on: ubuntu-latest
+    needs: test
+    if: always() && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+    permissions:
+      contents: write
+    steps:
+      - name: Download Allure Report
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-report-app
+          path: allure-report
+
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
+          destination_dir: allure/app/${{ github.run_number }}
+          keep_files: true
+
+      - name: Summary
+        run: |
+          REPORT_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/allure/app/${{ github.run_number }}"
+          echo "## Allure report" >> "$GITHUB_STEP_SUMMARY"
+          echo "- [View Allure Report](${REPORT_URL})" >> "$GITHUB_STEP_SUMMARY"
