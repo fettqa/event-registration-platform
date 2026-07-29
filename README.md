@@ -224,7 +224,7 @@ CI uploads Allure/k6 artifacts **always**. On **push to `main`** / `workflow_dis
 
 Example: `https://<owner>.github.io/<repo>/allure/app/42/`
 
-PR builds keep downloadable artifacts only (Pages publish skipped — fork/`GITHUB_TOKEN` limits).
+PR builds from the **same repo** also publish to Pages. Fork PRs keep artifacts only (token limits).
 
 **One-time setup:** Repo → Settings → Pages → Source = Deploy from branch → `gh-pages`.
 
