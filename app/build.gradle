@@ -17,6 +17,10 @@ repositories {
 	mavenCentral()
 }
 
+ext {
+	allureVersion = '2.29.1'
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
@@ -37,6 +41,11 @@ dependencies {
 	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	// Allure (no Gradle plugin — avoids deprecated adapter DSL)
+	testImplementation platform("io.qameta.allure:allure-bom:$allureVersion")
+	testImplementation 'io.qameta.allure:allure-junit5'
+	testImplementation 'io.qameta.allure:allure-rest-assured'
 }
 
 tasks.named('test') {

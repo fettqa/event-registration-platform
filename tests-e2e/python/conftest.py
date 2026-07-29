@@ -1,6 +1,6 @@
 import os
 import uuid
-
+import allure
 import pytest
 
 BASE_URL = os.getenv("BASE_URL", "http://localhost:8080").rstrip("/")
@@ -23,3 +23,23 @@ def browser_context_args(browser_context_args):
     **browser_context_args,
     "viewport": {"width": 1280, "height": 720},
   }
+
+@pytest.fixture(autouse=True)
+def attach_screenshot_on_failure(request, page):
+  yield
+  if hasattr(request.node, "rep_call") and request.node.rep_call.failed:
+    try:
+      allure.attach(
+          page.screenshot(),
+          name="failure-screenshot",
+          attachment_type=allure.attachment_type.PNG,
+      )
+    except Exception:
+      pass
+
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+  outcome = yield
+  rep = outcome.get_result()
+  setattr(item, "rep_" + rep.when, rep)

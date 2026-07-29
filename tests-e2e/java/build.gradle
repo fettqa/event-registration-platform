@@ -11,15 +11,36 @@ java {
     }
 }
 
+ext {
+    allureVersion = '2.29.1'
+    aspectJVersion = '1.9.22'
+}
+
 repositories {
     mavenCentral()
 }
 
+configurations {
+    agent {
+        canBeResolved = true
+        canBeConsumed = true
+    }
+}
+
 dependencies {
+    agent "org.aspectj:aspectjweaver:$aspectJVersion"
+
     testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.17.1'
     testImplementation 'com.microsoft.playwright:playwright:1.49.0'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation platform("io.qameta.allure:allure-bom:$allureVersion")
+    testImplementation 'io.qameta.allure:allure-junit5'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.compilerArgs.add('-parameters')
 }
 
 tasks.register('installPlaywright', JavaExec) {
@@ -31,5 +52,6 @@ tasks.register('installPlaywright', JavaExec) {
 tasks.named('test') {
     dependsOn('installPlaywright')
     useJUnitPlatform()
+    jvmArgs = ["-javaagent:${configurations.agent.singleFile}"]
     systemProperty 'baseUrl', System.getProperty('baseUrl', 'http://localhost:8080')
 }

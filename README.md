@@ -60,10 +60,10 @@ Swagger: Authorize → bearerAuth → insert token
 |------|---------------------------------------------------------|
 | Backend | Java 21, Spring Boot, JPA, Flyway, H2 / PostgreSQL, JWT |
 | API docs | springdoc OpenAPI (Swagger UI)                          |
-| Java tests | JUnit 5, REST Assured, MockMvc                          |
-| Python API tests | pytest, httpx                                           |
-| E2E | Playwright (Java + Python)                              |
-| Performance | k6                                                      |
+| Java tests | JUnit 5, REST Assured, MockMvc, Allure                  |
+| Python API tests | pytest, httpx, Allure                                   |
+| E2E | Playwright (Java + Python), Allure                      |
+| Performance | k6 (+ HTML/JSON summary)                                |
 | CI/CD | GitHub Actions                                          |
 | Infra | Docker Compose                                          |
 
@@ -158,6 +158,8 @@ cd app
 1. Start the app (`cd app && ./gradlew bootRun`)
 2. Install [k6](https://grafana.com/docs/k6/latest/set-up/install-k6/)
 
+Run from the **repo root** (paths in `handleSummary` are relative to cwd):
+
 ### Smoke
 ```bash
 k6 run perf/k6/smoke.js
@@ -173,6 +175,11 @@ k6 run perf/k6/load-register.js
 k6 run perf/k6/spike.js
 ```
 
+After a run, open (files are named per scenario and do not overwrite each other):
+- `perf/k6/results/smoke-report.html` / `smoke-summary.json`
+- `perf/k6/results/load-report.html` / `load-summary.json`
+- `perf/k6/results/spike-report.html` / `spike-summary.json`
+
 ### Results (local)
 
 | Test  | VUs / stages | Duration | p95      | Failed | Checks |
@@ -180,6 +187,47 @@ k6 run perf/k6/spike.js
 | Smoke | 2 VU        | 30s   | 43.59ms  | 0 %    | 100 %  |
 | Load  | 0→50→0      | ~3m   | 222.16ms | 0 %    | 100 %  |
 | Spike | 10→100→0    | ~1m   | 664.22ms | 0 %    | 100 %  |
+
+## Allure reports
+
+Install the [Allure CLI](https://allurereport.org/docs/install/), run tests, then serve results:
+
+```bash
+# Java API (from app/)
+./gradlew test
+allure serve build/allure-results
+
+# Java E2E (from tests-e2e/java/)
+./gradlew test
+allure serve build/allure-results
+
+# Python API (from tests-api/)
+pytest
+allure serve allure-results
+
+# Python E2E (from tests-e2e/python/)
+pytest
+allure serve allure-results
+```
+
+### GitHub Actions artifacts + GitHub Pages
+
+| Suite | Pages URL pattern |
+|-------|-------------------|
+| App CI | `…/allure/app/<run_number>/` |
+| Python API | `…/allure/python-api/<run_number>/` |
+| E2E Java | `…/allure/e2e-java/<run_number>/` |
+| E2E Python | `…/allure/e2e-python/<run_number>/` |
+| k6 | `…/k6/<scenario>/<run_number>/<scenario>-report.html` |
+
+Example: `https://<owner>.github.io/<repo>/allure/app/42/`
+
+PR builds from the **same repo** also publish to Pages. Fork PRs keep artifacts only (token limits).
+
+**One-time setup:** Repo → Settings → Pages → Source = Deploy from branch → `gh-pages`.
+
+k6 **smoke** runs on push/PR when `app/**` or `perf/k6/**` change.  
+Load/spike: Actions → **k6 Performance** → Run workflow → choose scenario.
 
 ## Python API tests
 
