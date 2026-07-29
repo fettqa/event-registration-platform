@@ -210,20 +210,23 @@ pytest
 allure serve allure-results
 ```
 
-### GitHub Actions artifacts
+### GitHub Actions artifacts + GitHub Pages
 
-CI uploads Allure **results** + generated **HTML report** (`if: always()`):
+CI uploads Allure/k6 artifacts **always**. On **push to `main`** / `workflow_dispatch` reports are also published to GitHub Pages (same pattern as ReX `peaceiris/actions-gh-pages`):
 
-| Workflow | Artifacts |
-|----------|-----------|
-| App CI | `allure-results-app`, `allure-report-app` |
-| Python API | `allure-results-python-api`, `allure-report-python-api` |
-| E2E Java | `allure-results-e2e-java`, `allure-report-e2e-java` |
-| E2E Python | `allure-results-e2e-python`, `allure-report-e2e-python` |
-| k6 | `k6-report-smoke` (HTML/JSON under `perf/k6/results/`) |
+| Suite | Pages URL pattern |
+|-------|-------------------|
+| App CI | `…/allure/app/<run_number>/` |
+| Python API | `…/allure/python-api/<run_number>/` |
+| E2E Java | `…/allure/e2e-java/<run_number>/` |
+| E2E Python | `…/allure/e2e-python/<run_number>/` |
+| k6 | `…/k6/<scenario>/<run_number>/<scenario>-report.html` |
 
-Download the `allure-report-*` zip from the Actions run and open `index.html`.  
-For k6, open `*-report.html` from the artifact.
+Example: `https://<owner>.github.io/<repo>/allure/app/42/`
+
+PR builds keep downloadable artifacts only (Pages publish skipped — fork/`GITHUB_TOKEN` limits).
+
+**One-time setup:** Repo → Settings → Pages → Source = Deploy from branch → `gh-pages`.
 
 k6 **smoke** runs on push/PR when `app/**` or `perf/k6/**` change.  
 Load/spike: Actions → **k6 Performance** → Run workflow → choose scenario.

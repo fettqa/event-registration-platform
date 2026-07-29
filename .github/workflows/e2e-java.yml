@@ -98,3 +98,31 @@ jobs:
           path: |
             tests-e2e/java/build/reports/tests/test
             app/app.log
+
+  publish-allure-report:
+    name: Publish Allure Report
+    runs-on: ubuntu-latest
+    needs: e2e
+    if: always() && github.event_name != 'pull_request'
+    permissions:
+      contents: write
+    steps:
+      - name: Download Allure Report
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-report-e2e-java
+          path: allure-report
+
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
+          destination_dir: allure/e2e-java/${{ github.run_number }}
+          keep_files: true
+
+      - name: Summary
+        run: |
+          REPORT_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/allure/e2e-java/${{ github.run_number }}"
+          echo "## Allure report" >> "$GITHUB_STEP_SUMMARY"
+          echo "- [View Allure Report](${REPORT_URL})" >> "$GITHUB_STEP_SUMMARY"
