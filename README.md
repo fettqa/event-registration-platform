@@ -212,8 +212,6 @@ allure serve allure-results
 
 ### GitHub Actions artifacts + GitHub Pages
 
-CI uploads Allure/k6 artifacts **always**. On **push to `main`** / `workflow_dispatch` reports are also published to GitHub Pages (same pattern as ReX `peaceiris/actions-gh-pages`):
-
 | Suite | Pages URL pattern |
 |-------|-------------------|
 | App CI | `…/allure/app/<run_number>/` |
