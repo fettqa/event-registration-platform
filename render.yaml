@@ -1,0 +1,45 @@
+# Render Blueprint: https://render.com/docs/blueprint-spec
+# Deploy: Dashboard → New → Blueprint → connect this repo
+#
+# Free web service spins down after ~15 min idle (cold start ~1 min).
+# Free Postgres expires after 30 days (upgrade or recreate).
+
+databases:
+  - name: event-registration-db
+    plan: free
+    databaseName: event_registration
+    user: event_user
+
+services:
+  - type: web
+    name: event-registration
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: render
+      - key: DB_HOST
+        fromDatabase:
+          name: event-registration-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: event-registration-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: event-registration-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: event-registration-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: event-registration-db
+          property: password
+      - key: APP_JWT_SECRET
+        generateValue: true

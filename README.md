@@ -14,6 +14,7 @@ Covers:
 - CI on **GitHub Actions** (Java tests, Python API tests, Playwright E2E)
 - Performance tests with **k6** (smoke / load / spike)
 - Dockerized **PostgreSQL** for local prod-like runs
+- Deploy on **Render** (Docker + free Postgres; see README Deploy section)
 
 ## Web UI (Thymeleaf)
 
@@ -65,6 +66,7 @@ Swagger: Authorize → bearerAuth → insert token
 | E2E | Playwright (Java + Python)                              |
 | Performance | k6                                                      |
 | CI/CD | GitHub Actions                                          |
+| Deploy | Render (Docker Blueprint)                               |
 | Infra | Docker Compose                                          |
 
 ## Structure
@@ -122,6 +124,37 @@ Tests run automatically on push/PR via GitHub Actions.
 | E2E Python | Playwright Python |
 
 Badges at the top show current status.
+
+## Deploy (Render)
+
+Free tier: web service **sleeps after ~15 min** without traffic (first request ~1 min cold start).  
+Free Postgres **expires after 30 days** (then upgrade or recreate).
+
+### Option A — Blueprint (recommended)
+
+1. Push these files to `main`: `Dockerfile`, `render.yaml`, `application-render.yml`
+2. Open [Render Dashboard](https://dashboard.render.com) → **New** → **Blueprint**
+3. Connect `fettqa/event-registration-platform`, apply `render.yaml`
+4. Wait for build; open the service URL (HTTPS)
+
+Default admin (seeded): `admin@example.com` / `admin123`
+
+### Option B — Manual
+
+1. Create **PostgreSQL** (Free) on Render → note host/port/db/user/password  
+2. Create **Web Service** → Docker, repo root, Dockerfile  
+3. Environment:
+   - `SPRING_PROFILES_ACTIVE=render`
+   - `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`
+   - `APP_JWT_SECRET` = long random string (≥32 chars)
+4. Health check path: `/actuator/health`
+
+### Local Docker image check
+
+```bash
+docker build -t event-registration .
+# needs Postgres env vars + profile render, or run with H2 locally via default profile instead
+```
 
 ## Run with PostgreSQL (Docker)
 
