@@ -1,0 +1,28 @@
+<div>POST to http://localhost:37009/api/events</div>
+
+    <h4>Body</h4>
+    <div>
+    <pre class="preformated-text">
+{
+    &quot;name&quot;: &quot;User Event 0ec88b6b&quot;,
+    &quot;maxSeats&quot;: 10
+}    </pre>
+    </div>
+
+    <h4>Headers</h4>
+    <div>
+            <div>Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VyXzBlYzg4YjZiQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJ1aWQiOjUsImlhdCI6MTc4NTUwODk2NiwiZXhwIjoxNzg1NTk1MzY2fQ.GNpLF66kmH1u0RBKefQZI5y8XE_P5VL_tGMIwwxBrSMlWx8np05clGWZWi0PmM2E</div>
+            <div>Accept: */*</div>
+            <div>Content-Type: application/json</div>
+    </div>
+
+
+
+    <h4>Curl</h4>
+    <div>
+        curl -v -X POST &#39;http://localhost:37009/api/events&#39; -H &#39;Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VyXzBlYzg4YjZiQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJ1aWQiOjUsImlhdCI6MTc4NTUwODk2NiwiZXhwIjoxNzg1NTk1MzY2fQ.GNpLF66kmH1u0RBKefQZI5y8XE_P5VL_tGMIwwxBrSMlWx8np05clGWZWi0PmM2E&#39; -H &#39;Accept: */*&#39; -H &#39;Content-Type: application/json&#39; -d &#39;{
+    &quot;name&quot;: &quot;User Event 0ec88b6b&quot;,
+    &quot;maxSeats&quot;: 10
+}&#39;
+    </div>
+
