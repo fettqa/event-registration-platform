@@ -46,11 +46,32 @@ jobs:
         working-directory: app
         run: ./gradlew bootJar -x test
 
+      - name: Start Kafka
+        working-directory: app
+        run: docker compose up -d kafka
+
+      - name: Wait for Kafka
+        run: |
+          for i in {1..30}; do
+            if docker exec kafka /opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092 >/dev/null 2>&1; then
+              echo "Kafka is up."
+              exit 0
+            fi
+            echo "Waiting for Kafka... ($i)"
+            sleep 2
+          done
+          echo "Kafka failed to start."
+          docker compose -f app/docker-compose.yml logs kafka || docker logs kafka || true
+          exit 1
+
       - name: Start Spring Boot application
         working-directory: app
+        env:
+          SPRING_PROFILES_ACTIVE: kafka
+          KAFKA_BOOTSTRAP_SERVERS: localhost:9092
         run: |
           JAR=$(ls build/libs/*SNAPSHOT.jar | head -n 1)
-          echo "Starting $JAR"
+          echo "Starting $JAR with profiles=$SPRING_PROFILES_ACTIVE"
           nohup java -jar "$JAR" > app.log 2>&1 &
           echo $! > app.pid
 
@@ -80,7 +101,13 @@ jobs:
         working-directory: tests-api
         env:
           BASE_URL: http://localhost:8080
+          KAFKA_BOOTSTRAP_SERVERS: localhost:9092
         run: pytest
+
+      - name: Stop Kafka
+        if: always()
+        working-directory: app
+        run: docker compose down || true
 
       - name: Upload Allure results
         if: always()

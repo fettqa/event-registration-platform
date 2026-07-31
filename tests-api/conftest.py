@@ -1,7 +1,14 @@
 import httpx
 import os
+import sys
 import pytest
 import uuid
+from pathlib import Path
+
+# Ensure tests-api root is importable (kafka_support, etc.) when pytest is started from elsewhere.
+_ROOT = Path(__file__).resolve().parent
+if str(_ROOT) not in sys.path:
+  sys.path.insert(0, str(_ROOT))
 
 BASE_URL = os.getenv("BASE_URL", "http://localhost:8080")
 ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "admin@example.com")
