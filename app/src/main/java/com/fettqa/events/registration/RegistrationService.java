@@ -6,13 +6,19 @@ import com.fettqa.events.auth.User;
 import com.fettqa.events.event.Event;
 import com.fettqa.events.event.EventNotFoundException;
 import com.fettqa.events.event.EventRepository;
+import com.fettqa.events.messaging.dto.RegistrationCreatedEvent;
+import com.fettqa.events.messaging.RegistrationEventPublisher;
 import com.fettqa.events.registration.dto.EventRegistrationResponse;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
@@ -20,11 +26,13 @@ public class RegistrationService {
 
   private final RegistrationRepository registrationRepository;
   private final EventRepository eventRepository;
+  private final Optional<RegistrationEventPublisher> publisher;
 
   public RegistrationService(RegistrationRepository registrationRepository,
-      EventRepository eventRepository) {
+                             EventRepository eventRepository, Optional<RegistrationEventPublisher> publisher) {
     this.registrationRepository = registrationRepository;
     this.eventRepository = eventRepository;
+    this.publisher = publisher;
   }
 
   @Transactional
@@ -48,8 +56,14 @@ public class RegistrationService {
           "event " + event.getName() + " has reached its maximum capacity");
     }
 
-    return EventRegistrationResponse.from(
-        registrationRepository.save(new Registration(event, fullName, email)));
+    Registration saved = registrationRepository.save(new Registration(event, fullName, email));
+    TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
+      @Override
+      public void afterCommit() {
+        publisher.ifPresent(p -> p.publish(RegistrationCreatedEvent.from(saved)));
+      }
+    });
+    return EventRegistrationResponse.from(saved);
   }
 
   public List<EventRegistrationResponse> getRegistrations(Long eventId) {

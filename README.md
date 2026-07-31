@@ -1,14 +1,17 @@
-![App CI](https://github.com/fettqa/event-registration-platform/actions/workflows/app-ci.yml/badge.svg)
-![Python API Tests](https://github.com/fettqa/event-registration-platform/actions/workflows/python-api-tests.yml/badge.svg)
-![E2E Java](https://github.com/fettqa/event-registration-platform/actions/workflows/e2e-java.yml/badge.svg)
-![E2E Python](https://github.com/fettqa/event-registration-platform/actions/workflows/e2e-python.yml/badge.svg)
+App CI
+Python API Tests
+E2E Java
+E2E Python
 
 ## Event Registration Platform
-Demo: https://event-registration-jesq.onrender.com/
+
+Demo: [https://event-registration-jesq.onrender.com/](https://event-registration-jesq.onrender.com/)
 
 ## About
+
 Event Registration API — pet project.
 Covers:
+
 - REST API (Spring Boot, Java 21, Flyway)
 - Automated API tests in **Java (REST Assured)** and **Python (pytest + httpx)**
 - E2E UI tests with **Playwright (Java + Python)**
@@ -17,27 +20,33 @@ Covers:
 - Dockerized **PostgreSQL** for local prod-like runs
 - Deploy on **Render** (Docker + free Postgres; see README Deploy section)
 
+
+
 ## Web UI (Thymeleaf)
 
-Open after `bootRun`: http://localhost:8080/
+Open after `bootRun`: [http://localhost:8080/](http://localhost:8080/)
 
-| Page | URL | Features |
-|------|-----|----------|
-| Events list | `/` | search by name, pagination (100/page) |
-| Login | `/login` | JWT via `/api/auth/login`, token in `localStorage` |
-| Register | `/register` | full name + email + password → USER + JWT |
-| Admin Panel | `/adminPanel` | ADMIN only; Users tab to set USER / SUPER_USER |
-| Create event | `/events/new` | ADMIN / SUPER_USER only; calls `POST /api/events` |
+
+| Page          | URL            | Features                                                                  |
+| ------------- | -------------- | ------------------------------------------------------------------------- |
+| Events list   | `/`            | search by name, pagination (100/page)                                     |
+| Login         | `/login`       | JWT via `/api/auth/login`, token in `localStorage`                        |
+| Register      | `/register`    | full name + email + password → USER + JWT                                 |
+| Admin Panel   | `/adminPanel`  | ADMIN only; Users tab to set USER / SUPER_USER                            |
+| Create event  | `/events/new`  | ADMIN / SUPER_USER only; calls `POST /api/events`                         |
 | Event details | `/events/{id}` | guests browse; logged-in users register from profile (no name/email form) |
+
 
 Create event uses the secured REST API from the browser (`Authorization: Bearer ...`). Event registration requires login; name/email come from the user account.
 
 ## Auth
+
 Default admin (seeded on startup):
-email:    admin@example.com
+email:    [admin@example.com](mailto:admin@example.com)
 password: admin123
 
 Roles:
+
 - `ADMIN` — seeded account (and any admins added via `AdminUserInitializer` / DB)
 - `SUPER_USER` — can create events and register for events
 - `USER` — can register for events only
@@ -45,7 +54,7 @@ Roles:
 POST /api/auth/register  → USER + accessToken (requires fullName)
 POST /api/auth/login     → accessToken
 
-Header: Authorization: Bearer <accessToken>
+Header: Authorization: Bearer 
 
 Swagger: Authorize → bearerAuth → insert token
 
@@ -56,28 +65,39 @@ Swagger: Authorize → bearerAuth → insert token
 - Cannot register when seats are full (409)
 - Concurrent registration protected (row lock / race handling)
 - Remaining seats shown on event details page
+- Successful registration can emit Kafka event `registration.created` (profile `kafka`)
+
 
 ## Tech stack
-| Area | Tools                                                   |
-|------|---------------------------------------------------------|
-| Backend | Java 21, Spring Boot, JPA, Flyway, H2 / PostgreSQL, JWT |
-| API docs | springdoc OpenAPI (Swagger UI)                          |
-| Java tests | JUnit 5, REST Assured, MockMvc, Allure                  |
-| Python API tests | pytest, httpx, Allure                                   |
-| E2E | Playwright (Java + Python), Allure                      |
-| Performance | k6 (+ HTML/JSON summary)                                |
-| CI/CD | GitHub Actions                                          |
-| Deploy | Render (Docker Blueprint)                               |
-| Infra | Docker Compose                                          |
+
+
+| Area             | Tools                                                                 |
+| ---------------- |-----------------------------------------------------------------------|
+| Backend          | Java 21, Spring Boot, JPA, Flyway, H2 / PostgreSQL, JWT, Spring Kafka |
+| API docs         | springdoc OpenAPI (Swagger UI)                                        |
+| Java tests       | JUnit 5, REST Assured, MockMvc, Allure, EmbeddedKafka                 |
+| Python API tests | pytest, httpx, Allure, kafka-python                                   |
+| E2E              | Playwright (Java + Python), Allure                                    |
+| Performance      | k6 (+ HTML/JSON summary)                                              |
+| CI/CD            | GitHub Actions                                                        |
+| Deploy           | Render (Docker Blueprint)                                             |
+| Infra            | Docker Compose (Postgres + Kafka)                                     |
+
+
+
 
 ## Structure
+
 - `app/` — Spring Boot API (Java 21) + Thymeleaf UI
 - `tests-api/` — Python REST tests (pytest + httpx)
 - `tests-e2e/java/` — Playwright E2E (Java)
 - `tests-e2e/python/` — Playwright E2E (Python)
 - `perf/k6/` — k6 load tests (smoke / load / spike)
 
+
+
 ## Quick start
+
 ```bash
 # App (H2)
 cd app && ./gradlew bootRun
@@ -85,6 +105,10 @@ cd app && ./gradlew bootRun
 open http://localhost:8080/
 # Java tests
 cd app && ./gradlew test
+# App (H2 + Kafka)
+./gradlew bootRun --args='--spring.profiles.active=kafka'
+# or Postgres + Kafka
+./gradlew bootRun --args='--spring.profiles.active=docker,kafka'
 # Python API tests (app must be running)
 cd tests-api && pytest
 # k6 smoke
@@ -93,36 +117,47 @@ k6 run perf/k6/smoke.js
 cd tests-e2e/java && ./gradlew installPlaywright && ./gradlew test
 # Playwright E2E Python (app must be running)
 cd tests-e2e/python
-# activate venv (py .\.venv\Scripts\activate), then:
+# activate venv (.\.venv\Scripts\activate), then:
 pytest
 
 Swagger: http://localhost:8080/swagger-ui.html  
 Health: http://localhost:8080/actuator/health
 ```
 
+
+
 ## API (REST)
-| Method | Path | Notes | Access |
-|--------|------|-------|--------|
-| POST | `/api/events` | create | Admin |
-| GET | `/api/events` | list / filter | Public |
-| GET | `/api/events/{id}` | by id | Public |
-| PATCH | `/api/events/{id}` | update | Admin |
-| DELETE | `/api/events/{id}` | delete | Admin |
-| POST | `/api/events/{id}/registrations` | register current user (201 / 409) | Authenticated |
-| DELETE | `/api/events/{id}/registrations/{registrationId}` | delete registration | Admin: any; Super User: on own events; User: own |
-| DELETE | `/api/events/{id}` | delete event | Admin: any; Super User: own events |
-Swagger: http://localhost:8080/swagger-ui.html
+
+
+| Method                                                                                  | Path                                              | Notes                             | Access                                           |
+| --------------------------------------------------------------------------------------- | ------------------------------------------------- | --------------------------------- | ------------------------------------------------ |
+| POST                                                                                    | `/api/events`                                     | create                            | Admin                                            |
+| GET                                                                                     | `/api/events`                                     | list / filter                     | Public                                           |
+| GET                                                                                     | `/api/events/{id}`                                | by id                             | Public                                           |
+| PATCH                                                                                   | `/api/events/{id}`                                | update                            | Admin                                            |
+| DELETE                                                                                  | `/api/events/{id}`                                | delete                            | Admin                                            |
+| POST                                                                                    | `/api/events/{id}/registrations`                  | register current user (201 / 409) | Authenticated                                    |
+| DELETE                                                                                  | `/api/events/{id}/registrations/{registrationId}` | delete registration               | Admin: any; Super User: on own events; User: own |
+| DELETE                                                                                  | `/api/events/{id}`                                | delete event                      | Admin: any; Super User: own events               |
+| Swagger: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) |                                                   |                                   |                                                  |
+
+
+
 
 ## CI
+
 Tests run automatically on push/PR via GitHub Actions.
+
 ## CI workflows
 
-| Workflow | Runs |
-|----------|------|
-| App CI | `./gradlew test` |
+
+| Workflow         | Runs                         |
+| ---------------- | ---------------------------- |
+| App CI           | `./gradlew test`             |
 | Python API Tests | bootJar → start app → pytest |
-| E2E Java | Playwright Java |
-| E2E Python | Playwright Python |
+| E2E Java         | Playwright Java              |
+| E2E Python       | Playwright Python            |
+
 
 Badges at the top show current status.
 
@@ -142,13 +177,15 @@ Default admin (seeded): `admin@example.com` / `admin123`
 
 ### Option B — Manual
 
-1. Create **PostgreSQL** (Free) on Render → note host/port/db/user/password  
-2. Create **Web Service** → Docker, repo root, Dockerfile  
+1. Create **PostgreSQL** (Free) on Render → note host/port/db/user/password
+2. Create **Web Service** → Docker, repo root, Dockerfile
 3. Environment:
-   - `SPRING_PROFILES_ACTIVE=render`
-   - `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`
-   - `APP_JWT_SECRET` = long random string (≥32 chars)
+  - `SPRING_PROFILES_ACTIVE=render`
+  - `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`
+  - `APP_JWT_SECRET` = long random string (≥32 chars)
 4. Health check path: `/actuator/health`
+
+
 
 ### Local Docker image check
 
@@ -156,6 +193,8 @@ Default admin (seeded): `admin@example.com` / `admin123`
 docker build -t event-registration .
 # needs Postgres env vars + profile render, or run with H2 locally via default profile instead
 ```
+
+
 
 ## Run with PostgreSQL (Docker)
 
@@ -170,57 +209,81 @@ cd app
 ```
 
 Stop database:
+
 ```bash
 docker compose down
 ```
 
 Clean database (drop + recreate):
+
 ```bash
 docker compose down -v
 docker compose up -d
 ```
 
+
+
 ## Run tests (H2, no Docker required)
+
 ```bash
 cd app
 ./gradlew test
 ```
 
+
+
 ## Performance (k6)
 
+
+
 ### Prerequisites
+
 1. Start the app (`cd app && ./gradlew bootRun`)
 2. Install [k6](https://grafana.com/docs/k6/latest/set-up/install-k6/)
 
 Run from the **repo root** (paths in `handleSummary` are relative to cwd):
 
 ### Smoke
+
 ```bash
 k6 run perf/k6/smoke.js
 ```
 
+
+
 ### Load (registrations)
+
 ```bash
 k6 run perf/k6/load-register.js
 ```
 
+
+
 ### Spike
+
 ```bash
 k6 run perf/k6/spike.js
 ```
 
 After a run, open (files are named per scenario and do not overwrite each other):
+
 - `perf/k6/results/smoke-report.html` / `smoke-summary.json`
 - `perf/k6/results/load-report.html` / `load-summary.json`
 - `perf/k6/results/spike-report.html` / `spike-summary.json`
 
+
+
 ### Results (local)
 
+
 | Test  | VUs / stages | Duration | p95      | Failed | Checks |
-|-------|-------------|-------|----------|--------|--------|
-| Smoke | 2 VU        | 30s   | 43.59ms  | 0 %    | 100 %  |
-| Load  | 0→50→0      | ~3m   | 222.16ms | 0 %    | 100 %  |
-| Spike | 10→100→0    | ~1m   | 664.22ms | 0 %    | 100 %  |
+| ----- | ------------ | -------- | -------- | ------ | ------ |
+| Smoke | 2 VU         | 30s      | 43.59ms  | 0 %    | 100 %  |
+| Load  | 0→50→0       | ~3m      | 222.16ms | 0 %    | 100 %  |
+| Spike | 10→100→0     | ~1m      | 664.22ms | 0 %    | 100 %  |
+
+
+
 
 ## Allure reports
 
@@ -244,15 +307,19 @@ pytest
 allure serve allure-results
 ```
 
+
+
 ### GitHub Actions artifacts + GitHub Pages
 
-| Suite | Pages URL pattern |
-|-------|-------------------|
-| App CI | `…/allure/app/<run_number>/` |
-| Python API | `…/allure/python-api/<run_number>/` |
-| E2E Java | `…/allure/e2e-java/<run_number>/` |
-| E2E Python | `…/allure/e2e-python/<run_number>/` |
-| k6 | `…/k6/<scenario>/<run_number>/<scenario>-report.html` |
+
+| Suite      | Pages URL pattern                                     |
+| ---------- | ----------------------------------------------------- |
+| App CI     | `…/allure/app/<run_number>/`                          |
+| Python API | `…/allure/python-api/<run_number>/`                   |
+| E2E Java   | `…/allure/e2e-java/<run_number>/`                     |
+| E2E Python | `…/allure/e2e-python/<run_number>/`                   |
+| k6         | `…/k6/<scenario>/<run_number>/<scenario>-report.html` |
+
 
 Example: `https://<owner>.github.io/<repo>/allure/app/42/`
 
@@ -260,7 +327,7 @@ PR builds from the **same repo** also publish to Pages. Fork PRs keep artifacts 
 
 **One-time setup:** Repo → Settings → Pages → Source = Deploy from branch → `gh-pages`.
 
-k6 **smoke** runs on push/PR when `app/**` or `perf/k6/**` change.  
+k6 **smoke** runs on push/PR when `app/`** or `perf/k6/**` change.  
 Load/spike: Actions → **k6 Performance** → Run workflow → choose scenario.
 
 ## Python API tests
@@ -277,6 +344,8 @@ python -m venv .venv
 pip install -r requirements.txt
 pytest
 ```
+
+
 
 ## Playwright E2E (Java)
 
@@ -295,6 +364,8 @@ cd tests-e2e/java
 # optional:
 ./gradlew test -DbaseUrl=http://localhost:8080
 ```
+
+
 
 ## Playwright E2E (Python)
 
@@ -318,6 +389,6 @@ pytest
 pytest --headed
 ```
 
-![Events](Events.png)
-![New event](New_event.png)
-![Event details](Event_details.png)
+Events
+New event
+Event details

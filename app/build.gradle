@@ -41,7 +41,8 @@ dependencies {
 	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
+	implementation 'org.springframework.kafka:spring-kafka'
+	testImplementation 'org.springframework.kafka:spring-kafka-test'
 	// Allure (no Gradle plugin — avoids deprecated adapter DSL)
 	testImplementation platform("io.qameta.allure:allure-bom:$allureVersion")
 	testImplementation 'io.qameta.allure:allure-junit5'
