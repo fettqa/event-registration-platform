@@ -1,0 +1,56 @@
+<div>POST to http://localhost:38807/api/events/bulk</div>
+
+    <h4>Body</h4>
+    <div>
+    <pre class="preformated-text">
+[
+    {
+        &quot;name&quot;: &quot;QA conf&quot;,
+        &quot;maxSeats&quot;: 5
+    },
+    {
+        &quot;name&quot;: &quot;QA conf&quot;,
+        &quot;maxSeats&quot;: 3
+    },
+    {
+        &quot;name&quot;: &quot;Automation&quot;,
+        &quot;maxSeats&quot;: 123
+    },
+    {
+        &quot;name&quot;: &quot;DEV conf&quot;,
+        &quot;maxSeats&quot;: 321
+    }
+]    </pre>
+    </div>
+
+    <h4>Headers</h4>
+    <div>
+            <div>Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsInVpZCI6MSwiaWF0IjoxNzg1NTA5MjQ0LCJleHAiOjE3ODU1OTU2NDR9.iDFR9ATsjJl5ljuL1RhonvKdI_NgVFYOu2k0yW_jybNnUw5nicHcJmy8FWq-HQhe</div>
+            <div>Accept: */*</div>
+            <div>Content-Type: application/json</div>
+    </div>
+
+
+
+    <h4>Curl</h4>
+    <div>
+        curl -v -X POST &#39;http://localhost:38807/api/events/bulk&#39; -H &#39;Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsInVpZCI6MSwiaWF0IjoxNzg1NTA5MjQ0LCJleHAiOjE3ODU1OTU2NDR9.iDFR9ATsjJl5ljuL1RhonvKdI_NgVFYOu2k0yW_jybNnUw5nicHcJmy8FWq-HQhe&#39; -H &#39;Accept: */*&#39; -H &#39;Content-Type: application/json&#39; -d &#39;[
+    {
+        &quot;name&quot;: &quot;QA conf&quot;,
+        &quot;maxSeats&quot;: 5
+    },
+    {
+        &quot;name&quot;: &quot;QA conf&quot;,
+        &quot;maxSeats&quot;: 3
+    },
+    {
+        &quot;name&quot;: &quot;Automation&quot;,
+        &quot;maxSeats&quot;: 123
+    },
+    {
+        &quot;name&quot;: &quot;DEV conf&quot;,
+        &quot;maxSeats&quot;: 321
+    }
+]&#39;
+    </div>
+
