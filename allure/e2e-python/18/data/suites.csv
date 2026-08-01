@@ -1,0 +1,5 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Sat Aug 01 05:33:14 UTC 2026","Sat Aug 01 05:33:15 UTC 2026","773","functional","test_register_duplicate_email","","","","test_register_same_email_twice_shows_error[chromium]",""
+"passed","Sat Aug 01 05:33:12 UTC 2026","Sat Aug 01 05:33:13 UTC 2026","1345","functional","test_create_event_and_register","","","","test_create_event_and_register_shows_success[chromium]",""
+"passed","Sat Aug 01 05:33:13 UTC 2026","Sat Aug 01 05:33:14 UTC 2026","609","functional","test_create_event_validation","","","","test_create_event_with_empty_name_stays_on_form[chromium]",""
+"passed","Sat Aug 01 05:33:15 UTC 2026","Sat Aug 01 05:33:15 UTC 2026","417","functional","test_register_user","","","","test_register_shows_user_in_header[chromium]",""
