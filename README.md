@@ -93,6 +93,8 @@ Swagger: Authorize → bearerAuth → insert token
 - `tests-e2e/java/` — Playwright E2E (Java)
 - `tests-e2e/python/` — Playwright E2E (Python)
 - `perf/k6/` — k6 load tests (smoke / load / spike)
+- `android/` — Android client (Kotlin; см. [`android/README.md`](android/README.md))
+- `docs/` — step-by-step walkthroughs (см. [`docs/README.md`](docs/README.md))
 
 
 
@@ -120,9 +122,23 @@ cd tests-e2e/python
 # activate venv (.\.venv\Scripts\activate), then:
 pytest
 
+# Android (emulator): bootRun + adb reverse, then open android/ in Android Studio
+#   adb reverse tcp:8080 tcp:8080
+#   cd android && ./gradlew assembleDebug
+# Details / Render BASE_URL: android/README.md
+
 Swagger: http://localhost:8080/swagger-ui.html  
 Health: http://localhost:8080/actuator/health
 ```
+
+## Android
+
+Клиент в [`android/`](android/README.md): список Events для гостя, login/register, create event, registrations, delete по ролям, Admin Panel, поиск.
+
+| Стенд | `BASE_URL` в `android/app/build.gradle.kts` |
+|-------|-----------------------------------------------|
+| Local + emulator | `http://127.0.0.1:8080/` + `adb reverse tcp:8080 tcp:8080` |
+| Render | `https://event-registration-jesq.onrender.com/` (без reverse) |
 
 
 

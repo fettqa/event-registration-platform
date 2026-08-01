@@ -42,6 +42,14 @@ tests-e2e/python/.pytest_cache/
 tests-e2e/python/test-results/
 tests-e2e/python/playwright-report/
 
+# Android
+android/local.properties
+android/.cxx/
+android/captures/
+android/*.apk
+android/*.ap_
+android/*.aab
+
 # k6
 perf/k6/results/*
 !perf/k6/results/.gitkeep
