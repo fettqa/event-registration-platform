@@ -94,6 +94,7 @@ Swagger: Authorize → bearerAuth → insert token
 - `tests-e2e/python/` — Playwright E2E (Python)
 - `perf/k6/` — k6 load tests (smoke / load / spike)
 - `android/` — Android client (Kotlin; см. [`android/README.md`](android/README.md))
+- `tests-mobile/` — mobile UI E2E (Maestro / Appium Kotlin / Appium Python; см. [`tests-mobile/README.md`](tests-mobile/README.md))
 - `docs/` — step-by-step walkthroughs (см. [`docs/README.md`](docs/README.md))
 
 
@@ -126,6 +127,8 @@ pytest
 #   adb reverse tcp:8080 tcp:8080
 #   cd android && ./gradlew assembleDebug
 # Details / Render BASE_URL: android/README.md
+# Mobile UI E2E (Maestro / Appium): tests-mobile/README.md
+#   emulator (-list-avds / -avd Pixel_8) → bootRun → adb reverse → APK → Appium → pytest / gradlew test
 
 Swagger: http://localhost:8080/swagger-ui.html  
 Health: http://localhost:8080/actuator/health
@@ -140,7 +143,7 @@ Health: http://localhost:8080/actuator/health
 | Local + emulator | `http://127.0.0.1:8080/` + `adb reverse tcp:8080 tcp:8080` |
 | Render | `https://event-registration-jesq.onrender.com/` (без reverse) |
 
-
+Mobile QA (Maestro / Appium): [`tests-mobile/README.md`](tests-mobile/README.md).
 
 ## API (REST)
 

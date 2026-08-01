@@ -196,8 +196,9 @@ class EventDetailActivity : AppCompatActivity() {
             val alreadyRegistered = allRegistrations.any {
                 it.email.equals(me, ignoreCase = true)
             }
+            // Keep enabled so a second tap can surface API 409 (duplicate) in UI / E2E.
             binding.registerButton.visibility = View.VISIBLE
-            binding.registerButton.isEnabled = !alreadyRegistered
+            binding.registerButton.isEnabled = true
             if (alreadyRegistered) {
                 binding.statusText.visibility = View.VISIBLE
                 binding.statusText.text = getString(R.string.registration_success)

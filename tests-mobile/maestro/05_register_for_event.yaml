@@ -1,0 +1,26 @@
+appId: com.fettqa.events.android
+name: Admin creates event and registers successfully
+---
+- launchApp:
+    clearState: true
+- runFlow: subflows/login_as_admin.yaml
+- tapOn:
+    id: createEventFab
+- assertVisible: "Create event"
+- tapOn:
+    id: nameInput
+- inputText: "Maestro Reg "
+- inputRandomNumber:
+    length: 6
+- tapOn:
+    id: seatsInput
+- inputText: "25"
+- tapOn:
+    id: submitButton
+- assertVisible:
+    id: registerButton
+- tapOn:
+    id: registerButton
+- assertVisible: "You are registered"
+- assertVisible:
+    id: registrationsRecycler

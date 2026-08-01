@@ -137,7 +137,8 @@ cd android
 ./gradlew connectedDebugAndroidTest    # Espresso smoke (emulator Online)
 ```
 
-QA Automation (Maestro / Appium scaffold): [`tests-mobile/`](../tests-mobile/README.md).
+QA Automation (Maestro + Appium Kotlin/Python): see [`tests-mobile/README.md`](../tests-mobile/README.md)  
+(run steps: emulator → `bootRun` → `adb reverse` → APK → Appium with `ANDROID_HOME` → `pytest` / `./gradlew test`).
 
 ---
 

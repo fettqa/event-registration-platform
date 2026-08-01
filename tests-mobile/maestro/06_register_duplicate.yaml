@@ -1,0 +1,28 @@
+appId: com.fettqa.events.android
+name: Duplicate registration shows error
+---
+- launchApp:
+    clearState: true
+- runFlow: subflows/login_as_admin.yaml
+- tapOn:
+    id: createEventFab
+- tapOn:
+    id: nameInput
+- inputText: "Maestro Dup "
+- inputRandomNumber:
+    length: 6
+- tapOn:
+    id: seatsInput
+- inputText: "10"
+- tapOn:
+    id: submitButton
+- assertVisible:
+    id: registerButton
+- tapOn:
+    id: registerButton
+- assertVisible: "You are registered"
+# Second attempt → API 409 → errorText
+- tapOn:
+    id: registerButton
+- assertVisible:
+    id: errorText
