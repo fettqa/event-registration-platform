@@ -91,7 +91,7 @@ Swagger: Authorize → bearerAuth → insert token
 - `app/` — Spring Boot API (Java 21) + Thymeleaf UI
 - `tests-api/` — Python REST tests (pytest + httpx)
 - `tests-e2e/java/` — Playwright E2E (Java)
-- `tests-e2e/python/` — Playwright E2E (Python)
+- `tests-e2e/python/` — Playwright E2E (Python) + pytest-bdd
 - `perf/k6/` — k6 load tests (smoke / load / spike)
 
 
@@ -115,10 +115,12 @@ cd tests-api && pytest
 k6 run perf/k6/smoke.js
 # Playwright E2E (app must be running)
 cd tests-e2e/java && ./gradlew installPlaywright && ./gradlew test
-# Playwright E2E Python (app must be running)
+# Playwright E2E Python (app must be running; Python 3.12)
 cd tests-e2e/python
-# activate venv (.\.venv\Scripts\activate), then:
+# py -3.12 -m venv .venv && .\.venv\Scripts\activate
+# pip install -r requirements.txt && playwright install chromium
 pytest
+# pytest functional/test_bdd.py   # Gherkin only
 
 Swagger: http://localhost:8080/swagger-ui.html  
 Health: http://localhost:8080/actuator/health
@@ -369,7 +371,8 @@ cd tests-e2e/java
 
 ## Playwright E2E (Python)
 
-Use **Python 3.12** (3.14 may fail installing `greenlet` wheels on Windows).
+Use **Python 3.12** (3.14 may fail installing `greenlet` wheels on Windows).  
+Gherkin: `features/` + `support/bdd_steps.py` (loaded via `pytest_plugins` in `conftest.py`). Details: [`docs/tests-e2e-python-walkthrough.md`](docs/tests-e2e-python-walkthrough.md).
 
 ```bash
 # 1. Start app
@@ -385,6 +388,7 @@ playwright install chromium
 
 # 3. Run
 pytest
+pytest functional/test_bdd.py   # Gherkin / pytest-bdd
 # headed:
 pytest --headed
 ```
