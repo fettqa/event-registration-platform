@@ -1,0 +1,7 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Sat Aug 01 05:37:41 UTC 2026","Sat Aug 01 05:37:47 UTC 2026","6478","tests","test_login","","","","test_login_bad_password",""
+"passed","Sat Aug 01 05:37:56 UTC 2026","Sat Aug 01 05:38:11 UTC 2026","15241","tests","test_register_for_event","","","","test_register_for_event_success",""
+"passed","Sat Aug 01 05:37:27 UTC 2026","Sat Aug 01 05:37:35 UTC 2026","7420","tests","test_login","","","","test_login_admin",""
+"passed","Sat Aug 01 05:38:44 UTC 2026","Sat Aug 01 05:39:07 UTC 2026","23116","tests","test_register_user","","","","test_register_user",""
+"passed","Sat Aug 01 05:37:16 UTC 2026","Sat Aug 01 05:37:18 UTC 2026","2407","tests","test_guest","","","","test_guest_sees_events",""
+"passed","Sat Aug 01 05:38:19 UTC 2026","Sat Aug 01 05:38:36 UTC 2026","16687","tests","test_register_for_event","","","","test_register_duplicate_shows_error",""
