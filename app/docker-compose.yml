@@ -34,6 +34,13 @@ services:
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_NUM_PARTITIONS: 3
 
+  mailpit:
+    image: axllent/mailpit:v1.22.3
+    container_name: mailpit
+    ports:
+      - "1025:1025"   # SMTP
+      - "8025:8025"   # UI http://localhost:8025
+
 volumes:
   postgres_data:
 
