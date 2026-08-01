@@ -241,6 +241,8 @@ docker compose up -d kafka mailpit
 
 Without profile `mail`, Kafka still works; the listener only logs.
 
+**Tests:** Java `RegistrationMailKafkaApiTest` (GreenMail, in `./gradlew test`); Python API `@pytest.mark.mail` + E2E Playwright (Mailpit). Locally for Python/E2E mail tests use `kafka,mail` + Mailpit as above.
+
 
 
 ## Run tests (H2, no Docker required)

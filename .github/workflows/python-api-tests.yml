@@ -46,9 +46,9 @@ jobs:
         working-directory: app
         run: ./gradlew bootJar -x test
 
-      - name: Start Kafka
+      - name: Start Kafka and Mailpit
         working-directory: app
-        run: docker compose up -d kafka
+        run: docker compose up -d kafka mailpit
 
       - name: Wait for Kafka
         run: |
@@ -64,10 +64,24 @@ jobs:
           docker compose -f app/docker-compose.yml logs kafka || docker logs kafka || true
           exit 1
 
+      - name: Wait for Mailpit
+        run: |
+          for i in {1..30}; do
+            if curl -sf http://localhost:8025/api/v1/info >/dev/null; then
+              echo "Mailpit is up."
+              exit 0
+            fi
+            echo "Waiting for Mailpit... ($i)"
+            sleep 1
+          done
+          echo "Mailpit failed to start."
+          docker compose -f app/docker-compose.yml logs mailpit || true
+          exit 1
+
       - name: Start Spring Boot application
         working-directory: app
         env:
-          SPRING_PROFILES_ACTIVE: kafka
+          SPRING_PROFILES_ACTIVE: kafka,mail
           KAFKA_BOOTSTRAP_SERVERS: localhost:9092
         run: |
           JAR=$(ls build/libs/*SNAPSHOT.jar | head -n 1)

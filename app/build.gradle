@@ -44,6 +44,7 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	implementation 'org.springframework.kafka:spring-kafka'
 	testImplementation 'org.springframework.kafka:spring-kafka-test'
+	testImplementation 'com.icegreen:greenmail-junit5:2.1.3'
 	testImplementation platform("io.qameta.allure:allure-bom:$allureVersion")
 	testImplementation 'io.qameta.allure:allure-junit5'
 	testImplementation 'io.qameta.allure:allure-rest-assured'

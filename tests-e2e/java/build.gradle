@@ -47,6 +47,9 @@ tasks.register('installPlaywright', JavaExec) {
     classpath = sourceSets.test.runtimeClasspath
     mainClass = 'com.microsoft.playwright.CLI'
     args = ['install', 'chromium']
+    // Default CDN timeout is 30s — too short on slow links (~140MB Chromium zip).
+    environment 'PLAYWRIGHT_DOWNLOAD_CONNECTION_TIMEOUT',
+            System.getenv('PLAYWRIGHT_DOWNLOAD_CONNECTION_TIMEOUT') ?: '600000'
 }
 
 tasks.named('test') {
