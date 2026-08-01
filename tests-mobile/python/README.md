@@ -93,7 +93,8 @@ pytest
 | `ANDROID_APK` | `../../android/app/build/outputs/apk/debug/app-debug.apk` |
 | `APPIUM_WAIT` | `15` (seconds) |
 
-Allure: `allure serve allure-results`
+Allure: `allure serve allure-results`  
+CI publishes HTML to GitHub Pages under `allure/mobile-python/<run_number>/`.
 
 ## Troubleshooting
 

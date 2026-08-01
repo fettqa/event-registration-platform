@@ -129,6 +129,7 @@ pytest
 # Details / Render BASE_URL: android/README.md
 # Mobile UI E2E (Maestro / Appium): tests-mobile/README.md
 #   emulator (-list-avds / -avd Pixel_8) → bootRun → adb reverse → APK → Appium → pytest / gradlew test
+# CI: mobile-maestro.yml / mobile-appium-python.yml / mobile-appium-kotlin.yml
 
 Swagger: http://localhost:8080/swagger-ui.html  
 Health: http://localhost:8080/actuator/health

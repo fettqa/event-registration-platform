@@ -189,6 +189,27 @@ cd tests-mobile\kotlin
 
 ---
 
+## CI (GitHub Actions)
+
+Separate workflow per suite (each can run independently / in parallel):
+
+| Suite | Workflow | Paths that trigger |
+|-------|----------|--------------------|
+| Maestro | [`.github/workflows/mobile-maestro.yml`](../.github/workflows/mobile-maestro.yml) | `tests-mobile/maestro/**` (+ `app/`, `android/`) |
+| Appium Python | [`.github/workflows/mobile-appium-python.yml`](../.github/workflows/mobile-appium-python.yml) | `tests-mobile/python/**` (+ `app/`, `android/`) |
+| Appium Kotlin | [`.github/workflows/mobile-appium-kotlin.yml`](../.github/workflows/mobile-appium-kotlin.yml) | `tests-mobile/kotlin/**` (+ `app/`, `android/`) |
+
+Each job: build API + APK → start API → (Appium if needed) → emulator → `scripts/ci-run-suite.sh <maestro|python|kotlin>`.
+
+Appium Python / Kotlin also generate Allure HTML and publish to GitHub Pages (same pattern as E2E):
+
+- `…/allure/mobile-python/<run_number>/`
+- `…/allure/mobile-kotlin/<run_number>/`
+
+Manual run: **Actions** → pick workflow → **Run workflow**.
+
+---
+
 ## What stays out of mobile UI
 
 Domain matrix (full 409 / concurrency / role matrix) → `tests-api` / Rest Assured in `app`.  

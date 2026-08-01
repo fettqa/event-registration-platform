@@ -99,4 +99,14 @@ Default APK (from this module): `../../android/app/build/outputs/apk/debug/app-d
 | `Unknown AVD name […]` | `emulator -list-avds` → exact name (e.g. `Pixel_8`) |
 | App cannot reach API | `bootRun` + `adb reverse tcp:8080 tcp:8080` |
 
+## Allure
+
+Results: `build/allure-results` (after `./gradlew test`).
+
+```bash
+allure serve build/allure-results
+```
+
+CI publishes HTML to GitHub Pages under `allure/mobile-kotlin/<run_number>/`.
+
 Parent overview: [`../README.md`](../README.md).
