@@ -70,6 +70,14 @@ Trailing slash is required for Retrofit.
 
 Local HTTP uses `android:usesCleartextTraffic="true"`. Render (HTTPS) does not need cleartext.
 
+### Fiddler / Charles (HTTPS)
+
+Android 7+ apps do **not** trust user-installed CAs by default → `CertPathValidatorException: Trust anchor…` when proxying HTTPS.
+
+Debug builds trust user CAs via `res/xml/network_security_config.xml` (`debug-overrides`). Also install the Fiddler/Charles root CA on the emulator.
+
+Without a proxy: clear Wi‑Fi / `adb` proxy — Render HTTPS works with system CAs only.
+
 ---
 
 ### Local backend
