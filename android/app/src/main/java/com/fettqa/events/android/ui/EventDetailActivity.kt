@@ -11,6 +11,7 @@ import com.fettqa.events.android.data.errorMessage
 import com.fettqa.events.android.databinding.ActivityEventDetailBinding
 import com.fettqa.events.android.model.EventRegistrationResponse
 import com.fettqa.events.android.model.EventResponse
+import com.fettqa.events.android.model.PageResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,8 +21,11 @@ class EventDetailActivity : BaseActivity() {
     private lateinit var registrationsAdapter: RegistrationAdapter
     private var eventId: Long = -1L
     private var currentEvent: EventResponse? = null
-    private var allRegistrations: List<EventRegistrationResponse> = emptyList()
     private var registrationsQuery: String = ""
+    private var registrationsPage: Int = 0
+    private var registrationsTotalPages: Int = 0
+    private var registrationsTotalCount: Int = 0
+    private var pageEmails: Set<String> = emptySet()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,18 +58,35 @@ class EventDetailActivity : BaseActivity() {
         }
         binding.deleteEventButton.setOnClickListener { deleteEvent() }
 
-        binding.registrationsSearchButton.setOnClickListener { applyRegistrationsFilter() }
+        binding.registrationsSearchButton.setOnClickListener {
+            registrationsPage = 0
+            loadRegistrations()
+        }
         binding.registrationsClearButton.setOnClickListener {
             binding.registrationsSearchInput.setText("")
             registrationsQuery = ""
-            applyRegistrationsFilter()
+            registrationsPage = 0
+            loadRegistrations()
         }
         binding.registrationsSearchInput.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                applyRegistrationsFilter()
+                registrationsPage = 0
+                loadRegistrations()
                 true
             } else {
                 false
+            }
+        }
+        binding.registrationsPreviousButton.setOnClickListener {
+            if (registrationsPage > 0) {
+                registrationsPage--
+                loadRegistrations()
+            }
+        }
+        binding.registrationsNextButton.setOnClickListener {
+            if (registrationsPage + 1 < registrationsTotalPages) {
+                registrationsPage++
+                loadRegistrations()
             }
         }
 
@@ -124,16 +145,21 @@ class EventDetailActivity : BaseActivity() {
     }
 
     private fun loadRegistrations() {
-        AppServices.api(this).eventApi.listRegistrations(eventId)
-            .enqueue(object : Callback<List<EventRegistrationResponse>> {
+        registrationsQuery = binding.registrationsSearchInput.text?.toString()?.trim().orEmpty()
+        binding.registrationsClearButton.visibility =
+            if (registrationsQuery.isNotEmpty()) View.VISIBLE else View.GONE
+
+        val q = registrationsQuery.ifBlank { null }
+        AppServices.api(this).eventApi
+            .searchRegistrations(eventId, page = registrationsPage, size = PAGE_SIZE, q = q)
+            .enqueue(object : Callback<PageResponse<EventRegistrationResponse>> {
                 override fun onResponse(
-                    call: Call<List<EventRegistrationResponse>>,
-                    response: Response<List<EventRegistrationResponse>>,
+                    call: Call<PageResponse<EventRegistrationResponse>>,
+                    response: Response<PageResponse<EventRegistrationResponse>>,
                 ) {
                     setLoading(false)
                     if (response.isSuccessful) {
-                        allRegistrations = response.body().orEmpty()
-                        applyRegistrationsFilter()
+                        bindRegistrationsPage(response.body() ?: PageResponse())
                         currentEvent?.let { updateSeatsLeft(it) }
                         bindActions()
                     } else {
@@ -141,28 +167,40 @@ class EventDetailActivity : BaseActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<List<EventRegistrationResponse>>, t: Throwable) {
+                override fun onFailure(
+                    call: Call<PageResponse<EventRegistrationResponse>>,
+                    t: Throwable,
+                ) {
                     setLoading(false)
                     showError(t.message ?: getString(R.string.error_generic))
                 }
             })
     }
 
-    private fun applyRegistrationsFilter() {
-        registrationsQuery = binding.registrationsSearchInput.text?.toString()?.trim().orEmpty()
-        binding.registrationsClearButton.visibility =
-            if (registrationsQuery.isNotEmpty()) View.VISIBLE else View.GONE
-
-        val filtered = if (registrationsQuery.isEmpty()) {
-            allRegistrations
-        } else {
-            allRegistrations.filter {
-                it.fullName.orEmpty().contains(registrationsQuery, ignoreCase = true)
-            }
+    private fun bindRegistrationsPage(page: PageResponse<EventRegistrationResponse>) {
+        registrationsPage = page.number
+        registrationsTotalPages = page.totalPages
+        if (registrationsQuery.isEmpty()) {
+            registrationsTotalCount = page.totalElements.toInt()
         }
-        registrationsAdapter.submit(filtered)
+        pageEmails = page.content.mapNotNull { it.email?.lowercase() }.toSet()
+        registrationsAdapter.submit(page.content)
         binding.emptyRegistrations.visibility =
-            if (filtered.isEmpty()) View.VISIBLE else View.GONE
+            if (page.content.isEmpty()) View.VISIBLE else View.GONE
+
+        val showPager = page.totalPages > 1
+        binding.registrationsPaginationBar.visibility =
+            if (showPager) View.VISIBLE else View.GONE
+        if (showPager) {
+            binding.registrationsPageInfo.text = getString(
+                R.string.page_info,
+                page.number + 1,
+                page.totalPages,
+                page.totalElements.toInt(),
+            )
+            binding.registrationsPreviousButton.isEnabled = !page.first
+            binding.registrationsNextButton.isEnabled = !page.last
+        }
     }
 
     private fun bindEvent(event: EventResponse) {
@@ -175,7 +213,7 @@ class EventDetailActivity : BaseActivity() {
     }
 
     private fun updateSeatsLeft(event: EventResponse) {
-        val left = (event.maxSeats - allRegistrations.size).coerceAtLeast(0)
+        val left = (event.maxSeats - registrationsTotalCount).coerceAtLeast(0)
         binding.seatsLeft.text = getString(R.string.seats_left, left)
     }
 
@@ -191,17 +229,15 @@ class EventDetailActivity : BaseActivity() {
             binding.deleteEventButton.isEnabled = false
         } else {
             binding.loginToRegisterButton.visibility = View.GONE
-            val me = session.effectiveEmail()
-            val alreadyRegistered = allRegistrations.any {
-                it.email.equals(me, ignoreCase = true)
-            }
+            val me = session.effectiveEmail()?.lowercase()
+            val alreadyRegistered = me != null && pageEmails.contains(me)
             // Keep enabled so a second tap can surface API 409 (duplicate) in UI / E2E.
             binding.registerButton.visibility = View.VISIBLE
             binding.registerButton.isEnabled = true
             if (alreadyRegistered) {
                 binding.statusText.visibility = View.VISIBLE
                 binding.statusText.text = getString(R.string.registration_success)
-            } else {
+            } else if (binding.statusText.text != getString(R.string.registration_success)) {
                 binding.statusText.visibility = View.GONE
             }
 
@@ -229,6 +265,7 @@ class EventDetailActivity : BaseActivity() {
                     if (response.isSuccessful) {
                         binding.statusText.visibility = View.VISIBLE
                         binding.statusText.text = getString(R.string.registration_success)
+                        registrationsPage = 0
                         loadRegistrations()
                     } else {
                         showError(response.errorMessage(AppServices.api(this@EventDetailActivity).gsonPublic))
@@ -299,5 +336,6 @@ class EventDetailActivity : BaseActivity() {
 
     companion object {
         const val EXTRA_EVENT_ID = "event_id"
+        private const val PAGE_SIZE = 10
     }
 }

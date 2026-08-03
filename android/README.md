@@ -12,10 +12,11 @@ Stack / QA mobile overview: [`docs/mobile-android-learning-guide.md`](../docs/mo
 | Feature | Who |
 |---------|-----|
 | Events list without login | guest |
-| Search Events by name (Search / Clear) | everyone |
+| Search Events by name (server-side, Search / Clear) | everyone |
+| Pagination on Events (Previous / Next, page size 10) | everyone |
 | Login / Register → JWT + fullName, email, role in header | — |
 | Create Event (FAB) | `ADMIN`, `SUPER_USER` |
-| Detail: seats left, registrations list, search by name | everyone (list is public) |
+| Detail: seats left, registrations list, search + pagination | everyone (list is public) |
 | Register for event | authenticated |
 | Delete registration | `ADMIN`; `SUPER_USER` on own event; `USER` — own registration only |
 | Delete event | `ADMIN`; `SUPER_USER` — own event only |

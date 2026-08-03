@@ -37,6 +37,9 @@
     <string name="clear">Clear</string>
     <string name="search_events_hint">Search by event name</string>
     <string name="search_registrations_hint">Search by registrant name</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="page_info">Page %1$d of %2$d (%3$d total)</string>
     <string-array name="assignable_roles">
         <item>USER</item>
         <item>SUPER_USER</item>

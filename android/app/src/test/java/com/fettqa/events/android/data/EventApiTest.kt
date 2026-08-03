@@ -58,6 +58,44 @@ class EventApiTest {
     }
 
     @Test
+    fun search_events_parses_page_json() {
+        server.enqueue(
+            MockResponse()
+                .setResponseCode(200)
+                .setBody(
+                    """
+                    {
+                      "content":[
+                        {
+                          "id":1,
+                          "name":"QA Meetup",
+                          "maxSeats":50,
+                          "createdById":1,
+                          "createdByEmail":"admin@example.com",
+                          "createdAt":"2026-01-01T10:00:00Z"
+                        }
+                      ],
+                      "totalElements":3,
+                      "totalPages":3,
+                      "number":0,
+                      "first":true,
+                      "last":false
+                    }
+                    """.trimIndent(),
+                ),
+        )
+
+        val response = api.eventApi.searchEvents(page = 0, size = 1, q = "QA").execute()
+        assertTrue(response.isSuccessful)
+        val page = response.body()!!
+        assertEquals(1, page.content.size)
+        assertEquals("QA Meetup", page.content[0].name)
+        assertEquals(3L, page.totalElements)
+        assertEquals(3, page.totalPages)
+        assertEquals("/api/events?page=0&size=1&q=QA", server.takeRequest().path)
+    }
+
+    @Test
     fun get_event_by_id() {
         server.enqueue(
             MockResponse()

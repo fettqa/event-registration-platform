@@ -140,6 +140,39 @@
                     android:visibility="gone" />
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/registrationsPaginationBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="8dp"
+                android:visibility="gone">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/registrationsPreviousButton"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/previous" />
+
+                <TextView
+                    android:id="@+id/registrationsPageInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textAppearance="?attr/textAppearanceBody2" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/registrationsNextButton"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/next" />
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/emptyRegistrations"
                 android:layout_width="match_parent"
