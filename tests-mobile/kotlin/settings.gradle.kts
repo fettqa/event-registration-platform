@@ -5,4 +5,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "event-registration-mobile-appium"
+rootProject.name = "event-registration-mobile-kotlin"

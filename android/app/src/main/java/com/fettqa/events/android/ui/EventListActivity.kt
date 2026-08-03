@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fettqa.events.android.R
 import com.fettqa.events.android.data.AppServices
@@ -15,7 +14,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class EventListActivity : AppCompatActivity() {
+class EventListActivity : BaseActivity() {
     private lateinit var binding: ActivityEventListBinding
     private lateinit var adapter: EventAdapter
     private var allEvents: List<EventResponse> = emptyList()

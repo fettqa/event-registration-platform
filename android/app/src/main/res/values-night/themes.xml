@@ -8,5 +8,6 @@
         <item name="colorSecondaryVariant">@color/brand_secondary</item>
         <item name="colorOnSecondary">@color/white</item>
         <item name="android:statusBarColor">@color/brand_primary_dark</item>
+        <item name="android:navigationBarColor">@color/surface</item>
     </style>
 </resources>

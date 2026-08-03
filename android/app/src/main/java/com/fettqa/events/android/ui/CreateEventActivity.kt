@@ -2,7 +2,6 @@ package com.fettqa.events.android.ui
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import com.fettqa.events.android.R
 import com.fettqa.events.android.data.AppServices
 import com.fettqa.events.android.data.errorMessage
@@ -13,7 +12,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CreateEventActivity : AppCompatActivity() {
+class CreateEventActivity : BaseActivity() {
     private lateinit var binding: ActivityCreateEventBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

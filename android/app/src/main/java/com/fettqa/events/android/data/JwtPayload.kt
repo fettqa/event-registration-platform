@@ -1,6 +1,6 @@
 package com.fettqa.events.android.data
 
-import java.util.Base64
+import okio.ByteString.Companion.decodeBase64
 
 /** Read email (sub) and role from JWT payload without verifying signature (UI only). */
 object JwtPayload {
@@ -13,13 +13,11 @@ object JwtPayload {
         return try {
             val parts = token.split(".")
             if (parts.size < 2) return null
-            var payload = parts[1]
+            var payload = parts[1].replace('-', '+').replace('_', '/')
             val pad = (4 - payload.length % 4) % 4
             if (pad > 0) payload += "=".repeat(pad)
-            val json = String(
-                Base64.getUrlDecoder().decode(payload),
-                Charsets.UTF_8,
-            )
+            val bytes = payload.decodeBase64()?.toByteArray() ?: return null
+            val json = String(bytes, Charsets.UTF_8)
             val match = Regex(""""$name"\s*:\s*"([^"]+)"""").find(json)
             match?.groupValues?.get(1)?.takeIf { it.isNotBlank() }
         } catch (_: Exception) {

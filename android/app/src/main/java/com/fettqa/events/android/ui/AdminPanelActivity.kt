@@ -2,7 +2,6 @@ package com.fettqa.events.android.ui
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fettqa.events.android.R
 import com.fettqa.events.android.data.AppServices
@@ -14,7 +13,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AdminPanelActivity : AppCompatActivity() {
+class AdminPanelActivity : BaseActivity() {
     private lateinit var binding: ActivityAdminPanelBinding
     private lateinit var adapter: AdminUserAdapter
 

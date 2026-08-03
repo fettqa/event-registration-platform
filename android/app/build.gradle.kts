@@ -20,8 +20,8 @@ android {
         // Emulator: use with `adb reverse tcp:8080 tcp:8080` (reliable on Windows).
         // Alternative without reverse: http://10.0.2.2:8080/
         // Physical device: http://<your-PC-LAN-IP>:8080/
-        //buildConfigField("String", "BASE_URL", "\"http://127.0.0.1:8080/\"")
-        buildConfigField("String", "BASE_URL", "\"https://event-registration-jesq.onrender.com/\"")
+        buildConfigField("String", "BASE_URL", "\"http://127.0.0.1:8080/\"")
+        //buildConfigField("String", "BASE_URL", "\"https://event-registration-jesq.onrender.com/\"")
     }
 
     buildTypes {
