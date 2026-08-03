@@ -90,9 +90,12 @@ Swagger: Authorize → bearerAuth → insert token
 
 - `app/` — Spring Boot API (Java 21) + Thymeleaf UI
 - `tests-api/` — Python REST tests (pytest + httpx)
-- `tests-e2e/java/` — Playwright E2E (Java)
-- `tests-e2e/python/` — Playwright E2E (Python)
+- `tests-e2e/java/` — Playwright E2E (Java; desktop + `mobileChromeTest`)
+- `tests-e2e/python/` — Playwright E2E (Python; desktop + `mobile_chrome/` smoke)
 - `perf/k6/` — k6 load tests (smoke / load / spike)
+- `android/` — Android client (Kotlin; см. [`android/README.md`](android/README.md))
+- `tests-mobile/` — mobile UI E2E (Maestro / Appium Kotlin / Appium Python; см. [`tests-mobile/README.md`](tests-mobile/README.md))
+- `docs/` — step-by-step walkthroughs (см. [`docs/README.md`](docs/README.md))
 
 
 
@@ -115,16 +118,36 @@ cd tests-api && pytest
 k6 run perf/k6/smoke.js
 # Playwright E2E (app must be running)
 cd tests-e2e/java && ./gradlew installPlaywright && ./gradlew test
+# Mobile Chrome smoke: ./gradlew mobileChromeTest
 # Playwright E2E Python (app must be running)
 cd tests-e2e/python
 # activate venv (.\.venv\Scripts\activate), then:
 pytest
+# Mobile Chrome smoke (web):
+pytest mobile_chrome -m smoke
+
+# Android (emulator): bootRun + adb reverse, then open android/ in Android Studio
+#   adb reverse tcp:8080 tcp:8080
+#   cd android && ./gradlew assembleDebug
+# Details / Render BASE_URL: android/README.md
+# Mobile UI E2E (Maestro / Appium): tests-mobile/README.md
+#   emulator (-list-avds / -avd Pixel_8) → bootRun → adb reverse → APK → Appium → pytest / gradlew test
+# CI: mobile-maestro.yml / mobile-appium-python.yml / mobile-appium-kotlin.yml
 
 Swagger: http://localhost:8080/swagger-ui.html  
 Health: http://localhost:8080/actuator/health
 ```
 
+## Android
 
+Клиент в [`android/`](android/README.md): список Events для гостя, login/register, create event, registrations, delete по ролям, Admin Panel, поиск.
+
+| Стенд | `BASE_URL` в `android/app/build.gradle.kts` |
+|-------|-----------------------------------------------|
+| Local + emulator | `http://127.0.0.1:8080/` + `adb reverse tcp:8080 tcp:8080` |
+| Render | `https://event-registration-jesq.onrender.com/` (без reverse) |
+
+Mobile QA (Maestro / Appium): [`tests-mobile/README.md`](tests-mobile/README.md).
 
 ## API (REST)
 
@@ -132,11 +155,12 @@ Health: http://localhost:8080/actuator/health
 | Method                                                                                  | Path                                              | Notes                             | Access                                           |
 | --------------------------------------------------------------------------------------- | ------------------------------------------------- | --------------------------------- | ------------------------------------------------ |
 | POST                                                                                    | `/api/events`                                     | create                            | Admin                                            |
-| GET                                                                                     | `/api/events`                                     | list / filter                     | Public                                           |
+| GET                                                                                     | `/api/events`                                     | list all (array); with `?page=&size=&q=` → paged search | Public                                           |
 | GET                                                                                     | `/api/events/{id}`                                | by id                             | Public                                           |
 | PATCH                                                                                   | `/api/events/{id}`                                | update                            | Admin                                            |
 | DELETE                                                                                  | `/api/events/{id}`                                | delete                            | Admin                                            |
 | POST                                                                                    | `/api/events/{id}/registrations`                  | register current user (201 / 409) | Authenticated                                    |
+| GET                                                                                     | `/api/events/{id}/registrations`                  | list; with `?page=&size=&q=` → paged | Public                                        |
 | DELETE                                                                                  | `/api/events/{id}/registrations/{registrationId}` | delete registration               | Admin: any; Super User: on own events; User: own |
 | DELETE                                                                                  | `/api/events/{id}`                                | delete event                      | Admin: any; Super User: own events               |
 | Swagger: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) |                                                   |                                   |                                                  |
@@ -359,10 +383,13 @@ cd app && ./gradlew bootRun
 cd tests-e2e/java
 ./gradlew installPlaywright
 
-# 3. Run E2E
+# 3. Desktop E2E
 ./gradlew test
 # optional:
 ./gradlew test -DbaseUrl=http://localhost:8080
+
+# Mobile Chrome smoke (Pixel 7 device profile — web DOM, not Appium)
+./gradlew mobileChromeTest
 ```
 
 
@@ -383,11 +410,17 @@ py -3.12 -m venv .venv
 pip install -r requirements.txt
 playwright install chromium
 
-# 3. Run
+# 3. Run desktop E2E
 pytest
+
+# Mobile Chrome smoke (Pixel 7 device profile — web DOM, not Appium)
+pytest mobile_chrome -m smoke
+
 # headed:
 pytest --headed
 ```
+
+Details: [`tests-e2e/python/README.md`](tests-e2e/python/README.md).
 
 Events
 New event

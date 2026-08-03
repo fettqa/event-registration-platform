@@ -1,0 +1,14 @@
+appId: com.fettqa.events.android
+name: Guest sees Events list
+---
+- launchApp:
+    clearState: true
+- assertVisible: "Events"
+- assertVisible:
+    id: headerLoginButton
+- assertVisible:
+    id: headerRegisterButton
+- assertVisible:
+    id: eventsSearchInput
+- assertVisible:
+    id: eventsRecycler

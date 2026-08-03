@@ -4,6 +4,7 @@ import com.fettqa.events.e2e.preconditions.Precondition;
 import com.microsoft.playwright.APIRequest;
 import com.microsoft.playwright.APIRequestContext;
 import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
@@ -23,6 +24,7 @@ public abstract class PlaywrightBaseTest<T extends Precondition> {
   protected static Browser browser;
   protected static APIRequestContext api;
 
+  protected BrowserContext context;
   protected Page page;
   protected T precondition;
 
@@ -51,9 +53,21 @@ public abstract class PlaywrightBaseTest<T extends Precondition> {
     }
   }
 
+  /** Override for device emulation (e.g. Mobile Chrome / Pixel 7). */
+  protected Browser.NewContextOptions newContextOptions() {
+    return null;
+  }
+
   @BeforeEach
   void openPage() {
-    page = browser.newPage();
+    Browser.NewContextOptions options = newContextOptions();
+    if (options != null) {
+      context = browser.newContext(options);
+      page = context.newPage();
+    } else {
+      context = null;
+      page = browser.newPage();
+    }
     precondition = createPreconditionInstance();
     precondition.setApi(api);
   }
@@ -84,6 +98,10 @@ public abstract class PlaywrightBaseTest<T extends Precondition> {
     if (page != null) {
       page.close();
       page = null;
+    }
+    if (context != null) {
+      context.close();
+      context = null;
     }
   }
 

@@ -233,6 +233,42 @@ public class EventControllerApiTest {
           .then()
           .statusCode(404);
     }
+
+    @Test
+    @Story("Search Events with Pagination")
+    void searchEvents_returnsPagedResult() {
+      createEvent("Alpha Summit", 10);
+      createEvent("Beta Meetup", 20);
+      createEvent("Alpha Workshop", 30);
+
+      given()
+          .filter(new AllureRestAssured())
+          .queryParam("page", 0)
+          .queryParam("size", 1)
+          .queryParam("q", "Alpha")
+          .when()
+          .get()
+          .then()
+          .statusCode(200)
+          .body("content.size()", equalTo(1))
+          .body("totalElements", equalTo(2))
+          .body("totalPages", equalTo(2))
+          .body("number", equalTo(0))
+          .body("content[0].name", equalTo("Alpha Workshop"));
+
+      given()
+          .filter(new AllureRestAssured())
+          .queryParam("page", 1)
+          .queryParam("size", 1)
+          .queryParam("q", "Alpha")
+          .when()
+          .get()
+          .then()
+          .statusCode(200)
+          .body("content.size()", equalTo(1))
+          .body("number", equalTo(1))
+          .body("content[0].name", equalTo("Alpha Summit"));
+    }
   }
 
   @Nested

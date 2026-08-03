@@ -1,0 +1,17 @@
+# Caller must already be on Events (guest) after launchApp clearState
+appId: com.fettqa.events.android
+---
+- tapOn:
+    id: headerLoginButton
+- assertVisible: "Sign in"
+- tapOn:
+    id: emailInput
+- inputText: "admin@example.com"
+- tapOn:
+    id: passwordInput
+- inputText: "admin123"
+- tapOn:
+    id: loginButton
+- assertVisible: "Events"
+- assertVisible: "admin@example.com"
+- assertVisible: "Role: ADMIN"

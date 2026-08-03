@@ -1,0 +1,25 @@
+appId: com.fettqa.events.android
+name: Register user → Events list as USER
+---
+- launchApp:
+    clearState: true
+- tapOn:
+    id: headerRegisterButton
+- assertVisible: "Create account"
+- tapOn:
+    id: fullNameInput
+- inputRandomPersonName
+- tapOn:
+    id: emailInput
+- inputRandomEmail
+- tapOn:
+    id: passwordInput
+- inputText: "secret12"
+- tapOn:
+    id: registerButton
+- assertVisible: "Events"
+- assertVisible: "Role: USER"
+- assertNotVisible:
+    id: headerAdminButton
+- assertNotVisible:
+    id: createEventFab

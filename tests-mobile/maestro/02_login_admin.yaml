@@ -1,0 +1,10 @@
+appId: com.fettqa.events.android
+name: Login admin → Events + Admin Panel
+---
+- launchApp:
+    clearState: true
+- runFlow: subflows/login_as_admin.yaml
+- assertVisible:
+    id: headerAdminButton
+- assertVisible:
+    id: createEventFab

@@ -7,6 +7,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,7 +49,7 @@ public class EventController {
     return eventService.getById(id);
   }
 
-  @GetMapping(params = "name")
+  @GetMapping(params = {"name", "!page"})
   @Operation(summary = "Find events by name", operationId = "getByName")
   public List<EventResponse> getByName(@RequestParam String name) {
     return eventService.getByName(name);
@@ -56,6 +59,16 @@ public class EventController {
   @SecurityRequirement(name = "bearerAuth")
   public EventResponse updateById(@PathVariable Long id, @Valid @RequestBody UpdateEventRequest request) {
     return eventService.updateById(id, request);
+  }
+
+  @GetMapping(params = {"page", "!name"})
+  @Operation(summary = "Search events with pagination", operationId = "searchEvents")
+  public Page<EventResponse> search(
+      @RequestParam(required = false) String q,
+      @RequestParam(defaultValue = "0") int page,
+      @RequestParam(defaultValue = "100") int size) {
+    return eventService.search(
+        q, PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id")));
   }
 
   @GetMapping
