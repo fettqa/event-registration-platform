@@ -1,0 +1,2 @@
+WARNING  kafka.coordinator.consumer:consumer.py:105 group_id is None: disabling auto-commit.
+WARNING  kafka.coordinator.assignors.range:range.py:52 No partition metadata for topic registration.created
