@@ -65,7 +65,7 @@ Swagger: Authorize → bearerAuth → insert token
 - Cannot register when seats are full (409)
 - Concurrent registration protected (row lock / race handling)
 - Remaining seats shown on event details page
-- Successful registration can emit Kafka event `registration.created` (profile `kafka`)
+- Successful registration can emit Kafka event `registration.created` (profile `kafka`); with `mail` → confirmation email via Mailpit SMTP
 
 
 ## Tech stack
@@ -110,6 +110,9 @@ open http://localhost:8080/
 cd app && ./gradlew test
 # App (H2 + Kafka)
 ./gradlew bootRun --args='--spring.profiles.active=kafka'
+# Kafka + Mailpit (mock inbox UI http://localhost:8025)
+#   docker compose up -d kafka mailpit
+#   ./gradlew bootRun --args='--spring.profiles.active=kafka,mail'
 # or Postgres + Kafka
 ./gradlew bootRun --args='--spring.profiles.active=docker,kafka'
 # Python API tests (app must be running)
@@ -244,6 +247,25 @@ Clean database (drop + recreate):
 docker compose down -v
 docker compose up -d
 ```
+
+## Kafka + Mailpit (registration emails)
+
+Mailpit is a **local mock SMTP + inbox UI** (letters do not go to Gmail). After a successful registration with profiles `kafka,mail`, open the UI and read the message.
+
+```bash
+cd app
+docker compose up -d kafka mailpit
+
+./gradlew bootRun --args='--spring.profiles.active=kafka,mail'
+```
+
+1. Register for an event (UI or API) as a user.  
+2. Open [http://localhost:8025](http://localhost:8025) — email `to` = registrant address.  
+3. SMTP for the app: `localhost:1025` (see `application-mail.yml`).
+
+Without profile `mail`, Kafka still works; the listener only logs.
+
+**Tests:** Java `RegistrationMailKafkaApiTest` (GreenMail, in `./gradlew test`); Python API `@pytest.mark.mail` + E2E Playwright (Mailpit). Locally for Python/E2E mail tests use `kafka,mail` + Mailpit as above.
 
 
 
