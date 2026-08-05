@@ -1,0 +1,83 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.fettqa.events'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+ext {
+    allureVersion = '2.29.1'
+    aspectJVersion = '1.9.22'
+}
+
+repositories {
+    maven { url = 'https://maven.aliyun.com/repository/central' }
+    maven { url = 'https://repo1.maven.org/maven2/' }
+    mavenCentral()
+}
+
+configurations {
+    agent {
+        canBeResolved = true
+        canBeConsumed = true
+    }
+}
+
+dependencies {
+    agent "org.aspectj:aspectjweaver:$aspectJVersion"
+
+    testImplementation 'io.rest-assured:rest-assured:5.5.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
+    testImplementation 'org.assertj:assertj-core:3.26.3'
+    testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.17.1'
+    testImplementation 'org.apache.kafka:kafka-clients:3.8.1'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation platform("io.qameta.allure:allure-bom:$allureVersion")
+    testImplementation 'io.qameta.allure:allure-junit5'
+    testImplementation 'io.qameta.allure:allure-rest-assured'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.compilerArgs.add('-parameters')
+}
+
+def configureApiTest = { Test task, Set<String> includedTags, Set<String> excludedTags ->
+    task.useJUnitPlatform {
+        if (!includedTags.isEmpty()) {
+            includeTags(includedTags as String[])
+        }
+        if (!excludedTags.isEmpty()) {
+            excludeTags(excludedTags as String[])
+        }
+    }
+    task.jvmArgs = ["-javaagent:${configurations.agent.singleFile}"]
+    task.systemProperty 'baseUrl',
+            System.getProperty('baseUrl', System.getenv().getOrDefault('BASE_URL', 'http://localhost:8080'))
+}
+
+tasks.named('test') {
+    configureApiTest(delegate as Test, [] as Set, ['kafka', 'mail'] as Set)
+}
+
+tasks.register('kafkaTest', Test) {
+    description = 'Runs black-box Kafka API tests.'
+    group = 'verification'
+    configureApiTest(delegate as Test, ['kafka'] as Set, [] as Set)
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+}
+
+tasks.register('mailTest', Test) {
+    description = 'Runs black-box Mailpit API tests.'
+    group = 'verification'
+    configureApiTest(delegate as Test, ['mail'] as Set, [] as Set)
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+}

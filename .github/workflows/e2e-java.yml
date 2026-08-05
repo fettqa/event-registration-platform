@@ -5,13 +5,13 @@ on:
     branches: [ main ]
     paths:
       - 'app/**'
-      - 'tests-e2e/java/**'
+      - 'tests-web/java/**'
       - '.github/workflows/e2e-java.yml'
   pull_request:
     branches: [ main ]
     paths:
       - 'app/**'
-      - 'tests-e2e/java/**'
+      - 'tests-web/java/**'
       - '.github/workflows/e2e-java.yml'
 
 jobs:
@@ -86,15 +86,15 @@ jobs:
           exit 1
 
       - name: Make e2e gradlew executable
-        working-directory: tests-e2e/java
+        working-directory: tests-web/java
         run: chmod +x gradlew
 
       - name: Install Playwright Chromium
-        working-directory: tests-e2e/java
+        working-directory: tests-web/java
         run: ./gradlew installPlaywright
 
       - name: Run E2E tests
-        working-directory: tests-e2e/java
+        working-directory: tests-web/java
         run: ./gradlew test -DbaseUrl=http://localhost:8080
 
       - name: Upload Allure results
@@ -102,12 +102,12 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: allure-results-e2e-java
-          path: tests-e2e/java/build/allure-results
+          path: tests-web/java/build/allure-results
           if-no-files-found: ignore
 
       - name: Generate Allure HTML report
         if: always()
-        working-directory: tests-e2e/java
+        working-directory: tests-web/java
         run: |
           if [ -d build/allure-results ] && [ "$(ls -A build/allure-results 2>/dev/null)" ]; then
             npm install -g allure-commandline@2.29.0
@@ -119,7 +119,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: allure-report-e2e-java
-          path: tests-e2e/java/build/allure-report
+          path: tests-web/java/build/allure-report
           if-no-files-found: ignore
 
       - name: Upload reports on failure
@@ -128,7 +128,7 @@ jobs:
         with:
           name: e2e-java-report
           path: |
-            tests-e2e/java/build/reports/tests/test
+            tests-web/java/build/reports/tests/test
             app/app.log
 
   publish-allure-report:

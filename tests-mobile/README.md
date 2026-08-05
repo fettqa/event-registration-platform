@@ -1,50 +1,93 @@
-# Mobile QA
+# Mobile QA Automation
 
-Black-box UI E2E against the Android APK and a running Spring API.
+Black-box UI E2E against the Android APK + a running Spring API.
 
 | Layer | Location | Role |
 |-------|----------|------|
-| Unit / Espresso | `android/` | white-box client tests |
-| Mobile E2E | `tests-mobile/` | Maestro / Appium |
-| Domain API | `tests-api`, Rest Assured | seats, roles, concurrency |
+| Dev unit / Espresso | `android/` | White-box client tests |
+| **QA mobile E2E** | `tests-mobile/` | Maestro / Appium (this folder) |
+| Domain API | `tests-api` (Python / Java RestAssured) | 409 seats, roles, concurrency |
 
-Mobile UI covers flows and that errors are shown. Full domain matrix stays in API tests.
+You **will see** taps on the emulator screen (Appium/Maestro drive a real device UI).
 
-## One-time setup
+---
+
+## One-time installs
 
 ```powershell
+# Appium 2 + UiAutomator2 (for Appium Kotlin / Python)
 npm i -g appium
 appium driver install uiautomator2
-# Maestro (optional): https://maestro.mobile.dev/
+
+# Maestro (optional YAML suite) — https://maestro.mobile.dev/
 ```
 
-Appium needs `ANDROID_HOME` (usually `%LOCALAPPDATA%\Android\Sdk`).
+Android SDK is installed with Android Studio (typically  
+`%LOCALAPPDATA%\Android\Sdk`). Appium must see it via `ANDROID_HOME`  
+(see “Start Appium” below).
 
-## Shared preconditions
+---
 
-### Emulator
+## Every run — shared preconditions
 
-Android Studio Device Manager, or CLI:
+Keep these running / ready before Maestro or Appium tests:
+
+### 1) Emulator Online
+
+You can start the AVD from Android Studio (Device Manager ▶), or from the CLI (preferred for repeatable QA runs).
+
+**List AVD names on this machine** (do not guess — names differ per install):
 
 ```powershell
 $sdk = "$env:LOCALAPPDATA\Android\Sdk"
 & "$sdk\emulator\emulator.exe" -list-avds
-# use an exact name from the list, e.g. Pixel_8
-& "$sdk\emulator\emulator.exe" -avd Pixel_8 -netdelay none -netspeed full
-
-adb wait-for-device
-adb devices
-# optional: adb shell getprop sys.boot_completed  → 1
 ```
 
-### API + reverse + APK
+Example output on this project machine: `Pixel_8`.
+
+**Start emulator (CLI):**
 
 ```powershell
+$sdk = "$env:LOCALAPPDATA\Android\Sdk"
+# replace Pixel_8 with a name from -list-avds
+& "$sdk\emulator\emulator.exe" -avd Pixel_8 -netdelay none -netspeed full
+```
+
+Leave that terminal open. Wait until boot finishes, then:
+
+```powershell
+adb wait-for-device
+adb devices
+# expect: emulator-XXXX   device
+```
+
+Optional boot check:
+
+```powershell
+adb shell getprop sys.boot_completed
+# expect: 1
+```
+
+If you see `Unknown AVD name […]`, the name is wrong — run `-list-avds` and use an exact match (e.g. `Pixel_8`, not `Pixel_8_API_34`).
+
+### 2) Backend + port reverse
+
+```powershell
+# Terminal: API
 cd app
 .\gradlew.bat bootRun
+```
 
-adb reverse tcp:8080 tcp:8080   # again after emulator restart
+```powershell
+# Another terminal (local app BASE_URL is http://127.0.0.1:8080/)
+adb reverse tcp:8080 tcp:8080
+```
 
+Re-run `adb reverse` after restarting the emulator.
+
+### 3) Install APK
+
+```powershell
 cd android
 .\gradlew.bat assembleDebug
 adb install -r app\build\outputs\apk\debug\app-debug.apk
@@ -52,70 +95,122 @@ adb install -r app\build\outputs\apk\debug\app-debug.apk
 
 Seeded admin: `admin@example.com` / `admin123`.
 
-## Maestro
+---
 
-No Appium. Emulator + API + APK only.
+## A) Maestro
+
+Does **not** need Appium. Needs emulator + API + APK (steps above).
 
 ```powershell
+# from repo root
 maestro test tests-mobile\maestro
+# one flow:
 maestro test tests-mobile\maestro\02_login_admin.yaml
 ```
 
-Flows: `maestro/01_*.yaml` … `07_*.yaml`.
+Flows: `maestro/01_*.yaml` … `07_*.yaml` (guest, login, bad password, register, register-for-event, duplicate, search).
 
-## Appium + Python
+---
 
-See [python/README.md](python/README.md).
+## B) Appium + Python
+
+Details: [`python/README.md`](python/README.md).
+
+### Terminal 1 — Appium (with Android SDK env)
 
 ```powershell
-# terminal 1
 cd tests-mobile\kotlin
 .\scripts\start-appium.ps1
-# http://127.0.0.1:4723/status → ready
+```
 
-# terminal 2 (after preconditions)
+Or:
+
+```powershell
+$env:ANDROID_HOME = "$env:LOCALAPPDATA\Android\Sdk"
+$env:ANDROID_SDK_ROOT = $env:ANDROID_HOME
+appium
+```
+
+Check: http://127.0.0.1:4723/status → `"ready": true`.
+
+Leave this terminal open.
+
+### Terminal 2 — pytest
+
+(After emulator + `bootRun` + `adb reverse` + APK.)
+
+```powershell
 cd tests-mobile\python
 py -3.12 -m venv .venv
 .\.venv\Scripts\activate
 pip install -r requirements.txt
+
 pytest -m smoke
+# or:
+pytest tests\test_guest.py -v
+pytest
 ```
 
-## Appium + Kotlin
+Allure (optional): `allure serve allure-results`.
 
-See [kotlin/README.md](kotlin/README.md).
+---
+
+## C) Appium + Kotlin
+
+Details: [`kotlin/README.md`](kotlin/README.md).
+
+### Terminal 1 — Appium (same as Python)
 
 ```powershell
-# terminal 1 — same start-appium.ps1 as above
 cd tests-mobile\kotlin
 .\scripts\start-appium.ps1
+```
 
-# terminal 2
+### Terminal 2 — Gradle tests
+
+```powershell
+cd tests-mobile\kotlin
 .\gradlew.bat test
 .\gradlew.bat test --tests com.fettqa.events.mobile.GuestEventsTest
 ```
 
-Bare `appium` without SDK env fails with `Neither ANDROID_HOME nor ANDROID_SDK_ROOT…` — use the script.
+---
 
 ## Troubleshooting
 
 | Error | Fix |
 |-------|-----|
-| Connection refused `:4723` | start Appium, leave it running |
-| `ANDROID_HOME` / `ANDROID_SDK_ROOT` not exported | `start-appium.ps1` |
-| `SessionNotCreated` / no device | emulator online; `adb devices` → `device` |
-| `Unknown AVD name` | `-list-avds`, use exact name |
+| `ConnectException` / cannot connect to `:4723` | Start Appium; keep that terminal open |
+| `Neither ANDROID_HOME nor ANDROID_SDK_ROOT...` | Restart Appium via `start-appium.ps1` (not bare `appium` without env) |
+| `SessionNotCreated` / no device | Emulator Online; `adb devices` → `device` |
+| `Unknown AVD name […]` | `emulator -list-avds` → use exact name (e.g. `Pixel_8`) |
 | App cannot reach API | `bootRun` + `adb reverse tcp:8080 tcp:8080` |
-| Stale UI | rebuild APK + `adb install -r …` |
+| APK missing / old UI | `cd android && ./gradlew assembleDebug` then `adb install -r …` |
 
-## CI
+---
 
-| Suite | Workflow |
-|-------|----------|
-| Maestro | [mobile-maestro.yml](../.github/workflows/mobile-maestro.yml) |
-| Appium Python | [mobile-appium-python.yml](../.github/workflows/mobile-appium-python.yml) |
-| Appium Kotlin | [mobile-appium-kotlin.yml](../.github/workflows/mobile-appium-kotlin.yml) |
+## CI (GitHub Actions)
 
-Jobs build API + APK, start the API, (Appium if needed), emulator, then `scripts/ci-run-suite.sh`. Allure for Appium suites: `allure/mobile-python|mobile-kotlin/<run>/` on Pages.
+Separate workflow per suite (each can run independently / in parallel):
 
-Manual: Actions → workflow → Run workflow.
+| Suite | Workflow | Paths that trigger |
+|-------|----------|--------------------|
+| Maestro | [`.github/workflows/mobile-maestro.yml`](../.github/workflows/mobile-maestro.yml) | `tests-mobile/maestro/**` (+ `app/`, `android/`) |
+| Appium Python | [`.github/workflows/mobile-appium-python.yml`](../.github/workflows/mobile-appium-python.yml) | `tests-mobile/python/**` (+ `app/`, `android/`) |
+| Appium Kotlin | [`.github/workflows/mobile-appium-kotlin.yml`](../.github/workflows/mobile-appium-kotlin.yml) | `tests-mobile/kotlin/**` (+ `app/`, `android/`) |
+
+Each job: build API + APK → start API → (Appium if needed) → emulator → `scripts/ci-run-suite.sh <maestro|python|kotlin>`.
+
+Appium Python / Kotlin also generate Allure HTML and publish to GitHub Pages (same pattern as E2E):
+
+- `…/allure/mobile-python/<run_number>/`
+- `…/allure/mobile-kotlin/<run_number>/`
+
+Manual run: **Actions** → pick workflow → **Run workflow**.
+
+---
+
+## What stays out of mobile UI
+
+Domain matrix (full 409 / concurrency / role matrix) → `tests-api` (Python / Java).  
+Mobile E2E: user flows + that errors are **shown** on screen.
