@@ -1,4 +1,4 @@
-﻿"""Gherkin step definitions for pytest-bdd (shared by functional/test_bdd_*.py)."""
+"""Gherkin step definitions for pytest-bdd (shared by functional/test_bdd_*.py)."""
 
 from __future__ import annotations
 

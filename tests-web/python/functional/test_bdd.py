@@ -1,4 +1,4 @@
-﻿"""Load Gherkin features; step defs live in support.bdd_steps (via conftest pytest_plugins)."""
+"""Load Gherkin features; step defs live in support.bdd_steps (via conftest pytest_plugins)."""
 
 from pathlib import Path
 

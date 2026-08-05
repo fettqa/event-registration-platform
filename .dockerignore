@@ -13,8 +13,6 @@ tests-e2e
 perf
 *.md
 *.png
-Events.png
-New_event.png
-Event_details.png
+/screenshot
 app/.venv
 **/node_modules
