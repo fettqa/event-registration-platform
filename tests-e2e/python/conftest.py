@@ -1,7 +1,11 @@
 import os
 import uuid
+
 import allure
 import pytest
+
+# pytest-bdd registers steps as fixtures; only conftest / test modules are scanned.
+pytest_plugins = ["support.bdd_steps"]
 
 BASE_URL = os.getenv("BASE_URL", "http://localhost:8080").rstrip("/")
 

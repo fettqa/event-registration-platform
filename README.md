@@ -90,8 +90,8 @@ Swagger: Authorize → bearerAuth → insert token
 
 - `app/` — Spring Boot API (Java 21) + Thymeleaf UI
 - `tests-api/` — Python REST tests (pytest + httpx)
-- `tests-e2e/java/` — Playwright E2E (Java; desktop + `mobileChromeTest`)
-- `tests-e2e/python/` — Playwright E2E (Python; desktop + `mobile_chrome/` smoke)
+- `tests-e2e/java/` — Playwright E2E (Java; desktop + `mobileChromeTest`) + java-bdd
+- `tests-e2e/python/` — Playwright E2E (Python; desktop + `mobile_chrome/` smoke)  + pytest-bdd
 - `perf/k6/` — k6 load tests (smoke / load / spike)
 - `android/` — Android client (Kotlin; см. [`android/README.md`](android/README.md))
 - `tests-mobile/` — mobile UI E2E (Maestro / Appium Kotlin / Appium Python; см. [`tests-mobile/README.md`](tests-mobile/README.md))
@@ -122,10 +122,12 @@ k6 run perf/k6/smoke.js
 # Playwright E2E (app must be running)
 cd tests-e2e/java && ./gradlew installPlaywright && ./gradlew test
 # Mobile Chrome smoke: ./gradlew mobileChromeTest
-# Playwright E2E Python (app must be running)
+# Playwright E2E Python (app must be running; Python 3.12)
 cd tests-e2e/python
-# activate venv (.\.venv\Scripts\activate), then:
+# py -3.12 -m venv .venv && .\.venv\Scripts\activate
+# pip install -r requirements.txt && playwright install chromium
 pytest
+# pytest functional/test_bdd.py   # Gherkin only
 # Mobile Chrome smoke (web):
 pytest mobile_chrome -m smoke
 
@@ -143,14 +145,14 @@ Health: http://localhost:8080/actuator/health
 
 ## Android
 
-Клиент в [`android/`](android/README.md): список Events для гостя, login/register, create event, registrations, delete по ролям, Admin Panel, поиск.
+Client: [`android/`](android/README.md)
 
-| Стенд | `BASE_URL` в `android/app/build.gradle.kts` |
-|-------|-----------------------------------------------|
-| Local + emulator | `http://127.0.0.1:8080/` + `adb reverse tcp:8080 tcp:8080` |
-| Render | `https://event-registration-jesq.onrender.com/` (без reverse) |
+| Local/Remote     | `BASE_URL` in `android/app/build.gradle.kts`                  |
+|------------------|---------------------------------------------------------------|
+| Local + emulator | `http://127.0.0.1:8080/` + `adb reverse tcp:8080 tcp:8080`    |
+| Render           | `https://event-registration-jesq.onrender.com/` (без reverse) |
 
-Mobile QA (Maestro / Appium): [`tests-mobile/README.md`](tests-mobile/README.md).
+Maestro / Appium: [`tests-mobile/README.md`](tests-mobile/README.md).
 
 ## API (REST)
 
@@ -418,7 +420,8 @@ cd tests-e2e/java
 
 ## Playwright E2E (Python)
 
-Use **Python 3.12** (3.14 may fail installing `greenlet` wheels on Windows).
+Use **Python 3.12** (3.14 may fail installing `greenlet` wheels on Windows).  
+Gherkin: `features/` + `support/bdd_steps.py` (loaded via `pytest_plugins` in `conftest.py`). Details: [`docs/tests-e2e-python-walkthrough.md`](docs/tests-e2e-python-walkthrough.md).
 
 ```bash
 # 1. Start app
@@ -438,6 +441,7 @@ pytest
 # Mobile Chrome smoke (Pixel 7 device profile — web DOM, not Appium)
 pytest mobile_chrome -m smoke
 
+pytest functional/test_bdd.py   # Gherkin / pytest-bdd
 # headed:
 pytest --headed
 ```
