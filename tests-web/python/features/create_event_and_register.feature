@@ -1,4 +1,4 @@
-﻿Feature: Create event and register
+Feature: Create event and register
   As an admin
   I want to create an event and register for it
   So that I appear in the registrations list

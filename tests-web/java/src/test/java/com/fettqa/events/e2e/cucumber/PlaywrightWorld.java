@@ -1,4 +1,4 @@
-﻿package com.fettqa.events.e2e.cucumber;
+package com.fettqa.events.e2e.cucumber;
 
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserType;

@@ -1,4 +1,4 @@
-﻿package com.fettqa.events.e2e.cucumber.steps;
+package com.fettqa.events.e2e.cucumber.steps;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 

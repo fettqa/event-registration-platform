@@ -18,8 +18,8 @@ Web UI against a running Spring app (`BASE_URL`, default `http://localhost:8080`
 cd tests-web\python
 py -3.12 -m venv .venv
 .\.venv\Scripts\activate
-pip install -r requirements.txt
-playwright install chromium
+python -m pip install -r requirements.txt
+python -m playwright install chromium
 ```
 
 App must be running: `cd app && ./gradlew bootRun`.

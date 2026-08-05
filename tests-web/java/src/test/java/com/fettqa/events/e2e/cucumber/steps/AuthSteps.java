@@ -1,4 +1,4 @@
-﻿package com.fettqa.events.e2e.cucumber.steps;
+package com.fettqa.events.e2e.cucumber.steps;
 
 import com.fettqa.events.e2e.cucumber.PlaywrightWorld;
 import com.fettqa.events.e2e.support.UiAuth;

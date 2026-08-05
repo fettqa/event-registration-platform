@@ -1,4 +1,4 @@
-﻿package com.fettqa.events.e2e.cucumber;
+package com.fettqa.events.e2e.cucumber;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Scenario;

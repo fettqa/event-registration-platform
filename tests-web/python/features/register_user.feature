@@ -1,4 +1,4 @@
-﻿Feature: Register user
+Feature: Register user
   As a visitor
   I want to create an account
   So that the header shows my identity
