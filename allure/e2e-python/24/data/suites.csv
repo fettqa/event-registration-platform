@@ -1,0 +1,8 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Wed Aug 05 05:19:30 UTC 2026","Wed Aug 05 05:19:31 UTC 2026","808","functional","test_register_sends_email","","","","test_register_for_event_sends_confirmation_email[chromium]",""
+"passed","Wed Aug 05 05:19:27 UTC 2026","Wed Aug 05 05:19:28 UTC 2026","416","functional","test_bdd","","","","test_new_user_sees_their_info_in_the_header[chromium]","/home/runner/work/event-registration-platform/event-registration-platform/tests-e2e/python/features/register_user.feature: New user sees their info in the header"
+"passed","Wed Aug 05 05:19:26 UTC 2026","Wed Aug 05 05:19:27 UTC 2026","1784","functional","test_bdd","","","","test_admin_creates_an_event_and_registers_for_it[chromium]","/home/runner/work/event-registration-platform/event-registration-platform/tests-e2e/python/features/create_event_and_register.feature: Admin creates an event and registers for it"
+"passed","Wed Aug 05 05:19:31 UTC 2026","Wed Aug 05 05:19:31 UTC 2026","350","functional","test_register_user","","","","test_register_shows_user_in_header[chromium]",""
+"passed","Wed Aug 05 05:19:29 UTC 2026","Wed Aug 05 05:19:29 UTC 2026","546","functional","test_create_event_validation","","","","test_create_event_with_empty_name_stays_on_form[chromium]",""
+"passed","Wed Aug 05 05:19:28 UTC 2026","Wed Aug 05 05:19:29 UTC 2026","757","functional","test_create_event_and_register","","","","test_create_event_and_register_shows_success[chromium]",""
+"passed","Wed Aug 05 05:19:29 UTC 2026","Wed Aug 05 05:19:30 UTC 2026","765","functional","test_register_duplicate_email","","","","test_register_same_email_twice_shows_error[chromium]",""
