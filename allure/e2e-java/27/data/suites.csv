@@ -1,0 +1,12 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Wed Aug 05 06:19:42 UTC 2026","Wed Aug 05 06:19:42 UTC 2026","454","","com.fettqa.events.e2e.functional.RegisterUserE2ETest","","com.fettqa.events.e2e.functional.RegisterUserE2ETest","register_showsUserInHeader","register_showsUserInHeader()",""
+"passed","Wed Aug 05 06:19:40 UTC 2026","Wed Aug 05 06:19:41 UTC 2026","1272","","com.fettqa.events.e2e.functional.RegisterSendsEmailE2ETest","","com.fettqa.events.e2e.functional.RegisterSendsEmailE2ETest","registerForEvent_sendsConfirmationEmail","registerForEvent_sendsConfirmationEmail()",""
+"passed","Wed Aug 05 06:19:37 UTC 2026","Wed Aug 05 06:19:38 UTC 2026","662","","com.fettqa.events.e2e.functional.CreateEventWithEmptyNameTest","","com.fettqa.events.e2e.functional.CreateEventWithEmptyNameTest","createEventWithEmptyName_showsValidation","createEventWithEmptyName_showsValidation()",""
+"passed","Wed Aug 05 06:19:35 UTC 2026","Wed Aug 05 06:19:36 UTC 2026","475","","Register user","","New user sees their info in the header","","New user sees their info in the header","  As a visitor
+  I want to create an account
+  So that the header shows my identity"
+"passed","Wed Aug 05 06:19:26 UTC 2026","Wed Aug 05 06:19:35 UTC 2026","9027","","Create event and register","","Admin creates an event and registers for it","","Admin creates an event and registers for it","  As an admin
+  I want to create an event and register for it
+  So that I appear in the registrations list"
+"passed","Wed Aug 05 06:19:38 UTC 2026","Wed Aug 05 06:19:40 UTC 2026","1304","","com.fettqa.events.e2e.functional.RegisterDuplicateEmailE2ETest","","com.fettqa.events.e2e.functional.RegisterDuplicateEmailE2ETest","registerSameEmailTwice_showsError","registerSameEmailTwice_showsError()",""
+"passed","Wed Aug 05 06:19:36 UTC 2026","Wed Aug 05 06:19:37 UTC 2026","901","","com.fettqa.events.e2e.functional.CreateEventAndRegisterE2ETest","","com.fettqa.events.e2e.functional.CreateEventAndRegisterE2ETest","createEventAndRegister_showsSuccess","createEventAndRegister_showsSuccess()",""
