@@ -40,11 +40,42 @@ jobs:
         working-directory: app
         run: ./gradlew bootJar -x test
 
+      - name: Start Kafka and Mailpit
+        working-directory: app
+        run: docker compose up -d kafka mailpit
+
+      - name: Wait for Kafka
+        run: |
+          for i in {1..30}; do
+            if docker exec kafka /opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092 >/dev/null 2>&1; then
+              echo "Kafka is up."
+              exit 0
+            fi
+            sleep 2
+          done
+          docker compose -f app/docker-compose.yml logs kafka || true
+          exit 1
+
+      - name: Wait for Mailpit
+        run: |
+          for i in {1..30}; do
+            if curl -sf http://localhost:8025/api/v1/info >/dev/null; then
+              echo "Mailpit is up."
+              exit 0
+            fi
+            sleep 1
+          done
+          docker compose -f app/docker-compose.yml logs mailpit || true
+          exit 1
+
       - name: Start Spring Boot
         working-directory: app
+        env:
+          SPRING_PROFILES_ACTIVE: kafka,mail
+          KAFKA_BOOTSTRAP_SERVERS: localhost:9092
         run: |
           JAR=$(ls build/libs/*SNAPSHOT.jar | head -n 1)
-          echo "Starting $JAR"
+          echo "Starting $JAR with profiles=$SPRING_PROFILES_ACTIVE"
           nohup java -jar "$JAR" > app.log 2>&1 &
           echo $! > app.pid
 
@@ -118,6 +149,11 @@ jobs:
     name: Publish Allure Report
     runs-on: ubuntu-latest
     needs: e2e
+    timeout-minutes: 90
+    concurrency:
+      group: github-pages-publish
+      cancel-in-progress: false
+      queue: max
     if: always() && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
     permissions:
       contents: write

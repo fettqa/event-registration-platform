@@ -74,6 +74,13 @@ def configureAllureAndCucumber = { Test t ->
 
 tasks.named('test') {
     configureAllureAndCucumber(it)
+    dependsOn('installPlaywright')
+    useJUnitPlatform {
+        excludeTags 'mobile_chrome'
+    }
+    jvmArgs = ["-javaagent:${configurations.agent.singleFile}"]
+    systemProperty 'baseUrl', System.getProperty('baseUrl', 'http://localhost:8080')
+
 }
 
 tasks.register('cucumber', Test) {
@@ -86,4 +93,17 @@ tasks.register('cucumber', Test) {
     filter {
         includeTestsMatching 'com.fettqa.events.e2e.cucumber.RunCucumberTest'
     }
+}
+
+tasks.register('mobileChromeTest', Test) {
+    description = 'Mobile Chrome smoke (Playwright Pixel 7 device profile)'
+    group = 'verification'
+    dependsOn('installPlaywright')
+    useJUnitPlatform {
+        includeTags 'mobile_chrome'
+    }
+    jvmArgs = ["-javaagent:${configurations.agent.singleFile}"]
+    systemProperty 'baseUrl', System.getProperty('baseUrl', 'http://localhost:8080')
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
 }

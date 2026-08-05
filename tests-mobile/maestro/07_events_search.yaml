@@ -1,0 +1,29 @@
+appId: com.fettqa.events.android
+name: Events search filter
+---
+- launchApp:
+    clearState: true
+- runFlow: subflows/login_as_admin.yaml
+- tapOn:
+    id: createEventFab
+- tapOn:
+    id: nameInput
+- inputText: "UniqueSearchToken42"
+- tapOn:
+    id: seatsInput
+- inputText: "5"
+- tapOn:
+    id: submitButton
+# CreateEvent opens detail → back to list
+- back
+- assertVisible: "Events"
+- tapOn:
+    id: eventsSearchInput
+- inputText: "UniqueSearchToken42"
+- tapOn:
+    id: eventsSearchButton
+- assertVisible: "UniqueSearchToken42"
+- tapOn:
+    id: eventsClearButton
+- assertVisible:
+    id: eventsRecycler

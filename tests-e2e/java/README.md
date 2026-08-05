@@ -1,6 +1,6 @@
 # E2E Java (Playwright + Cucumber)
 
-Black-box UI tests against a running app (`http://localhost:8080` by default).
+Black-box UI tests against a running app (`-DbaseUrl=…`, default: `http://localhost:8080`).
 
 ## Layout
 
@@ -8,6 +8,15 @@ Black-box UI tests against a running app (`http://localhost:8080` by default).
 |------|------|
 | `functional/*E2ETest` | Classic JUnit 5 + Playwright |
 | `cucumber/` + `resources/features/*.feature` | Cucumber BDD → same UI |
+
+## Suites
+
+| Task | Scope |
+|------|--------|
+| `./gradlew test` | Desktop Chromium (`functional/`) |
+| `./gradlew mobileChromeTest` | **Mobile Chrome** smoke (Pixel 7 profile) |
+
+`mobileChromeTest` is **not** Appium — same HTML DOM, mobile viewport + touch.
 
 ## Run
 
@@ -20,6 +29,7 @@ cd tests-e2e/java
 ./gradlew installPlaywright
 ./gradlew test              # all E2E including Cucumber
 ./gradlew cucumber          # Cucumber scenarios only (not *E2ETest)
+.\gradlew.bat mobileChromeTest # appium e2e
 ./gradlew test -DbaseUrl=http://localhost:8080
 ```
 

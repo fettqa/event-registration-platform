@@ -141,6 +141,37 @@ public class RegistrationControllerApiTest {
   }
 
   @Test
+  @Story("Search Registrations with Pagination")
+  void search_registrations_returnsPagedResult() {
+    Integer eventId = createEvent(10);
+    String tokenA = registerToken("Alice Alpha", "alice@example.com");
+    String tokenB = registerToken("Bob Beta", "bob@example.com");
+    String tokenC = registerToken("Alice Gamma", "alice2@example.com");
+
+    given().filter(new AllureRestAssured()).header("Authorization", "Bearer " + tokenA)
+        .when().post("/api/events/{eventId}/registrations", eventId).then().statusCode(201);
+    given().filter(new AllureRestAssured()).header("Authorization", "Bearer " + tokenB)
+        .when().post("/api/events/{eventId}/registrations", eventId).then().statusCode(201);
+    given().filter(new AllureRestAssured()).header("Authorization", "Bearer " + tokenC)
+        .when().post("/api/events/{eventId}/registrations", eventId).then().statusCode(201);
+
+    given()
+        .filter(new AllureRestAssured())
+        .queryParam("page", 0)
+        .queryParam("size", 1)
+        .queryParam("q", "Alice")
+        .when()
+        .get("/api/events/{eventId}/registrations", eventId)
+        .then()
+        .statusCode(200)
+        .body("content.size()", equalTo(1))
+        .body("totalElements", equalTo(2))
+        .body("totalPages", equalTo(2))
+        .body("number", equalTo(0))
+        .body("content[0].fullName", equalTo("Alice Gamma"));
+  }
+
+  @Test
   @Story("Register for Event when Event is Full")
   void registration_returns409_whenEventIsFull() {
     Integer eventId = createEvent(1);

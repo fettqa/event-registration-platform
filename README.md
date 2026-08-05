@@ -65,7 +65,7 @@ Swagger: Authorize → bearerAuth → insert token
 - Cannot register when seats are full (409)
 - Concurrent registration protected (row lock / race handling)
 - Remaining seats shown on event details page
-- Successful registration can emit Kafka event `registration.created` (profile `kafka`)
+- Successful registration can emit Kafka event `registration.created` (profile `kafka`); with `mail` → confirmation email via Mailpit SMTP
 
 
 ## Tech stack
@@ -90,9 +90,12 @@ Swagger: Authorize → bearerAuth → insert token
 
 - `app/` — Spring Boot API (Java 21) + Thymeleaf UI
 - `tests-api/` — Python REST tests (pytest + httpx)
-- `tests-e2e/java/` — Playwright E2E (Java)
-- `tests-e2e/python/` — Playwright E2E (Python) + pytest-bdd
+- `tests-e2e/java/` — Playwright E2E (Java; desktop + `mobileChromeTest`) + java-bdd
+- `tests-e2e/python/` — Playwright E2E (Python; desktop + `mobile_chrome/` smoke)  + pytest-bdd
 - `perf/k6/` — k6 load tests (smoke / load / spike)
+- `android/` — Android client (Kotlin; см. [`android/README.md`](android/README.md))
+- `tests-mobile/` — mobile UI E2E (Maestro / Appium Kotlin / Appium Python; см. [`tests-mobile/README.md`](tests-mobile/README.md))
+- `docs/` — step-by-step walkthroughs (см. [`docs/README.md`](docs/README.md))
 
 
 
@@ -107,6 +110,9 @@ open http://localhost:8080/
 cd app && ./gradlew test
 # App (H2 + Kafka)
 ./gradlew bootRun --args='--spring.profiles.active=kafka'
+# Kafka + Mailpit (mock inbox UI http://localhost:8025)
+#   docker compose up -d kafka mailpit
+#   ./gradlew bootRun --args='--spring.profiles.active=kafka,mail'
 # or Postgres + Kafka
 ./gradlew bootRun --args='--spring.profiles.active=docker,kafka'
 # Python API tests (app must be running)
@@ -115,18 +121,38 @@ cd tests-api && pytest
 k6 run perf/k6/smoke.js
 # Playwright E2E (app must be running)
 cd tests-e2e/java && ./gradlew installPlaywright && ./gradlew test
+# Mobile Chrome smoke: ./gradlew mobileChromeTest
 # Playwright E2E Python (app must be running; Python 3.12)
 cd tests-e2e/python
 # py -3.12 -m venv .venv && .\.venv\Scripts\activate
 # pip install -r requirements.txt && playwright install chromium
 pytest
 # pytest functional/test_bdd.py   # Gherkin only
+# Mobile Chrome smoke (web):
+pytest mobile_chrome -m smoke
+
+# Android (emulator): bootRun + adb reverse, then open android/ in Android Studio
+#   adb reverse tcp:8080 tcp:8080
+#   cd android && ./gradlew assembleDebug
+# Details / Render BASE_URL: android/README.md
+# Mobile UI E2E (Maestro / Appium): tests-mobile/README.md
+#   emulator (-list-avds / -avd Pixel_8) → bootRun → adb reverse → APK → Appium → pytest / gradlew test
+# CI: mobile-maestro.yml / mobile-appium-python.yml / mobile-appium-kotlin.yml
 
 Swagger: http://localhost:8080/swagger-ui.html  
 Health: http://localhost:8080/actuator/health
 ```
 
+## Android
 
+Client: [`android/`](android/README.md)
+
+| Local/Remote     | `BASE_URL` in `android/app/build.gradle.kts`                  |
+|------------------|---------------------------------------------------------------|
+| Local + emulator | `http://127.0.0.1:8080/` + `adb reverse tcp:8080 tcp:8080`    |
+| Render           | `https://event-registration-jesq.onrender.com/` (без reverse) |
+
+Maestro / Appium: [`tests-mobile/README.md`](tests-mobile/README.md).
 
 ## API (REST)
 
@@ -134,11 +160,12 @@ Health: http://localhost:8080/actuator/health
 | Method                                                                                  | Path                                              | Notes                             | Access                                           |
 | --------------------------------------------------------------------------------------- | ------------------------------------------------- | --------------------------------- | ------------------------------------------------ |
 | POST                                                                                    | `/api/events`                                     | create                            | Admin                                            |
-| GET                                                                                     | `/api/events`                                     | list / filter                     | Public                                           |
+| GET                                                                                     | `/api/events`                                     | list all (array); with `?page=&size=&q=` → paged search | Public                                           |
 | GET                                                                                     | `/api/events/{id}`                                | by id                             | Public                                           |
 | PATCH                                                                                   | `/api/events/{id}`                                | update                            | Admin                                            |
 | DELETE                                                                                  | `/api/events/{id}`                                | delete                            | Admin                                            |
 | POST                                                                                    | `/api/events/{id}/registrations`                  | register current user (201 / 409) | Authenticated                                    |
+| GET                                                                                     | `/api/events/{id}/registrations`                  | list; with `?page=&size=&q=` → paged | Public                                        |
 | DELETE                                                                                  | `/api/events/{id}/registrations/{registrationId}` | delete registration               | Admin: any; Super User: on own events; User: own |
 | DELETE                                                                                  | `/api/events/{id}`                                | delete event                      | Admin: any; Super User: own events               |
 | Swagger: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) |                                                   |                                   |                                                  |
@@ -222,6 +249,25 @@ Clean database (drop + recreate):
 docker compose down -v
 docker compose up -d
 ```
+
+## Kafka + Mailpit (registration emails)
+
+Mailpit is a **local mock SMTP + inbox UI** (letters do not go to Gmail). After a successful registration with profiles `kafka,mail`, open the UI and read the message.
+
+```bash
+cd app
+docker compose up -d kafka mailpit
+
+./gradlew bootRun --args='--spring.profiles.active=kafka,mail'
+```
+
+1. Register for an event (UI or API) as a user.  
+2. Open [http://localhost:8025](http://localhost:8025) — email `to` = registrant address.  
+3. SMTP for the app: `localhost:1025` (see `application-mail.yml`).
+
+Without profile `mail`, Kafka still works; the listener only logs.
+
+**Tests:** Java `RegistrationMailKafkaApiTest` (GreenMail, in `./gradlew test`); Python API `@pytest.mark.mail` + E2E Playwright (Mailpit). Locally for Python/E2E mail tests use `kafka,mail` + Mailpit as above.
 
 
 
@@ -361,10 +407,13 @@ cd app && ./gradlew bootRun
 cd tests-e2e/java
 ./gradlew installPlaywright
 
-# 3. Run E2E
+# 3. Desktop E2E
 ./gradlew test
 # optional:
 ./gradlew test -DbaseUrl=http://localhost:8080
+
+# Mobile Chrome smoke (Pixel 7 device profile — web DOM, not Appium)
+./gradlew mobileChromeTest
 ```
 
 
@@ -386,12 +435,18 @@ py -3.12 -m venv .venv
 pip install -r requirements.txt
 playwright install chromium
 
-# 3. Run
+# 3. Run desktop E2E
 pytest
+
+# Mobile Chrome smoke (Pixel 7 device profile — web DOM, not Appium)
+pytest mobile_chrome -m smoke
+
 pytest functional/test_bdd.py   # Gherkin / pytest-bdd
 # headed:
 pytest --headed
 ```
+
+Details: [`tests-e2e/python/README.md`](tests-e2e/python/README.md).
 
 Events
 New event
