@@ -50,18 +50,14 @@ android/*.apk
 android/*.ap_
 android/*.aab
 
-# k6
-perf/k6/results/*
-!perf/k6/results/.gitkeep
+# k6 local reports
+tests-perf/k6/results/*.html
+tests-perf/k6/results/*.json
+!tests-perf/k6/results/.gitkeep
 
 # Allure
 **/allure-results/
 **/allure-report/
 ajcore.*.txt
 **/ajcore.*.txt
-
-# k6 local reports
-tests-perf/k6/results/*.html
-tests-perf/k6/results/*.json
-!tests-perf/k6/results/.gitkeep
 

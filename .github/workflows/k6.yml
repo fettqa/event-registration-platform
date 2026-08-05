@@ -102,7 +102,7 @@ jobs:
           path: |
             tests-perf/k6/results/*.html
             tests-perf/k6/results/*.json
-          if-no-files-found: ignore
+          if-no-files-found: error
 
       - name: Upload app log on failure
         if: failure()
@@ -120,7 +120,7 @@ jobs:
       group: github-pages-publish
       cancel-in-progress: false
       queue: max
-    if: always() && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+    if: always() && needs.k6.result == 'success' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
     permissions:
       contents: write
     steps:

@@ -97,8 +97,8 @@ export function handleSummaryFor(name) {
   return function handleSummary(data) {
     return {
       stdout: textSummary(data, {indent: ' ', enableColors: true}),
-      [`perf/k6/results/${name}-summary.json`]: JSON.stringify(data, null, 2),
-      [`perf/k6/results/${name}-report.html`]: htmlReport(data),
+      [`tests-perf/k6/results/${name}-summary.json`]: JSON.stringify(data, null, 2),
+      [`tests-perf/k6/results/${name}-report.html`]: htmlReport(data),
     };
   };
 }
