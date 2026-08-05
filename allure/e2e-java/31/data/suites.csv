@@ -1,0 +1,12 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Wed Aug 05 14:04:46 UTC 2026","Wed Aug 05 14:04:51 UTC 2026","4593","","com.fettqa.events.e2e.functional.CreateEventAndRegisterE2ETest","","com.fettqa.events.e2e.functional.CreateEventAndRegisterE2ETest","createEventAndRegister_showsSuccess","createEventAndRegister_showsSuccess()",""
+"passed","Wed Aug 05 14:04:55 UTC 2026","Wed Aug 05 14:04:55 UTC 2026","692","","com.fettqa.events.e2e.functional.RegisterUserE2ETest","","com.fettqa.events.e2e.functional.RegisterUserE2ETest","register_showsUserInHeader","register_showsUserInHeader()",""
+"passed","Wed Aug 05 14:04:51 UTC 2026","Wed Aug 05 14:04:52 UTC 2026","663","","com.fettqa.events.e2e.functional.CreateEventWithEmptyNameTest","","com.fettqa.events.e2e.functional.CreateEventWithEmptyNameTest","createEventWithEmptyName_showsValidation","createEventWithEmptyName_showsValidation()",""
+"passed","Wed Aug 05 14:04:53 UTC 2026","Wed Aug 05 14:04:54 UTC 2026","1031","","com.fettqa.events.e2e.functional.RegisterSendsEmailE2ETest","","com.fettqa.events.e2e.functional.RegisterSendsEmailE2ETest","registerForEvent_sendsConfirmationEmail","registerForEvent_sendsConfirmationEmail()",""
+"passed","Wed Aug 05 14:04:52 UTC 2026","Wed Aug 05 14:04:53 UTC 2026","1171","","com.fettqa.events.e2e.functional.RegisterDuplicateEmailE2ETest","","com.fettqa.events.e2e.functional.RegisterDuplicateEmailE2ETest","registerSameEmailTwice_showsError","registerSameEmailTwice_showsError()",""
+"passed","Wed Aug 05 14:04:35 UTC 2026","Wed Aug 05 14:04:45 UTC 2026","10599","","Create event and register","","Admin creates an event and registers for it","","Admin creates an event and registers for it","  As an admin
+  I want to create an event and register for it
+  So that I appear in the registrations list"
+"passed","Wed Aug 05 14:04:46 UTC 2026","Wed Aug 05 14:04:46 UTC 2026","483","","Register user","","New user sees their info in the header","","New user sees their info in the header","  As a visitor
+  I want to create an account
+  So that the header shows my identity"

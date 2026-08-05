@@ -1,0 +1,8 @@
+"Epic","Feature","Story","FAILED","BROKEN","PASSED","SKIPPED","UNKNOWN"
+"End-to-End Tests","Create Event and Register","Admin can create an event and register for it","0","0","1","0","0"
+"End-to-End Tests","Register User","User can register and see their information in the header","0","0","1","0","0"
+"End-to-End Tests","Create Event Validation","Admin cannot create an event with empty name and zero seats","0","0","1","0","0"
+"End-to-End Tests","Registration Mail","UI registration for event delivers confirmation email","0","0","1","0","0"
+"End-to-End Tests","Register Duplicate Email Validation","Admin cannot register the same email twice for the same event","0","0","1","0","0"
+"","Create event and register","Admin creates an event and registers for it","0","0","1","0","0"
+"","Register user","New user sees their info in the header","0","0","1","0","0"
