@@ -5,13 +5,13 @@ on:
     branches: [ main ]
     paths:
       - 'app/**'
-      - 'perf/k6/**'
+      - 'tests-perf/k6/**'
       - '.github/workflows/k6.yml'
   pull_request:
     branches: [ main ]
     paths:
       - 'app/**'
-      - 'perf/k6/**'
+      - 'tests-perf/k6/**'
       - '.github/workflows/k6.yml'
   workflow_dispatch:
     inputs:
@@ -87,9 +87,9 @@ jobs:
         run: |
           echo "scenario=${SCENARIO}" >> "$GITHUB_OUTPUT"
           case "$SCENARIO" in
-            load)  SCRIPT=perf/k6/load-register.js ;;
-            spike) SCRIPT=perf/k6/spike.js ;;
-            *)     SCRIPT=perf/k6/smoke.js ;;
+            load)  SCRIPT=tests-perf/k6/load-register.js ;;
+            spike) SCRIPT=tests-perf/k6/spike.js ;;
+            *)     SCRIPT=tests-perf/k6/smoke.js ;;
           esac
           echo "Running $SCRIPT"
           k6 run "$SCRIPT"
@@ -100,8 +100,8 @@ jobs:
         with:
           name: k6-report-${{ github.event.inputs.scenario || 'smoke' }}
           path: |
-            perf/k6/results/*.html
-            perf/k6/results/*.json
+            tests-perf/k6/results/*.html
+            tests-perf/k6/results/*.json
           if-no-files-found: ignore
 
       - name: Upload app log on failure

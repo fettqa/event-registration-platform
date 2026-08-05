@@ -6,7 +6,7 @@ Black-box UI E2E against the Android APK + a running Spring API.
 |-------|----------|------|
 | Dev unit / Espresso | `android/` | White-box client tests |
 | **QA mobile E2E** | `tests-mobile/` | Maestro / Appium (this folder) |
-| Domain API | `tests-api` / Rest Assured | 409 seats, roles, concurrency |
+| Domain API | `tests-api` (Python / Java RestAssured) | 409 seats, roles, concurrency |
 
 You **will see** taps on the emulator screen (Appium/Maestro drive a real device UI).
 
@@ -212,5 +212,5 @@ Manual run: **Actions** → pick workflow → **Run workflow**.
 
 ## What stays out of mobile UI
 
-Domain matrix (full 409 / concurrency / role matrix) → `tests-api` / Rest Assured in `app`.  
+Domain matrix (full 409 / concurrency / role matrix) → `tests-api` (Python / Java).  
 Mobile E2E: user flows + that errors are **shown** on screen.

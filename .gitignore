@@ -59,3 +59,9 @@ perf/k6/results/*
 **/allure-report/
 ajcore.*.txt
 **/ajcore.*.txt
+
+# k6 local reports
+tests-perf/k6/results/*.html
+tests-perf/k6/results/*.json
+!tests-perf/k6/results/.gitkeep
+

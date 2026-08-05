@@ -89,13 +89,13 @@ Swagger: Authorize → bearerAuth → insert token
 ## Structure
 
 - `app/` — Spring Boot API (Java 21) + Thymeleaf UI
-- `tests-api/` — Python REST tests (pytest + httpx)
-- `tests-e2e/java/` — Playwright E2E (Java; desktop + `mobileChromeTest`)
-- `tests-e2e/python/` — Playwright E2E (Python; desktop + `mobile_chrome/` smoke)
-- `perf/k6/` — k6 load tests (smoke / load / spike)
+- `tests-api/python/` — Python REST tests (pytest + httpx)
+- `tests-api/java/` — Java REST tests (RestAssured black-box)
+- `tests-web/java/` — Playwright E2E (Java; desktop + `mobileChromeTest`)
+- `tests-web/python/` — Playwright E2E (Python; desktop + `mobile_chrome/` smoke)
+- `tests-perf/k6/` — k6 load tests (smoke / load / spike)
 - `android/` — Android client (Kotlin; см. [`android/README.md`](android/README.md))
 - `tests-mobile/` — mobile UI E2E (Maestro / Appium Kotlin / Appium Python; см. [`tests-mobile/README.md`](tests-mobile/README.md))
-- `docs/` — step-by-step walkthroughs (см. [`docs/README.md`](docs/README.md))
 
 
 
@@ -116,14 +116,16 @@ cd app && ./gradlew test
 # or Postgres + Kafka
 ./gradlew bootRun --args='--spring.profiles.active=docker,kafka'
 # Python API tests (app must be running)
-cd tests-api && pytest
+cd tests-api/python/python && pytest
+# Java API tests (RestAssured black-box)
+cd tests-api/python/java && ./gradlew test
 # k6 smoke
-k6 run perf/k6/smoke.js
+k6 run tests-perf/k6/smoke.js
 # Playwright E2E (app must be running)
-cd tests-e2e/java && ./gradlew installPlaywright && ./gradlew test
+cd tests-web/java && ./gradlew installPlaywright && ./gradlew test
 # Mobile Chrome smoke: ./gradlew mobileChromeTest
 # Playwright E2E Python (app must be running)
-cd tests-e2e/python
+cd tests-web/python
 # activate venv (.\.venv\Scripts\activate), then:
 pytest
 # Mobile Chrome smoke (web):
@@ -292,7 +294,7 @@ Run from the **repo root** (paths in `handleSummary` are relative to cwd):
 ### Smoke
 
 ```bash
-k6 run perf/k6/smoke.js
+k6 run tests-perf/k6/smoke.js
 ```
 
 
@@ -300,7 +302,7 @@ k6 run perf/k6/smoke.js
 ### Load (registrations)
 
 ```bash
-k6 run perf/k6/load-register.js
+k6 run tests-perf/k6/load-register.js
 ```
 
 
@@ -308,14 +310,14 @@ k6 run perf/k6/load-register.js
 ### Spike
 
 ```bash
-k6 run perf/k6/spike.js
+k6 run tests-perf/k6/spike.js
 ```
 
 After a run, open (files are named per scenario and do not overwrite each other):
 
-- `perf/k6/results/smoke-report.html` / `smoke-summary.json`
-- `perf/k6/results/load-report.html` / `load-summary.json`
-- `perf/k6/results/spike-report.html` / `spike-summary.json`
+- `tests-perf/k6/results/smoke-report.html` / `smoke-summary.json`
+- `tests-perf/k6/results/load-report.html` / `load-summary.json`
+- `tests-perf/k6/results/spike-report.html` / `spike-summary.json`
 
 
 
@@ -340,7 +342,7 @@ Install the [Allure CLI](https://allurereport.org/docs/install/), run tests, the
 ./gradlew test
 allure serve build/allure-results
 
-# Java E2E (from tests-e2e/java/)
+# Java E2E (from tests-web/java/)
 ./gradlew test
 allure serve build/allure-results
 
@@ -348,7 +350,7 @@ allure serve build/allure-results
 pytest
 allure serve allure-results
 
-# Python E2E (from tests-e2e/python/)
+# Python E2E (from tests-web/python/)
 pytest
 allure serve allure-results
 ```
@@ -373,7 +375,7 @@ PR builds from the **same repo** also publish to Pages. Fork PRs keep artifacts 
 
 **One-time setup:** Repo → Settings → Pages → Source = Deploy from branch → `gh-pages`.
 
-k6 **smoke** runs on push/PR when `app/`** or `perf/k6/**` change.  
+k6 **smoke** runs on push/PR when `app/`** or `tests-perf/k6/**` change.  
 Load/spike: Actions → **k6 Performance** → Run workflow → choose scenario.
 
 ## Python API tests
@@ -383,7 +385,7 @@ Load/spike: Actions → **k6 Performance** → Run workflow → choose scenario.
 cd app && ./gradlew bootRun
 
 # 2. In another terminal
-cd tests-api
+cd tests-api/python
 python -m venv .venv
 # Windows:
 .venv\Scripts\activate
@@ -402,7 +404,7 @@ App must be running on `:8080`.
 cd app && ./gradlew bootRun
 
 # 2. Install browser (once)
-cd tests-e2e/java
+cd tests-web/java
 ./gradlew installPlaywright
 
 # 3. Desktop E2E
@@ -425,7 +427,7 @@ Use **Python 3.12** (3.14 may fail installing `greenlet` wheels on Windows).
 cd app && ./gradlew bootRun
 
 # 2. Setup (first time)
-cd tests-e2e/python
+cd tests-web/python
 py -3.12 -m venv .venv
 # Windows:
 .venv\Scripts\activate
@@ -442,7 +444,7 @@ pytest mobile_chrome -m smoke
 pytest --headed
 ```
 
-Details: [`tests-e2e/python/README.md`](tests-e2e/python/README.md).
+Details: [`tests-web/python/README.md`](tests-web/python/README.md).
 
 Events
 New event
