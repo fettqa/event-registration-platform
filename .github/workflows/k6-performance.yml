@@ -1,18 +1,13 @@
 name: k6 Performance
 
 on:
-  push:
-    branches: [ main ]
-    paths:
-      - 'app/**'
-      - 'tests-perf/k6/**'
-      - '.github/workflows/k6-performance.yml'
-  pull_request:
-    branches: [ main ]
-    paths:
-      - 'app/**'
-      - 'tests-perf/k6/**'
-      - '.github/workflows/k6-performance.yml'
+  workflow_call:
+    inputs:
+      scenario:
+        description: 'k6 scenario to run'
+        type: string
+        required: false
+        default: smoke
   workflow_dispatch:
     inputs:
       scenario:
@@ -39,11 +34,20 @@ jobs:
           java-version: '21'
           cache: gradle
 
+      - name: Download bootJar artifact
+        if: github.event_name != 'workflow_dispatch'
+        uses: actions/download-artifact@v4
+        with:
+          name: app-boot-jar
+          path: app/build/libs
+
       - name: Make gradlew executable
+        if: github.event_name == 'workflow_dispatch'
         working-directory: app
         run: chmod +x gradlew
 
-      - name: Build app
+      - name: Build bootJar
+        if: github.event_name == 'workflow_dispatch'
         working-directory: app
         run: ./gradlew bootJar -x test
 
@@ -83,7 +87,7 @@ jobs:
         id: run
         env:
           BASE_URL: http://localhost:8080
-          SCENARIO: ${{ github.event.inputs.scenario || 'smoke' }}
+          SCENARIO: ${{ inputs.scenario || 'smoke' }}
         run: |
           echo "scenario=${SCENARIO}" >> "$GITHUB_OUTPUT"
           case "$SCENARIO" in
@@ -98,7 +102,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: k6-report-${{ github.event.inputs.scenario || 'smoke' }}
+          name: k6-report-${{ inputs.scenario || 'smoke' }}
           path: |
             tests-perf/k6/results/*.html
             tests-perf/k6/results/*.json

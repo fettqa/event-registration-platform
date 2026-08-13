@@ -1,3 +1,4 @@
+![App CI](https://github.com/fettqa/event-registration-platform/actions/workflows/app-ci.yml/badge.svg)
 ![App Unit Tests](https://github.com/fettqa/event-registration-platform/actions/workflows/app-unit-tests.yml/badge.svg)
 ![API RestAssured Java](https://github.com/fettqa/event-registration-platform/actions/workflows/api-restassured-java.yml/badge.svg)
 ![API httpx Python](https://github.com/fettqa/event-registration-platform/actions/workflows/api-httpx-python.yml/badge.svg)
@@ -142,7 +143,7 @@ pytest mobile_chrome -m smoke
 # Details / Render BASE_URL: android/README.md
 # Mobile UI E2E (Maestro / Appium): tests-mobile/README.md
 #   emulator (-list-avds / -avd Pixel_8) → bootRun → adb reverse → APK → Appium → pytest / gradlew test
-# CI: mobile-maestro.yml / mobile-appium-python.yml / mobile-appium-kotlin.yml
+# CI: app-ci.yml → android-app-ci → mobile-*.yml (or Run workflow on a suite)
 
 Swagger: http://localhost:8080/swagger-ui.html  
 Health: http://localhost:8080/actuator/health
@@ -180,19 +181,21 @@ Mobile QA (Maestro / Appium): [`tests-mobile/README.md`](tests-mobile/README.md)
 
 ## CI workflows
 
-| Workflow | File | Runs |
-|----------|------|------|
-| App Unit Tests | `app-unit-tests.yml` | `cd app && ./gradlew test` (MockMvc, in-app IT) |
-| API RestAssured Java | `api-restassured-java.yml` | live app + `tests-api/java` |
-| API httpx Python | `api-httpx-python.yml` | live app + `tests-api/python` (pytest + httpx) |
-| Web Playwright Java | `web-playwright-java.yml` | Playwright Java (`tests-web/java`) |
-| Web Playwright Python | `web-playwright-python.yml` | Playwright Python (`tests-web/python`) |
-| k6 Performance | `k6-performance.yml` | smoke / load / spike |
-| Mobile Maestro | `mobile-maestro.yml` | Maestro flows |
-| Mobile Appium Python | `mobile-appium-python.yml` | Appium + pytest |
-| Mobile Appium Kotlin | `mobile-appium-kotlin.yml` | Appium + Gradle |
+Push/PR entry point is **App CI** (`app-ci.yml`): path filters decide what runs, builds `bootJar` once, then calls suites via `workflow_call` (shared JAR; Android APK via child `android-app-ci.yml`).
 
-Badges at the top track these workflows.
+| Workflow | File | Role |
+|----------|------|------|
+| App CI | `app-ci.yml` | Orchestrator (push/PR): detect changes → JAR → selective suites |
+| App Unit Tests | `app-unit-tests.yml` | Called when `app/**` changes; also manual dispatch |
+| Android App CI | `android-app-ci.yml` | Child of App CI: Android unit + APK + mobile fan-out |
+| API RestAssured Java | `api-restassured-java.yml` | `workflow_call` / manual (`bootJar` on dispatch) |
+| API httpx Python | `api-httpx-python.yml` | same |
+| Web Playwright Java | `web-playwright-java.yml` | same |
+| Web Playwright Python | `web-playwright-python.yml` | same |
+| k6 Performance | `k6-performance.yml` | same (+ scenario input) |
+| Mobile Maestro / Appium | `mobile-*.yml` | call: download JAR+APK; dispatch: build both |
+
+Manual run of a single suite: **Actions** → suite workflow → **Run workflow** (builds artifacts locally).
 
 ## Deploy (Render)
 

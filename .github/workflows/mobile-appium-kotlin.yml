@@ -1,23 +1,8 @@
 name: Mobile Appium Kotlin
 
 on:
+  workflow_call:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - 'app/**'
-      - 'android/**'
-      - 'tests-mobile/kotlin/**'
-      - 'tests-mobile/scripts/**'
-      - '.github/workflows/mobile-appium-kotlin.yml'
-  pull_request:
-    branches: [main]
-    paths:
-      - 'app/**'
-      - 'android/**'
-      - 'tests-mobile/kotlin/**'
-      - 'tests-mobile/scripts/**'
-      - '.github/workflows/mobile-appium-kotlin.yml'
 
 jobs:
   appium-kotlin:
@@ -58,11 +43,27 @@ jobs:
           chmod +x tests-mobile/kotlin/gradlew
           chmod +x tests-mobile/scripts/ci-run-suite.sh
 
+      - name: Download bootJar artifact
+        if: github.event_name != 'workflow_dispatch'
+        uses: actions/download-artifact@v4
+        with:
+          name: app-boot-jar
+          path: app/build/libs
+
+      - name: Download debug APK artifact
+        if: github.event_name != 'workflow_dispatch'
+        uses: actions/download-artifact@v4
+        with:
+          name: android-debug-apk
+          path: android/app/build/outputs/apk/debug
+
       - name: Build Spring Boot jar
+        if: github.event_name == 'workflow_dispatch'
         working-directory: app
         run: ./gradlew bootJar -x test
 
       - name: Build debug APK
+        if: github.event_name == 'workflow_dispatch'
         working-directory: android
         run: ./gradlew assembleDebug
 

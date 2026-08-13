@@ -1,17 +1,8 @@
 name: App Unit Tests
+
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - app/**
-      - .github/workflows/app-unit-tests.yml
-  pull_request:
-    branches:
-      - main
-    paths:
-      - app/**
-      - .github/workflows/app-unit-tests.yml
+  workflow_call:
+  workflow_dispatch:
 
 jobs:
   test:
