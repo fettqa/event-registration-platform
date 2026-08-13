@@ -1,7 +1,12 @@
-App CI
-Python API Tests
-E2E Java
-E2E Python
+![App CI](https://github.com/fettqa/event-registration-platform/actions/workflows/app-ci.yml/badge.svg)
+![Java API Tests](https://github.com/fettqa/event-registration-platform/actions/workflows/python-api-tests.yml/badge.svg)
+![Python API Tests](https://github.com/fettqa/event-registration-platform/actions/workflows/python-api-tests.yml/badge.svg)
+![Web-UI Java Playwright tests](https://github.com/fettqa/event-registration-platform/actions/workflows/e2e-java.yml/badge.svg)
+![Web-UI Python Playwright tests](https://github.com/fettqa/event-registration-platform/actions/workflows/e2e-python.yml/badge.svg)
+![Mobile Kotlin Appium tests](https://github.com/fettqa/event-registration-platform/actions/workflows/mobile-appium-kotlin.yml/badge.svg)
+![Mobile Python Appium tests](https://github.com/fettqa/event-registration-platform/actions/workflows/mobile-appium-python.yml/badge.svg)
+![Mobile Maestro tests](https://github.com/fettqa/event-registration-platform/actions/workflows/mobile-maestro.yml/badge.svg)
+![K6 Performance tests](https://github.com/fettqa/event-registration-platform/actions/workflows/k6.yml/badge.svg)
 
 ## Event Registration Platform
 

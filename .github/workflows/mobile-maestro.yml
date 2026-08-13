@@ -96,18 +96,26 @@ jobs:
         with:
           api-level: 34
           arch: x86_64
-          target: google_apis
+          target: default
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: ./tests-mobile/scripts/ci-run-suite.sh maestro
 
-      - name: Upload logs
+      - name: Upload app logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: mobile-maestro-logs
+          name: mobile-maestro-app-log
           path: app/app.log
+          if-no-files-found: ignore
+
+      - name: Upload Maestro report and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mobile-maestro-results
+          path: tests-mobile/maestro-results/
           if-no-files-found: ignore
 
       - name: Stop Spring Boot

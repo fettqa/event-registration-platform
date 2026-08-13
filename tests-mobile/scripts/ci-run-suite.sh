@@ -25,7 +25,16 @@ adb install -r "$APK"
 case "$SUITE" in
   maestro)
     command -v maestro >/dev/null
-    maestro test "$ROOT/tests-mobile/maestro"
+    RESULTS_DIR="$ROOT/tests-mobile/maestro-results"
+    rm -rf "$RESULTS_DIR"
+    mkdir -p "$RESULTS_DIR"
+    # JUnit XML + failing-step screenshots / logs
+    maestro test \
+      --format junit \
+      --output "$RESULTS_DIR/report.xml" \
+      --test-output-dir "$RESULTS_DIR" \
+      --debug-output "$RESULTS_DIR/debug" \
+      "$ROOT/tests-mobile/maestro"
     ;;
   python)
     curl -sf "$APPIUM_URL/status" | grep -q ready

@@ -106,9 +106,19 @@ Does **not** need Appium. Needs emulator + API + APK (steps above).
 maestro test tests-mobile\maestro
 # one flow:
 maestro test tests-mobile\maestro\02_login_admin.yaml
+
+# JUnit report + failing-step screenshots (same as CI)
+mkdir tests-mobile\maestro-results -Force
+maestro test `
+  --format junit --output tests-mobile\maestro-results\report.xml `
+  --test-output-dir tests-mobile\maestro-results `
+  --debug-output tests-mobile\maestro-results\debug `
+  tests-mobile\maestro
 ```
 
 Flows: `maestro/01_*.yaml` … `07_*.yaml` (guest, login, bad password, register, register-for-event, duplicate, search).
+
+CI (`mobile-maestro.yml`) uploads artifact **`mobile-maestro-results`** (`report.xml` + screenshots/logs).
 
 ---
 

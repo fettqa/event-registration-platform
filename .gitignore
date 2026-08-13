@@ -61,3 +61,6 @@ tests-perf/k6/results/*.json
 ajcore.*.txt
 **/ajcore.*.txt
 
+# Maestro local/CI artifacts
+tests-mobile/maestro-results/
+
