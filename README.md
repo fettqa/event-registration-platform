@@ -181,13 +181,13 @@ Mobile QA (Maestro / Appium): [`tests-mobile/README.md`](tests-mobile/README.md)
 
 ## CI workflows
 
-Push/PR entry point is **App CI** (`app-ci.yml`): path filters decide what runs, builds `bootJar` once, then calls suites via `workflow_call` (shared JAR; Android APK via child `android-app-ci.yml`).
+Push/PR entry point is **App CI** (`app-ci.yml`): path filters decide what runs; one Gradle invocation builds the JAR (`test bootJar` if `app/**` changed, else `bootJar -x test`), then calls suites via `workflow_call` (shared JAR; Android APK via child `android-app-ci.yml`).
 
 | Workflow | File | Role |
 |----------|------|------|
-| App CI | `app-ci.yml` | Orchestrator (push/PR): detect changes → JAR → selective suites |
-| App Unit Tests | `app-unit-tests.yml` | Called when `app/**` changes; also manual dispatch |
-| Android App CI | `android-app-ci.yml` | Child of App CI: Android unit + APK + mobile fan-out |
+| App CI | `app-ci.yml` | Orchestrator (push/PR): detect changes → one Gradle (`test bootJar` or `bootJar -x test`) → selective suites |
+| App Unit Tests | `app-unit-tests.yml` | Manual dispatch only (`./gradlew test`); on CI, units run inside App CI build when `app/**` changes |
+| Android App CI | `android-app-ci.yml` | Child of App CI: one Gradle (`test` / `assembleDebug` / both) + mobile fan-out |
 | API RestAssured Java | `api-restassured-java.yml` | `workflow_call` / manual (`bootJar` on dispatch) |
 | API httpx Python | `api-httpx-python.yml` | same |
 | Web Playwright Java | `web-playwright-java.yml` | same |

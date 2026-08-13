@@ -90,7 +90,7 @@ jobs:
               - 'tests-mobile/kotlin/**'
 
   build-jar:
-    name: Build bootJar
+    name: Build app
     needs: detect-changes
     if: |
       needs.detect-changes.outputs.app == 'true' ||
@@ -119,7 +119,13 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x gradlew
 
-      - name: Build bootJar
+      # app/** → one compile: unit tests + bootJar. Suite-only → JAR without tests.
+      - name: Test and bootJar
+        if: needs.detect-changes.outputs.app == 'true'
+        run: ./gradlew test bootJar
+
+      - name: bootJar only
+        if: needs.detect-changes.outputs.app != 'true'
         run: ./gradlew bootJar -x test
 
       - name: Upload bootJar artifact
@@ -130,12 +136,77 @@ jobs:
           retention-days: 3
           if-no-files-found: error
 
-  app-unit:
-    name: App unit tests
-    needs: detect-changes
-    if: needs.detect-changes.outputs.app == 'true'
-    uses: ./.github/workflows/app-unit-tests.yml
-    secrets: inherit
+      - name: Upload Allure results
+        if: always() && needs.detect-changes.outputs.app == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results-app-unit-tests
+          path: app/build/allure-results
+          if-no-files-found: ignore
+
+      - name: Generate Allure HTML report
+        if: always() && needs.detect-changes.outputs.app == 'true'
+        working-directory: app
+        run: |
+          if [ -d build/allure-results ] && [ "$(ls -A build/allure-results 2>/dev/null)" ]; then
+            npm install -g allure-commandline@2.29.0
+            allure generate build/allure-results -o build/allure-report --clean
+          fi
+
+      - name: Upload Allure HTML report
+        if: always() && needs.detect-changes.outputs.app == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report-app-unit-tests
+          path: app/build/allure-report
+          if-no-files-found: ignore
+
+      - name: Upload test report
+        if: failure() && needs.detect-changes.outputs.app == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: app/build/reports/tests/test
+
+  publish-app-unit-allure:
+    name: Publish App Unit Allure
+    needs: [detect-changes, build-jar]
+    if: |
+      always() &&
+      needs.detect-changes.outputs.app == 'true' &&
+      needs.build-jar.result != 'cancelled' &&
+      (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    concurrency:
+      group: github-pages-publish
+      cancel-in-progress: false
+      queue: max
+    permissions:
+      contents: write
+    steps:
+      - name: Download Allure Report
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-report-app-unit-tests
+          path: allure-report
+        continue-on-error: true
+
+      - name: Publish to GitHub Pages
+        if: hashFiles('allure-report/index.html') != ''
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
+          destination_dir: allure/app-unit-tests/${{ github.run_number }}
+          keep_files: true
+
+      - name: Summary
+        if: hashFiles('allure-report/index.html') != ''
+        run: |
+          REPORT_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/allure/app-unit-tests/${{ github.run_number }}"
+          echo "## Allure report" >> "$GITHUB_STEP_SUMMARY"
+          echo "- [View Allure Report](${REPORT_URL})" >> "$GITHUB_STEP_SUMMARY"
 
   api-restassured-java:
     name: API RestAssured Java

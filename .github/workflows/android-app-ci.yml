@@ -30,9 +30,9 @@ on:
         default: false
 
 jobs:
-  android-unit:
-    name: Android unit tests
-    if: inputs.run_android_unit
+  build-android:
+    name: Build Android
+    if: inputs.run_android_unit || inputs.build_apk
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -52,35 +52,21 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x gradlew
 
-      - name: Run unit tests
+      # One Gradle invocation: decide test / assemble from inputs.
+      - name: Unit tests and assembleDebug
+        if: ${{ inputs.run_android_unit && inputs.build_apk }}
+        run: ./gradlew test assembleDebug
+
+      - name: Unit tests only
+        if: ${{ inputs.run_android_unit && !inputs.build_apk }}
         run: ./gradlew test
 
-  build-apk:
-    name: Build debug APK
-    if: inputs.build_apk
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: android
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '21'
-          cache: gradle
-
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Make gradlew executable
-        run: chmod +x gradlew
-
-      - name: Assemble debug APK
+      - name: assembleDebug only
+        if: ${{ !inputs.run_android_unit && inputs.build_apk }}
         run: ./gradlew assembleDebug
 
       - name: Upload debug APK
+        if: inputs.build_apk
         uses: actions/upload-artifact@v4
         with:
           name: android-debug-apk
@@ -90,8 +76,8 @@ jobs:
 
   mobile-maestro:
     name: Mobile Maestro
-    needs: build-apk
-    if: always() && inputs.run_maestro && needs.build-apk.result == 'success'
+    needs: build-android
+    if: always() && inputs.run_maestro && inputs.build_apk && needs.build-android.result == 'success'
     permissions:
       contents: write
       actions: write
@@ -100,8 +86,8 @@ jobs:
 
   mobile-appium-python:
     name: Mobile Appium Python
-    needs: build-apk
-    if: always() && inputs.run_appium_python && needs.build-apk.result == 'success'
+    needs: build-android
+    if: always() && inputs.run_appium_python && inputs.build_apk && needs.build-android.result == 'success'
     permissions:
       contents: write
       actions: write
@@ -110,8 +96,8 @@ jobs:
 
   mobile-appium-kotlin:
     name: Mobile Appium Kotlin
-    needs: build-apk
-    if: always() && inputs.run_appium_kotlin && needs.build-apk.result == 'success'
+    needs: build-android
+    if: always() && inputs.run_appium_kotlin && inputs.build_apk && needs.build-android.result == 'success'
     permissions:
       contents: write
       actions: write
