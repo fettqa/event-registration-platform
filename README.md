@@ -1,12 +1,12 @@
-![App CI](https://github.com/fettqa/event-registration-platform/actions/workflows/app-ci.yml/badge.svg)
-![Java API Tests](https://github.com/fettqa/event-registration-platform/actions/workflows/python-api-tests.yml/badge.svg)
-![Python API Tests](https://github.com/fettqa/event-registration-platform/actions/workflows/python-api-tests.yml/badge.svg)
-![Web-UI Java Playwright tests](https://github.com/fettqa/event-registration-platform/actions/workflows/e2e-java.yml/badge.svg)
-![Web-UI Python Playwright tests](https://github.com/fettqa/event-registration-platform/actions/workflows/e2e-python.yml/badge.svg)
-![Mobile Kotlin Appium tests](https://github.com/fettqa/event-registration-platform/actions/workflows/mobile-appium-kotlin.yml/badge.svg)
-![Mobile Python Appium tests](https://github.com/fettqa/event-registration-platform/actions/workflows/mobile-appium-python.yml/badge.svg)
-![Mobile Maestro tests](https://github.com/fettqa/event-registration-platform/actions/workflows/mobile-maestro.yml/badge.svg)
-![K6 Performance tests](https://github.com/fettqa/event-registration-platform/actions/workflows/k6.yml/badge.svg)
+![App Unit Tests](https://github.com/fettqa/event-registration-platform/actions/workflows/app-unit-tests.yml/badge.svg)
+![API RestAssured Java](https://github.com/fettqa/event-registration-platform/actions/workflows/api-restassured-java.yml/badge.svg)
+![API httpx Python](https://github.com/fettqa/event-registration-platform/actions/workflows/api-httpx-python.yml/badge.svg)
+![Web Playwright Java](https://github.com/fettqa/event-registration-platform/actions/workflows/web-playwright-java.yml/badge.svg)
+![Web Playwright Python](https://github.com/fettqa/event-registration-platform/actions/workflows/web-playwright-python.yml/badge.svg)
+![Mobile Appium Kotlin](https://github.com/fettqa/event-registration-platform/actions/workflows/mobile-appium-kotlin.yml/badge.svg)
+![Mobile Appium Python](https://github.com/fettqa/event-registration-platform/actions/workflows/mobile-appium-python.yml/badge.svg)
+![Mobile Maestro](https://github.com/fettqa/event-registration-platform/actions/workflows/mobile-maestro.yml/badge.svg)
+![k6 Performance](https://github.com/fettqa/event-registration-platform/actions/workflows/k6-performance.yml/badge.svg)
 
 ## Event Registration Platform
 
@@ -178,22 +178,21 @@ Mobile QA (Maestro / Appium): [`tests-mobile/README.md`](tests-mobile/README.md)
 
 
 
-## CI
-
-Tests run automatically on push/PR via GitHub Actions.
-
 ## CI workflows
 
+| Workflow | File | Runs |
+|----------|------|------|
+| App Unit Tests | `app-unit-tests.yml` | `cd app && ./gradlew test` (MockMvc, in-app IT) |
+| API RestAssured Java | `api-restassured-java.yml` | live app + `tests-api/java` |
+| API httpx Python | `api-httpx-python.yml` | live app + `tests-api/python` (pytest + httpx) |
+| Web Playwright Java | `web-playwright-java.yml` | Playwright Java (`tests-web/java`) |
+| Web Playwright Python | `web-playwright-python.yml` | Playwright Python (`tests-web/python`) |
+| k6 Performance | `k6-performance.yml` | smoke / load / spike |
+| Mobile Maestro | `mobile-maestro.yml` | Maestro flows |
+| Mobile Appium Python | `mobile-appium-python.yml` | Appium + pytest |
+| Mobile Appium Kotlin | `mobile-appium-kotlin.yml` | Appium + Gradle |
 
-| Workflow         | Runs                         |
-| ---------------- | ---------------------------- |
-| App CI           | `./gradlew test`             |
-| Python API Tests | bootJar → start app → pytest |
-| E2E Java         | Playwright Java              |
-| E2E Python       | Playwright Python            |
-
-
-Badges at the top show current status.
+Badges at the top track these workflows.
 
 ## Deploy (Render)
 
@@ -364,23 +363,21 @@ allure serve allure-results
 
 ### GitHub Actions artifacts + GitHub Pages
 
+| Suite | Pages path |
+|-------|------------|
+| App Unit Tests | `…/allure/app-unit-tests/<run_number>/` |
+| API httpx Python | `…/allure/api-httpx-python/<run_number>/` |
+| Web Playwright Java | `…/allure/web-playwright-java/<run_number>/` |
+| Web Playwright Python | `…/allure/web-playwright-python/<run_number>/` |
+| k6 | `…/k6/<scenario>/<run_number>/<scenario>-report.html` |
 
-| Suite      | Pages URL pattern                                     |
-| ---------- | ----------------------------------------------------- |
-| App CI     | `…/allure/app/<run_number>/`                          |
-| Python API | `…/allure/python-api/<run_number>/`                   |
-| E2E Java   | `…/allure/e2e-java/<run_number>/`                     |
-| E2E Python | `…/allure/e2e-python/<run_number>/`                   |
-| k6         | `…/k6/<scenario>/<run_number>/<scenario>-report.html` |
-
-
-Example: `https://<owner>.github.io/<repo>/allure/app/42/`
+Example: `https://<owner>.github.io/<repo>/allure/app-unit-tests/42/`
 
 PR builds from the **same repo** also publish to Pages. Fork PRs keep artifacts only (token limits).
 
 **One-time setup:** Repo → Settings → Pages → Source = Deploy from branch → `gh-pages`.
 
-k6 **smoke** runs on push/PR when `app/`** or `tests-perf/k6/**` change.  
+k6 **smoke** runs on push/PR when `app/` or `tests-perf/k6/**` change.  
 Load/spike: Actions → **k6 Performance** → Run workflow → choose scenario.
 
 ## Python API tests

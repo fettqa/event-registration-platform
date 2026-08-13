@@ -1,17 +1,17 @@
-name: App CI
+name: App Unit Tests
 on:
   push:
     branches:
       - main
     paths:
       - app/**
-      - .github/workflows/app-ci.yml
+      - .github/workflows/app-unit-tests.yml
   pull_request:
     branches:
       - main
     paths:
       - app/**
-      - .github/workflows/app-ci.yml
+      - .github/workflows/app-unit-tests.yml
 
 jobs:
   test:
@@ -41,7 +41,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: allure-results-app
+          name: allure-results-app-unit-tests
           path: app/build/allure-results
           if-no-files-found: ignore
 
@@ -58,7 +58,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: allure-report-app
+          name: allure-report-app-unit-tests
           path: app/build/allure-report
           if-no-files-found: ignore
 
@@ -85,7 +85,7 @@ jobs:
       - name: Download Allure Report
         uses: actions/download-artifact@v4
         with:
-          name: allure-report-app
+          name: allure-report-app-unit-tests
           path: allure-report
 
       - name: Publish to GitHub Pages
@@ -93,11 +93,11 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./allure-report
-          destination_dir: allure/app/${{ github.run_number }}
+          destination_dir: allure/app-unit-tests/${{ github.run_number }}
           keep_files: true
 
       - name: Summary
         run: |
-          REPORT_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/allure/app/${{ github.run_number }}"
+          REPORT_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/allure/app-unit-tests/${{ github.run_number }}"
           echo "## Allure report" >> "$GITHUB_STEP_SUMMARY"
           echo "- [View Allure Report](${REPORT_URL})" >> "$GITHUB_STEP_SUMMARY"

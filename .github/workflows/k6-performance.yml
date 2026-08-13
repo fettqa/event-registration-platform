@@ -6,13 +6,13 @@ on:
     paths:
       - 'app/**'
       - 'tests-perf/k6/**'
-      - '.github/workflows/k6.yml'
+      - '.github/workflows/k6-performance.yml'
   pull_request:
     branches: [ main ]
     paths:
       - 'app/**'
       - 'tests-perf/k6/**'
-      - '.github/workflows/k6.yml'
+      - '.github/workflows/k6-performance.yml'
   workflow_dispatch:
     inputs:
       scenario:
