@@ -42,6 +42,12 @@ on:
       - '.github/workflows/mobile-appium-python.yml'
       - '.github/workflows/mobile-appium-kotlin.yml'
 
+# Reusable children publish Allure/k6 to gh-pages (contents: write).
+# Explicit permissions replace the default read-only GITHUB_TOKEN.
+permissions:
+  contents: write
+  actions: write
+
 jobs:
   detect-changes:
     runs-on: ubuntu-latest
