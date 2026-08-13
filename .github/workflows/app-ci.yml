@@ -1,0 +1,210 @@
+name: App CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'app/**'
+      - 'android/**'
+      - 'tests-api/**'
+      - 'tests-web/**'
+      - 'tests-perf/**'
+      - 'tests-mobile/**'
+      - '.github/workflows/app-ci.yml'
+      - '.github/workflows/app-unit-tests.yml'
+      - '.github/workflows/android-app-ci.yml'
+      - '.github/workflows/api-httpx-python.yml'
+      - '.github/workflows/api-restassured-java.yml'
+      - '.github/workflows/web-playwright-java.yml'
+      - '.github/workflows/web-playwright-python.yml'
+      - '.github/workflows/k6-performance.yml'
+      - '.github/workflows/mobile-maestro.yml'
+      - '.github/workflows/mobile-appium-python.yml'
+      - '.github/workflows/mobile-appium-kotlin.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'app/**'
+      - 'android/**'
+      - 'tests-api/**'
+      - 'tests-web/**'
+      - 'tests-perf/**'
+      - 'tests-mobile/**'
+      - '.github/workflows/app-ci.yml'
+      - '.github/workflows/app-unit-tests.yml'
+      - '.github/workflows/android-app-ci.yml'
+      - '.github/workflows/api-httpx-python.yml'
+      - '.github/workflows/api-restassured-java.yml'
+      - '.github/workflows/web-playwright-java.yml'
+      - '.github/workflows/web-playwright-python.yml'
+      - '.github/workflows/k6-performance.yml'
+      - '.github/workflows/mobile-maestro.yml'
+      - '.github/workflows/mobile-appium-python.yml'
+      - '.github/workflows/mobile-appium-kotlin.yml'
+
+# Reusable children publish Allure/k6 to gh-pages (contents: write).
+# Explicit permissions replace the default read-only GITHUB_TOKEN.
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      app: ${{ steps.filter.outputs.app }}
+      apiJava: ${{ steps.filter.outputs.apiJava }}
+      apiPython: ${{ steps.filter.outputs.apiPython }}
+      webJava: ${{ steps.filter.outputs.webJava }}
+      webPython: ${{ steps.filter.outputs.webPython }}
+      perf: ${{ steps.filter.outputs.perf }}
+      android: ${{ steps.filter.outputs.android }}
+      mobileMaestro: ${{ steps.filter.outputs.mobileMaestro }}
+      mobilePython: ${{ steps.filter.outputs.mobilePython }}
+      mobileKotlin: ${{ steps.filter.outputs.mobileKotlin }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            app:
+              - 'app/**'
+            apiJava:
+              - 'tests-api/java/**'
+            apiPython:
+              - 'tests-api/python/**'
+            webJava:
+              - 'tests-web/java/**'
+            webPython:
+              - 'tests-web/python/**'
+            perf:
+              - 'tests-perf/**'
+            android:
+              - 'android/**'
+            mobileMaestro:
+              - 'tests-mobile/maestro/**'
+            mobilePython:
+              - 'tests-mobile/python/**'
+            mobileKotlin:
+              - 'tests-mobile/kotlin/**'
+
+  build-jar:
+    name: Build bootJar
+    needs: detect-changes
+    if: |
+      needs.detect-changes.outputs.app == 'true' ||
+      needs.detect-changes.outputs.android == 'true' ||
+      needs.detect-changes.outputs.apiJava == 'true' ||
+      needs.detect-changes.outputs.apiPython == 'true' ||
+      needs.detect-changes.outputs.webJava == 'true' ||
+      needs.detect-changes.outputs.webPython == 'true' ||
+      needs.detect-changes.outputs.perf == 'true' ||
+      needs.detect-changes.outputs.mobileMaestro == 'true' ||
+      needs.detect-changes.outputs.mobilePython == 'true' ||
+      needs.detect-changes.outputs.mobileKotlin == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: gradle
+
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+
+      - name: Build bootJar
+        run: ./gradlew bootJar -x test
+
+      - name: Upload bootJar artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-boot-jar
+          path: app/build/libs/*SNAPSHOT.jar
+          retention-days: 3
+          if-no-files-found: error
+
+  app-unit:
+    name: App unit tests
+    needs: detect-changes
+    if: needs.detect-changes.outputs.app == 'true'
+    uses: ./.github/workflows/app-unit-tests.yml
+    secrets: inherit
+
+  api-restassured-java:
+    name: API RestAssured Java
+    needs: [detect-changes, build-jar]
+    if: |
+      always() &&
+      needs.build-jar.result == 'success' &&
+      (needs.detect-changes.outputs.app == 'true' || needs.detect-changes.outputs.apiJava == 'true')
+    uses: ./.github/workflows/api-restassured-java.yml
+    secrets: inherit
+
+  api-httpx-python:
+    name: API httpx Python
+    needs: [detect-changes, build-jar]
+    if: |
+      always() &&
+      needs.build-jar.result == 'success' &&
+      (needs.detect-changes.outputs.app == 'true' || needs.detect-changes.outputs.apiPython == 'true')
+    uses: ./.github/workflows/api-httpx-python.yml
+    secrets: inherit
+
+  web-playwright-java:
+    name: Web Playwright Java
+    needs: [detect-changes, build-jar]
+    if: |
+      always() &&
+      needs.build-jar.result == 'success' &&
+      (needs.detect-changes.outputs.app == 'true' || needs.detect-changes.outputs.webJava == 'true')
+    uses: ./.github/workflows/web-playwright-java.yml
+    secrets: inherit
+
+  web-playwright-python:
+    name: Web Playwright Python
+    needs: [detect-changes, build-jar]
+    if: |
+      always() &&
+      needs.build-jar.result == 'success' &&
+      (needs.detect-changes.outputs.app == 'true' || needs.detect-changes.outputs.webPython == 'true')
+    uses: ./.github/workflows/web-playwright-python.yml
+    secrets: inherit
+
+  k6-performance:
+    name: k6 Performance
+    needs: [detect-changes, build-jar]
+    if: |
+      always() &&
+      needs.build-jar.result == 'success' &&
+      (needs.detect-changes.outputs.app == 'true' || needs.detect-changes.outputs.perf == 'true')
+    uses: ./.github/workflows/k6-performance.yml
+    with:
+      scenario: smoke
+    secrets: inherit
+
+  android-ci:
+    name: Android App CI
+    needs: [detect-changes, build-jar]
+    if: |
+      always() &&
+      needs.build-jar.result == 'success' &&
+      (needs.detect-changes.outputs.app == 'true' ||
+       needs.detect-changes.outputs.android == 'true' ||
+       needs.detect-changes.outputs.mobileMaestro == 'true' ||
+       needs.detect-changes.outputs.mobilePython == 'true' ||
+       needs.detect-changes.outputs.mobileKotlin == 'true')
+    uses: ./.github/workflows/android-app-ci.yml
+    with:
+      run_android_unit: ${{ needs.detect-changes.outputs.android == 'true' }}
+      build_apk: ${{ needs.detect-changes.outputs.app == 'true' || needs.detect-changes.outputs.android == 'true' || needs.detect-changes.outputs.mobileMaestro == 'true' || needs.detect-changes.outputs.mobilePython == 'true' || needs.detect-changes.outputs.mobileKotlin == 'true' }}
+      run_maestro: ${{ needs.detect-changes.outputs.app == 'true' || needs.detect-changes.outputs.android == 'true' || needs.detect-changes.outputs.mobileMaestro == 'true' }}
+      run_appium_python: ${{ needs.detect-changes.outputs.app == 'true' || needs.detect-changes.outputs.android == 'true' || needs.detect-changes.outputs.mobilePython == 'true' }}
+      run_appium_kotlin: ${{ needs.detect-changes.outputs.app == 'true' || needs.detect-changes.outputs.android == 'true' || needs.detect-changes.outputs.mobileKotlin == 'true' }}
+    secrets: inherit
