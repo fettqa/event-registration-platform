@@ -1,0 +1,254 @@
+--------- beginning of system
+08-13 14:54:03.211 I/ActivityManager(  504): Force stopping com.fettqa.events.android appid=10141 user=0: clear data
+08-13 14:54:03.212 D/DisplayManagerService(  504): Drop pending events for gone uid 10141
+08-13 14:54:03.212 I/ActivityManager(  504): Killing 3046:com.fettqa.events.android/u0a141 (adj 0): stop com.fettqa.events.android due to clear data
+08-13 14:54:03.212 W/ActivityTaskManager(  504): Force removing ActivityRecord{fb5764a u0 com.fettqa.events.android/.ui.EventListActivity t13 f}}: app died, no saved state
+08-13 14:54:03.218 V/WindowManagerShell(  797): Transition requested: android.os.BinderProxy@6716917 TransitionRequestInfo { type = CLOSE, triggerTask = TaskInfo{userId=0 taskId=13 displayId=0 isRunning=false baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 pkg=com.fettqa.events.android cmp=com.fettqa.events.android/.ui.EventListActivity } baseActivity=null topActivity=null origActivity=null realActivity=ComponentInfo{com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity} numActivities=0 lastActiveTime=193997 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@b18f104} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=null launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isVisibleRequested=true isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+08-13 14:54:03.220 D/OomAdjuster(  504): Not killing cached processes
+08-13 14:54:03.221 E/TaskPersister(  504): File error accessing recents directory (directory doesn't exist?).
+08-13 14:54:03.222 I/ActivityManager(  504): Force stopping com.fettqa.events.android appid=10141 user=-1: clearApplicationUserData
+08-13 14:54:03.222 I/WindowManager(  504):   Force removing ActivityRecord{fb5764a u0 com.fettqa.events.android/.ui.EventListActivity t13 f} isExiting}
+08-13 14:54:03.222 W/WindowManager(  504): removeAppToken: Attempted to remove non-existing token: Token{d461ed8 ActivityRecord{fb5764a u0 com.fettqa.events.android/.ui.EventListActivity t13 f} isExiting}}
+--------- beginning of main
+08-13 14:54:03.222 E/libprocessgroup(  504): No such cgroup attribute: /sys/fs/cgroup/uid_4294877437/cgroup.freeze
+08-13 14:54:03.224 I/Zygote  (  326): Process 3046 exited due to signal 9 (Killed)
+08-13 14:54:03.225 W/libprocessgroup(  504): Failed to apply Frozen process profile: No such file or directory
+08-13 14:54:03.225 I/BpBinder(  389): onLastStrongRef automatically unlinking death recipients: 
+08-13 14:54:03.229 E/libprocessgroup(  504): No such cgroup attribute: /sys/fs/cgroup/uid_4294877437/cgroup.freeze
+08-13 14:54:03.229 W/libprocessgroup(  504): Failed to apply Unfrozen process profile: No such file or directory
+08-13 14:54:03.229 I/ImeTracker(  504): com.fettqa.events.android:4622b8c5: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_REMOVE_CLIENT
+08-13 14:54:03.230 I/WindowManager(  504): WIN DEATH: Window{7132c77 u0 com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity}
+08-13 14:54:03.230 W/InputManager-JNI(  504): Input channel object '7132c77 com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity (client)' was disposed without first being removed with the input manager!
+08-13 14:54:03.230 V/WindowManager(  504): Unknown focus tokens, dropping reportFocusChanged
+08-13 14:54:03.231 V/ActivityManager(  504): Got obituary of 3046:com.fettqa.events.android
+08-13 14:54:03.235 E/IPCThreadState( 1392): Binder transaction failure: 215428/29189/-22
+--------- beginning of kernel
+08-13 14:54:03.425 I/servicemanager(    0): Since 'artd' could not be found, trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+08-13 14:54:03.428 I/binder  (    0): 1392:1392 cannot find target node
+08-13 14:54:03.429 I/binder  (    0): 1392:1392 transaction async to 0:0 failed 215428/29189/-22, size 136-0 line 3210
+08-13 14:54:03.431 I/init    (    0): starting service 'artd'...
+08-13 14:54:03.431 I/binder  (    0): 1392:1392 cannot find target node
+08-13 14:54:03.239 E/IPCThreadState( 1392): Binder transaction failure: 215441/29189/-22
+08-13 14:54:03.433 I/binder  (    0): 1392:1392 transaction async to 0:0 failed 215441/29189/-22, size 136-0 line 3210
+08-13 14:54:03.240 I/ImeTracker(  504): com.fettqa.events.android:4622b8c5: onFailed at PHASE_SERVER_APPLY_IME_VISIBILITY
+08-13 14:54:03.244 W/WindowManager(  504): Failed to deliver inset control state change to w=Window{7132c77 u0 com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity EXITING}
+08-13 14:54:03.244 W/WindowManager(  504): android.os.DeadObjectException
+08-13 14:54:03.244 W/WindowManager(  504): 	at android.os.BinderProxy.transactNative(Native Method)
+08-13 14:54:03.244 W/WindowManager(  504): 	at android.os.BinderProxy.transact(BinderProxy.java:584)
+08-13 14:54:03.244 W/WindowManager(  504): 	at android.view.IWindow$Stub$Proxy.insetsControlChanged(IWindow.java:479)
+08-13 14:54:03.244 W/WindowManager(  504): 	at com.android.server.wm.WindowState.notifyInsetsControlChanged(WindowState.java:3802)
+08-13 14:54:03.244 W/WindowManager(  504): 	at com.android.server.wm.InsetsStateController.lambda$notifyPendingInsetsControlChanged$3(InsetsStateController.java:343)
+08-13 14:54:03.244 W/WindowManager(  504): 	at com.android.server.wm.InsetsStateController.$r8$lambda$8yykPRG1GyNq_J17QvL9d5xANMc(InsetsStateController.java:0)
+08-13 14:54:03.244 W/WindowManager(  504): 	at com.android.server.wm.InsetsStateController$$ExternalSyntheticLambda2.run(R8$$SyntheticClass:0)
+08-13 14:54:03.244 W/WindowManager(  504): 	at com.android.server.wm.WindowAnimator.executeAfterPrepareSurfacesRunnables(WindowAnimator.java:294)
+08-13 14:54:03.244 W/WindowManager(  504): 	at com.android.server.wm.WindowAnimator.animate(WindowAnimator.java:202)
+08-13 14:54:03.244 W/WindowManager(  504): 	at com.android.server.wm.WindowAnimator.lambda$new$1(WindowAnimator.java:99)
+08-13 14:54:03.244 W/WindowManager(  504): 	at com.android.server.wm.WindowAnimator.$r8$lambda$aHNu1uhcqxihX5NZc4McDDQPAyw(WindowAnimator.java:0)
+08-13 14:54:03.244 W/WindowManager(  504): 	at com.android.server.wm.WindowAnimator$$ExternalSyntheticLambda1.doFrame(R8$$SyntheticClass:0)
+08-13 14:54:03.244 W/WindowManager(  504): 	at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1337)
+08-13 14:54:03.244 W/WindowManager(  504): 	at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1348)
+08-13 14:54:03.244 W/WindowManager(  504): 	at android.view.Choreographer.doCallbacks(Choreographer.java:952)
+08-13 14:54:03.244 W/WindowManager(  504): 	at android.view.Choreographer.doFrame(Choreographer.java:878)
+08-13 14:54:03.244 W/WindowManager(  504): 	at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:1322)
+08-13 14:54:03.244 W/WindowManager(  504): 	at android.os.Handler.handleCallback(Handler.java:958)
+08-13 14:54:03.244 W/WindowManager(  504): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+08-13 14:54:03.244 W/WindowManager(  504): 	at android.os.Looper.loopOnce(Looper.java:205)
+08-13 14:54:03.244 W/WindowManager(  504): 	at android.os.Looper.loop(Looper.java:294)
+08-13 14:54:03.244 W/WindowManager(  504): 	at android.os.HandlerThread.run(HandlerThread.java:67)
+08-13 14:54:03.244 W/WindowManager(  504): 	at com.android.server.ServiceThread.run(ServiceThread.java:46)
+08-13 14:54:03.251 D/EGL_emulation( 1392): app_time_stats: avg=510.55ms min=198.28ms max=822.83ms count=2
+08-13 14:54:03.448 I/init    (    0): ... started service 'artd' has pid 3136
+08-13 14:54:03.449 I/init    (    0): Control message: Processed ctl.interface_start for 'aidl/artd' from pid: 132 (/system/bin/servicemanager)
+08-13 14:54:03.268 V/WindowManager(  504): Sent Transition #35 createdAt=08-13 14:54:03.212 via request=TransitionRequestInfo { type = CLOSE, triggerTask = TaskInfo{userId=0 taskId=13 displayId=0 isRunning=false baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 pkg=com.fettqa.events.android cmp=com.fettqa.events.android/.ui.EventListActivity } baseActivity=null topActivity=null origActivity=null realActivity=ComponentInfo{com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity} numActivities=0 lastActiveTime=193997 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{25448ee Task{18a19bb #13 type=standard A=10141:com.fettqa.events.android}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=null launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isVisibleRequested=true isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+08-13 14:54:03.269 V/WindowManager(  504):     startWCT=WindowContainerTransaction { changes = {} hops = [] errorCallbackToken=null taskFragmentOrganizer=null }
+08-13 14:54:03.269 V/WindowManager(  504):     info={id=35 t=CLOSE f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{RemoteToken{25448ee Task{18a19bb #13 type=standard A=10141:com.fettqa.events.android}}} m=CLOSE f=NONE leash=Surface(name=Task=13)/@0x7df0f0 sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0},{WCT{RemoteToken{1831c89 Task{9b278be #1 type=home}}} m=TO_FRONT f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0x6cbe808 sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0},{null m=TO_FRONT f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{e541c9a token=android.os.Binder@1324d45})/@0xbab93e1 sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0}]}
+08-13 14:54:03.270 I/artd    ( 3136): Starting artd
+08-13 14:54:03.270 I/AidlLazyServiceRegistrar( 3136): Registering service artd
+08-13 14:54:03.270 V/WindowManagerShell(  797): onTransitionReady android.os.BinderProxy@6716917: {id=35 t=CLOSE f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@5e924e9} m=CLOSE f=NONE leash=Surface(name=Task=13)/@0x2606ed sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0},{WCT{android.window.IWindowContainerToken$Stub$Proxy@2b9e56e} m=TO_FRONT f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0xe9b5922 sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0},{null m=TO_FRONT f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{e541c9a token=android.os.Binder@1324d45})/@0xf997fb3 sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0}]}
+08-13 14:54:03.271 V/WindowManagerShell(  797): Playing animation for (#35)android.os.BinderProxy@6716917@0
+08-13 14:54:03.271 V/WindowManagerShell(  797):  try handler com.android.wm.shell.transition.DefaultMixedHandler@8a14844
+08-13 14:54:03.271 V/WindowManagerShell(  797):  try handler com.android.wm.shell.keyguard.KeyguardTransitionHandler@948ad2d
+08-13 14:54:03.271 V/WindowManagerShell(  797):  try handler com.android.wm.shell.activityembedding.ActivityEmbeddingController@683a262
+08-13 14:54:03.271 V/WindowManagerShell(  797):  try handler com.android.wm.shell.recents.RecentsTransitionHandler@b522ff3
+08-13 14:54:03.271 V/ShellRecents(  797): RecentsTransitionHandler.startAnimation: no controller found
+08-13 14:54:03.271 V/WindowManagerShell(  797):  try handler com.android.wm.shell.pip.PipTransition@58ca4b0
+08-13 14:54:03.271 V/WindowManagerShell(  797):  try handler com.android.wm.shell.splitscreen.StageCoordinator@72fef29
+08-13 14:54:03.271 V/WindowManagerShell(  797):  try handler com.android.wm.shell.transition.RemoteTransitionHandler@cfd82ae
+08-13 14:54:03.271 V/WindowManagerShell(  797): Transition doesn't have explicit remote, search filters for match for {id=35 t=CLOSE f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@5e924e9} m=CLOSE f=NONE leash=Surface(name=Task=13)/@0x2606ed sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0},{WCT{android.window.IWindowContainerToken$Stub$Proxy@2b9e56e} m=TO_FRONT f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0xe9b5922 sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0},{null m=TO_FRONT f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{e541c9a token=android.os.Binder@1324d45})/@0xf997fb3 sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0}]}
+08-13 14:54:03.272 V/WindowManagerShell(  797):  Checking filter Pair{{types=[] flags=0x0] notFlags=0x100 checks=[{atype=home independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=TOP topActivity=ComponentInfo{com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher}},{atype=standard independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@655d84f, appThread = android.app.IApplicationThread$Stub$Proxy@68f5bdc, debugName = QuickstepLaunchHome }}
+08-13 14:54:03.272 V/WindowManagerShell(  797):  Delegate animation for #35 to null
+08-13 14:54:03.272 V/WindowManagerShell(  797):  try handler com.android.wm.shell.transition.DefaultTransitionHandler@12f54e5
+08-13 14:54:03.272 V/WindowManagerShell(  797): start default transition animation, info = {id=35 t=CLOSE f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@5e924e9} m=CLOSE f=NONE leash=Surface(name=Task=13)/@0x2606ed sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0},{WCT{android.window.IWindowContainerToken$Stub$Proxy@2b9e56e} m=TO_FRONT f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0xe9b5922 sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0},{null m=TO_FRONT f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{e541c9a token=android.os.Binder@1324d45})/@0xf997fb3 sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0}]}
+08-13 14:54:03.273 V/WindowManagerShell(  797): loadAnimation: anim=android.view.animation.AnimationSet@1bb5c9c animAttr=0x10 type=CLOSE isEntrance=true
+08-13 14:54:03.273 V/WindowManagerShell(  797): loadAnimation: anim=android.view.animation.AnimationSet@ab322b animAttr=0x11 type=CLOSE isEntrance=false
+08-13 14:54:03.273 V/WindowManagerShell(  797):  animated by com.android.wm.shell.transition.DefaultTransitionHandler@12f54e5
+08-13 14:54:03.274 I/AidlLazyServiceRegistrar( 3136): Process has 1 (of 1 available) client(s) in use after notification artd has clients: 1
+08-13 14:54:03.467 I/BpBinder(    0): onLastStrongRef automatically unlinking death recipients:
+08-13 14:54:03.469 I/servicemanager(    0): Notifying artd they do (previously: don't) have clients when service is guaranteed to be in use
+08-13 14:54:03.278 V/WindowManagerShell(  797): Transition animation finished (aborted=false), notifying core (#35)android.os.BinderProxy@6716917@0
+08-13 14:54:03.279 W/WindowManager(  504): Exception thrown during dispatchAppVisibility Window{7132c77 u0 com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity EXITING}
+08-13 14:54:03.279 W/WindowManager(  504): android.os.DeadObjectException
+08-13 14:54:03.279 W/WindowManager(  504): 	at android.os.BinderProxy.transactNative(Native Method)
+08-13 14:54:03.279 W/WindowManager(  504): 	at android.os.BinderProxy.transact(BinderProxy.java:584)
+08-13 14:54:03.279 W/WindowManager(  504): 	at android.view.IWindow$Stub$Proxy.dispatchAppVisibility(IWindow.java:546)
+08-13 14:54:03.279 W/WindowManager(  504): 	at com.android.server.wm.WindowState.sendAppVisibilityToClients(WindowState.java:3271)
+08-13 14:54:03.279 W/WindowManager(  504): 	at com.android.server.wm.WindowContainer.sendAppVisibilityToClients(WindowContainer.java:1221)
+08-13 14:54:03.279 W/WindowManager(  504): 	at com.android.server.wm.WindowToken.setClientVisible(WindowToken.java:409)
+08-13 14:54:03.279 W/WindowManager(  504): 	at com.android.server.wm.ActivityRecord.setClientVisible(ActivityRecord.java:6946)
+08-13 14:54:03.279 W/WindowManager(  504): 	at com.android.server.wm.ActivityRecord.postApplyAnimation(ActivityRecord.java:5637)
+08-13 14:54:03.279 W/WindowManager(  504): 	at com.android.server.wm.ActivityRecord.commitVisibility(ActivityRecord.java:5580)
+08-13 14:54:03.279 W/WindowManager(  504): 	at com.android.server.wm.Transition.finishTransition(Transition.java:1151)
+08-13 14:54:03.279 W/WindowManager(  504): 	at com.android.server.wm.TransitionController.finishTransition(TransitionController.java:868)
+08-13 14:54:03.279 W/WindowManager(  504): 	at com.android.server.wm.WindowOrganizerController.finishTransition(WindowOrganizerController.java:396)
+08-13 14:54:03.279 W/WindowManager(  504): 	at android.window.IWindowOrganizerController$Stub.onTransact(IWindowOrganizerController.java:286)
+08-13 14:54:03.279 W/WindowManager(  504): 	at com.android.server.wm.WindowOrganizerController.onTransact(WindowOrganizerController.java:181)
+08-13 14:54:03.279 W/WindowManager(  504): 	at android.os.Binder.execTransactInternal(Binder.java:1344)
+08-13 14:54:03.279 W/WindowManager(  504): 	at android.os.Binder.execTransact(Binder.java:1275)
+08-13 14:54:03.279 I/Process (  504): Sending signal. PID: 3046 SIG: 9
+08-13 14:54:03.280 V/WindowManager(  504): Finish Transition #35: created at 08-13 14:54:03.212 collect-started=0.021ms request-sent=0.059ms started=7.158ms ready=7.149ms sent=54.775ms finished=66.676ms
+08-13 14:54:03.282 D/CarrierSvcBindHelper( 1007): onHandleForceStop: [com.fettqa.events.android]
+08-13 14:54:03.282 D/CarrierSvcBindHelper( 1007): No carrier app for: 0
+08-13 14:54:03.284 V/WindowManagerShell(  797): Track 0 became idle
+08-13 14:54:03.284 V/WindowManagerShell(  797): All active transition animations finished
+08-13 14:54:03.286 I/ImeTracker(  504): com.android.launcher3:a676d84: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_UNSPECIFIED_WINDOW
+08-13 14:54:03.286 I/ImeTracker(  504): com.android.launcher3:a676d84: onCancelled at PHASE_SERVER_SHOULD_HIDE
+08-13 14:54:03.286 W/ActivityManager(  504): setHasOverlayUi called on unknown pid: 3046
+08-13 14:54:03.294 V/MediaPlayerList(  979): mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_DATA_CLEARED
+08-13 14:54:03.294 V/MediaPlayerList(  979): mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_DATA_CLEARED
+08-13 14:54:03.295 D/ActivityManager(  504): sync unfroze 1484 com.android.documentsui for 3
+08-13 14:54:03.295 D/ActivityManager(  504): sync unfroze 798 com.android.permissioncontroller for 3
+08-13 14:54:03.309 E/BpTransactionCompletedListener(  389): Failed to transact (-32)
+08-13 14:54:03.314 D/EGL_emulation(  797): app_time_stats: avg=3279.96ms min=3279.96ms max=3279.96ms count=1
+08-13 14:54:03.316 I/MediaProvider( 1454): Begin Intent { act=android.intent.action.PACKAGE_DATA_CLEARED dat=package: flg=0x5000010 cmp=com.android.providers.media.module/com.android.providers.media.MediaService (has extras) }
+08-13 14:54:03.317 D/MediaProvider( 1454): Deleted 0 Android/media items belonging to com.fettqa.events.android on /data/user/0/com.android.providers.media.module/databases/external.db
+08-13 14:54:03.318 D/MediaGrants( 1454): Removed 0 media_grants for 0 user for com.fettqa.events.android. Reason: Package orphaned
+08-13 14:54:03.318 I/MediaProvider( 1454): End Intent { act=android.intent.action.PACKAGE_DATA_CLEARED dat=package: flg=0x5000010 cmp=com.android.providers.media.module/com.android.providers.media.MediaService (has extras) }
+08-13 14:54:03.329 D/SafetySourceDataValidator(  504): No cert check requested for package com.android.permissioncontroller
+08-13 14:54:03.336 D/PersistedStoragePackageUninstalledReceiver(  798): Received android.intent.action.PACKAGE_DATA_CLEARED for com.fettqa.events.android for u0
+08-13 14:54:03.490 I/ActivityManager(  504): Force stopping com.fettqa.events.android appid=10141 user=0: from pid 3170
+08-13 14:54:03.494 D/CarrierSvcBindHelper( 1007): onHandleForceStop: [com.fettqa.events.android]
+08-13 14:54:03.494 D/CarrierSvcBindHelper( 1007): No carrier app for: 0
+08-13 14:54:03.513 D/CompatibilityChangeReporter(  504): Compat change id reported: 161252188; UID 10141; state: DISABLED
+08-13 14:54:03.516 D/CompatibilityChangeReporter(  504): Compat change id reported: 205907456; UID 10141; state: ENABLED
+08-13 14:54:03.517 I/ActivityTaskManager(  504): START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 pkg=com.fettqa.events.android cmp=com.fettqa.events.android/.ui.EventListActivity} with LAUNCH_MULTIPLE from uid 10142 (BAL_ALLOW_PERMISSION) result code=0
+08-13 14:54:03.517 D/CompatibilityChangeReporter(  504): Compat change id reported: 135634846; UID 10141; state: DISABLED
+08-13 14:54:03.517 D/CompatibilityChangeReporter(  504): Compat change id reported: 177438394; UID 10141; state: DISABLED
+08-13 14:54:03.517 D/CompatibilityChangeReporter(  504): Compat change id reported: 135772972; UID 10141; state: DISABLED
+08-13 14:54:03.517 D/CompatibilityChangeReporter(  504): Compat change id reported: 135754954; UID 10141; state: ENABLED
+08-13 14:54:03.518 D/SplashScreenView(  797): Build android.window.SplashScreenView{4a3855d V.E...... ......ID 0,0-0,0}
+08-13 14:54:03.518 D/SplashScreenView(  797): Icon: view: null drawable: null size: 0
+08-13 14:54:03.518 D/SplashScreenView(  797): Branding: view: android.view.View{f304ed2 G.ED..... ......I. 0,0-0,0 #10204ef android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+08-13 14:54:03.519 D/CompatibilityChangeReporter(  504): Compat change id reported: 143937733; UID 10141; state: ENABLED
+08-13 14:54:03.522 V/WindowManagerShell(  797): Transition requested: android.os.BinderProxy@a981a59 TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=14 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 pkg=com.fettqa.events.android cmp=com.fettqa.events.android/.ui.EventListActivity } baseActivity=ComponentInfo{com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity} topActivity=ComponentInfo{com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity} origActivity=null realActivity=ComponentInfo{com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity} numActivities=1 lastActiveTime=206145 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@4a0861e} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=ActivityInfo{a6a6eff com.fettqa.events.android.ui.EventListActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+08-13 14:54:03.526 D/CompatibilityChangeReporter(  504): Compat change id reported: 265195908; UID 10141; state: ENABLED
+08-13 14:54:03.526 D/Zygote  (  326): Forked child process 3178
+08-13 14:54:03.529 I/ActivityManager(  504): Start proc 3178:com.fettqa.events.android/u0a141 for next-top-activity {com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity}
+08-13 14:54:03.530 D/CoreBackPreview(  504): Window{5df4023 u0 Splash Screen com.fettqa.events.android}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@5dbbb7f, mPriority=0, mIsAnimationCallback=false}
+08-13 14:54:03.539 V/WindowManager(  504): Sent Transition #36 createdAt=08-13 14:54:03.514 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=14 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 pkg=com.fettqa.events.android cmp=com.fettqa.events.android/.ui.EventListActivity } baseActivity=ComponentInfo{com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity} topActivity=ComponentInfo{com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity} origActivity=null realActivity=ComponentInfo{com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity} numActivities=1 lastActiveTime=206145 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{613fcaa Task{a1f0287 #14 type=standard A=10141:com.fettqa.events.android}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=ActivityInfo{fa0fc38 com.fettqa.events.android.ui.EventListActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+08-13 14:54:03.540 V/WindowManager(  504):     startWCT=WindowContainerTransaction { changes = {} hops = [] errorCallbackToken=null taskFragmentOrganizer=null }
+08-13 14:54:03.540 V/WindowManager(  504):     info={id=36 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{RemoteToken{613fcaa Task{a1f0287 #14 type=standard A=10141:com.fettqa.events.android}}} m=OPEN f=NONE leash=Surface(name=Task=14)/@0x4e9b74c sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0},{WCT{RemoteToken{1831c89 Task{9b278be #1 type=home}}} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0x6cbe808 sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0}]}
+08-13 14:54:03.540 V/WindowManagerShell(  797): onTransitionReady android.os.BinderProxy@a981a59: {id=36 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@d861082} m=OPEN f=NONE leash=Surface(name=Task=14)/@0xea93ef7 sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0},{WCT{android.window.IWindowContainerToken$Stub$Proxy@1a8d393} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0x9494164 sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0}]}
+08-13 14:54:03.540 V/WindowManagerShell(  797): Playing animation for (#36)android.os.BinderProxy@a981a59@0
+08-13 14:54:03.540 V/WindowManagerShell(  797):  try handler com.android.wm.shell.transition.DefaultMixedHandler@8a14844
+08-13 14:54:03.540 V/WindowManagerShell(  797):  try handler com.android.wm.shell.keyguard.KeyguardTransitionHandler@948ad2d
+08-13 14:54:03.540 V/WindowManagerShell(  797):  try handler com.android.wm.shell.activityembedding.ActivityEmbeddingController@683a262
+08-13 14:54:03.540 V/WindowManagerShell(  797):  try handler com.android.wm.shell.recents.RecentsTransitionHandler@b522ff3
+08-13 14:54:03.540 V/ShellRecents(  797): RecentsTransitionHandler.startAnimation: no controller found
+08-13 14:54:03.540 V/WindowManagerShell(  797):  try handler com.android.wm.shell.pip.PipTransition@58ca4b0
+08-13 14:54:03.540 V/WindowManagerShell(  797):  try handler com.android.wm.shell.splitscreen.StageCoordinator@72fef29
+08-13 14:54:03.540 V/WindowManagerShell(  797):  try handler com.android.wm.shell.transition.RemoteTransitionHandler@cfd82ae
+08-13 14:54:03.540 V/WindowManagerShell(  797): Transition doesn't have explicit remote, search filters for match for {id=36 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@d861082} m=OPEN f=NONE leash=Surface(name=Task=14)/@0xea93ef7 sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0},{WCT{android.window.IWindowContainerToken$Stub$Proxy@1a8d393} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0x9494164 sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0}]}
+08-13 14:54:03.540 V/WindowManagerShell(  797):  Checking filter Pair{{types=[] flags=0x0] notFlags=0x100 checks=[{atype=home independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=TOP topActivity=ComponentInfo{com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher}},{atype=standard independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@655d84f, appThread = android.app.IApplicationThread$Stub$Proxy@68f5bdc, debugName = QuickstepLaunchHome }}
+08-13 14:54:03.540 V/WindowManagerShell(  797):  Delegate animation for #36 to null
+08-13 14:54:03.540 V/WindowManagerShell(  797):  try handler com.android.wm.shell.transition.DefaultTransitionHandler@12f54e5
+08-13 14:54:03.540 V/WindowManagerShell(  797): start default transition animation, info = {id=36 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@d861082} m=OPEN f=NONE leash=Surface(name=Task=14)/@0xea93ef7 sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0},{WCT{android.window.IWindowContainerToken$Stub$Proxy@1a8d393} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0x9494164 sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0}]}
+08-13 14:54:03.541 V/WindowManagerShell(  797): loadAnimation: anim=android.view.animation.AnimationSet@a674bc9 animAttr=0x13 type=OPEN isEntrance=false
+08-13 14:54:03.541 V/WindowManagerShell(  797): loadAnimation: anim=android.view.animation.AnimationSet@a8fdb85 animAttr=0x12 type=OPEN isEntrance=true
+08-13 14:54:03.542 I/BpBinder(  389): onLastStrongRef automatically unlinking death recipients: 
+08-13 14:54:03.542 V/WindowManagerShell(  797):  animated by com.android.wm.shell.transition.DefaultTransitionHandler@12f54e5
+08-13 14:54:03.553 I/.events.android( 3178): Late-enabling -Xcheck:jni
+08-13 14:54:03.566 V/WindowManagerShell(  797): Transition animation finished (aborted=false), notifying core (#36)android.os.BinderProxy@a981a59@0
+08-13 14:54:03.567 V/WindowManager(  504): Finish Transition #36: created at 08-13 14:54:03.514 collect-started=0.013ms request-sent=2.474ms started=10.214ms ready=24.069ms sent=24.958ms finished=52.663ms
+08-13 14:54:03.568 V/WindowManagerShell(  797): Track 0 became idle
+08-13 14:54:03.568 V/WindowManagerShell(  797): All active transition animations finished
+08-13 14:54:03.572 I/.events.android( 3178): Using CollectorTypeCC GC.
+08-13 14:54:03.573 W/.events.android( 3178): Unexpected CPU variant for x86: x86_64.
+08-13 14:54:03.573 W/.events.android( 3178): Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, tremont, kabylake, default
+08-13 14:54:03.581 I/adbd    (  402): jdwp connection from 3178
+08-13 14:54:03.589 I/AppsFilter(  504): interaction: PackageSetting{4679b77 com.fettqa.events.android/10141} -> PackageSetting{477f845 dev.mobile.maestro/10142} BLOCKED
+08-13 14:54:03.604 D/CompatibilityChangeReporter( 3178): Compat change id reported: 171979766; UID 10141; state: ENABLED
+08-13 14:54:03.605 D/CompatibilityChangeReporter( 3178): Compat change id reported: 242716250; UID 10141; state: ENABLED
+08-13 14:54:03.608 D/CompatibilityChangeReporter(  504): Compat change id reported: 170503758; UID 10141; state: ENABLED
+08-13 14:54:03.610 W/ziparchive( 3178): Unable to open '/data/app/~~2q2Sa2mgDNcrgekNavJjWA==/com.fettqa.events.android-YDoiASNox4w2dTHCEmXbzA==/base.dm': No such file or directory
+08-13 14:54:03.610 W/ziparchive( 3178): Unable to open '/data/app/~~2q2Sa2mgDNcrgekNavJjWA==/com.fettqa.events.android-YDoiASNox4w2dTHCEmXbzA==/base.dm': No such file or directory
+08-13 14:54:03.704 D/nativeloader( 3178): Configuring clns-6 for other apk /data/app/~~2q2Sa2mgDNcrgekNavJjWA==/com.fettqa.events.android-YDoiASNox4w2dTHCEmXbzA==/base.apk. target_sdk_version=37, uses_libraries=, library_path=/data/app/~~2q2Sa2mgDNcrgekNavJjWA==/com.fettqa.events.android-YDoiASNox4w2dTHCEmXbzA==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.fettqa.events.android
+08-13 14:54:03.709 V/GraphicsEnvironment( 3178): Currently set values for:
+08-13 14:54:03.709 V/GraphicsEnvironment( 3178):   angle_gl_driver_selection_pkgs=[]
+08-13 14:54:03.709 V/GraphicsEnvironment( 3178):   angle_gl_driver_selection_values=[]
+08-13 14:54:03.709 V/GraphicsEnvironment( 3178): ANGLE GameManagerService for com.fettqa.events.android: false
+08-13 14:54:03.710 V/GraphicsEnvironment( 3178): com.fettqa.events.android is not listed in per-application setting
+08-13 14:54:03.710 V/GraphicsEnvironment( 3178): Neither updatable production driver nor prerelease driver is supported.
+08-13 14:54:03.720 I/ActivityManager(  504): Flag disabled. Ignoring finishAttachApplication from uid: 10141. pid: 3178
+08-13 14:54:03.724 D/libEGL  ( 3178): loaded /vendor/lib64/egl/libEGL_emulation.so
+08-13 14:54:03.726 D/libEGL  ( 3178): loaded /vendor/lib64/egl/libGLESv1_CM_emulation.so
+08-13 14:54:03.727 D/libEGL  ( 3178): loaded /vendor/lib64/egl/libGLESv2_emulation.so
+08-13 14:54:03.740 D/AppCompatDelegate( 3178): Checking for metadata for AppLocalesMetadataHolderService : Service not found
+08-13 14:54:03.772 D/CompatibilityChangeReporter( 3178): Compat change id reported: 210923482; UID 10141; state: ENABLED
+08-13 14:54:03.778 D/StatusBarIconController(  797): ignoring old pipeline callbacks, because the new mobile icons are enabled
+08-13 14:54:03.867 W/.events.android( 3178): Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (unsupported, reflection, allowed)
+08-13 14:54:03.922 I/okhttp.OkHttpClient( 3178): --> GET http://127.0.0.1:8080/api/events?page=0&size=10
+08-13 14:54:03.926 D/TrafficStats( 3178): tagSocket(76) with statsTag=0xffffffff, statsUid=-1
+08-13 14:54:03.928 D/CompatibilityChangeReporter( 3178): Compat change id reported: 237531167; UID 10141; state: DISABLED
+08-13 14:54:03.929 I/okhttp.OkHttpClient( 3178): --> GET http://127.0.0.1:8080/api/events?page=0&size=10
+08-13 14:54:03.929 W/OpenGLRenderer( 3178): Unknown dataspace 0
+08-13 14:54:03.934 D/TrafficStats( 3178): tagSocket(77) with statsTag=0xffffffff, statsUid=-1
+08-13 14:54:03.947 D/AutofillManager( 3178): view not autofillable - not passing ime action check
+08-13 14:54:03.948 D/AutofillManager( 3178): view not autofillable - not passing ime action check
+08-13 14:54:03.953 I/okhttp.OkHttpClient( 3178): <-- 200 http://127.0.0.1:8080/api/events?page=0&size=10 (23ms, unknown-length body)
+08-13 14:54:03.955 I/okhttp.OkHttpClient( 3178): <-- 200 http://127.0.0.1:8080/api/events?page=0&size=10 (31ms, unknown-length body)
+08-13 14:54:03.958 D/CoreBackPreview(  504): Window{314ec26 u0 com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@c906bd, mPriority=0, mIsAnimationCallback=false}
+08-13 14:54:03.974 W/OpenGLRenderer( 3178): Failed to initialize 101010-2 format, error = EGL_SUCCESS
+08-13 14:54:03.986 I/hwservicemanager(  133): getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+08-13 14:54:03.986 I/Gralloc4( 3178): mapper 4.x is not supported
+08-13 14:54:04.180 I/servicemanager(    0): Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+08-13 14:54:04.034 W/AccessibilityManagerService(  504):  wait for adding window timeout: 31
+08-13 14:54:04.222 I/ActivityTaskManager(  504): Destroy timeout of remove-task, attempt to kill Task{18a19bb #13 type=standard A=10141:com.fettqa.events.android}
+08-13 14:54:04.415 W/ziparchive(  504): Unable to open '/data/app/~~2q2Sa2mgDNcrgekNavJjWA==/com.fettqa.events.android-YDoiASNox4w2dTHCEmXbzA==/base.dm': No such file or directory
+08-13 14:54:04.416 I/ActivityTaskManager(  504): Displayed com.fettqa.events.android/.ui.EventListActivity for user 0: +901ms
+08-13 14:54:04.418 W/QueryController( 2333): Could not detect idle state.
+08-13 14:54:04.418 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:54:04.419 W/QueryController( 2333): Could not detect idle state.
+08-13 14:54:04.419 W/QueryController( 2333): Could not detect idle state.
+08-13 14:54:04.431 W/WindowOnBackDispatcher(  797): sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@55d24cc
+08-13 14:54:04.431 D/CoreBackPreview(  504): Window{5df4023 u0 Splash Screen com.fettqa.events.android EXITING}: Setting back callback null
+08-13 14:54:04.432 W/InputManager-JNI(  504): Input channel object '5df4023 Splash Screen com.fettqa.events.android (client)' was disposed without first being removed with the input manager!
+08-13 14:54:04.434 I/ImeTracker( 1049): com.android.launcher3:6f9935bf: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT
+08-13 14:54:04.434 I/ImeTracker(  504): com.android.launcher3:6f9935bf: onCancelled at PHASE_SERVER_SHOULD_HIDE
+08-13 14:54:04.448 D/EGL_emulation(  797): app_time_stats: avg=223.98ms min=1.36ms max=669.55ms count=5
+08-13 14:54:04.687 I/Maestro ( 2333): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@1198c; boundsInParent: Rect(0, 0 - 0, 56); boundsInScreen: Rect(320, 24 - 320, 80); boundsInWindow: Rect(320, 24 - 320, 80); packageName: com.fettqa.events.android; className: androidx.appcompat.widget.LinearLayoutCompat; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+08-13 14:54:04.691 D/Maestro ( 2333): View hierarchy received in 273 ms
+08-13 14:54:04.693 I/OpenGLRenderer( 3178): Davey! duration=728ms; Flags=0, FrameTimelineVsyncId=16713, IntendedVsync=206587699622, Vsync=207037699604, InputEventId=0, HandleInputStart=207052515966, AnimationStart=207052518030, PerformTraversalsStart=207052875758, DrawStart=207093308489, FrameDeadline=207071032936, FrameInterval=207052344266, FrameStartTime=16666666, SyncQueued=207101509730, SyncStart=207101557100, IssueDrawCommandsStart=207101611392, SwapBuffers=207116729266, FrameCompleted=207315768308, DequeueBufferDuration=1973, QueueBufferDuration=4311888, GpuCompleted=207315719807, SwapBuffersCompleted=207315768308, DisplayPresentTime=0, CommandSubmissionCompleted=207116729266, 
+08-13 14:54:04.700 D/CompatibilityChangeReporter(  504): Compat change id reported: 214016041; UID 10141; state: ENABLED
+08-13 14:54:04.700 I/ImeTracker(  504): com.fettqa.events.android:4c5f5da0: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_UNSPECIFIED_WINDOW
+08-13 14:54:04.700 I/ImeTracker(  504): com.fettqa.events.android:4c5f5da0: onCancelled at PHASE_SERVER_SHOULD_HIDE
+08-13 14:54:05.172 D/android.hardware.audio@7.1-impl.ranchu(  331): threadLoop: entering standby, frames: 3457664
+08-13 14:54:05.201 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:54:05.202 W/QueryController( 2333): Could not detect idle state.
+08-13 14:54:05.203 W/QueryController( 2333): Could not detect idle state.
+08-13 14:54:05.217 I/Maestro ( 2333): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@1198c; boundsInParent: Rect(0, 0 - 0, 56); boundsInScreen: Rect(320, 24 - 320, 80); boundsInWindow: Rect(320, 24 - 320, 80); packageName: com.fettqa.events.android; className: androidx.appcompat.widget.LinearLayoutCompat; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+08-13 14:54:05.234 D/Maestro ( 2333): View hierarchy received in 33 ms
+08-13 14:54:05.285 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:54:05.285 W/QueryController( 2333): Could not detect idle state.
+08-13 14:54:05.285 W/QueryController( 2333): Could not detect idle state.
+08-13 14:54:05.297 I/Maestro ( 2333): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@1198c; boundsInParent: Rect(0, 0 - 0, 56); boundsInScreen: Rect(320, 24 - 320, 80); boundsInWindow: Rect(320, 24 - 320, 80); packageName: com.fettqa.events.android; className: androidx.appcompat.widget.LinearLayoutCompat; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+08-13 14:54:05.310 D/Maestro ( 2333): View hierarchy received in 25 ms
+08-13 14:54:05.360 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:54:05.361 W/QueryController( 2333): Could not detect idle state.
+08-13 14:54:05.361 W/QueryController( 2333): Could not detect idle state.
+08-13 14:54:05.372 I/Maestro ( 2333): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@1198c; boundsInParent: Rect(0, 0 - 0, 56); boundsInScreen: Rect(320, 24 - 320, 80); boundsInWindow: Rect(320, 24 - 320, 80); packageName: com.fettqa.events.android; className: androidx.appcompat.widget.LinearLayoutCompat; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+08-13 14:54:05.389 D/Maestro ( 2333): View hierarchy received in 29 ms
+08-13 14:54:05.478 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:54:05.479 W/QueryController( 2333): Could not detect idle state.
+08-13 14:54:05.479 W/QueryController( 2333): Could not detect idle state.
+08-13 14:54:05.491 I/Maestro ( 2333): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@1198c; boundsInParent: Rect(0, 0 - 0, 56); boundsInScreen: Rect(320, 24 - 320, 80); boundsInWindow: Rect(320, 24 - 320, 80); packageName: com.fettqa.events.android; className: androidx.appcompat.widget.LinearLayoutCompat; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+08-13 14:54:05.508 D/Maestro ( 2333): View hierarchy received in 30 ms

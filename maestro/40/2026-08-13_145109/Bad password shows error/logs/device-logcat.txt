@@ -1,0 +1,733 @@
+--------- beginning of system
+08-13 14:51:16.406 I/ActivityManager(  504): Force stopping com.fettqa.events.android appid=10141 user=0: clear data
+--------- beginning of main
+08-13 14:51:16.406 E/libprocessgroup(  504): No such cgroup attribute: /sys/fs/cgroup/uid_10141/cgroup.freeze
+08-13 14:51:16.406 W/libprocessgroup(  504): Failed to apply Frozen process profile: No such file or directory
+08-13 14:51:16.406 E/libprocessgroup(  504): No such cgroup attribute: /sys/fs/cgroup/uid_10141/cgroup.freeze
+08-13 14:51:16.406 W/libprocessgroup(  504): Failed to apply Unfrozen process profile: No such file or directory
+08-13 14:51:16.407 I/ActivityManager(  504): Force stopping com.fettqa.events.android appid=10141 user=-1: clearApplicationUserData
+08-13 14:51:16.407 E/libprocessgroup(  504): No such cgroup attribute: /sys/fs/cgroup/uid_4294877437/cgroup.freeze
+08-13 14:51:16.407 W/libprocessgroup(  504): Failed to apply Frozen process profile: No such file or directory
+08-13 14:51:16.407 E/libprocessgroup(  504): No such cgroup attribute: /sys/fs/cgroup/uid_4294877437/cgroup.freeze
+08-13 14:51:16.407 W/libprocessgroup(  504): Failed to apply Unfrozen process profile: No such file or directory
+--------- beginning of kernel
+08-13 14:51:16.604 I/servicemanager(    0): Since 'artd' could not be found, trying to start it as a lazy AIDL service. (if it's not configured to be a lazy service, it may be stuck starting or still starting).
+08-13 14:51:16.608 I/init    (    0): starting service 'artd'...
+08-13 14:51:16.624 I/init    (    0): ... started service 'artd' has pid 2388
+08-13 14:51:16.625 I/init    (    0): Control message: Processed ctl.interface_start for 'aidl/artd' from pid: 132 (/system/bin/servicemanager)
+08-13 14:51:16.436 I/artd    ( 2388): Starting artd
+08-13 14:51:16.437 I/AidlLazyServiceRegistrar( 2388): Registering service artd
+08-13 14:51:16.633 I/BpBinder(    0): onLastStrongRef automatically unlinking death recipients:
+08-13 14:51:16.635 I/servicemanager(    0): Notifying artd they do (previously: don't) have clients when service is guaranteed to be in use
+08-13 14:51:16.441 I/AidlLazyServiceRegistrar( 2388): Process has 1 (of 1 available) client(s) in use after notification artd has clients: 1
+08-13 14:51:16.445 D/CarrierSvcBindHelper( 1007): onHandleForceStop: [com.fettqa.events.android]
+08-13 14:51:16.445 D/CarrierSvcBindHelper( 1007): No carrier app for: 0
+08-13 14:51:16.450 D/CompatibilityChangeReporter(  504): Compat change id reported: 265195908; UID 10071; state: ENABLED
+08-13 14:51:16.451 V/MediaPlayerList(  979): mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_DATA_CLEARED
+08-13 14:51:16.452 V/MediaPlayerList(  979): mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_DATA_CLEARED
+08-13 14:51:16.452 W/ProcessStats(  504): Tracking association SourceState{db74f6c com.android.documentsui/10071 Receivr #535} whose proc state 10 is better than process ProcessState{5fcd722 com.android.externalstorage/10070 pkg=com.android.externalstorage} proc state 14 (1 skipped)
+08-13 14:51:16.457 D/CompatibilityChangeReporter(  504): Compat change id reported: 261072174; UID 1000; state: ENABLED
+08-13 14:51:16.459 D/CompatibilityChangeReporter(  504): Compat change id reported: 265195908; UID 10070; state: ENABLED
+08-13 14:51:16.460 I/MediaProvider( 1454): Begin Intent { act=android.intent.action.PACKAGE_DATA_CLEARED dat=package: flg=0x5000010 cmp=com.android.providers.media.module/com.android.providers.media.MediaService (has extras) }
+08-13 14:51:16.464 D/MediaProvider( 1454): Deleted 0 Android/media items belonging to com.fettqa.events.android on /data/user/0/com.android.providers.media.module/databases/external.db
+08-13 14:51:16.466 D/MediaGrants( 1454): Removed 0 media_grants for 0 user for com.fettqa.events.android. Reason: Package orphaned
+08-13 14:51:16.466 D/SafetySourceDataValidator(  504): No cert check requested for package com.android.permissioncontroller
+08-13 14:51:16.468 I/MediaProvider( 1454): End Intent { act=android.intent.action.PACKAGE_DATA_CLEARED dat=package: flg=0x5000010 cmp=com.android.providers.media.module/com.android.providers.media.MediaService (has extras) }
+08-13 14:51:16.473 D/PersistedStoragePackageUninstalledReceiver(  798): Received android.intent.action.PACKAGE_DATA_CLEARED for com.fettqa.events.android for u0
+08-13 14:51:16.673 I/ActivityManager(  504): Force stopping com.fettqa.events.android appid=10141 user=0: from pid 2420
+08-13 14:51:16.673 E/libprocessgroup(  504): No such cgroup attribute: /sys/fs/cgroup/uid_10141/cgroup.freeze
+08-13 14:51:16.673 W/libprocessgroup(  504): Failed to apply Frozen process profile: No such file or directory
+08-13 14:51:16.674 E/libprocessgroup(  504): No such cgroup attribute: /sys/fs/cgroup/uid_10141/cgroup.freeze
+08-13 14:51:16.674 W/libprocessgroup(  504): Failed to apply Unfrozen process profile: No such file or directory
+08-13 14:51:16.676 I/ProvidersCache( 1484): Updating roots due to change on user 0at content://com.android.externalstorage.documents
+08-13 14:51:16.677 D/CarrierSvcBindHelper( 1007): onHandleForceStop: [com.fettqa.events.android]
+08-13 14:51:16.678 D/CarrierSvcBindHelper( 1007): No carrier app for: 0
+08-13 14:51:16.713 D/CompatibilityChangeReporter(  504): Compat change id reported: 161252188; UID 10141; state: DISABLED
+08-13 14:51:16.713 D/CompatibilityChangeReporter(  504): Compat change id reported: 244637991; UID 10142; state: ENABLED
+08-13 14:51:16.714 D/CompatibilityChangeReporter(  504): Compat change id reported: 265464455; UID 10141; state: DISABLED
+08-13 14:51:16.714 D/CompatibilityChangeReporter(  504): Compat change id reported: 265452344; UID 10141; state: DISABLED
+08-13 14:51:16.714 D/CompatibilityChangeReporter(  504): Compat change id reported: 266124927; UID 10141; state: DISABLED
+08-13 14:51:16.714 D/CompatibilityChangeReporter(  504): Compat change id reported: 265451093; UID 10141; state: DISABLED
+08-13 14:51:16.715 D/CompatibilityChangeReporter(  504): Compat change id reported: 265456536; UID 10141; state: DISABLED
+08-13 14:51:16.715 D/CompatibilityChangeReporter(  504): Compat change id reported: 255940284; UID 10141; state: DISABLED
+08-13 14:51:16.715 D/CompatibilityChangeReporter(  504): Compat change id reported: 236283604; UID 10141; state: DISABLED
+08-13 14:51:16.715 D/CompatibilityChangeReporter(  504): Compat change id reported: 263959004; UID 10141; state: DISABLED
+08-13 14:51:16.715 D/CompatibilityChangeReporter(  504): Compat change id reported: 264304459; UID 10141; state: DISABLED
+08-13 14:51:16.715 D/CompatibilityChangeReporter(  504): Compat change id reported: 264301586; UID 10141; state: DISABLED
+08-13 14:51:16.715 D/CompatibilityChangeReporter(  504): Compat change id reported: 254631730; UID 10141; state: DISABLED
+08-13 14:51:16.715 D/CompatibilityChangeReporter(  504): Compat change id reported: 273509367; UID 10141; state: DISABLED
+08-13 14:51:16.715 D/CompatibilityChangeReporter(  504): Compat change id reported: 263259275; UID 10141; state: DISABLED
+08-13 14:51:16.715 D/CompatibilityChangeReporter(  504): Compat change id reported: 174042980; UID 10141; state: DISABLED
+08-13 14:51:16.715 D/CompatibilityChangeReporter(  504): Compat change id reported: 174042936; UID 10141; state: DISABLED
+08-13 14:51:16.715 D/CompatibilityChangeReporter(  504): Compat change id reported: 181136395; UID 10141; state: DISABLED
+08-13 14:51:16.717 D/CompatibilityChangeReporter(  504): Compat change id reported: 194480991; UID 10141; state: ENABLED
+08-13 14:51:16.718 D/CompatibilityChangeReporter(  504): Compat change id reported: 184838306; UID 10141; state: DISABLED
+08-13 14:51:16.719 D/CompatibilityChangeReporter(  504): Compat change id reported: 185004937; UID 10141; state: DISABLED
+08-13 14:51:16.719 D/CompatibilityChangeReporter(  504): Compat change id reported: 197654537; UID 10141; state: ENABLED
+08-13 14:51:16.720 D/CompatibilityChangeReporter(  504): Compat change id reported: 205907456; UID 10141; state: ENABLED
+08-13 14:51:16.721 D/CompatibilityChangeReporter(  504): Compat change id reported: 194833441; UID 10141; state: ENABLED
+08-13 14:51:16.721 I/ActivityTaskManager(  504): START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 pkg=com.fettqa.events.android cmp=com.fettqa.events.android/.ui.EventListActivity} with LAUNCH_MULTIPLE from uid 10142 (BAL_ALLOW_PERMISSION) result code=0
+08-13 14:51:16.721 D/CompatibilityChangeReporter(  504): Compat change id reported: 135634846; UID 10141; state: DISABLED
+08-13 14:51:16.721 D/CompatibilityChangeReporter(  504): Compat change id reported: 177438394; UID 10141; state: DISABLED
+08-13 14:51:16.721 D/CompatibilityChangeReporter(  504): Compat change id reported: 135772972; UID 10141; state: DISABLED
+08-13 14:51:16.721 D/CompatibilityChangeReporter(  504): Compat change id reported: 135754954; UID 10141; state: ENABLED
+08-13 14:51:16.722 D/CompatibilityChangeReporter(  504): Compat change id reported: 143937733; UID 10141; state: ENABLED
+08-13 14:51:16.726 V/WindowManagerShell(  797): Transition requested: android.os.BinderProxy@ccd9c4a TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=8 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 pkg=com.fettqa.events.android cmp=com.fettqa.events.android/.ui.EventListActivity } baseActivity=ComponentInfo{com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity} topActivity=ComponentInfo{com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity} origActivity=null realActivity=ComponentInfo{com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity} numActivities=1 lastActiveTime=39349 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@46647bb} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=ActivityInfo{f09b4d8 com.fettqa.events.android.ui.EventListActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+08-13 14:51:16.734 D/Zygote  (  326): Forked child process 2433
+08-13 14:51:16.734 D/CompatibilityChangeReporter(  504): Compat change id reported: 265195908; UID 10141; state: ENABLED
+08-13 14:51:16.737 I/ActivityManager(  504): Start proc 2433:com.fettqa.events.android/u0a141 for next-top-activity {com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity}
+08-13 14:51:16.737 D/SplashScreenView(  797): Build android.window.SplashScreenView{727a497 V.E...... ......ID 0,0-0,0}
+08-13 14:51:16.737 D/SplashScreenView(  797): Icon: view: null drawable: null size: 0
+08-13 14:51:16.737 D/SplashScreenView(  797): Branding: view: android.view.View{3d14684 G.ED..... ......I. 0,0-0,0 #10204ef android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+08-13 14:51:16.742 I/BpBinder(  389): onLastStrongRef automatically unlinking death recipients: 
+08-13 14:51:16.748 D/CoreBackPreview(  504): Window{1f2b3ea u0 Splash Screen com.fettqa.events.android}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@24024b6, mPriority=0, mIsAnimationCallback=false}
+08-13 14:51:16.757 V/WindowManager(  504): Sent Transition #6 createdAt=08-13 14:51:16.717 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=8 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 pkg=com.fettqa.events.android cmp=com.fettqa.events.android/.ui.EventListActivity } baseActivity=ComponentInfo{com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity} topActivity=ComponentInfo{com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity} origActivity=null realActivity=ComponentInfo{com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity} numActivities=1 lastActiveTime=39349 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{631c48d Task{e86d530 #8 type=standard A=10141:com.fettqa.events.android}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=ActivityInfo{f21d642 com.fettqa.events.android.ui.EventListActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+08-13 14:51:16.757 V/WindowManager(  504):     startWCT=WindowContainerTransaction { changes = {} hops = [] errorCallbackToken=null taskFragmentOrganizer=null }
+08-13 14:51:16.757 V/WindowManager(  504):     info={id=6 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{RemoteToken{631c48d Task{e86d530 #8 type=standard A=10141:com.fettqa.events.android}}} m=OPEN f=NONE leash=Surface(name=Task=8)/@0xb4345b7 sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0},{WCT{RemoteToken{1831c89 Task{9b278be #1 type=home}}} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0x6cbe808 sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0}]}
+08-13 14:51:16.758 V/WindowManagerShell(  797): onTransitionReady android.os.BinderProxy@ccd9c4a: {id=6 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@93495ab} m=OPEN f=NONE leash=Surface(name=Task=8)/@0x378e21c sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0},{WCT{android.window.IWindowContainerToken$Stub$Proxy@e400408} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0xd04fe25 sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0}]}
+08-13 14:51:16.759 V/WindowManagerShell(  797): Playing animation for (#6)android.os.BinderProxy@ccd9c4a@0
+08-13 14:51:16.759 V/WindowManagerShell(  797):  try handler com.android.wm.shell.transition.DefaultMixedHandler@8a14844
+08-13 14:51:16.759 V/WindowManagerShell(  797):  try handler com.android.wm.shell.keyguard.KeyguardTransitionHandler@948ad2d
+08-13 14:51:16.759 V/WindowManagerShell(  797):  try handler com.android.wm.shell.activityembedding.ActivityEmbeddingController@683a262
+08-13 14:51:16.759 V/WindowManagerShell(  797):  try handler com.android.wm.shell.recents.RecentsTransitionHandler@b522ff3
+08-13 14:51:16.759 V/ShellRecents(  797): RecentsTransitionHandler.startAnimation: no controller found
+08-13 14:51:16.759 V/WindowManagerShell(  797):  try handler com.android.wm.shell.pip.PipTransition@58ca4b0
+08-13 14:51:16.759 V/WindowManagerShell(  797):  try handler com.android.wm.shell.splitscreen.StageCoordinator@72fef29
+08-13 14:51:16.759 V/WindowManagerShell(  797):  try handler com.android.wm.shell.transition.RemoteTransitionHandler@cfd82ae
+08-13 14:51:16.760 V/WindowManagerShell(  797): Transition doesn't have explicit remote, search filters for match for {id=6 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@93495ab} m=OPEN f=NONE leash=Surface(name=Task=8)/@0x378e21c sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0},{WCT{android.window.IWindowContainerToken$Stub$Proxy@e400408} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0xd04fe25 sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0}]}
+08-13 14:51:16.760 V/WindowManagerShell(  797):  Checking filter Pair{{types=[] flags=0x0] notFlags=0x100 checks=[{atype=home independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=TOP topActivity=ComponentInfo{com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher}},{atype=standard independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@655d84f, appThread = android.app.IApplicationThread$Stub$Proxy@68f5bdc, debugName = QuickstepLaunchHome }}
+08-13 14:51:16.760 V/WindowManagerShell(  797):  Delegate animation for #6 to null
+08-13 14:51:16.760 V/WindowManagerShell(  797):  try handler com.android.wm.shell.transition.DefaultTransitionHandler@12f54e5
+08-13 14:51:16.760 V/WindowManagerShell(  797): start default transition animation, info = {id=6 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@93495ab} m=OPEN f=NONE leash=Surface(name=Task=8)/@0x378e21c sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0},{WCT{android.window.IWindowContainerToken$Stub$Proxy@e400408} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0xd04fe25 sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0}]}
+08-13 14:51:16.760 V/WindowManagerShell(  797): loadAnimation: anim=android.view.animation.AnimationSet@b9a8dc6 animAttr=0x13 type=OPEN isEntrance=false
+08-13 14:51:16.760 V/WindowManagerShell(  797): loadAnimation: anim=android.view.animation.AnimationSet@ea1c052 animAttr=0x12 type=OPEN isEntrance=true
+08-13 14:51:16.761 V/WindowManagerShell(  797):  animated by com.android.wm.shell.transition.DefaultTransitionHandler@12f54e5
+08-13 14:51:16.766 D/EGL_emulation( 1049): app_time_stats: avg=1035.75ms min=47.69ms max=5593.15ms count=6
+08-13 14:51:16.771 I/ProvidersCache( 1484): Updating roots due to change on user 0at content://com.android.externalstorage.documents
+08-13 14:51:16.783 V/WindowManagerShell(  797): Transition animation finished (aborted=false), notifying core (#6)android.os.BinderProxy@ccd9c4a@0
+08-13 14:51:16.783 I/.events.android( 2433): Late-enabling -Xcheck:jni
+08-13 14:51:16.797 V/WindowManager(  504): Finish Transition #6: created at 08-13 14:51:16.717 collect-started=0.038ms request-sent=3.61ms started=13.409ms ready=37.669ms sent=39.319ms finished=70.853ms
+08-13 14:51:16.803 I/.events.android( 2433): Using CollectorTypeCC GC.
+08-13 14:51:16.804 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:16.807 V/WindowManagerShell(  797): Track 0 became idle
+08-13 14:51:16.807 V/WindowManagerShell(  797): All active transition animations finished
+08-13 14:51:16.808 W/.events.android( 2433): Unexpected CPU variant for x86: x86_64.
+08-13 14:51:16.808 W/.events.android( 2433): Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, tremont, kabylake, default
+08-13 14:51:16.813 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:16.814 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:16.814 I/adbd    (  402): jdwp connection from 2433
+08-13 14:51:16.938 D/EGL_emulation(  797): app_time_stats: avg=8019.93ms min=8019.93ms max=8019.93ms count=1
+08-13 14:51:16.945 W/UiDevice( 2333): Active window root not found.
+08-13 14:51:16.947 I/AppsFilter(  504): interaction: PackageSetting{90f0bc com.fettqa.events.android/10141} -> PackageSetting{477f845 dev.mobile.maestro/10142} BLOCKED
+08-13 14:51:16.950 W/UiDevice( 2333): Skipping null root node for window: AccessibilityWindowInfo[title=Home, displayId=0, id=1, taskId=7, type=TYPE_APPLICATION, layer=0, region=SkRegion((0,0,320,640)), bounds=Rect(0, 0 - 320, 640), focused=true, active=true, pictureInPicture=false, transitionTime=38487, hasParent=false, isAnchored=false, hasChildren=false]
+08-13 14:51:16.963 D/StatusBarIconController(  797): ignoring old pipeline callback because the new wifi icon is enabled
+08-13 14:51:16.969 D/CompatibilityChangeReporter( 2433): Compat change id reported: 171979766; UID 10141; state: ENABLED
+08-13 14:51:16.970 D/CompatibilityChangeReporter( 2433): Compat change id reported: 242716250; UID 10141; state: ENABLED
+08-13 14:51:16.973 D/CompatibilityChangeReporter(  504): Compat change id reported: 170503758; UID 10141; state: ENABLED
+08-13 14:51:16.977 W/ziparchive( 2433): Unable to open '/data/app/~~2q2Sa2mgDNcrgekNavJjWA==/com.fettqa.events.android-YDoiASNox4w2dTHCEmXbzA==/base.dm': No such file or directory
+08-13 14:51:16.977 W/ziparchive( 2433): Unable to open '/data/app/~~2q2Sa2mgDNcrgekNavJjWA==/com.fettqa.events.android-YDoiASNox4w2dTHCEmXbzA==/base.dm': No such file or directory
+08-13 14:51:17.011 D/Maestro ( 2333): View hierarchy received in 207 ms
+08-13 14:51:17.012 I/ProvidersCache( 1484): Updating roots due to change on user 0at content://com.android.providers.media.documents/root
+08-13 14:51:17.055 I/ProvidersCache( 1484): Updating roots due to change on user 0at content://com.android.externalstorage.documents
+08-13 14:51:17.074 I/ProvidersCache( 1484): Updating roots due to change on user 0at content://com.android.externalstorage.documents
+08-13 14:51:17.079 I/ProvidersCache( 1484): Updating roots due to change on user 0at content://com.android.externalstorage.documents
+08-13 14:51:17.111 D/nativeloader( 2433): Configuring clns-6 for other apk /data/app/~~2q2Sa2mgDNcrgekNavJjWA==/com.fettqa.events.android-YDoiASNox4w2dTHCEmXbzA==/base.apk. target_sdk_version=37, uses_libraries=, library_path=/data/app/~~2q2Sa2mgDNcrgekNavJjWA==/com.fettqa.events.android-YDoiASNox4w2dTHCEmXbzA==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.fettqa.events.android
+08-13 14:51:17.119 V/GraphicsEnvironment( 2433): Currently set values for:
+08-13 14:51:17.119 V/GraphicsEnvironment( 2433):   angle_gl_driver_selection_pkgs=[]
+08-13 14:51:17.119 V/GraphicsEnvironment( 2433):   angle_gl_driver_selection_values=[]
+08-13 14:51:17.119 V/GraphicsEnvironment( 2433): ANGLE GameManagerService for com.fettqa.events.android: false
+08-13 14:51:17.119 V/GraphicsEnvironment( 2433): com.fettqa.events.android is not listed in per-application setting
+08-13 14:51:17.119 V/GraphicsEnvironment( 2433): Neither updatable production driver nor prerelease driver is supported.
+08-13 14:51:17.140 I/ActivityManager(  504): Flag disabled. Ignoring finishAttachApplication from uid: 10141. pid: 2433
+08-13 14:51:17.161 D/libEGL  ( 2433): loaded /vendor/lib64/egl/libEGL_emulation.so
+08-13 14:51:17.163 D/libEGL  ( 2433): loaded /vendor/lib64/egl/libGLESv1_CM_emulation.so
+08-13 14:51:17.165 D/libEGL  ( 2433): loaded /vendor/lib64/egl/libGLESv2_emulation.so
+08-13 14:51:17.170 D/AppCompatDelegate( 2433): Checking for metadata for AppLocalesMetadataHolderService : Service not found
+08-13 14:51:17.199 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:17.199 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:17.200 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:17.201 W/UiDevice( 2333): Active window root not found.
+08-13 14:51:17.204 W/UiDevice( 2333): Skipping null root node for window: AccessibilityWindowInfo[title=Home, displayId=0, id=1, taskId=7, type=TYPE_APPLICATION, layer=0, region=SkRegion((0,0,320,640)), bounds=Rect(0, 0 - 320, 640), focused=true, active=true, pictureInPicture=false, transitionTime=38487, hasParent=false, isAnchored=false, hasChildren=false]
+08-13 14:51:17.214 D/CompatibilityChangeReporter( 2433): Compat change id reported: 210923482; UID 10141; state: ENABLED
+08-13 14:51:17.234 D/Maestro ( 2333): View hierarchy received in 35 ms
+08-13 14:51:17.250 W/AccessibilityManagerService(  504):  wait for adding window timeout: 7
+08-13 14:51:17.306 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:17.306 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:17.307 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:17.308 W/UiDevice( 2333): Active window root not found.
+08-13 14:51:17.310 W/UiDevice( 2333): Skipping null root node for window: AccessibilityWindowInfo[title=Home, displayId=0, id=1, taskId=7, type=TYPE_APPLICATION, layer=0, region=SkRegion((0,0,320,640)), bounds=Rect(0, 0 - 320, 640), focused=true, active=true, pictureInPicture=false, transitionTime=38487, hasParent=false, isAnchored=false, hasChildren=false]
+08-13 14:51:17.329 D/Maestro ( 2333): View hierarchy received in 23 ms
+08-13 14:51:17.334 W/.events.android( 2433): Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (unsupported, reflection, allowed)
+08-13 14:51:17.401 I/okhttp.OkHttpClient( 2433): --> GET http://127.0.0.1:8080/api/events?page=0&size=10
+08-13 14:51:17.406 D/TrafficStats( 2433): tagSocket(76) with statsTag=0xffffffff, statsUid=-1
+08-13 14:51:17.409 D/CompatibilityChangeReporter( 2433): Compat change id reported: 237531167; UID 10141; state: DISABLED
+08-13 14:51:17.410 I/okhttp.OkHttpClient( 2433): --> GET http://127.0.0.1:8080/api/events?page=0&size=10
+08-13 14:51:17.410 W/OpenGLRenderer( 2433): Unknown dataspace 0
+08-13 14:51:17.413 D/TrafficStats( 2433): tagSocket(77) with statsTag=0xffffffff, statsUid=-1
+08-13 14:51:17.430 D/AutofillManager( 2433): view not autofillable - not passing ime action check
+08-13 14:51:17.430 D/AutofillManager( 2433): view not autofillable - not passing ime action check
+08-13 14:51:17.453 D/CoreBackPreview(  504): Window{de07cb5 u0 com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@4103616, mPriority=0, mIsAnimationCallback=false}
+08-13 14:51:17.462 W/ServiceManagerCppClient(  389): Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10141 pid=0
+08-13 14:51:17.462 D/PermissionCache(  389): checking android.permission.ROTATE_SURFACE_FLINGER for uid=10141 => denied (3751 us)
+08-13 14:51:17.470 W/ServiceManagerCppClient(  389): Permission failure: android.permission.INTERNAL_SYSTEM_WINDOW from uid=10141 pid=0
+08-13 14:51:17.470 D/PermissionCache(  389): checking android.permission.INTERNAL_SYSTEM_WINDOW for uid=10141 => denied (8257 us)
+08-13 14:51:17.471 W/ServiceManagerCppClient(  389): Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10141 pid=0
+08-13 14:51:17.471 D/PermissionCache(  389): checking android.permission.ACCESS_SURFACE_FLINGER for uid=10141 => denied (360 us)
+08-13 14:51:17.489 W/OpenGLRenderer( 2433): Failed to initialize 101010-2 format, error = EGL_SUCCESS
+08-13 14:51:17.517 I/okhttp.OkHttpClient( 2433): <-- 200 http://127.0.0.1:8080/api/events?page=0&size=10 (114ms, unknown-length body)
+08-13 14:51:17.520 I/okhttp.OkHttpClient( 2433): <-- 200 http://127.0.0.1:8080/api/events?page=0&size=10 (110ms, unknown-length body)
+08-13 14:51:17.716 I/servicemanager(    0): Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+08-13 14:51:17.524 I/hwservicemanager(  133): getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+08-13 14:51:17.524 I/Gralloc4( 2433): mapper 4.x is not supported
+08-13 14:51:17.659 D/ActivityManager(  504): freezing 1802 com.android.quicksearchbox
+08-13 14:51:17.738 D/ActivityManager(  504): freezing 1744 com.android.printspooler
+08-13 14:51:18.048 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:18.049 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:18.049 W/AccessibilityManagerService(  504):  wait for adding window timeout: 8
+08-13 14:51:18.050 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:18.051 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:18.053 W/ServiceManagerCppClient(  504): Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10141 pid=0
+08-13 14:51:18.054 D/PermissionCache(  504): checking android.permission.ROTATE_SURFACE_FLINGER for uid=10141 => denied (93 us)
+08-13 14:51:18.054 W/ServiceManagerCppClient(  504): Permission failure: android.permission.INTERNAL_SYSTEM_WINDOW from uid=10141 pid=0
+08-13 14:51:18.054 D/PermissionCache(  504): checking android.permission.INTERNAL_SYSTEM_WINDOW for uid=10141 => denied (24 us)
+08-13 14:51:18.054 W/ServiceManagerCppClient(  504): Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10141 pid=0
+08-13 14:51:18.054 D/PermissionCache(  504): checking android.permission.ACCESS_SURFACE_FLINGER for uid=10141 => denied (11 us)
+08-13 14:51:18.055 W/ziparchive(  504): Unable to open '/data/app/~~2q2Sa2mgDNcrgekNavJjWA==/com.fettqa.events.android-YDoiASNox4w2dTHCEmXbzA==/base.dm': No such file or directory
+08-13 14:51:18.056 I/ActivityTaskManager(  504): Displayed com.fettqa.events.android/.ui.EventListActivity for user 0: +1s342ms
+08-13 14:51:18.065 W/WindowOnBackDispatcher(  797): sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@1af6e6d
+08-13 14:51:18.066 D/CoreBackPreview(  504): Window{1f2b3ea u0 Splash Screen com.fettqa.events.android EXITING}: Setting back callback null
+08-13 14:51:18.066 W/InputManager-JNI(  504): Input channel object '1f2b3ea Splash Screen com.fettqa.events.android (client)' was disposed without first being removed with the input manager!
+08-13 14:51:18.068 I/ImeTracker( 1049): com.android.launcher3:14d36613: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT
+08-13 14:51:18.068 I/ImeTracker(  504): com.android.launcher3:14d36613: onCancelled at PHASE_SERVER_SHOULD_HIDE
+08-13 14:51:18.070 I/OpenGLRenderer( 2433): Davey! duration=916ms; Flags=1, FrameTimelineVsyncId=2194, IntendedVsync=39771039628, Vsync=40037706284, InputEventId=0, HandleInputStart=40045324179, AnimationStart=40045328187, PerformTraversalsStart=40045428614, DrawStart=40179910557, FrameDeadline=39787706294, FrameInterval=40045152078, FrameStartTime=16666666, SyncQueued=40193266621, SyncStart=40193532207, IssueDrawCommandsStart=40194076724, SwapBuffers=40573711561, FrameCompleted=40687899013, DequeueBufferDuration=3355, QueueBufferDuration=198480, GpuCompleted=40687899013, SwapBuffersCompleted=40681891506, DisplayPresentTime=0, CommandSubmissionCompleted=40573711561, 
+08-13 14:51:18.070 I/Choreographer( 2433): Skipped 37 frames!  The application may be doing too much work on its main thread.
+08-13 14:51:18.073 W/GpuWork (  387): Failed to attach bpf program to power/gpu_work_period tracepoint [2(No such file or directory)]
+08-13 14:51:18.081 D/EGL_emulation(  797): app_time_stats: avg=568.97ms min=1.41ms max=1136.53ms count=2
+08-13 14:51:18.084 D/OomAdjuster(  504): Not killing cached processes
+08-13 14:51:18.102 D/CompatibilityChangeReporter(  504): Compat change id reported: 214016041; UID 10141; state: ENABLED
+08-13 14:51:18.102 I/ImeTracker(  504): com.fettqa.events.android:e798f874: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_UNSPECIFIED_WINDOW
+08-13 14:51:18.102 I/ImeTracker(  504): com.fettqa.events.android:e798f874: onCancelled at PHASE_SERVER_SHOULD_HIDE
+08-13 14:51:18.169 I/Maestro ( 2333): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@11974; boundsInParent: Rect(0, 0 - 0, 56); boundsInScreen: Rect(320, 24 - 320, 80); boundsInWindow: Rect(320, 24 - 320, 80); packageName: com.fettqa.events.android; className: androidx.appcompat.widget.LinearLayoutCompat; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+08-13 14:51:18.182 D/Maestro ( 2333): View hierarchy received in 133 ms
+08-13 14:51:18.259 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:18.264 D/UiDevice( 2333): Waiting 500ms for window update of package com.fettqa.events.android.
+08-13 14:51:18.316 I/wpa_supplicant(  784): wlan0: CTRL-EVENT-BEACON-LOSS 
+08-13 14:51:18.755 D/ActivityManager(  504): freezing 1300 com.android.cellbroadcastreceiver
+08-13 14:51:18.765 W/UiDevice( 2333): Timed out waiting 500ms on window update.
+08-13 14:51:18.765 W/UiDevice( 2333): java.util.concurrent.TimeoutException: Expected event not received within: 500 ms among: []
+08-13 14:51:18.765 W/UiDevice( 2333): 	at android.app.UiAutomation.executeAndWaitForEvent(UiAutomation.java:1071)
+08-13 14:51:18.765 W/UiDevice( 2333): 	at androidx.test.uiautomator.UiDevice.waitForWindowUpdate(UiDevice.java:1253)
+08-13 14:51:18.765 W/UiDevice( 2333): 	at dev.mobile.maestro.Service.isWindowUpdating(MaestroDriverService.kt:359)
+08-13 14:51:18.765 W/UiDevice( 2333): 	at maestro_android.MaestroDriverGrpc$MethodHandlers.invoke(MaestroDriverGrpc.java:965)
+08-13 14:51:18.765 W/UiDevice( 2333): 	at io.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+08-13 14:51:18.765 W/UiDevice( 2333): 	at io.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:355)
+08-13 14:51:18.765 W/UiDevice( 2333): 	at io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:867)
+08-13 14:51:18.765 W/UiDevice( 2333): 	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+08-13 14:51:18.765 W/UiDevice( 2333): 	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+08-13 14:51:18.765 W/UiDevice( 2333): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+08-13 14:51:18.765 W/UiDevice( 2333): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+08-13 14:51:18.765 W/UiDevice( 2333): 	at java.lang.Thread.run(Thread.java:1012)
+08-13 14:51:18.824 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:18.831 D/UiDevice( 2333): Waiting 500ms for window update of package com.fettqa.events.android.
+08-13 14:51:18.959 D/ActivityManager(  504): freezing 2226 com.android.carrierdefaultapp
+08-13 14:51:19.333 W/UiDevice( 2333): Timed out waiting 500ms on window update.
+08-13 14:51:19.333 W/UiDevice( 2333): java.util.concurrent.TimeoutException: Expected event not received within: 500 ms among: []
+08-13 14:51:19.333 W/UiDevice( 2333): 	at android.app.UiAutomation.executeAndWaitForEvent(UiAutomation.java:1071)
+08-13 14:51:19.333 W/UiDevice( 2333): 	at androidx.test.uiautomator.UiDevice.waitForWindowUpdate(UiDevice.java:1253)
+08-13 14:51:19.333 W/UiDevice( 2333): 	at dev.mobile.maestro.Service.isWindowUpdating(MaestroDriverService.kt:359)
+08-13 14:51:19.333 W/UiDevice( 2333): 	at maestro_android.MaestroDriverGrpc$MethodHandlers.invoke(MaestroDriverGrpc.java:965)
+08-13 14:51:19.333 W/UiDevice( 2333): 	at io.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+08-13 14:51:19.333 W/UiDevice( 2333): 	at io.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:355)
+08-13 14:51:19.333 W/UiDevice( 2333): 	at io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:867)
+08-13 14:51:19.333 W/UiDevice( 2333): 	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+08-13 14:51:19.333 W/UiDevice( 2333): 	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+08-13 14:51:19.333 W/UiDevice( 2333): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+08-13 14:51:19.333 W/UiDevice( 2333): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+08-13 14:51:19.333 W/UiDevice( 2333): 	at java.lang.Thread.run(Thread.java:1012)
+08-13 14:51:19.440 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:19.441 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:19.441 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:19.470 I/Maestro ( 2333): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@11974; boundsInParent: Rect(0, 0 - 0, 56); boundsInScreen: Rect(320, 24 - 320, 80); boundsInWindow: Rect(320, 24 - 320, 80); packageName: com.fettqa.events.android; className: androidx.appcompat.widget.LinearLayoutCompat; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+08-13 14:51:19.475 D/Maestro ( 2333): View hierarchy received in 35 ms
+08-13 14:51:19.675 D/EGL_emulation( 2433): app_time_stats: avg=403.56ms min=1.74ms max=1545.55ms count=4
+08-13 14:51:19.680 D/audioserver(  385): FGS Logger Transaction failed
+08-13 14:51:19.680 D/audioserver(  385): -129
+08-13 14:51:19.682 D/AudioFlinger(  385): mixer(0x7f05b2d2c930) throttle end: throttle time(11)
+08-13 14:51:19.685 E/Transition(  504): Trying to add a ready-group twice: Display{#0 state=ON size=320x640 ROTATION_0}
+08-13 14:51:19.685 I/ActivityTaskManager(  504): START u0 {cmp=com.fettqa.events.android/.ui.LoginActivity} with LAUNCH_MULTIPLE from uid 10141 (BAL_ALLOW_VISIBLE_WINDOW) result code=0
+08-13 14:51:19.686 V/WindowManagerShell(  797): Transition requested: android.os.BinderProxy@6defdbd TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=8 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 pkg=com.fettqa.events.android cmp=com.fettqa.events.android/.ui.EventListActivity } baseActivity=ComponentInfo{com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity} topActivity=ComponentInfo{com.fettqa.events.android/com.fettqa.events.android.ui.LoginActivity} origActivity=null realActivity=ComponentInfo{com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity} numActivities=2 lastActiveTime=42313 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@b6fcfb2} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=ActivityInfo{58fdb03 com.fettqa.events.android.ui.LoginActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isVisibleRequested=true isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+08-13 14:51:19.709 I/BpBinder(  389): onLastStrongRef automatically unlinking death recipients: 
+08-13 14:51:19.717 D/CompatibilityChangeReporter( 2433): Compat change id reported: 171228096; UID 10141; state: ENABLED
+08-13 14:51:19.736 D/AutofillManager( 2433): Fill dialog is enabled:false, hints=[]
+08-13 14:51:19.790 D/CoreBackPreview(  504): Window{2f35aaa u0 com.fettqa.events.android/com.fettqa.events.android.ui.LoginActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@8aa1a11, mPriority=0, mIsAnimationCallback=false}
+08-13 14:51:19.809 D/AutofillManager( 2433): notifyViewEnteredForFillDialog:1073741824
+08-13 14:51:19.813 D/AutofillManager( 2433): notifyViewEnteredForFillDialog:1073741825
+08-13 14:51:19.841 D/audioserver(  385): FGS Logger Transaction failed
+08-13 14:51:19.841 D/audioserver(  385): -129
+08-13 14:51:19.933 I/ActivityTaskManager(  504): Displayed com.fettqa.events.android/.ui.LoginActivity for user 0: +251ms
+08-13 14:51:19.933 V/WindowManagerShell(  797): onTransitionReady android.os.BinderProxy@6defdbd: {id=7 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{null m=OPEN f=FILLS_TASK leash=Surface(name=ActivityRecord{afd28d9 u0 com.fettqa.events.android/.ui.LoginActivity)/@0xa4d5a80 sb=Rect(0, 0 - 0, 0) eb=Rect(0, 0 - 320, 640) d=-1->0 r=-1->0:-1},{null m=TO_BACK f=FILLS_TASK leash=Surface(name=ActivityRecord{d0cd273 u0 com.fettqa.events.android/.ui.EventListActivity)/@0x382b8b9 sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0}]}
+08-13 14:51:19.933 V/WindowManagerShell(  797): Playing animation for (#7)android.os.BinderProxy@6defdbd@0
+08-13 14:51:19.933 V/WindowManagerShell(  797):  try handler com.android.wm.shell.transition.DefaultMixedHandler@8a14844
+08-13 14:51:19.933 V/WindowManagerShell(  797):  try handler com.android.wm.shell.keyguard.KeyguardTransitionHandler@948ad2d
+08-13 14:51:19.933 V/WindowManagerShell(  797):  try handler com.android.wm.shell.activityembedding.ActivityEmbeddingController@683a262
+08-13 14:51:19.933 V/WindowManagerShell(  797):  try handler com.android.wm.shell.recents.RecentsTransitionHandler@b522ff3
+08-13 14:51:19.933 V/ShellRecents(  797): RecentsTransitionHandler.startAnimation: no controller found
+08-13 14:51:19.933 V/WindowManagerShell(  797):  try handler com.android.wm.shell.pip.PipTransition@58ca4b0
+08-13 14:51:19.933 V/WindowManagerShell(  797):  try handler com.android.wm.shell.splitscreen.StageCoordinator@72fef29
+08-13 14:51:19.933 V/WindowManagerShell(  797):  try handler com.android.wm.shell.transition.RemoteTransitionHandler@cfd82ae
+08-13 14:51:19.933 V/WindowManagerShell(  797): Transition doesn't have explicit remote, search filters for match for {id=7 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{null m=OPEN f=FILLS_TASK leash=Surface(name=ActivityRecord{afd28d9 u0 com.fettqa.events.android/.ui.LoginActivity)/@0xa4d5a80 sb=Rect(0, 0 - 0, 0) eb=Rect(0, 0 - 320, 640) d=-1->0 r=-1->0:-1},{null m=TO_BACK f=FILLS_TASK leash=Surface(name=ActivityRecord{d0cd273 u0 com.fettqa.events.android/.ui.EventListActivity)/@0x382b8b9 sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0}]}
+08-13 14:51:19.933 V/WindowManagerShell(  797):  Checking filter Pair{{types=[] flags=0x0] notFlags=0x100 checks=[{atype=home independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=TOP topActivity=ComponentInfo{com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher}},{atype=standard independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@655d84f, appThread = android.app.IApplicationThread$Stub$Proxy@68f5bdc, debugName = QuickstepLaunchHome }}
+08-13 14:51:19.933 V/WindowManagerShell(  797):  Delegate animation for #7 to null
+08-13 14:51:19.933 V/WindowManagerShell(  797):  try handler com.android.wm.shell.transition.DefaultTransitionHandler@12f54e5
+08-13 14:51:19.933 V/WindowManagerShell(  797): start default transition animation, info = {id=7 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{null m=OPEN f=FILLS_TASK leash=Surface(name=ActivityRecord{afd28d9 u0 com.fettqa.events.android/.ui.LoginActivity)/@0xa4d5a80 sb=Rect(0, 0 - 0, 0) eb=Rect(0, 0 - 320, 640) d=-1->0 r=-1->0:-1},{null m=TO_BACK f=FILLS_TASK leash=Surface(name=ActivityRecord{d0cd273 u0 com.fettqa.events.android/.ui.EventListActivity)/@0x382b8b9 sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0}]}
+08-13 14:51:19.934 V/WindowManagerShell(  797): loadAnimation: anim=android.view.animation.AnimationSet@71da30a animAttr=0x5 type=OPEN isEntrance=false
+08-13 14:51:19.935 V/WindowManager(  504): Sent Transition #7 createdAt=08-13 14:51:19.683 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=8 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 pkg=com.fettqa.events.android cmp=com.fettqa.events.android/.ui.EventListActivity } baseActivity=ComponentInfo{com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity} topActivity=ComponentInfo{com.fettqa.events.android/com.fettqa.events.android.ui.LoginActivity} origActivity=null realActivity=ComponentInfo{com.fettqa.events.android/com.fettqa.events.android.ui.EventListActivity} numActivities=2 lastActiveTime=42313 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{631c48d Task{e86d530 #8 type=standard A=10141:com.fettqa.events.android}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=ActivityInfo{80a3e13 com.fettqa.events.android.ui.LoginActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isVisibleRequested=true isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+08-13 14:51:19.935 V/WindowManager(  504):     startWCT=WindowContainerTransaction { changes = {} hops = [] errorCallbackToken=null taskFragmentOrganizer=null }
+08-13 14:51:19.935 V/WindowManager(  504):     info={id=7 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{null m=OPEN f=FILLS_TASK leash=Surface(name=ActivityRecord{afd28d9 u0 com.fettqa.events.android/.ui.LoginActivity)/@0x705464d sb=Rect(0, 0 - 0, 0) eb=Rect(0, 0 - 320, 640) d=-1->0 r=-1->0:-1},{null m=TO_BACK f=FILLS_TASK leash=Surface(name=ActivityRecord{d0cd273 u0 com.fettqa.events.android/.ui.EventListActivity)/@0xcba11e4 sb=Rect(0, 0 - 320, 640) eb=Rect(0, 0 - 320, 640) d=0}]}
+08-13 14:51:19.936 D/PermissionCache(  389): checking android.permission.READ_FRAME_BUFFER for uid=10117 => granted (312 us)
+08-13 14:51:19.936 D/PermissionCache(  389): checking android.permission.CAPTURE_BLACKOUT_CONTENT for uid=10117 => granted (120 us)
+08-13 14:51:19.944 E/OpenGLRenderer(  797): Unable to match the desired swap behavior.
+08-13 14:51:20.069 V/WindowManagerShell(  797): loadAnimation: anim=android.view.animation.AnimationSet@17ae5d6 animAttr=0x4 type=OPEN isEntrance=true
+08-13 14:51:20.082 E/OpenGLRenderer(  797): Unable to match the desired swap behavior.
+08-13 14:51:20.088 V/WindowManagerShell(  797):  animated by com.android.wm.shell.transition.DefaultTransitionHandler@12f54e5
+08-13 14:51:20.089 W/Looper  (  797): Slow dispatch took 155ms wmshell.main h=android.os.Handler c=com.android.wm.shell.transition.Transitions$TransitionPlayerImpl$$ExternalSyntheticLambda0@d2fd02d m=0
+08-13 14:51:20.097 V/WindowManagerShell(  797): Transition animation finished (aborted=false), notifying core (#7)android.os.BinderProxy@6defdbd@0
+08-13 14:51:20.099 V/WindowManagerShell(  797): Track 0 became idle
+08-13 14:51:20.099 V/WindowManagerShell(  797): All active transition animations finished
+08-13 14:51:20.099 V/WindowManager(  504): Finish Transition #7: created at 08-13 14:51:19.683 collect-started=0.018ms request-sent=2.684ms started=3.378ms ready=7.639ms sent=249.62ms finished=414.75ms
+08-13 14:51:20.154 I/ImeTracker(  504): com.fettqa.events.android:307a6cc8: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_UNSPECIFIED_WINDOW
+08-13 14:51:20.154 I/ImeTracker(  504): com.fettqa.events.android:307a6cc8: onCancelled at PHASE_SERVER_SHOULD_HIDE
+08-13 14:51:20.183 D/AutofillManager( 2433): view not autofillable - not passing ime action check
+08-13 14:51:20.185 D/AutofillManager( 2433): view not autofillable - not passing ime action check
+08-13 14:51:20.224 E/TaskPersister(  504): File error accessing recents directory (directory doesn't exist?).
+08-13 14:51:20.656 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:20.656 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:20.657 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:20.657 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:20.687 D/Maestro ( 2333): View hierarchy received in 31 ms
+08-13 14:51:20.756 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:20.756 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:20.757 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:20.784 D/Maestro ( 2333): View hierarchy received in 28 ms
+08-13 14:51:20.878 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:20.879 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:20.879 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:20.908 D/Maestro ( 2333): View hierarchy received in 30 ms
+08-13 14:51:20.966 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:20.972 D/UiDevice( 2333): Waiting 500ms for window update of package com.fettqa.events.android.
+08-13 14:51:21.197 I/init    (    0): Sending signal 9 to service 'idmap2d' (pid 441) process group...
+08-13 14:51:21.003 W/OverlayManager(  504): service 'idmap' died
+08-13 14:51:21.204 I/libprocessgroup(    0): Successfully killed process cgroup uid 1000 pid 441 in 5ms
+08-13 14:51:21.205 I/init    (    0): Control message: Processed ctl.stop for 'idmap2d' from pid: 504 (system_server)
+08-13 14:51:21.207 I/init    (    0): Service 'idmap2d' (pid 441) received signal 9
+08-13 14:51:21.378 D/EGL_emulation( 2433): app_time_stats: avg=239.32ms min=5.52ms max=1183.36ms count=6
+08-13 14:51:21.413 I/DropBoxManagerService(  504): add tag=system_app_strictmode isTagEnabled=true flags=0x2
+08-13 14:51:21.473 W/UiDevice( 2333): Timed out waiting 500ms on window update.
+08-13 14:51:21.473 W/UiDevice( 2333): java.util.concurrent.TimeoutException: Expected event not received within: 500 ms among: []
+08-13 14:51:21.473 W/UiDevice( 2333): 	at android.app.UiAutomation.executeAndWaitForEvent(UiAutomation.java:1071)
+08-13 14:51:21.473 W/UiDevice( 2333): 	at androidx.test.uiautomator.UiDevice.waitForWindowUpdate(UiDevice.java:1253)
+08-13 14:51:21.473 W/UiDevice( 2333): 	at dev.mobile.maestro.Service.isWindowUpdating(MaestroDriverService.kt:359)
+08-13 14:51:21.473 W/UiDevice( 2333): 	at maestro_android.MaestroDriverGrpc$MethodHandlers.invoke(MaestroDriverGrpc.java:965)
+08-13 14:51:21.473 W/UiDevice( 2333): 	at io.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+08-13 14:51:21.473 W/UiDevice( 2333): 	at io.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:355)
+08-13 14:51:21.473 W/UiDevice( 2333): 	at io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:867)
+08-13 14:51:21.473 W/UiDevice( 2333): 	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+08-13 14:51:21.473 W/UiDevice( 2333): 	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+08-13 14:51:21.473 W/UiDevice( 2333): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+08-13 14:51:21.473 W/UiDevice( 2333): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+08-13 14:51:21.473 W/UiDevice( 2333): 	at java.lang.Thread.run(Thread.java:1012)
+08-13 14:51:21.533 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:21.545 D/UiDevice( 2333): Waiting 500ms for window update of package com.fettqa.events.android.
+08-13 14:51:21.941 I/ProvidersCache( 1484): Updating roots due to change on user 0at content://com.android.providers.media.documents/root
+08-13 14:51:22.047 W/UiDevice( 2333): Timed out waiting 500ms on window update.
+08-13 14:51:22.047 W/UiDevice( 2333): java.util.concurrent.TimeoutException: Expected event not received within: 500 ms among: []
+08-13 14:51:22.047 W/UiDevice( 2333): 	at android.app.UiAutomation.executeAndWaitForEvent(UiAutomation.java:1071)
+08-13 14:51:22.047 W/UiDevice( 2333): 	at androidx.test.uiautomator.UiDevice.waitForWindowUpdate(UiDevice.java:1253)
+08-13 14:51:22.047 W/UiDevice( 2333): 	at dev.mobile.maestro.Service.isWindowUpdating(MaestroDriverService.kt:359)
+08-13 14:51:22.047 W/UiDevice( 2333): 	at maestro_android.MaestroDriverGrpc$MethodHandlers.invoke(MaestroDriverGrpc.java:965)
+08-13 14:51:22.047 W/UiDevice( 2333): 	at io.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+08-13 14:51:22.047 W/UiDevice( 2333): 	at io.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:355)
+08-13 14:51:22.047 W/UiDevice( 2333): 	at io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:867)
+08-13 14:51:22.047 W/UiDevice( 2333): 	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+08-13 14:51:22.047 W/UiDevice( 2333): 	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+08-13 14:51:22.047 W/UiDevice( 2333): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+08-13 14:51:22.047 W/UiDevice( 2333): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+08-13 14:51:22.047 W/UiDevice( 2333): 	at java.lang.Thread.run(Thread.java:1012)
+08-13 14:51:22.111 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:22.111 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:22.112 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:22.143 D/Maestro ( 2333): View hierarchy received in 32 ms
+08-13 14:51:22.350 D/AutofillManagerServiceImpl(  504): Reset component for user 0:null
+08-13 14:51:22.350 D/AutofillUI(  504): destroySaveUiUiThread(): already destroyed
+08-13 14:51:22.354 D/CompatibilityChangeReporter( 2433): Compat change id reported: 163400105; UID 10141; state: ENABLED
+08-13 14:51:22.355 I/ImeTracker( 2433): com.fettqa.events.android:85a5132a: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+08-13 14:51:22.355 D/InputMethodManager( 2433): showSoftInput() view=com.google.android.material.textfield.TextInputEditText{b6ecd6d VFED..CL. .F.P..ID 0,0-272,56 #7f0900b7 app:id/emailInput aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+08-13 14:51:22.358 D/CompatibilityChangeReporter( 1392): Compat change id reported: 210923482; UID 10109; state: DISABLED
+08-13 14:51:22.360 D/CompatibilityChangeReporter( 1392): Compat change id reported: 37756858; UID 10109; state: ENABLED
+08-13 14:51:22.373 D/CompatibilityChangeReporter( 1392): Compat change id reported: 183155436; UID 10109; state: DISABLED
+08-13 14:51:22.379 W/RichInputMethodSubtype( 1392): Can't find emoji subtype
+08-13 14:51:22.379 W/RichInputMethodSubtype( 1392): No input method subtype found; returning placeholder subtype: Multi-lingual subtype: android.view.inputmethod.InputMethodSubtype@d78b2ed0, zz
+08-13 14:51:22.380 D/EGL_emulation( 2433): app_time_stats: avg=58.91ms min=14.04ms max=736.01ms count=17
+08-13 14:51:22.412 I/EmojiCategory( 1392): Last Emoji category id is 8
+08-13 14:51:22.414 D/CompatibilityChangeReporter( 1392): Compat change id reported: 171228096; UID 10109; state: ENABLED
+08-13 14:51:22.415 W/putmethod.latin( 1392): Cleared Reference was only reachable from finalizer (only reported once)
+08-13 14:51:22.419 W/ViewPager( 1392): Requested offscreen page limit 0 too small; defaulting to 1
+08-13 14:51:22.422 I/LatinIME( 1392): Starting input. Cursor position = 0,0
+08-13 14:51:22.439 D/CoreBackPreview(  504): Window{2f35aaa u0 com.fettqa.events.android/com.fettqa.events.android.ui.LoginActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@c178498, mPriority=0, mIsAnimationCallback=false}
+08-13 14:51:22.446 W/ServiceManagerCppClient(  389): Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10109 pid=0
+08-13 14:51:22.446 D/PermissionCache(  389): checking android.permission.ROTATE_SURFACE_FLINGER for uid=10109 => denied (117 us)
+08-13 14:51:22.447 W/ServiceManagerCppClient(  389): Permission failure: android.permission.INTERNAL_SYSTEM_WINDOW from uid=10109 pid=0
+08-13 14:51:22.447 D/PermissionCache(  389): checking android.permission.INTERNAL_SYSTEM_WINDOW for uid=10109 => denied (265 us)
+08-13 14:51:22.447 W/ServiceManagerCppClient(  389): Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10109 pid=0
+08-13 14:51:22.447 D/PermissionCache(  389): checking android.permission.ACCESS_SURFACE_FLINGER for uid=10109 => denied (158 us)
+08-13 14:51:22.447 W/ServiceManagerCppClient(  389): Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10109 pid=1392
+08-13 14:51:22.447 D/PermissionCache(  389): checking android.permission.ACCESS_SURFACE_FLINGER for uid=10109 => denied (156 us)
+08-13 14:51:22.449 D/libEGL  ( 1392): loaded /vendor/lib64/egl/libEGL_emulation.so
+08-13 14:51:22.450 D/libEGL  ( 1392): loaded /vendor/lib64/egl/libGLESv1_CM_emulation.so
+08-13 14:51:22.451 D/libEGL  ( 1392): loaded /vendor/lib64/egl/libGLESv2_emulation.so
+08-13 14:51:22.471 W/OpenGLRenderer( 1392): Failed to initialize 101010-2 format, error = EGL_SUCCESS
+08-13 14:51:22.678 I/servicemanager(    0): Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+08-13 14:51:22.483 I/hwservicemanager(  133): getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+08-13 14:51:22.484 I/Gralloc4( 1392): mapper 4.x is not supported
+08-13 14:51:22.730 D/android.hardware.audio@7.1-impl.ranchu(  331): threadLoop: entering standby, frames: 285056
+08-13 14:51:22.849 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:22.850 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:22.851 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:22.914 W/ServiceManagerCppClient(  504): Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10109 pid=0
+08-13 14:51:22.914 D/PermissionCache(  504): checking android.permission.ROTATE_SURFACE_FLINGER for uid=10109 => denied (90 us)
+08-13 14:51:22.914 W/ServiceManagerCppClient(  504): Permission failure: android.permission.INTERNAL_SYSTEM_WINDOW from uid=10109 pid=0
+08-13 14:51:22.914 D/PermissionCache(  504): checking android.permission.INTERNAL_SYSTEM_WINDOW for uid=10109 => denied (19 us)
+08-13 14:51:22.914 W/ServiceManagerCppClient(  504): Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10109 pid=0
+08-13 14:51:22.914 D/PermissionCache(  504): checking android.permission.ACCESS_SURFACE_FLINGER for uid=10109 => denied (14 us)
+08-13 14:51:22.918 D/InsetsController( 2433): show(ime(), fromIme=true)
+08-13 14:51:22.937 W/AccessibilityManagerService(  504):  wait for adding window timeout: 0
+08-13 14:51:22.941 D/Maestro ( 2333): View hierarchy received in 92 ms
+08-13 14:51:22.944 I/ImeTracker( 2433): com.fettqa.events.android:85a5132a: onShown
+08-13 14:51:22.953 W/AccessibilityManagerService(  504):  wait for adding window timeout: 0
+08-13 14:51:23.252 W/ndroid.settings( 1010): Cleared Reference was only reachable from finalizer (only reported once)
+08-13 14:51:23.306 D/ProfileInstaller( 2433): Installing profile for com.fettqa.events.android
+08-13 14:51:23.522 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:23.522 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:23.523 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:23.523 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:23.597 D/Maestro ( 2333): View hierarchy received in 75 ms
+08-13 14:51:23.768 D/StatusBarIconController(  797): ignoring old pipeline callbacks, because the new mobile icons are enabled
+08-13 14:51:23.855 D/OomAdjuster(  504): Not killing cached processes
+08-13 14:51:23.858 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:23.859 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:23.859 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:23.862 D/EGL_emulation( 2433): app_time_stats: avg=370.46ms min=69.83ms max=500.21ms count=4
+08-13 14:51:23.940 D/Maestro ( 2333): View hierarchy received in 82 ms
+08-13 14:51:24.006 D/Maestro ( 2333): Inputting text
+08-13 14:51:24.006 D/Maestro ( 2333): 97
+08-13 14:51:24.006 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:24.007 D/UiDevice( 2333): Pressing keycodes [29] with modifier 0.
+08-13 14:51:24.029 D/EGL_emulation( 1392): app_time_stats: avg=272.30ms min=1.31ms max=1066.75ms count=4
+08-13 14:51:24.048 D/WifiNl80211Manager(  504): Scan result ready event
+08-13 14:51:24.048 D/WifiNative(  504): Scan result ready event
+08-13 14:51:24.103 I/SdkSandboxManager(  504): Reconciling sdk data package directories for 0
+08-13 14:51:24.119 D/Maestro ( 2333): 100
+08-13 14:51:24.119 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:24.119 D/UiDevice( 2333): Pressing keycodes [32] with modifier 0.
+08-13 14:51:24.237 D/Maestro ( 2333): 109
+08-13 14:51:24.238 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:24.238 D/UiDevice( 2333): Pressing keycodes [41] with modifier 0.
+08-13 14:51:24.353 D/Maestro ( 2333): 105
+08-13 14:51:24.353 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:24.353 D/UiDevice( 2333): Pressing keycodes [37] with modifier 0.
+08-13 14:51:24.470 D/Maestro ( 2333): 110
+08-13 14:51:24.470 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:24.471 D/UiDevice( 2333): Pressing keycodes [42] with modifier 0.
+08-13 14:51:24.588 D/Maestro ( 2333): 64
+08-13 14:51:24.588 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:24.589 D/UiDevice( 2333): Pressing keycodes [77] with modifier 0.
+08-13 14:51:24.703 D/Maestro ( 2333): 101
+08-13 14:51:24.703 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:24.703 D/UiDevice( 2333): Pressing keycodes [33] with modifier 0.
+08-13 14:51:24.821 D/Maestro ( 2333): 120
+08-13 14:51:24.821 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:24.821 D/UiDevice( 2333): Pressing keycodes [52] with modifier 0.
+08-13 14:51:24.938 D/Maestro ( 2333): 97
+08-13 14:51:24.938 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:24.938 D/UiDevice( 2333): Pressing keycodes [29] with modifier 0.
+08-13 14:51:24.963 D/EGL_emulation( 2433): app_time_stats: avg=122.33ms min=114.76ms max=171.47ms count=9
+08-13 14:51:24.974 D/StrictMode( 1709): StrictMode policy violation: android.os.strictmode.SqliteObjectLeakedViolation: Finalizing a Cursor that has not been deactivated or closed. database = /data/user/0/com.android.providers.contacts/databases/contacts2.db, table = raw_contacts, query = SELECT contacts_view._id AS _id, contacts_view.display_name AS display_name, contacts_view.photo_thumb_uri AS photo_thumb_uri, data1 AS number, data2 AS type, data3 AS label, contacts_view.lookup AS lookup FROM raw_contacts JOIN view_contacts as contacts_view ON (contacts_view._id = raw_contacts.contact_id) JOIN (SELECT data_id,normalized_number FROM phone_lookup WHERE (phone_lookup.min_match = '7654321')) AS lookup ON lookup.data_id=data._id JOIN data ON data.raw_contact_id=raw_contacts._id WHERE (PHONE_NUMBERS_EQUAL(data.data1, '+15551234567', 0, 7)) ORDER BY  length(lookup.normalized_number) DESC
+08-13 14:51:24.974 D/StrictMode( 1709): 	at android.os.StrictMode.onSqliteObjectLeaked(StrictMode.java:2222)
+08-13 14:51:24.974 D/StrictMode( 1709): 	at android.database.sqlite.SQLiteCursor.finalize(SQLiteCursor.java:282)
+08-13 14:51:24.974 D/StrictMode( 1709): 	at java.lang.Daemons$FinalizerDaemon.doFinalize(Daemons.java:339)
+08-13 14:51:24.974 D/StrictMode( 1709): 	at java.lang.Daemons$FinalizerDaemon.processReference(Daemons.java:324)
+08-13 14:51:24.974 D/StrictMode( 1709): 	at java.lang.Daemons$FinalizerDaemon.runInternal(Daemons.java:300)
+08-13 14:51:24.974 D/StrictMode( 1709): 	at java.lang.Daemons$Daemon.run(Daemons.java:145)
+08-13 14:51:24.974 D/StrictMode( 1709): 	at java.lang.Thread.run(Thread.java:1012)
+08-13 14:51:24.975 D/StrictMode( 1709): StrictMode policy violation: android.os.strictmode.LeakedClosableViolation: A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+08-13 14:51:24.975 D/StrictMode( 1709): 	at android.os.StrictMode$AndroidCloseGuardReporter.report(StrictMode.java:1994)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at dalvik.system.CloseGuard.warnIfOpen(CloseGuard.java:336)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at android.database.AbstractCursor.finalize(AbstractCursor.java:531)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at android.database.sqlite.SQLiteCursor.finalize(SQLiteCursor.java:291)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at java.lang.Daemons$FinalizerDaemon.doFinalize(Daemons.java:339)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at java.lang.Daemons$FinalizerDaemon.processReference(Daemons.java:324)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at java.lang.Daemons$FinalizerDaemon.runInternal(Daemons.java:300)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at java.lang.Daemons$Daemon.run(Daemons.java:145)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at java.lang.Thread.run(Thread.java:1012)
+08-13 14:51:24.975 D/StrictMode( 1709): Caused by: java.lang.Throwable: Explicit termination method 'AbstractCursor.close' not called
+08-13 14:51:24.975 D/StrictMode( 1709): 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at android.database.AbstractCursor.<init>(AbstractCursor.java:227)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at android.database.AbstractWindowedCursor.<init>(AbstractWindowedCursor.java:39)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at android.database.sqlite.SQLiteCursor.<init>(SQLiteCursor.java:98)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at android.database.sqlite.SQLiteDirectCursorDriver.query(SQLiteDirectCursorDriver.java:52)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at android.database.sqlite.SQLiteDatabase.rawQueryWithFactory(SQLiteDatabase.java:1714)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at android.database.sqlite.SQLiteQueryBuilder.query(SQLiteQueryBuilder.java:592)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at com.android.providers.contacts.ContactsProvider2.doQuery(ContactsProvider2.java:7543)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at com.android.providers.contacts.ContactsProvider2.queryLocal(ContactsProvider2.java:7249)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at com.android.providers.contacts.ContactsProvider2.queryCorpLookupIfNecessary(ContactsProvider2.java:7728)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at com.android.providers.contacts.ContactsProvider2.queryLookupEnterprise(ContactsProvider2.java:7867)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at com.android.providers.contacts.ContactsProvider2.queryPhoneLookupEnterprise(ContactsProvider2.java:7838)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at com.android.providers.contacts.ContactsProvider2.queryLocal(ContactsProvider2.java:7172)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at com.android.providers.contacts.ContactsProvider2.queryDirectoryIfNecessary(ContactsProvider2.java:5883)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at com.android.providers.contacts.ContactsProvider2.queryInternal(ContactsProvider2.java:5728)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at com.android.providers.contacts.ContactsProvider2.query(ContactsProvider2.java:5673)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at android.content.ContentProvider.query(ContentProvider.java:1692)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at android.content.ContentProvider$Transport.query(ContentProvider.java:292)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at android.content.ContentProviderNative.onTransact(ContentProviderNative.java:107)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at android.os.Binder.execTransactInternal(Binder.java:1344)
+08-13 14:51:24.975 D/StrictMode( 1709): 	at android.os.Binder.execTransact(Binder.java:1275)
+08-13 14:51:25.054 D/Maestro ( 2333): 109
+08-13 14:51:25.055 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:25.055 D/UiDevice( 2333): Pressing keycodes [41] with modifier 0.
+08-13 14:51:25.085 D/EGL_emulation( 1392): app_time_stats: avg=105.64ms min=38.85ms max=118.46ms count=10
+08-13 14:51:25.171 D/Maestro ( 2333): 112
+08-13 14:51:25.171 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:25.172 D/UiDevice( 2333): Pressing keycodes [44] with modifier 0.
+08-13 14:51:25.287 D/Maestro ( 2333): 108
+08-13 14:51:25.287 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:25.287 D/UiDevice( 2333): Pressing keycodes [40] with modifier 0.
+08-13 14:51:25.404 D/Maestro ( 2333): 101
+08-13 14:51:25.405 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:25.405 D/UiDevice( 2333): Pressing keycodes [33] with modifier 0.
+08-13 14:51:25.520 D/Maestro ( 2333): 46
+08-13 14:51:25.520 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:25.521 D/UiDevice( 2333): Pressing keycodes [56] with modifier 0.
+08-13 14:51:25.637 D/Maestro ( 2333): 99
+08-13 14:51:25.637 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:25.637 D/UiDevice( 2333): Pressing keycodes [31] with modifier 0.
+08-13 14:51:25.751 D/Maestro ( 2333): 111
+08-13 14:51:25.751 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:25.751 D/UiDevice( 2333): Pressing keycodes [43] with modifier 0.
+08-13 14:51:25.870 D/Maestro ( 2333): 109
+08-13 14:51:25.871 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:25.871 D/UiDevice( 2333): Pressing keycodes [41] with modifier 0.
+08-13 14:51:25.972 D/StatusBarIconController(  797): ignoring old pipeline callback because the new wifi icon is enabled
+08-13 14:51:26.386 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:26.387 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:26.387 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:26.395 D/EGL_emulation( 2433): app_time_stats: avg=159.13ms min=115.35ms max=498.23ms count=9
+08-13 14:51:26.447 I/DropBoxManagerService(  504): add tag=system_server_strictmode isTagEnabled=true flags=0x2
+08-13 14:51:26.448 I/DropBoxManagerService(  504): add tag=system_server_strictmode isTagEnabled=true flags=0x2
+08-13 14:51:26.448 I/DropBoxManagerService(  504): add tag=system_server_strictmode isTagEnabled=true flags=0x2
+08-13 14:51:26.448 I/DropBoxManagerService(  504): add tag=system_server_strictmode isTagEnabled=true flags=0x2
+08-13 14:51:26.449 I/DropBoxManagerService(  504): add tag=system_server_strictmode isTagEnabled=true flags=0x2
+08-13 14:51:26.449 I/DropBoxManagerService(  504): add tag=system_server_strictmode isTagEnabled=true flags=0x2
+08-13 14:51:26.449 I/DropBoxManagerService(  504): add tag=system_server_strictmode isTagEnabled=true flags=0x2
+08-13 14:51:26.475 D/Maestro ( 2333): View hierarchy received in 89 ms
+08-13 14:51:26.541 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:26.542 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:26.542 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:26.623 D/Maestro ( 2333): View hierarchy received in 82 ms
+08-13 14:51:26.691 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:26.692 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:26.692 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:26.766 D/Maestro ( 2333): View hierarchy received in 75 ms
+08-13 14:51:26.827 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:26.829 D/UiDevice( 2333): Waiting 500ms for window update of package com.fettqa.events.android.
+08-13 14:51:26.944 I/keystore2(  157): system/security/keystore2/src/watchdog.rs:319 - Watchdog thread idle -> terminating. Have a great day.
+08-13 14:51:27.331 W/UiDevice( 2333): Timed out waiting 500ms on window update.
+08-13 14:51:27.331 W/UiDevice( 2333): java.util.concurrent.TimeoutException: Expected event not received within: 500 ms among: []
+08-13 14:51:27.331 W/UiDevice( 2333): 	at android.app.UiAutomation.executeAndWaitForEvent(UiAutomation.java:1071)
+08-13 14:51:27.331 W/UiDevice( 2333): 	at androidx.test.uiautomator.UiDevice.waitForWindowUpdate(UiDevice.java:1253)
+08-13 14:51:27.331 W/UiDevice( 2333): 	at dev.mobile.maestro.Service.isWindowUpdating(MaestroDriverService.kt:359)
+08-13 14:51:27.331 W/UiDevice( 2333): 	at maestro_android.MaestroDriverGrpc$MethodHandlers.invoke(MaestroDriverGrpc.java:965)
+08-13 14:51:27.331 W/UiDevice( 2333): 	at io.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+08-13 14:51:27.331 W/UiDevice( 2333): 	at io.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:355)
+08-13 14:51:27.331 W/UiDevice( 2333): 	at io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:867)
+08-13 14:51:27.331 W/UiDevice( 2333): 	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+08-13 14:51:27.331 W/UiDevice( 2333): 	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+08-13 14:51:27.331 W/UiDevice( 2333): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+08-13 14:51:27.331 W/UiDevice( 2333): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+08-13 14:51:27.331 W/UiDevice( 2333): 	at java.lang.Thread.run(Thread.java:1012)
+08-13 14:51:27.390 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:27.396 D/UiDevice( 2333): Waiting 500ms for window update of package com.fettqa.events.android.
+08-13 14:51:27.746 W/ProcessStats(  504): Tracking association SourceState{f0baa0e system/1000 BFgs #578} whose proc state 4 is better than process ProcessState{45541ef com.android.inputmethod.latin/10109 pkg=com.android.inputmethod.latin} proc state 6 (4 skipped)
+08-13 14:51:27.895 D/EGL_emulation( 2433): app_time_stats: avg=499.92ms min=499.23ms max=500.33ms count=3
+08-13 14:51:27.897 W/UiDevice( 2333): Timed out waiting 500ms on window update.
+08-13 14:51:27.897 W/UiDevice( 2333): java.util.concurrent.TimeoutException: Expected event not received within: 500 ms among: []
+08-13 14:51:27.897 W/UiDevice( 2333): 	at android.app.UiAutomation.executeAndWaitForEvent(UiAutomation.java:1071)
+08-13 14:51:27.897 W/UiDevice( 2333): 	at androidx.test.uiautomator.UiDevice.waitForWindowUpdate(UiDevice.java:1253)
+08-13 14:51:27.897 W/UiDevice( 2333): 	at dev.mobile.maestro.Service.isWindowUpdating(MaestroDriverService.kt:359)
+08-13 14:51:27.897 W/UiDevice( 2333): 	at maestro_android.MaestroDriverGrpc$MethodHandlers.invoke(MaestroDriverGrpc.java:965)
+08-13 14:51:27.897 W/UiDevice( 2333): 	at io.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+08-13 14:51:27.897 W/UiDevice( 2333): 	at io.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:355)
+08-13 14:51:27.897 W/UiDevice( 2333): 	at io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:867)
+08-13 14:51:27.897 W/UiDevice( 2333): 	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+08-13 14:51:27.897 W/UiDevice( 2333): 	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+08-13 14:51:27.897 W/UiDevice( 2333): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+08-13 14:51:27.897 W/UiDevice( 2333): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+08-13 14:51:27.897 W/UiDevice( 2333): 	at java.lang.Thread.run(Thread.java:1012)
+08-13 14:51:28.003 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:28.003 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:28.003 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:28.079 D/Maestro ( 2333): View hierarchy received in 76 ms
+08-13 14:51:28.194 D/EGL_emulation( 1392): app_time_stats: avg=345.34ms min=109.63ms max=2181.47ms count=9
+08-13 14:51:28.290 I/ImeTracker(  504): com.fettqa.events.android:254d0108: onRequestShow at ORIGIN_SERVER_START_INPUT reason ATTACH_NEW_INPUT
+08-13 14:51:28.292 I/ImeTracker( 2433): com.fettqa.events.android:8d6f3753: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+08-13 14:51:28.292 D/InputMethodManager( 2433): showSoftInput() view=com.google.android.material.textfield.TextInputEditText{97071f0 VFED..CL. .F.P..ID 0,0-272,56 #7f090182 app:id/passwordInput aid=1073741825} flags=0 reason=SHOW_SOFT_INPUT
+08-13 14:51:28.296 I/LatinIME( 1392): Starting input. Cursor position = 0,0
+08-13 14:51:28.301 W/WindowOnBackDispatcher( 2433): sendCancelIfRunning: isInProgress=falsecallback=ImeCallback=ImeOnBackInvokedCallback@147741801 Callback=android.window.IOnBackInvokedCallback$Stub$Proxy@1b74a4f
+08-13 14:51:28.301 D/CoreBackPreview(  504): Window{2f35aaa u0 com.fettqa.events.android/com.fettqa.events.android.ui.LoginActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@2c22f1f, mPriority=0, mIsAnimationCallback=false}
+08-13 14:51:28.347 D/CoreBackPreview(  504): Window{2f35aaa u0 com.fettqa.events.android/com.fettqa.events.android.ui.LoginActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@70d3cca, mPriority=0, mIsAnimationCallback=false}
+08-13 14:51:28.347 D/InsetsController( 2433): show(ime(), fromIme=true)
+08-13 14:51:28.347 I/ImeTracker( 2433): com.fettqa.events.android:254d0108: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+08-13 14:51:28.400 D/InsetsController( 2433): show(ime(), fromIme=true)
+08-13 14:51:28.401 I/ImeTracker( 2433): com.fettqa.events.android:8d6f3753: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+08-13 14:51:28.948 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:28.948 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:28.949 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:28.949 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:28.975 D/StatusBarIconController(  797): ignoring old pipeline callback because the new wifi icon is enabled
+08-13 14:51:29.012 D/Maestro ( 2333): View hierarchy received in 64 ms
+08-13 14:51:29.115 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:29.116 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:29.116 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:29.135 D/OomAdjuster(  504): Not killing cached processes
+08-13 14:51:29.180 D/Maestro ( 2333): View hierarchy received in 65 ms
+08-13 14:51:29.235 D/Maestro ( 2333): Inputting text
+08-13 14:51:29.235 D/Maestro ( 2333): 119
+08-13 14:51:29.235 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:29.235 D/UiDevice( 2333): Pressing keycodes [51] with modifier 0.
+08-13 14:51:29.263 D/EGL_emulation( 2433): app_time_stats: avg=273.68ms min=16.15ms max=468.72ms count=5
+08-13 14:51:29.355 D/Maestro ( 2333): 114
+08-13 14:51:29.356 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:29.356 D/UiDevice( 2333): Pressing keycodes [46] with modifier 0.
+08-13 14:51:29.470 D/Maestro ( 2333): 111
+08-13 14:51:29.471 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:29.471 D/UiDevice( 2333): Pressing keycodes [43] with modifier 0.
+08-13 14:51:29.588 D/Maestro ( 2333): 110
+08-13 14:51:29.588 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:29.588 D/UiDevice( 2333): Pressing keycodes [42] with modifier 0.
+08-13 14:51:29.701 D/Maestro ( 2333): 103
+08-13 14:51:29.701 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:29.701 D/UiDevice( 2333): Pressing keycodes [35] with modifier 0.
+08-13 14:51:29.820 D/Maestro ( 2333): 45
+08-13 14:51:29.821 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:29.821 D/UiDevice( 2333): Pressing keycodes [69] with modifier 0.
+08-13 14:51:29.938 D/Maestro ( 2333): 112
+08-13 14:51:29.939 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:29.939 D/UiDevice( 2333): Pressing keycodes [44] with modifier 0.
+08-13 14:51:30.054 D/Maestro ( 2333): 97
+08-13 14:51:30.055 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:30.055 D/UiDevice( 2333): Pressing keycodes [29] with modifier 0.
+08-13 14:51:30.171 D/Maestro ( 2333): 115
+08-13 14:51:30.171 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:30.171 D/UiDevice( 2333): Pressing keycodes [47] with modifier 0.
+08-13 14:51:30.288 D/Maestro ( 2333): 115
+08-13 14:51:30.289 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:30.289 D/UiDevice( 2333): Pressing keycodes [47] with modifier 0.
+08-13 14:51:30.312 D/EGL_emulation( 2433): app_time_stats: avg=116.52ms min=115.79ms max=117.97ms count=9
+08-13 14:51:30.404 D/Maestro ( 2333): 119
+08-13 14:51:30.404 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:30.404 D/UiDevice( 2333): Pressing keycodes [51] with modifier 0.
+08-13 14:51:30.522 D/Maestro ( 2333): 111
+08-13 14:51:30.522 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:30.523 D/UiDevice( 2333): Pressing keycodes [43] with modifier 0.
+08-13 14:51:30.637 D/Maestro ( 2333): 114
+08-13 14:51:30.638 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:30.638 D/UiDevice( 2333): Pressing keycodes [46] with modifier 0.
+08-13 14:51:30.751 D/Maestro ( 2333): 100
+08-13 14:51:30.751 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:30.752 D/UiDevice( 2333): Pressing keycodes [32] with modifier 0.
+08-13 14:51:31.269 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:31.269 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:31.270 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:31.342 D/Maestro ( 2333): View hierarchy received in 73 ms
+08-13 14:51:31.406 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:31.406 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:31.407 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:31.499 D/Maestro ( 2333): View hierarchy received in 93 ms
+08-13 14:51:31.560 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:31.561 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:31.561 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:31.621 D/Maestro ( 2333): View hierarchy received in 61 ms
+08-13 14:51:31.676 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:31.678 D/UiDevice( 2333): Waiting 500ms for window update of package com.fettqa.events.android.
+08-13 14:51:31.779 D/EGL_emulation( 2433): app_time_stats: avg=244.33ms min=116.48ms max=500.18ms count=6
+08-13 14:51:31.980 D/StatusBarIconController(  797): ignoring old pipeline callback because the new wifi icon is enabled
+08-13 14:51:32.184 W/UiDevice( 2333): Timed out waiting 500ms on window update.
+08-13 14:51:32.184 W/UiDevice( 2333): java.util.concurrent.TimeoutException: Expected event not received within: 500 ms among: []
+08-13 14:51:32.184 W/UiDevice( 2333): 	at android.app.UiAutomation.executeAndWaitForEvent(UiAutomation.java:1071)
+08-13 14:51:32.184 W/UiDevice( 2333): 	at androidx.test.uiautomator.UiDevice.waitForWindowUpdate(UiDevice.java:1253)
+08-13 14:51:32.184 W/UiDevice( 2333): 	at dev.mobile.maestro.Service.isWindowUpdating(MaestroDriverService.kt:359)
+08-13 14:51:32.184 W/UiDevice( 2333): 	at maestro_android.MaestroDriverGrpc$MethodHandlers.invoke(MaestroDriverGrpc.java:965)
+08-13 14:51:32.184 W/UiDevice( 2333): 	at io.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+08-13 14:51:32.184 W/UiDevice( 2333): 	at io.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:355)
+08-13 14:51:32.184 W/UiDevice( 2333): 	at io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:867)
+08-13 14:51:32.184 W/UiDevice( 2333): 	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+08-13 14:51:32.184 W/UiDevice( 2333): 	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+08-13 14:51:32.184 W/UiDevice( 2333): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+08-13 14:51:32.184 W/UiDevice( 2333): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+08-13 14:51:32.184 W/UiDevice( 2333): 	at java.lang.Thread.run(Thread.java:1012)
+08-13 14:51:32.242 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:32.244 D/UiDevice( 2333): Waiting 500ms for window update of package com.fettqa.events.android.
+08-13 14:51:32.396 I/wpa_supplicant(  784): wlan0: CTRL-EVENT-BEACON-LOSS 
+08-13 14:51:32.745 W/UiDevice( 2333): Timed out waiting 500ms on window update.
+08-13 14:51:32.745 W/UiDevice( 2333): java.util.concurrent.TimeoutException: Expected event not received within: 500 ms among: []
+08-13 14:51:32.745 W/UiDevice( 2333): 	at android.app.UiAutomation.executeAndWaitForEvent(UiAutomation.java:1071)
+08-13 14:51:32.745 W/UiDevice( 2333): 	at androidx.test.uiautomator.UiDevice.waitForWindowUpdate(UiDevice.java:1253)
+08-13 14:51:32.745 W/UiDevice( 2333): 	at dev.mobile.maestro.Service.isWindowUpdating(MaestroDriverService.kt:359)
+08-13 14:51:32.745 W/UiDevice( 2333): 	at maestro_android.MaestroDriverGrpc$MethodHandlers.invoke(MaestroDriverGrpc.java:965)
+08-13 14:51:32.745 W/UiDevice( 2333): 	at io.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+08-13 14:51:32.745 W/UiDevice( 2333): 	at io.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:355)
+08-13 14:51:32.745 W/UiDevice( 2333): 	at io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:867)
+08-13 14:51:32.745 W/UiDevice( 2333): 	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+08-13 14:51:32.745 W/UiDevice( 2333): 	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+08-13 14:51:32.745 W/UiDevice( 2333): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+08-13 14:51:32.745 W/UiDevice( 2333): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+08-13 14:51:32.745 W/UiDevice( 2333): 	at java.lang.Thread.run(Thread.java:1012)
+08-13 14:51:32.795 D/EGL_emulation( 2433): app_time_stats: avg=338.80ms min=17.35ms max=500.68ms count=3
+08-13 14:51:32.812 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:32.813 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:32.813 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:32.863 D/Maestro ( 2333): View hierarchy received in 51 ms
+08-13 14:51:33.058 D/audioserver(  385): FGS Logger Transaction failed
+08-13 14:51:33.058 D/audioserver(  385): -129
+08-13 14:51:33.066 I/okhttp.OkHttpClient( 2433): --> POST http://127.0.0.1:8080/api/auth/login (57-byte body)
+08-13 14:51:33.069 D/AudioFlinger(  385): mixer(0x7f05b2d2c930) throttle end: throttle time(44)
+08-13 14:51:33.115 D/AudioFlinger(  385): mixer(0x7f05b2d2c930) throttle end: throttle time(33)
+08-13 14:51:33.130 D/ActivityManager(  504): freezing 1764 com.android.externalstorage
+08-13 14:51:33.187 E/FrameTracker( 2433): force finish cuj, time out: J<IME_INSETS_ANIMATION::0@0@com.fettqa.events.android>
+08-13 14:51:33.187 W/FrameTracker( 2433): Missed SF frame:PREDICTION_ERROR, 2866, 0, CUJ=J<IME_INSETS_ANIMATION::0@0@com.fettqa.events.android>
+08-13 14:51:33.228 D/audioserver(  385): FGS Logger Transaction failed
+08-13 14:51:33.228 D/audioserver(  385): -129
+08-13 14:51:33.334 I/okhttp.OkHttpClient( 2433): <-- 401 http://127.0.0.1:8080/api/auth/login (267ms, unknown-length body)
+08-13 14:51:33.768 D/StatusBarIconController(  797): ignoring old pipeline callbacks, because the new mobile icons are enabled
+08-13 14:51:33.796 D/EGL_emulation( 2433): app_time_stats: avg=141.38ms min=5.04ms max=430.66ms count=7
+08-13 14:51:33.936 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:33.936 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:33.937 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:33.937 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:33.997 D/Maestro ( 2333): View hierarchy received in 61 ms
+08-13 14:51:34.056 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:34.057 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:34.057 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:34.138 D/Maestro ( 2333): View hierarchy received in 82 ms
+08-13 14:51:34.199 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:34.200 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:34.200 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:34.264 D/Maestro ( 2333): View hierarchy received in 65 ms
+08-13 14:51:34.332 D/Maestro ( 2333): Requesting view hierarchy
+08-13 14:51:34.333 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:34.333 W/QueryController( 2333): Could not detect idle state.
+08-13 14:51:34.403 D/Maestro ( 2333): View hierarchy received in 71 ms
+08-13 14:51:34.534 D/ActivityManager(  504): freezing 1484 com.android.documentsui
+08-13 14:51:34.799 D/EGL_emulation( 2433): app_time_stats: avg=501.37ms min=501.19ms max=501.55ms count=2
+08-13 14:51:34.852 D/OomAdjuster(  504): Not killing cached processes
+08-13 14:51:34.986 D/StatusBarIconController(  797): ignoring old pipeline callback because the new wifi icon is enabled
