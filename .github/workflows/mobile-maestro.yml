@@ -123,3 +123,38 @@ jobs:
         working-directory: app
         run: |
           if [ -f app.pid ]; then kill "$(cat app.pid)" || true; fi
+
+  publish-maestro-report:
+    name: Publish Maestro Report
+    runs-on: ubuntu-latest
+    needs: maestro
+    timeout-minutes: 30
+    concurrency:
+      group: github-pages-publish
+      cancel-in-progress: false
+    if: always() && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+    permissions:
+      contents: write
+    steps:
+      - name: Download Maestro results
+        uses: actions/download-artifact@v4
+        with:
+          name: mobile-maestro-results
+          path: maestro-report
+        continue-on-error: true
+
+      - name: Publish to GitHub Pages
+        if: hashFiles('maestro-report/index.html') != ''
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./maestro-report
+          destination_dir: maestro/${{ github.run_number }}
+          keep_files: true
+
+      - name: Summary
+        if: hashFiles('maestro-report/index.html') != ''
+        run: |
+          REPORT_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/maestro/${{ github.run_number }}/"
+          echo "## Maestro report" >> "$GITHUB_STEP_SUMMARY"
+          echo "- [View Maestro Report](${REPORT_URL})" >> "$GITHUB_STEP_SUMMARY"

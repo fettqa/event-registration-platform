@@ -28,13 +28,21 @@ case "$SUITE" in
     RESULTS_DIR="$ROOT/tests-mobile/maestro-results"
     rm -rf "$RESULTS_DIR"
     mkdir -p "$RESULTS_DIR"
-    # JUnit XML + failing-step screenshots / logs
+    # HTML for GitHub Pages (index.html) + failing-step screenshots / debug logs.
+    # Capture exit code so artifacts exist even when flows fail.
+    set +e
     maestro test \
-      --format junit \
-      --output "$RESULTS_DIR/report.xml" \
+      --format html \
+      --output "$RESULTS_DIR/index.html" \
       --test-output-dir "$RESULTS_DIR" \
       --debug-output "$RESULTS_DIR/debug" \
       "$ROOT/tests-mobile/maestro"
+    STATUS=$?
+    set -e
+    if [[ "$STATUS" -ne 0 ]]; then
+      echo "==> Suite maestro failed ($STATUS)" >&2
+      exit "$STATUS"
+    fi
     ;;
   python)
     curl -sf "$APPIUM_URL/status" | grep -q ready
