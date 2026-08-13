@@ -1,0 +1,58 @@
+15:02:22.898 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Define variables RUNNING
+15:02:22.899 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Define variables COMPLETED
+15:02:22.899 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Apply configuration RUNNING
+15:02:22.900 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Apply configuration COMPLETED
+15:02:22.900 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Launch app "com.fettqa.events.android" with clear state RUNNING
+15:02:22.900 [ INFO] maestro.Maestro.clearAppState$lambda$8: Clearing app state com.fettqa.events.android
+15:02:23.181 [ INFO] maestro.Maestro.launchApp$lambda$5: Launching app com.fettqa.events.android
+15:02:23.181 [ INFO] maestro.Maestro.launchApp$lambda$5: Stopping com.fettqa.events.android app during launch
+15:02:23.236 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Launch app "com.fettqa.events.android" with clear state COMPLETED
+15:02:23.236 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Tap on id: headerRegisterButton RUNNING
+15:02:24.737 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=CREATE ACCOUNT, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=com.fettqa.events.android:id/headerRegisterButton, clickable=true, bounds=[151,80][304,128], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.Button, important-for-accessibility=true, error=}, children=[], clickable=true, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=151, y=80, width=153, height=48))
+15:02:25.985 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+15:02:25.986 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (227, 104) using hierarchy based logic for wait
+15:02:27.272 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Something has changed in the UI judging by view hierarchy. Proceed.
+15:02:27.272 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Tap on id: headerRegisterButton COMPLETED
+15:02:27.272 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Assert that "Create account" is visible RUNNING
+15:02:27.385 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Assert that "Create account" is visible COMPLETED
+15:02:27.385 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Tap on id: fullNameInput RUNNING
+15:02:27.469 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=Full name, accessibilityText=, hintText=Full name, ignoreBoundsFiltering=false, resource-id=com.fettqa.events.android:id/fullNameInput, clickable=true, bounds=[24,105][296,161], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.EditText, important-for-accessibility=true, error=}, children=[], clickable=true, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=24, y=105, width=272, height=56))
+15:02:28.724 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+15:02:28.725 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (160, 133) using hierarchy based logic for wait
+15:02:29.683 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Something has changed in the UI judging by view hierarchy. Proceed.
+15:02:29.683 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Tap on id: fullNameInput COMPLETED
+15:02:29.684 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Input text random TEXT_PERSON_NAME RUNNING
+15:02:29.760 [ INFO] maestro.Maestro.inputText: Inputting text: Shanelle Wunsch
+15:02:32.429 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Input text random TEXT_PERSON_NAME COMPLETED
+15:02:32.429 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Tap on id: emailInput RUNNING
+15:02:32.537 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=Email, accessibilityText=, hintText=Email, ignoreBoundsFiltering=false, resource-id=com.fettqa.events.android:id/emailInput, clickable=true, bounds=[24,173][296,229], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.EditText, important-for-accessibility=true, error=}, children=[], clickable=true, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=24, y=173, width=272, height=56))
+15:02:33.774 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+15:02:33.776 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (160, 201) using hierarchy based logic for wait
+15:02:34.770 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Something has changed in the UI judging by view hierarchy. Proceed.
+15:02:34.771 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Tap on id: emailInput COMPLETED
+15:02:34.771 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Input text random TEXT_EMAIL_ADDRESS RUNNING
+15:02:34.778 [ INFO] maestro.Maestro.inputText: Inputting text: stan.roberts@hotmail.com
+15:02:38.215 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Input text random TEXT_EMAIL_ADDRESS COMPLETED
+15:02:38.215 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Tap on id: passwordInput RUNNING
+15:02:38.327 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=Password, accessibilityText=, hintText=Password, ignoreBoundsFiltering=false, resource-id=com.fettqa.events.android:id/passwordInput, clickable=true, bounds=[24,241][296,297], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.EditText, important-for-accessibility=true, error=}, children=[], clickable=true, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=24, y=241, width=272, height=56))
+15:02:39.542 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+15:02:39.543 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (160, 269) using hierarchy based logic for wait
+15:02:40.598 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Something has changed in the UI judging by view hierarchy. Proceed.
+15:02:40.599 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Tap on id: passwordInput COMPLETED
+15:02:40.599 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Input text secret12 RUNNING
+15:02:40.599 [ INFO] maestro.Maestro.inputText: Inputting text: secret12
+15:02:42.187 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Input text secret12 COMPLETED
+15:02:42.187 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Tap on id: registerButton RUNNING
+15:02:42.282 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=CREATE ACCOUNT, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=com.fettqa.events.android:id/registerButton, clickable=true, bounds=[24,313][296,361], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.Button, important-for-accessibility=true, error=}, children=[], clickable=true, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=24, y=313, width=272, height=48))
+15:02:43.558 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+15:02:43.559 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (160, 337) using hierarchy based logic for wait
+15:02:44.699 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Something has changed in the UI judging by view hierarchy. Proceed.
+15:02:44.700 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Tap on id: registerButton COMPLETED
+15:02:44.700 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Assert that "Events" is visible RUNNING
+15:02:44.777 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Assert that "Events" is visible COMPLETED
+15:02:44.777 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Assert that "Role: USER" is visible RUNNING
+15:02:44.892 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Assert that "Role: USER" is visible COMPLETED
+15:02:44.892 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Assert that id: headerAdminButton is not visible RUNNING
+15:02:45.572 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Assert that id: headerAdminButton is not visible COMPLETED
+15:02:45.572 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Assert that id: createEventFab is not visible RUNNING
+15:02:46.216 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Assert that id: createEventFab is not visible COMPLETED
