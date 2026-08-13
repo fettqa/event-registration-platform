@@ -1,0 +1,12 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Thu Aug 13 11:51:56 UTC 2026","Thu Aug 13 11:51:57 UTC 2026","504","","Register user","","New user sees their info in the header","","New user sees their info in the header","  As a visitor
+  I want to create an account
+  So that the header shows my identity"
+"passed","Thu Aug 13 11:51:57 UTC 2026","Thu Aug 13 11:51:58 UTC 2026","886","","com.fettqa.events.e2e.functional.CreateEventAndRegisterE2ETest","","com.fettqa.events.e2e.functional.CreateEventAndRegisterE2ETest","createEventAndRegister_showsSuccess","createEventAndRegister_showsSuccess()",""
+"passed","Thu Aug 13 11:51:59 UTC 2026","Thu Aug 13 11:51:59 UTC 2026","647","","com.fettqa.events.e2e.functional.CreateEventWithEmptyNameTest","","com.fettqa.events.e2e.functional.CreateEventWithEmptyNameTest","createEventWithEmptyName_showsValidation","createEventWithEmptyName_showsValidation()",""
+"passed","Thu Aug 13 11:52:00 UTC 2026","Thu Aug 13 11:52:01 UTC 2026","1260","","com.fettqa.events.e2e.functional.RegisterDuplicateEmailE2ETest","","com.fettqa.events.e2e.functional.RegisterDuplicateEmailE2ETest","registerSameEmailTwice_showsError","registerSameEmailTwice_showsError()",""
+"passed","Thu Aug 13 11:52:01 UTC 2026","Thu Aug 13 11:52:02 UTC 2026","1174","","com.fettqa.events.e2e.functional.RegisterSendsEmailE2ETest","","com.fettqa.events.e2e.functional.RegisterSendsEmailE2ETest","registerForEvent_sendsConfirmationEmail","registerForEvent_sendsConfirmationEmail()",""
+"passed","Thu Aug 13 11:51:47 UTC 2026","Thu Aug 13 11:51:56 UTC 2026","9187","","Create event and register","","Admin creates an event and registers for it","","Admin creates an event and registers for it","  As an admin
+  I want to create an event and register for it
+  So that I appear in the registrations list"
+"passed","Thu Aug 13 11:52:03 UTC 2026","Thu Aug 13 11:52:03 UTC 2026","439","","com.fettqa.events.e2e.functional.RegisterUserE2ETest","","com.fettqa.events.e2e.functional.RegisterUserE2ETest","register_showsUserInHeader","register_showsUserInHeader()",""
