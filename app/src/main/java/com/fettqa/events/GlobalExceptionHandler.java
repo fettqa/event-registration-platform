@@ -14,7 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-
+  //CI trigger
   @ExceptionHandler(EventNotFoundException.class)
   @ResponseStatus(HttpStatus.NOT_FOUND)
   public Map<String, String> handleNotFound(EventNotFoundException ex) {
