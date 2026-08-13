@@ -107,10 +107,10 @@ maestro test tests-mobile\maestro
 # one flow:
 maestro test tests-mobile\maestro\02_login_admin.yaml
 
-# JUnit report + failing-step screenshots (same as CI)
+# JUnit / HTML report + failing-step screenshots
 mkdir tests-mobile\maestro-results -Force
 maestro test `
-  --format junit --output tests-mobile\maestro-results\report.xml `
+  --format html --output tests-mobile\maestro-results\index.html `
   --test-output-dir tests-mobile\maestro-results `
   --debug-output tests-mobile\maestro-results\debug `
   tests-mobile\maestro
@@ -118,7 +118,9 @@ maestro test `
 
 Flows: `maestro/01_*.yaml` … `07_*.yaml` (guest, login, bad password, register, register-for-event, duplicate, search).
 
-CI (`mobile-maestro.yml`) uploads artifact **`mobile-maestro-results`** (`report.xml` + screenshots/logs).
+CI (`mobile-maestro.yml`):
+- Artifact **`mobile-maestro-results`** (`index.html` + screenshots/logs)
+- GitHub Pages: `…/maestro/<run_number>/` (job **Publish Maestro Report**)
 
 ---
 
