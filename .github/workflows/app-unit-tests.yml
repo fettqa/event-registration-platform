@@ -1,7 +1,7 @@
 name: App Unit Tests
 
+# Manual run only. On push/PR, App CI runs `test bootJar` in the build-jar job when app/** changes.
 on:
-  workflow_call:
   workflow_dispatch:
 
 jobs:
