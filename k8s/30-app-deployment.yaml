@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-registration
+  namespace: erp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: event-registration
+  template:
+    metadata:
+      labels:
+        app: event-registration
+    spec:
+      containers:
+        - name: app
+          image: event-registration:local
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: render
+            - name: PORT
+              value: "8080"
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: DB_HOST
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: DB_PORT
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: DB_NAME
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: DB_USER
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: DB_PASSWORD
+            - name: DB_SSLMODE
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: DB_SSLMODE
+            - name: APP_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: APP_JWT_SECRET
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            failureThreshold: 12
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 40
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 512Mi
+            limits:
+              memory: 768Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: event-registration
+  namespace: erp
+spec:
+  selector:
+    app: event-registration
+  ports:
+    - port: 8080
+      targetPort: 8080
+      name: http
