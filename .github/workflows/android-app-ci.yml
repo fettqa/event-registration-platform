@@ -54,15 +54,15 @@ jobs:
 
       # One Gradle invocation: decide test / assemble from inputs.
       - name: Unit tests and assembleDebug
-        if: inputs.run_android_unit && inputs.build_apk
+        if: ${{ inputs.run_android_unit && inputs.build_apk }}
         run: ./gradlew test assembleDebug
 
       - name: Unit tests only
-        if: inputs.run_android_unit && !inputs.build_apk
+        if: ${{ inputs.run_android_unit && !inputs.build_apk }}
         run: ./gradlew test
 
       - name: assembleDebug only
-        if: !inputs.run_android_unit && inputs.build_apk
+        if: ${{ !inputs.run_android_unit && inputs.build_apk }}
         run: ./gradlew assembleDebug
 
       - name: Upload debug APK
