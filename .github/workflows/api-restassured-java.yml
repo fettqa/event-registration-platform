@@ -1,4 +1,4 @@
-name: Java API Tests (RestAssured)
+name: API RestAssured Java
 
 on:
   push:
@@ -6,13 +6,13 @@ on:
     paths:
       - 'app/**'
       - 'tests-api/java/**'
-      - '.github/workflows/java-api-tests.yml'
+      - '.github/workflows/api-restassured-java.yml'
   pull_request:
     branches: [ main ]
     paths:
       - 'app/**'
       - 'tests-api/java/**'
-      - '.github/workflows/java-api-tests.yml'
+      - '.github/workflows/api-restassured-java.yml'
 
 jobs:
   api-tests:
@@ -106,7 +106,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: allure-results-java-api
+          name: allure-results-api-restassured-java
           path: tests-api/java/build/allure-results
           if-no-files-found: ignore
 
@@ -114,5 +114,5 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: app-log-java-api
+          name: app-log-api-restassured-java
           path: app/app.log
