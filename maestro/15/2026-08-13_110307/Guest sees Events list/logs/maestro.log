@@ -1,0 +1,19 @@
+11:06:01.046 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Define variables RUNNING
+11:06:01.046 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Define variables COMPLETED
+11:06:01.047 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Apply configuration RUNNING
+11:06:01.047 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Apply configuration COMPLETED
+11:06:01.047 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Launch app "com.fettqa.events.android" with clear state RUNNING
+11:06:01.047 [ INFO] maestro.Maestro.clearAppState$lambda$8: Clearing app state com.fettqa.events.android
+11:06:01.377 [ INFO] maestro.Maestro.launchApp$lambda$5: Launching app com.fettqa.events.android
+11:06:01.377 [ INFO] maestro.Maestro.launchApp$lambda$5: Stopping com.fettqa.events.android app during launch
+11:06:01.449 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Launch app "com.fettqa.events.android" with clear state COMPLETED
+11:06:01.449 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Assert that "Events" is visible RUNNING
+11:06:02.934 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Assert that "Events" is visible COMPLETED
+11:06:02.934 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Assert that id: headerLoginButton is visible RUNNING
+11:06:03.390 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Assert that id: headerLoginButton is visible COMPLETED
+11:06:03.390 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Assert that id: headerRegisterButton is visible RUNNING
+11:06:03.465 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Assert that id: headerRegisterButton is visible COMPLETED
+11:06:03.465 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Assert that id: eventsSearchInput is visible RUNNING
+11:06:03.581 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Assert that id: eventsSearchInput is visible COMPLETED
+11:06:03.581 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Assert that id: eventsRecycler is visible RUNNING
+11:06:03.657 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Assert that id: eventsRecycler is visible COMPLETED
