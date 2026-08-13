@@ -1,0 +1,12 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Thu Aug 13 11:49:04 UTC 2026","Thu Aug 13 11:49:04 UTC 2026","837","","com.fettqa.events.e2e.functional.CreateEventAndRegisterE2ETest","","com.fettqa.events.e2e.functional.CreateEventAndRegisterE2ETest","createEventAndRegister_showsSuccess","createEventAndRegister_showsSuccess()",""
+"passed","Thu Aug 13 11:49:03 UTC 2026","Thu Aug 13 11:49:03 UTC 2026","435","","Register user","","New user sees their info in the header","","New user sees their info in the header","  As a visitor
+  I want to create an account
+  So that the header shows my identity"
+"passed","Thu Aug 13 11:49:06 UTC 2026","Thu Aug 13 11:49:07 UTC 2026","1205","","com.fettqa.events.e2e.functional.RegisterDuplicateEmailE2ETest","","com.fettqa.events.e2e.functional.RegisterDuplicateEmailE2ETest","registerSameEmailTwice_showsError","registerSameEmailTwice_showsError()",""
+"passed","Thu Aug 13 11:49:05 UTC 2026","Thu Aug 13 11:49:05 UTC 2026","615","","com.fettqa.events.e2e.functional.CreateEventWithEmptyNameTest","","com.fettqa.events.e2e.functional.CreateEventWithEmptyNameTest","createEventWithEmptyName_showsValidation","createEventWithEmptyName_showsValidation()",""
+"passed","Thu Aug 13 11:49:09 UTC 2026","Thu Aug 13 11:49:09 UTC 2026","423","","com.fettqa.events.e2e.functional.RegisterUserE2ETest","","com.fettqa.events.e2e.functional.RegisterUserE2ETest","register_showsUserInHeader","register_showsUserInHeader()",""
+"passed","Thu Aug 13 11:49:07 UTC 2026","Thu Aug 13 11:49:08 UTC 2026","1151","","com.fettqa.events.e2e.functional.RegisterSendsEmailE2ETest","","com.fettqa.events.e2e.functional.RegisterSendsEmailE2ETest","registerForEvent_sendsConfirmationEmail","registerForEvent_sendsConfirmationEmail()",""
+"passed","Thu Aug 13 11:48:54 UTC 2026","Thu Aug 13 11:49:03 UTC 2026","8990","","Create event and register","","Admin creates an event and registers for it","","Admin creates an event and registers for it","  As an admin
+  I want to create an event and register for it
+  So that I appear in the registrations list"
