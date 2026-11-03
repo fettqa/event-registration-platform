@@ -451,6 +451,14 @@ pytest --headed
 
 Details: [`tests-web/python/README.md`](tests-web/python/README.md).
 
-Events
-New event
-Event details
+### Web
+
+| Events | Event | Registration | Admin |
+|--------|-------|--------------|-------|
+| ![Events](screenshot/ERP_events.png) | ![Event](screenshot/ERP_event.png) | ![Registration](screenshot/ERP_registration.png) | ![Admin](screenshot/ERP_admin_panel.png) |
+
+### Android
+
+| Events | Event | Registration | Admin |
+|--------|-------|--------------|-------|
+| ![Events APK](screenshot/ERP_events_apk.png) | ![Event APK](screenshot/ERP_event_apk.png) | ![Registration APK](screenshot/ERP_registration_apk.png) | ![Admin APK](screenshot/ERP_admin_panel_apk.png) |
